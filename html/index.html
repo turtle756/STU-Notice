@@ -2,62 +2,44 @@
 <html lang="ko">
 <!--
 ////////////////////////////////////////////////////////////////////////////////////////
-// 총학생회 - 행사 & 공모전 페이지
+// 총학생회 통합 웹사이트
 ////////////////////////////////////////////////////////////////////////////////////////
 
 【 📖 이 파일 수정 가이드 】
 
 1. 페이지 제목 변경
-   - 아래 <title> 태그에서 "총학생회 - 행사 & 공모전"을 원하는 제목으로 변경
+   - <title> 태그에서 "총학생회"를 원하는 제목으로 변경
 
 2. 상단 네비게이션 수정
    - "🎓 총학생회" 부분: 로고/학교명 변경
-   - "행사 & 공모전", "동아리 & 소모임" 부분: 메뉴 이름 변경
-   - community.html 파일 이름을 변경한 경우, 링크도 함께 변경
+   - 메뉴 이름 변경 가능
 
-3. 페이지 헤더 수정
-   - "교내 행사 & 공모전" 제목 변경
-   - "다양한 교내 활동에 참여해보세요!" 설명 변경
+3. 행사 & 공모전 섹션
+   - 행사 카드: 주관, 장소 정보 포함
+   - 공모전 카드: 주최 정보, 신청하기 버튼 포함
+   - "행사 제안/건의하기" 버튼 링크 수정
 
-4. 필터 버튼 수정
-   - "전체", "행사", "공모전" 버튼 이름 변경
-   - 카테고리 추가/삭제 가능
+4. 이번 달 주요 일정 (캘린더)
+   - 날짜별 일정 추가/수정
 
-5. 행사 카드 추가/수정/삭제
-   - 각 카드는 <div class="event-card" data-category="카테고리명"> 형태
-   - 이미지 URL: <img src="이미지주소">에서 변경
-   - 카테고리: data-category="행사" 또는 "공모전"
-   - 행사명: <h3> 태그 안에
-   - 날짜: <p class="event-date"> 안에
-   - 설명: <p class="event-description"> 안에
+5. 동아리 & 소모임 섹션
+   - "동아리 & 소모임 신청하기" 버튼 링크 수정
+   - 카카오톡 오픈채팅 링크 수정
 
-【 예시 카드 구조 】
-<div class="event-card" data-category="행사">
-  <img src="이미지URL" alt="행사명">
-  <div class="event-content">
-    <span class="event-category">행사</span>
-    <h3>2024 가을 축제</h3>
-    <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
-    <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
-  </div>
-</div>
-
-【 카드 추가 방법 】
-위 예시 구조를 복사해서 "행사 카드 목록 (여기에 카드 추가)" 섹션에 붙여넣고 내용 수정
-
-【 카드 삭제 방법 】
-삭제하고 싶은 카드의 <div class="event-card">부터 </div>까지 전체 삭제
+【 이미지 URL 변경 방법 】
+구글 드라이브 공유 링크에서 파일 ID를 추출하여:
+src="https://drive.google.com/uc?export=view&id=파일ID"
 
 ////////////////////////////////////////////////////////////////////////////////////////
 -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>총학생회 - 행사 & 공모전</title>
+  <title>총학생회</title>
   
   <!--
   ////////////////////////////////////////////////////////////////////////////////////////
-  // 스타일 (CSS) 영역 - 디자인을 변경하려면 여기를 수정하세요
+  // 스타일 (CSS) 영역
   ////////////////////////////////////////////////////////////////////////////////////////
   -->
   <style>
@@ -102,6 +84,7 @@
       color: #2c3e50;
       text-decoration: none;
       transition: color 0.3s;
+      cursor: pointer;
     }
 
     .nav-logo:hover {
@@ -120,6 +103,7 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
       transition: all 0.3s;
+      cursor: pointer;
     }
 
     .nav-links a:hover {
@@ -138,82 +122,132 @@
       min-height: 100vh;
     }
 
+    /* Section */
+    .section {
+      padding: 3rem 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #e0e0e0;
+      margin: 0;
+    }
+
     /* Page Header */
     .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
       text-align: center;
-      margin-bottom: 3rem;
-      padding: 2rem 2rem 0;
     }
 
     .page-header h1 {
       font-size: 2.5rem;
-      color: #2c3e50;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .page-header p {
-      font-size: 1.2rem;
-      color: #7f8c8d;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Action Buttons */
+    .action-button-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    .action-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #27ae60;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-button:hover {
+      background-color: #229954;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .action-button.primary {
+      background-color: #3498db;
+    }
+
+    .action-button.primary:hover {
+      background-color: #2980b9;
     }
 
     /* Filter Buttons */
     .filter-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
       padding: 0 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .filter-buttons button {
+    .filter-btn {
       padding: 0.75rem 1.5rem;
-      border: 2px solid #e0e0e0;
       background-color: white;
       color: #555;
+      border: 2px solid #e0e0e0;
       border-radius: 25px;
+      cursor: pointer;
       font-size: 1rem;
       font-weight: 500;
-      cursor: pointer;
       transition: all 0.3s;
     }
 
-    .filter-buttons button:hover {
+    .filter-btn:hover {
       border-color: #3498db;
       color: #3498db;
     }
 
-    .filter-buttons button.active {
+    .filter-btn.active {
       background-color: #3498db;
       color: white;
       border-color: #3498db;
     }
 
-    /* Grid Layout */
+    /* Grid Container */
     .grid-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem 2rem;
     }
 
-    .events-grid {
+    /* Event Grid */
+    .event-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
     }
 
-    /* Event Card */
     .event-card {
       background-color: white;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
     }
 
     .event-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
 
     .event-card img {
@@ -224,6 +258,9 @@
 
     .event-content {
       padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .event-category {
@@ -233,13 +270,14 @@
       color: white;
       border-radius: 15px;
       font-size: 0.85rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      width: fit-content;
     }
 
-    .event-content h3 {
+    .event-card h3 {
       font-size: 1.3rem;
       color: #2c3e50;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .event-date {
@@ -248,12 +286,219 @@
       margin-bottom: 0.5rem;
     }
 
+    .event-organizer,
+    .event-location {
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
     .event-description {
       color: #555;
       line-height: 1.6;
+      margin-top: 0.75rem;
+      flex-grow: 1;
     }
 
-    /* Hidden class for filtering */
+    .apply-button {
+      display: inline-block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+      background-color: #e74c3c;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .apply-button:hover {
+      background-color: #c0392b;
+    }
+
+    /* Calendar */
+    .calendar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 2rem;
+    }
+
+    .calendar-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .calendar-header h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .calendar-month {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .calendar {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background-color: #3498db;
+      color: white;
+    }
+
+    .calendar-weekday {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background-color: #e0e0e0;
+    }
+
+    .calendar-day {
+      background-color: white;
+      min-height: 100px;
+      padding: 0.75rem;
+      position: relative;
+    }
+
+    .calendar-day.other-month {
+      background-color: #f5f5f5;
+      color: #bbb;
+    }
+
+    .calendar-day-number {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .calendar-day.other-month .calendar-day-number {
+      color: #bbb;
+    }
+
+    .calendar-event {
+      background-color: #3498db;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-bottom: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .calendar-event:hover {
+      background-color: #2980b9;
+    }
+
+    .calendar-event.contest {
+      background-color: #e74c3c;
+    }
+
+    .calendar-event.contest:hover {
+      background-color: #c0392b;
+    }
+
+    .calendar-event.club {
+      background-color: #27ae60;
+    }
+
+    .calendar-event.club:hover {
+      background-color: #229954;
+    }
+
+    /* Community Grid */
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .community-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .community-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .community-header-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .community-card h3 {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    .community-category {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background-color: #27ae60;
+      color: white;
+      border-radius: 15px;
+      font-size: 0.85rem;
+    }
+
+    .community-members {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .community-description {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .kakao-button {
+      display: inline-block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: #FEE500;
+      color: #3c1e1e;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .kakao-button:hover {
+      background-color: #fdd835;
+    }
+
+    /* Hidden class */
     .hidden {
       display: none;
     }
@@ -274,24 +519,32 @@
         padding-top: 180px;
       }
 
-      .page-header {
-        padding: 1rem;
-      }
-
       .page-header h1 {
         font-size: 2rem;
       }
 
-      .filter-buttons {
+      .filter-buttons,
+      .grid-container,
+      .calendar-container,
+      .action-button-container {
         padding: 0 1rem;
       }
 
-      .grid-container {
-        padding: 0 1rem 1rem;
+      .event-grid {
+        grid-template-columns: 1fr;
       }
 
-      .events-grid {
+      .community-grid {
         grid-template-columns: 1fr;
+      }
+
+      .calendar-day {
+        min-height: 80px;
+        padding: 0.5rem;
+      }
+
+      .calendar-event {
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -300,224 +553,562 @@
   
   <!--
   ////////////////////////////////////////////////////////////////////////////////////////
-  // 상단 네비게이션 바 (메뉴)
+  // 상단 네비게이션 바
   ////////////////////////////////////////////////////////////////////////////////////////
-  
-  【 수정 가능한 항목 】
-  1. "🎓 총학생회" → 학교 로고나 이름으로 변경
-  2. "행사 & 공모전" → 현재 페이지 메뉴명 변경
-  3. "동아리 & 소모임" → 다른 페이지 메뉴명 변경
-  4. href="community.html" → 다른 페이지로 이동하는 링크 변경
   -->
   <nav class="navigation">
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">🎓 총학생회</a>
+      <a class="nav-logo" onclick="scrollToTop()">🎓 총학생회</a>
       <div class="nav-links">
-        <a href="index.html" class="active">행사 & 공모전</a>
-        <a href="community.html">동아리 & 소모임</a>
+        <a onclick="scrollToSection('events')">행사 & 공모전</a>
+        <a onclick="scrollToSection('calendar')">일정</a>
+        <a onclick="scrollToSection('community')">동아리 & 소모임</a>
       </div>
     </div>
   </nav>
 
   <!--
   ////////////////////////////////////////////////////////////////////////////////////////
-  // 메인 콘텐츠 영역
+  // 메인 콘텐츠
   ////////////////////////////////////////////////////////////////////////////////////////
   -->
   <main class="main-content">
     
     <!--
     ////////////////////////////////////////////////////////////////////////////////////////
-    // 페이지 헤더 (제목과 설명)
+    // 섹션 1: 행사 & 공모전
     ////////////////////////////////////////////////////////////////////////////////////////
-    
-    【 수정 가능한 항목 】
-    1. <h1> 태그 안의 "교내 행사 & 공모전" → 페이지 제목 변경
-    2. <p> 태그 안의 "다양한 교내 활동에 참여해보세요!" → 설명 변경
     -->
-    <div class="page-header">
-      <h1>교내 행사 & 공모전</h1>
-      <p>다양한 교내 활동에 참여해보세요!</p>
-    </div>
-
-    <!--
-    ////////////////////////////////////////////////////////////////////////////////////////
-    // 필터 버튼 (카테고리 선택)
-    ////////////////////////////////////////////////////////////////////////////////////////
-    
-    【 수정 가능한 항목 】
-    1. 버튼 이름 변경: "전체", "행사", "공모전"을 원하는 이름으로 변경
-    2. data-filter="카테고리명" → 필터링할 카테고리명과 반드시 일치해야 함
-    3. 버튼 추가: 아래 형식으로 복사해서 추가 가능
-       <button class="filter-btn" data-filter="새카테고리">새카테고리</button>
-    -->
-    <div class="filter-buttons">
-      <button class="filter-btn active" data-filter="전체">전체</button>
-      <button class="filter-btn" data-filter="행사">행사</button>
-      <button class="filter-btn" data-filter="공모전">공모전</button>
-    </div>
-
-    <!--
-    ////////////////////////////////////////////////////////////////////////////////////////
-    // 행사 카드 목록 (여기에 카드 추가/삭제/수정)
-    ////////////////////////////////////////////////////////////////////////////////////////
-    
-    【 카드 구조 설명 】
-    - <div class="event-card" data-category="카테고리명"> : 카드 전체 감싸는 영역
-      - data-category : 필터 버튼의 data-filter 값과 일치해야 필터링됨
-    
-    - <img src="이미지URL" alt="설명"> : 카드 상단 이미지
-      - src : 이미지 주소 (https://로 시작하는 링크 또는 로컬 파일 경로)
-      - alt : 이미지 설명 (이미지가 안 보일 때 표시)
-    
-    - <span class="event-category">카테고리명</span> : 카테고리 뱃지
-      - 카드 상단에 표시되는 파란색 태그
-    
-    - <h3>행사명</h3> : 행사 제목
-    
-    - <p class="event-date">📅 날짜</p> : 행사 날짜
-    
-    - <p class="event-description">설명</p> : 행사 설명
-    
-    【 카드 추가 방법 】
-    아래 예시 카드를 복사해서 붙여넣고 내용만 수정하세요
-    
-    【 카드 삭제 방법 】
-    삭제하고 싶은 카드의 <div class="event-card">부터 </div>까지 전체 삭제
-    -->
-    <div class="grid-container">
-      <div class="events-grid" id="eventsGrid">
-        
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 카드 1: 2024 가을 축제 (행사) -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <div class="event-card" data-category="행사">
-          <img src="https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=Fall+Festival" alt="2024 가을 축제">
-          <div class="event-content">
-            <span class="event-category">행사</span>
-            <h3>2024 가을 축제</h3>
-            <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
-            <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
-          </div>
-        </div>
-
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <div class="event-card" data-category="공모전">
-          <img src="https://via.placeholder.com/300x200/50C878/FFFFFF?text=Startup+Contest" alt="창업 아이디어 공모전">
-          <div class="event-content">
-            <span class="event-category">공모전</span>
-            <h3>창업 아이디어 공모전</h3>
-            <p class="event-date">📅 2024.11.20</p>
-            <p class="event-description">혁신적인 창업 아이디어를 공모합니다.</p>
-          </div>
-        </div>
-
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 카드 3: 겨울 MT (행사) -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <div class="event-card" data-category="행사">
-          <img src="https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Winter+MT" alt="겨울 MT">
-          <div class="event-content">
-            <span class="event-category">행사</span>
-            <h3>겨울 MT</h3>
-            <p class="event-date">📅 2024.12.05</p>
-            <p class="event-description">학과 MT에 참여하세요!</p>
-          </div>
-        </div>
-
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <div class="event-card" data-category="공모전">
-          <img src="https://via.placeholder.com/300x200/9B59B6/FFFFFF?text=Writing+Contest" alt="글쓰기 경진대회">
-          <div class="event-content">
-            <span class="event-category">공모전</span>
-            <h3>글쓰기 경진대회</h3>
-            <p class="event-date">📅 2024.11.30</p>
-            <p class="event-description">당신의 글솜씨를 뽐내보세요.</p>
-          </div>
-        </div>
-
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 카드 5: 체육대회 (행사) -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <div class="event-card" data-category="행사">
-          <img src="https://via.placeholder.com/300x200/F39C12/FFFFFF?text=Sports+Day" alt="체육대회">
-          <div class="event-content">
-            <span class="event-category">행사</span>
-            <h3>체육대회</h3>
-            <p class="event-date">📅 2024.12.10</p>
-            <p class="event-description">다양한 종목으로 진행되는 체육대회</p>
-          </div>
-        </div>
-
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <div class="event-card" data-category="공모전">
-          <img src="https://via.placeholder.com/300x200/34495E/FFFFFF?text=Hackathon" alt="프로그래밍 해커톤">
-          <div class="event-content">
-            <span class="event-category">공모전</span>
-            <h3>프로그래밍 해커톤</h3>
-            <p class="event-date">📅 2024.12.15</p>
-            <p class="event-description">24시간 코딩 마라톤에 도전하세요!</p>
-          </div>
-        </div>
-
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-        <!-- 여기에 새로운 카드를 추가하세요 -->
-        <!-- 위의 카드 중 하나를 복사해서 붙여넣고 내용만 수정하면 됩니다 -->
-        <!-- //////////////////////////////////////////////////////////////////////////////// -->
-
+    <section id="events" class="section">
+      <div class="page-header">
+        <h1>교내 행사 & 공모전</h1>
+        <p>다양한 교내 활동에 참여해보세요!</p>
       </div>
-    </div>
+
+      <!-- 행사 제안/건의하기 버튼 -->
+      <div class="action-button-container">
+        <a href="https://forms.gle/example" target="_blank" class="action-button primary">✍️ 행사 제안 / 건의하기</a>
+      </div>
+
+      <!-- 필터 버튼 -->
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="전체" data-section="events">전체</button>
+        <button class="filter-btn" data-filter="행사" data-section="events">행사</button>
+        <button class="filter-btn" data-filter="공모전" data-section="events">공모전</button>
+      </div>
+
+      <!-- 행사 & 공모전 카드 목록 -->
+      <div class="grid-container">
+        <div class="event-grid" id="eventGrid">
+          
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 1: 2024 가을 축제 (행사) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="2024 가을 축제">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>2024 가을 축제</h3>
+              <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
+              <p class="event-organizer">주관: 학생회</p>
+              <p class="event-location">📍 장소: 중앙운동장</p>
+              <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="창업 아이디어 공모전">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>창업 아이디어 공모전</h3>
+              <p class="event-date">📅 2024.11.20</p>
+              <p class="event-organizer">주최: LINC+ 사업단</p>
+              <p class="event-description">혁신적인 창업 아이디어를 공모합니다.</p>
+              <a href="https://forms.gle/example1" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 3: 겨울 MT (행사) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="겨울 MT">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>겨울 MT</h3>
+              <p class="event-date">📅 2024.12.05</p>
+              <p class="event-organizer">주관: 학생회</p>
+              <p class="event-location">📍 장소: 강원도 평창</p>
+              <p class="event-description">학과 MT에 참여하세요!</p>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="글쓰기 경진대회">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>글쓰기 경진대회</h3>
+              <p class="event-date">📅 2024.11.30</p>
+              <p class="event-organizer">주최: 학습지원센터</p>
+              <p class="event-description">다양한 글쓰기 주제로 경진대회에 도전하세요.</p>
+              <a href="https://forms.gle/example2" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 5: 체육대회 (행사) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="체육대회">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>체육대회</h3>
+              <p class="event-date">📅 2024.12.10</p>
+              <p class="event-organizer">주관: 체육부</p>
+              <p class="event-location">📍 장소: 체육관</p>
+              <p class="event-description">단양 조으로 자웅을 겨루는 체육대회</p>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="프로그래밍 해커톤">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>프로그래밍 해커톤</h3>
+              <p class="event-date">📅 2024.12.15</p>
+              <p class="event-organizer">주최: 컴퓨터공학과</p>
+              <p class="event-description">24시간 코딩 마라톤에 도전하세요!</p>
+              <a href="https://forms.gle/example3" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 여기에 새로운 카드 추가 -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!--
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // 섹션 2: 이번 달 주요 일정 (캘린더)
+    ////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <section id="calendar" class="section">
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <h2>📅 이번 달 주요 일정</h2>
+          <p class="calendar-month">2024년 11월</p>
+        </div>
+
+        <div class="calendar">
+          <div class="calendar-weekdays">
+            <div class="calendar-weekday">일</div>
+            <div class="calendar-weekday">월</div>
+            <div class="calendar-weekday">화</div>
+            <div class="calendar-weekday">수</div>
+            <div class="calendar-weekday">목</div>
+            <div class="calendar-weekday">금</div>
+            <div class="calendar-weekday">토</div>
+          </div>
+          
+          <div class="calendar-days">
+            <!-- Week 1 -->
+            <div class="calendar-day other-month">
+              <div class="calendar-day-number">27</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="calendar-day-number">28</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="calendar-day-number">29</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="calendar-day-number">30</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="calendar-day-number">31</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">1</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">2</div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="calendar-day">
+              <div class="calendar-day-number">3</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">4</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">5</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">6</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">7</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">8</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">9</div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="calendar-day">
+              <div class="calendar-day-number">10</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">11</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">12</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">13</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">14</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">15</div>
+              <div class="calendar-event">가을 축제</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">16</div>
+              <div class="calendar-event">가을 축제</div>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="calendar-day">
+              <div class="calendar-day-number">17</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">18</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">19</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">20</div>
+              <div class="calendar-event contest">창업 공모전</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">21</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">22</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">23</div>
+            </div>
+
+            <!-- Week 5 -->
+            <div class="calendar-day">
+              <div class="calendar-day-number">24</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">25</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">26</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">27</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">28</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">29</div>
+            </div>
+            <div class="calendar-day">
+              <div class="calendar-day-number">30</div>
+              <div class="calendar-event contest">글쓰기 대회</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!--
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // 섹션 3: 동아리 & 소모임
+    ////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <section id="community" class="section">
+      <div class="page-header">
+        <h1>동아리 & 소모임</h1>
+        <p>관심사가 같은 친구들과 함께하세요!</p>
+      </div>
+
+      <!-- 동아리 & 소모임 신청하기 버튼 -->
+      <div class="action-button-container">
+        <a href="https://forms.gle/community-apply" target="_blank" class="action-button">📋 동아리 & 소모임 신청하기</a>
+      </div>
+
+      <!-- 필터 버튼 -->
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="전체" data-section="community">전체</button>
+        <button class="filter-btn" data-filter="스포츠" data-section="community">스포츠</button>
+        <button class="filter-btn" data-filter="학술" data-section="community">학술</button>
+        <button class="filter-btn" data-filter="문화예술" data-section="community">문화예술</button>
+        <button class="filter-btn" data-filter="취미" data-section="community">취미</button>
+      </div>
+
+      <!-- 동아리 카드 목록 -->
+      <div class="grid-container">
+        <div class="community-grid" id="communityGrid">
+          
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 1: 농구 동아리 (스포츠) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="스포츠">
+            <div class="community-header-card">
+              <h3>농구 동아리</h3>
+              <span class="community-category">스포츠</span>
+            </div>
+            <p class="community-members">👥 25명</p>
+            <p class="community-description">함께 농구하며 친목을 다지는 동아리입니다.</p>
+            <a href="https://open.kakao.com/o/example1" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 2: 사진 소모임 (문화예술) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="문화예술">
+            <div class="community-header-card">
+              <h3>사진 소모임</h3>
+              <span class="community-category">문화예술</span>
+            </div>
+            <p class="community-members">👥 18명</p>
+            <p class="community-description">사진 촬영과 편집을 함께 배우는 소모임입니다.</p>
+            <a href="https://open.kakao.com/o/example2" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 3: 코딩 스터디 (학술) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="학술">
+            <div class="community-header-card">
+              <h3>코딩 스터디</h3>
+              <span class="community-category">학술</span>
+            </div>
+            <p class="community-members">👥 32명</p>
+            <p class="community-description">알고리즘 문제풀이 및 프로젝트 스터디</p>
+            <a href="https://open.kakao.com/o/example3" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 4: 밴드 동아리 (문화예술) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="문화예술">
+            <div class="community-header-card">
+              <h3>밴드 동아리</h3>
+              <span class="community-category">문화예술</span>
+            </div>
+            <p class="community-members">👥 15명</p>
+            <p class="community-description">다양한 악기로 밴드를 구성해 공연합니다.</p>
+            <a href="https://open.kakao.com/o/example4" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 5: 영어 회화 모임 (학술) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="학술">
+            <div class="community-header-card">
+              <h3>영어 회화 모임</h3>
+              <span class="community-category">학술</span>
+            </div>
+            <p class="community-members">👥 20명</p>
+            <p class="community-description">자유롭게 영어로 대화하는 모임</p>
+            <a href="https://open.kakao.com/o/example5" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 6: 등산 모임 (스포츠) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="스포츠">
+            <div class="community-header-card">
+              <h3>등산 모임</h3>
+              <span class="community-category">스포츠</span>
+            </div>
+            <p class="community-members">👥 22명</p>
+            <p class="community-description">주말마다 함께 산을 오르는 모임</p>
+            <a href="https://open.kakao.com/o/example6" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 7: 요리 동아리 (취미) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="취미">
+            <div class="community-header-card">
+              <h3>요리 동아리</h3>
+              <span class="community-category">취미</span>
+            </div>
+            <p class="community-members">👥 16명</p>
+            <p class="community-description">다양한 요리를 함께 만들어보는 동아리</p>
+            <a href="https://open.kakao.com/o/example7" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 8: 독서 토론 모임 (학술) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="학술">
+            <div class="community-header-card">
+              <h3>독서 토론 모임</h3>
+              <span class="community-category">학술</span>
+            </div>
+            <p class="community-members">👥 14명</p>
+            <p class="community-description">책을 읽고 함께 토론하는 모임</p>
+            <a href="https://open.kakao.com/o/example8" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 9: 댄스 동아리 (문화예술) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="community-card" data-category="문화예술">
+            <div class="community-header-card">
+              <h3>댄스 동아리</h3>
+              <span class="community-category">문화예술</span>
+            </div>
+            <p class="community-members">👥 28명</p>
+            <p class="community-description">K-POP 댄스를 배우고 공연하는 동아리</p>
+            <a href="https://open.kakao.com/o/example9" target="_blank" rel="noopener noreferrer" class="kakao-button">
+              💬 오픈채팅 참여하기
+            </a>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 여기에 새로운 카드 추가 -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!--
   ////////////////////////////////////////////////////////////////////////////////////////
-  // 필터 버튼 클릭 기능 (JavaScript)
+  // JavaScript 영역 - 필터링 및 스크롤 기능
   ////////////////////////////////////////////////////////////////////////////////////////
-  
-  【 이 부분은 수정하지 마세요 】
-  - 필터 버튼 클릭 시 카드를 자동으로 필터링하는 기능
-  - 수정하면 필터 기능이 작동하지 않을 수 있습니다
-  
-  【 작동 방식 】
-  1. 사용자가 필터 버튼을 클릭
-  2. 클릭한 버튼의 data-filter 값을 가져옴
-  3. 모든 카드를 확인하며 data-category와 비교
-  4. 일치하는 카드만 표시하고 나머지는 숨김
   -->
   <script>
-    // 모든 필터 버튼과 카드 찾기
+    // 페이지 상단으로 스크롤
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 섹션으로 스크롤
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const navHeight = 70;
+        const sectionTop = section.offsetTop - navHeight;
+        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+      }
+    }
+
+    // 필터 기능
     const filterButtons = document.querySelectorAll('.filter-btn');
     const eventCards = document.querySelectorAll('.event-card');
+    const communityCards = document.querySelectorAll('.community-card');
 
-    // 각 필터 버튼에 클릭 이벤트 추가
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // 모든 버튼의 active 클래스 제거
-        filterButtons.forEach(btn => btn.classList.remove('active'));
+        const section = button.getAttribute('data-section');
+        const filter = button.getAttribute('data-filter');
+        
+        // 같은 섹션의 버튼들에서만 active 클래스 제거
+        filterButtons.forEach(btn => {
+          if (btn.getAttribute('data-section') === section) {
+            btn.classList.remove('active');
+          }
+        });
         
         // 클릭한 버튼에 active 클래스 추가
         button.classList.add('active');
         
-        // 클릭한 버튼의 필터 값 가져오기
-        const filter = button.getAttribute('data-filter');
-        
-        // 모든 카드 필터링
-        eventCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          
-          // "전체" 버튼이거나 카테고리가 일치하면 표시, 아니면 숨김
-          if (filter === '전체' || category === filter) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
+        // 필터링
+        if (section === 'events') {
+          eventCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === '전체' || category === filter) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        } else if (section === 'community') {
+          communityCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === '전체' || category === filter) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        }
+      });
+    });
+
+    // 네비게이션 active 상태 업데이트 (스크롤 시)
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = ['events', 'calendar', 'community'];
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const sectionTop = section.offsetTop - 100;
+          if (window.pageYOffset >= sectionTop) {
+            current = sectionId;
           }
-        });
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick')?.includes(current)) {
+          link.classList.add('active');
+        }
       });
     });
   </script>
