@@ -14,13 +14,14 @@
    - "🎓 총학생회" 부분: 로고/학교명 변경
    - 메뉴 이름 변경 가능
 
-3. 행사 & 공모전 섹션
+3. 이번 달 주요 일정 (캘린더)
+   - 월별 네비게이션으로 9월~12월 확인 가능
+   - 날짜별 일정 추가/수정
+
+4. 행사 & 공모전 섹션
    - 행사 카드: 주관, 장소 정보 포함
    - 공모전 카드: 주최 정보, 신청하기 버튼 포함
    - "행사 제안/건의하기" 버튼 링크 수정
-
-4. 이번 달 주요 일정 (캘린더)
-   - 날짜별 일정 추가/수정
 
 5. 동아리 & 소모임 섹션
    - "동아리 & 소모임 신청하기" 버튼 링크 수정
@@ -339,6 +340,37 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
     .calendar-month {
       font-size: 1.2rem;
       color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .month-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .month-btn {
+      padding: 0.6rem 1.2rem;
+      background-color: white;
+      color: #555;
+      border: 2px solid #e0e0e0;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .month-btn:hover {
+      border-color: #3498db;
+      color: #3498db;
+    }
+
+    .month-btn.active {
+      background-color: #3498db;
+      color: white;
+      border-color: #3498db;
     }
 
     .calendar {
@@ -546,6 +578,15 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
       .calendar-event {
         font-size: 0.7rem;
       }
+
+      .month-navigation {
+        flex-wrap: wrap;
+      }
+
+      .month-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+      }
     }
   </style>
 </head>
@@ -580,137 +621,17 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
     ////////////////////////////////////////////////////////////////////////////////////////
     -->
     <section id="calendar" class="section">
-      <div class="page-header">
-        <h1>교내 행사 & 공모전</h1>
-        <p>다양한 교내 활동에 참여해보세요!</p>
-      </div>
-
-      <!-- 행사 제안/건의하기 버튼 -->
-      <div class="action-button-container">
-        <a href="https://forms.gle/example" target="_blank" class="action-button primary">✍️ 행사 제안 / 건의하기</a>
-      </div>
-
-      <!-- 필터 버튼 -->
-      <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="전체" data-section="events">전체</button>
-        <button class="filter-btn" data-filter="행사" data-section="events">행사</button>
-        <button class="filter-btn" data-filter="공모전" data-section="events">공모전</button>
-      </div>
-
-      <!-- 행사 & 공모전 카드 목록 -->
-      <div class="grid-container">
-        <div class="event-grid" id="eventGrid">
-          
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 1: 2024 가을 축제 (행사) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="2024 가을 축제">
-            <div class="event-content">
-              <span class="event-category">행사</span>
-              <h3>2024 가을 축제</h3>
-              <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
-              <p class="event-organizer">주관: 학생회</p>
-              <p class="event-location">📍 장소: 중앙운동장</p>
-              <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="공모전">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="창업 아이디어 공모전">
-            <div class="event-content">
-              <span class="event-category">공모전</span>
-              <h3>창업 아이디어 공모전</h3>
-              <p class="event-date">📅 2024.11.20</p>
-              <p class="event-organizer">주최: LINC+ 사업단</p>
-              <p class="event-description">혁신적인 창업 아이디어를 공모합니다.</p>
-              <a href="https://forms.gle/example1" target="_blank" class="apply-button">📝 신청하기</a>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 3: 겨울 MT (행사) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="겨울 MT">
-            <div class="event-content">
-              <span class="event-category">행사</span>
-              <h3>겨울 MT</h3>
-              <p class="event-date">📅 2024.12.05</p>
-              <p class="event-organizer">주관: 학생회</p>
-              <p class="event-location">📍 장소: 강원도 평창</p>
-              <p class="event-description">학과 MT에 참여하세요!</p>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="공모전">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="글쓰기 경진대회">
-            <div class="event-content">
-              <span class="event-category">공모전</span>
-              <h3>글쓰기 경진대회</h3>
-              <p class="event-date">📅 2024.11.30</p>
-              <p class="event-organizer">주최: 학습지원센터</p>
-              <p class="event-description">다양한 글쓰기 주제로 경진대회에 도전하세요.</p>
-              <a href="https://forms.gle/example2" target="_blank" class="apply-button">📝 신청하기</a>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 5: 체육대회 (행사) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="체육대회">
-            <div class="event-content">
-              <span class="event-category">행사</span>
-              <h3>체육대회</h3>
-              <p class="event-date">📅 2024.12.10</p>
-              <p class="event-organizer">주관: 체육부</p>
-              <p class="event-location">📍 장소: 체육관</p>
-              <p class="event-description">단양 조으로 자웅을 겨루는 체육대회</p>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="공모전">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="프로그래밍 해커톤">
-            <div class="event-content">
-              <span class="event-category">공모전</span>
-              <h3>프로그래밍 해커톤</h3>
-              <p class="event-date">📅 2024.12.15</p>
-              <p class="event-organizer">주최: 컴퓨터공학과</p>
-              <p class="event-description">24시간 코딩 마라톤에 도전하세요!</p>
-              <a href="https://forms.gle/example3" target="_blank" class="apply-button">📝 신청하기</a>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 여기에 새로운 카드 추가 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-divider">
-
-    <!--
-    ////////////////////////////////////////////////////////////////////////////////////////
-    // 섹션 2: 이번 달 주요 일정 (캘린더)
-    ////////////////////////////////////////////////////////////////////////////////////////
-    -->
-    <section id="calendar" class="section">
       <div class="calendar-container">
         <div class="calendar-header">
           <h2>📅 이번 달 주요 일정</h2>
-          <p class="calendar-month">2024년 11월</p>
+          <p class="calendar-month" id="currentMonth">2024년 11월</p>
+          
+          <div class="month-navigation">
+            <button class="month-btn" data-month="9">9월</button>
+            <button class="month-btn" data-month="10">10월</button>
+            <button class="month-btn active" data-month="11">11월</button>
+            <button class="month-btn" data-month="12">12월</button>
+          </div>
         </div>
 
         <div class="calendar">
@@ -724,126 +645,111 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             <div class="calendar-weekday">토</div>
           </div>
           
-          <div class="calendar-days">
-            <!-- Week 1 -->
-            <div class="calendar-day other-month">
-              <div class="calendar-day-number">27</div>
-            </div>
-            <div class="calendar-day other-month">
-              <div class="calendar-day-number">28</div>
-            </div>
-            <div class="calendar-day other-month">
-              <div class="calendar-day-number">29</div>
-            </div>
-            <div class="calendar-day other-month">
-              <div class="calendar-day-number">30</div>
-            </div>
-            <div class="calendar-day other-month">
-              <div class="calendar-day-number">31</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">1</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">2</div>
-            </div>
+          <div class="calendar-days" id="calendarDays">
+            <!-- JavaScript로 동적 생성 -->
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Week 2 -->
-            <div class="calendar-day">
-              <div class="calendar-day-number">3</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">4</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">5</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">6</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">7</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">8</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">9</div>
-            </div>
+    <hr class="section-divider">
 
-            <!-- Week 3 -->
-            <div class="calendar-day">
-              <div class="calendar-day-number">10</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">11</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">12</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">13</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">14</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">15</div>
-              <div class="calendar-event">가을 축제</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">16</div>
-              <div class="calendar-event">가을 축제</div>
-            </div>
+    <!--
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // 섹션 2: 행사 & 공모전
+    ////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <section id="events" class="section">
+      <div class="page-header">
+        <h1>교내 행사 & 공모전</h1>
+        <p>다양한 교내 활동에 참여해보세요!</p>
+      </div>
 
-            <!-- Week 4 -->
-            <div class="calendar-day">
-              <div class="calendar-day-number">17</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">18</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">19</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">20</div>
-              <div class="calendar-event contest">창업 공모전</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">21</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">22</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">23</div>
-            </div>
+      <div class="action-button-container">
+        <a href="https://forms.gle/example" target="_blank" class="action-button primary">✍️ 행사 제안 / 건의하기</a>
+      </div>
 
-            <!-- Week 5 -->
-            <div class="calendar-day">
-              <div class="calendar-day-number">24</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">25</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">26</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">27</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">28</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">29</div>
-            </div>
-            <div class="calendar-day">
-              <div class="calendar-day-number">30</div>
-              <div class="calendar-event contest">글쓰기 대회</div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="전체" data-section="events">전체</button>
+        <button class="filter-btn" data-filter="행사" data-section="events">행사</button>
+        <button class="filter-btn" data-filter="공모전" data-section="events">공모전</button>
+      </div>
+
+      <div class="grid-container">
+        <div class="event-grid" id="eventGrid">
+          
+          <div class="event-card" data-category="행사">
+            <img src="https://picsum.photos/200/300" alt="2024 가을 축제">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>2024 가을 축제</h3>
+              <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
+              <p class="event-organizer">주관: 학생회</p>
+              <p class="event-location">📍 장소: 중앙운동장</p>
+              <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
             </div>
           </div>
+
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="창업 아이디어 공모전">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>창업 아이디어 공모전</h3>
+              <p class="event-date">📅 2024.11.20</p>
+              <p class="event-organizer">주최: LINC+ 사업단</p>
+              <p class="event-description">혁신적인 창업 아이디어를 공모합니다.</p>
+              <a href="https://forms.gle/example1" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="겨울 MT">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>겨울 MT</h3>
+              <p class="event-date">📅 2024.12.05</p>
+              <p class="event-organizer">주관: 학생회</p>
+              <p class="event-location">📍 장소: 강원도 평창</p>
+              <p class="event-description">학과 MT에 참여하세요!</p>
+            </div>
+          </div>
+
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="글쓰기 경진대회">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>글쓰기 경진대회</h3>
+              <p class="event-date">📅 2024.11.30</p>
+              <p class="event-organizer">주최: 학습지원센터</p>
+              <p class="event-description">다양한 글쓰기 주제로 경진대회에 도전하세요.</p>
+              <a href="https://forms.gle/example2" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="체육대회">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>체육대회</h3>
+              <p class="event-date">📅 2024.12.10</p>
+              <p class="event-organizer">주관: 체육부</p>
+              <p class="event-location">📍 장소: 체육관</p>
+              <p class="event-description">단양 조으로 자웅을 겨루는 체육대회</p>
+            </div>
+          </div>
+
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="프로그래밍 해커톤">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>프로그래밍 해커톤</h3>
+              <p class="event-date">📅 2024.12.15</p>
+              <p class="event-organizer">주최: 컴퓨터공학과</p>
+              <p class="event-description">24시간 코딩 마라톤에 도전하세요!</p>
+              <a href="https://forms.gle/example3" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -861,12 +767,10 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         <p>관심사가 같은 친구들과 함께하세요!</p>
       </div>
 
-      <!-- 동아리 & 소모임 신청하기 버튼 -->
       <div class="action-button-container">
         <a href="https://forms.gle/community-apply" target="_blank" class="action-button">📋 동아리 & 소모임 신청하기</a>
       </div>
 
-      <!-- 필터 버튼 -->
       <div class="filter-buttons">
         <button class="filter-btn active" data-filter="전체" data-section="community">전체</button>
         <button class="filter-btn" data-filter="스포츠" data-section="community">스포츠</button>
@@ -875,13 +779,9 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         <button class="filter-btn" data-filter="취미" data-section="community">취미</button>
       </div>
 
-      <!-- 동아리 카드 목록 -->
       <div class="grid-container">
         <div class="community-grid" id="communityGrid">
           
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 1: 농구 동아리 (스포츠) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="스포츠">
             <div class="community-header-card">
               <h3>농구 동아리</h3>
@@ -894,9 +794,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 2: 사진 소모임 (문화예술) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="문화예술">
             <div class="community-header-card">
               <h3>사진 소모임</h3>
@@ -909,9 +806,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 3: 코딩 스터디 (학술) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="학술">
             <div class="community-header-card">
               <h3>코딩 스터디</h3>
@@ -924,9 +818,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 4: 밴드 동아리 (문화예술) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="문화예술">
             <div class="community-header-card">
               <h3>밴드 동아리</h3>
@@ -939,9 +830,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 5: 영어 회화 모임 (학술) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="학술">
             <div class="community-header-card">
               <h3>영어 회화 모임</h3>
@@ -954,9 +842,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 6: 등산 모임 (스포츠) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="스포츠">
             <div class="community-header-card">
               <h3>등산 모임</h3>
@@ -969,9 +854,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 7: 요리 동아리 (취미) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="취미">
             <div class="community-header-card">
               <h3>요리 동아리</h3>
@@ -984,9 +866,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 8: 독서 토론 모임 (학술) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="학술">
             <div class="community-header-card">
               <h3>독서 토론 모임</h3>
@@ -999,9 +878,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 9: 댄스 동아리 (문화예술) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="community-card" data-category="문화예술">
             <div class="community-header-card">
               <h3>댄스 동아리</h3>
@@ -1014,10 +890,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </a>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 여기에 새로운 카드 추가 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-
         </div>
       </div>
     </section>
@@ -1026,16 +898,132 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
 
   <!--
   ////////////////////////////////////////////////////////////////////////////////////////
-  // JavaScript 영역 - 필터링 및 스크롤 기능
+  // JavaScript 영역 - 필터링, 스크롤, 캘린더 기능
   ////////////////////////////////////////////////////////////////////////////////////////
   -->
   <script>
-    // 페이지 상단으로 스크롤
+    // 캘린더 데이터 (월별)
+    const calendarData = {
+      9: {
+        month: '2024년 9월',
+        firstDay: 0,
+        daysInMonth: 30,
+        prevMonthDays: 31,
+        events: {
+          5: [{ name: '신입생 환영회', type: '' }],
+          12: [{ name: '동아리 박람회', type: 'club' }],
+          20: [{ name: '추석 연휴', type: '' }]
+        }
+      },
+      10: {
+        month: '2024년 10월',
+        firstDay: 2,
+        daysInMonth: 31,
+        prevMonthDays: 30,
+        events: {
+          3: [{ name: '개천절', type: '' }],
+          9: [{ name: '한글날', type: '' }],
+          15: [{ name: '중간고사', type: '' }],
+          16: [{ name: '중간고사', type: '' }],
+          17: [{ name: '중간고사', type: '' }],
+          25: [{ name: '학술제', type: 'club' }]
+        }
+      },
+      11: {
+        month: '2024년 11월',
+        firstDay: 5,
+        daysInMonth: 30,
+        prevMonthDays: 31,
+        events: {
+          15: [{ name: '가을 축제', type: '' }],
+          16: [{ name: '가을 축제', type: '' }],
+          20: [{ name: '창업 공모전', type: 'contest' }],
+          30: [{ name: '글쓰기 대회', type: 'contest' }]
+        }
+      },
+      12: {
+        month: '2024년 12월',
+        firstDay: 0,
+        daysInMonth: 31,
+        prevMonthDays: 30,
+        events: {
+          5: [{ name: '겨울 MT', type: '' }],
+          10: [{ name: '체육대회', type: '' }],
+          15: [{ name: '해커톤', type: 'contest' }],
+          20: [{ name: '기말고사', type: '' }],
+          21: [{ name: '기말고사', type: '' }],
+          22: [{ name: '기말고사', type: '' }],
+          25: [{ name: '크리스마스', type: '' }]
+        }
+      }
+    };
+
+    let currentDisplayMonth = 11;
+
+    function renderCalendar(month) {
+      const data = calendarData[month];
+      const calendarDaysContainer = document.getElementById('calendarDays');
+      calendarDaysContainer.innerHTML = '';
+
+      document.getElementById('currentMonth').textContent = data.month;
+
+      const firstDay = data.firstDay;
+      const daysInMonth = data.daysInMonth;
+      const prevMonthDays = data.prevMonthDays;
+
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day other-month';
+        dayDiv.innerHTML = `<div class="calendar-day-number">${prevMonthDays - i}</div>`;
+        calendarDaysContainer.appendChild(dayDiv);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        dayDiv.innerHTML = `<div class="calendar-day-number">${day}</div>`;
+        
+        if (data.events[day]) {
+          data.events[day].forEach(event => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = `calendar-event ${event.type}`;
+            eventDiv.textContent = event.name;
+            dayDiv.appendChild(eventDiv);
+          });
+        }
+        
+        calendarDaysContainer.appendChild(dayDiv);
+      }
+
+      const totalCells = firstDay + daysInMonth;
+      const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+      
+      for (let i = 1; i <= remainingCells; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day other-month';
+        dayDiv.innerHTML = `<div class="calendar-day-number">${i}</div>`;
+        calendarDaysContainer.appendChild(dayDiv);
+      }
+    }
+
+    renderCalendar(currentDisplayMonth);
+
+    const monthButtons = document.querySelectorAll('.month-btn');
+    monthButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        monthButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const month = parseInt(btn.getAttribute('data-month'));
+        currentDisplayMonth = month;
+        renderCalendar(month);
+      });
+    });
+
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 섹션으로 스크롤
     function scrollToSection(sectionId) {
       const section = document.getElementById(sectionId);
       if (section) {
@@ -1045,7 +1033,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
       }
     }
 
-    // 필터 기능
     const filterButtons = document.querySelectorAll('.filter-btn');
     const eventCards = document.querySelectorAll('.event-card');
     const communityCards = document.querySelectorAll('.community-card');
@@ -1055,17 +1042,14 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         const section = button.getAttribute('data-section');
         const filter = button.getAttribute('data-filter');
         
-        // 같은 섹션의 버튼들에서만 active 클래스 제거
         filterButtons.forEach(btn => {
           if (btn.getAttribute('data-section') === section) {
             btn.classList.remove('active');
           }
         });
         
-        // 클릭한 버튼에 active 클래스 추가
         button.classList.add('active');
         
-        // 필터링
         if (section === 'events') {
           eventCards.forEach(card => {
             const category = card.getAttribute('data-category');
@@ -1088,9 +1072,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
       });
     });
 
-    // 네비게이션 active 상태 업데이트 (스크롤 시)
     const navLinks = document.querySelectorAll('.nav-links a');
-    const sections = ['events', 'calendar', 'community'];
+    const sections = ['calendar', 'events', 'community'];
 
     window.addEventListener('scroll', () => {
       let current = '';
