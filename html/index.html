@@ -560,8 +560,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
     <div class="nav-container">
       <a class="nav-logo" onclick="scrollToTop()">🎓 총학생회</a>
       <div class="nav-links">
-        <a onclick="scrollToSection('calendar')">일정</a>
         <a onclick="scrollToSection('events')">행사 & 공모전</a>
+        <a onclick="scrollToSection('calendar')">일정</a>
         <a onclick="scrollToSection('community')">동아리 & 소모임</a>
       </div>
     </div>
@@ -576,8 +576,131 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
     
     <!--
     ////////////////////////////////////////////////////////////////////////////////////////
-    // 섹션 1: 이번 달 주요 일정 (캘린더)
+    // 섹션 1: 행사 & 공모전
     ////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <section id="events" class="section">
+      <div class="page-header">
+        <h1>교내 행사 & 공모전</h1>
+        <p>다양한 교내 활동에 참여해보세요!</p>
+      </div>
+
+      <!-- 행사 제안/건의하기 버튼 -->
+      <div class="action-button-container">
+        <a href="https://forms.gle/example" target="_blank" class="action-button primary">✍️ 행사 제안 / 건의하기</a>
+      </div>
+
+      <!-- 필터 버튼 -->
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="전체" data-section="events">전체</button>
+        <button class="filter-btn" data-filter="행사" data-section="events">행사</button>
+        <button class="filter-btn" data-filter="공모전" data-section="events">공모전</button>
+      </div>
+
+      <!-- 행사 & 공모전 카드 목록 -->
+      <div class="grid-container">
+        <div class="event-grid" id="eventGrid">
+          
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 1: 2024 가을 축제 (행사) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="2024 가을 축제">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>2024 가을 축제</h3>
+              <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
+              <p class="event-organizer">주관: 학생회</p>
+              <p class="event-location">📍 장소: 중앙운동장</p>
+              <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="창업 아이디어 공모전">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>창업 아이디어 공모전</h3>
+              <p class="event-date">📅 2024.11.20</p>
+              <p class="event-organizer">주최: LINC+ 사업단</p>
+              <p class="event-description">혁신적인 창업 아이디어를 공모합니다.</p>
+              <a href="https://forms.gle/example1" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 3: 겨울 MT (행사) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="겨울 MT">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>겨울 MT</h3>
+              <p class="event-date">📅 2024.12.05</p>
+              <p class="event-organizer">주관: 학생회</p>
+              <p class="event-location">📍 장소: 강원도 평창</p>
+              <p class="event-description">학과 MT에 참여하세요!</p>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="글쓰기 경진대회">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>글쓰기 경진대회</h3>
+              <p class="event-date">📅 2024.11.30</p>
+              <p class="event-organizer">주최: 학습지원센터</p>
+              <p class="event-description">다양한 글쓰기 주제로 경진대회에 도전하세요.</p>
+              <a href="https://forms.gle/example2" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 5: 체육대회 (행사) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="행사">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="체육대회">
+            <div class="event-content">
+              <span class="event-category">행사</span>
+              <h3>체육대회</h3>
+              <p class="event-date">📅 2024.12.10</p>
+              <p class="event-organizer">주관: 체육부</p>
+              <p class="event-location">📍 장소: 체육관</p>
+              <p class="event-description">단양 조으로 자웅을 겨루는 체육대회</p>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <div class="event-card" data-category="공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="프로그래밍 해커톤">
+            <div class="event-content">
+              <span class="event-category">공모전</span>
+              <h3>프로그래밍 해커톤</h3>
+              <p class="event-date">📅 2024.12.15</p>
+              <p class="event-organizer">주최: 컴퓨터공학과</p>
+              <p class="event-description">24시간 코딩 마라톤에 도전하세요!</p>
+              <a href="https://forms.gle/example3" target="_blank" class="apply-button">📝 신청하기</a>
+            </div>
+          </div>
+
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          <!-- 여기에 새로운 카드 추가 -->
+          <!-- //////////////////////////////////////////////////////////////////////////////// -->
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
     <!--
     ////////////////////////////////////////////////////////////////////////////////////////
     // 섹션 2: 이번 달 주요 일정 (캘린더)
@@ -721,128 +844,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
               <div class="calendar-event contest">글쓰기 대회</div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-divider">
-    -->
-    <section id="events" class="section">
-      <div class="page-header">
-        <h1>교내 행사 & 공모전</h1>
-        <p>다양한 교내 활동에 참여해보세요!</p>
-      </div>
-
-      <!-- 행사 제안/건의하기 버튼 -->
-      <div class="action-button-container">
-        <a href="https://forms.gle/example" target="_blank" class="action-button primary">✍️ 행사 제안 / 건의하기</a>
-      </div>
-
-      <!-- 필터 버튼 -->
-      <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="전체" data-section="events">전체</button>
-        <button class="filter-btn" data-filter="행사" data-section="events">행사</button>
-        <button class="filter-btn" data-filter="공모전" data-section="events">공모전</button>
-      </div>
-
-      <!-- 행사 & 공모전 카드 목록 -->
-      <div class="grid-container">
-        <div class="event-grid" id="eventGrid">
-          
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 1: 2024 가을 축제 (행사) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="2024 가을 축제">
-            <div class="event-content">
-              <span class="event-category">행사</span>
-              <h3>2024 가을 축제</h3>
-              <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
-              <p class="event-organizer">주관: 학생회</p>
-              <p class="event-location">📍 장소: 중앙운동장</p>
-              <p class="event-description">우리 대학 가을 축제에 여러분을 초대합니다!</p>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="공모전">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="창업 아이디어 공모전">
-            <div class="event-content">
-              <span class="event-category">공모전</span>
-              <h3>창업 아이디어 공모전</h3>
-              <p class="event-date">📅 2024.11.20</p>
-              <p class="event-organizer">주최: LINC+ 사업단</p>
-              <p class="event-description">혁신적인 창업 아이디어를 공모합니다.</p>
-              <a href="https://forms.gle/example1" target="_blank" class="apply-button">📝 신청하기</a>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 3: 겨울 MT (행사) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="겨울 MT">
-            <div class="event-content">
-              <span class="event-category">행사</span>
-              <h3>겨울 MT</h3>
-              <p class="event-date">📅 2024.12.05</p>
-              <p class="event-organizer">주관: 학생회</p>
-              <p class="event-location">📍 장소: 강원도 평창</p>
-              <p class="event-description">학과 MT에 참여하세요!</p>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="공모전">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="글쓰기 경진대회">
-            <div class="event-content">
-              <span class="event-category">공모전</span>
-              <h3>글쓰기 경진대회</h3>
-              <p class="event-date">📅 2024.11.30</p>
-              <p class="event-organizer">주최: 학습지원센터</p>
-              <p class="event-description">다양한 글쓰기 주제로 경진대회에 도전하세요.</p>
-              <a href="https://forms.gle/example2" target="_blank" class="apply-button">📝 신청하기</a>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 5: 체육대회 (행사) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="체육대회">
-            <div class="event-content">
-              <span class="event-category">행사</span>
-              <h3>체육대회</h3>
-              <p class="event-date">📅 2024.12.10</p>
-              <p class="event-organizer">주관: 체육부</p>
-              <p class="event-location">📍 장소: 체육관</p>
-              <p class="event-description">단양 조으로 자웅을 겨루는 체육대회</p>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <div class="event-card" data-category="공모전">
-            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="프로그래밍 해커톤">
-            <div class="event-content">
-              <span class="event-category">공모전</span>
-              <h3>프로그래밍 해커톤</h3>
-              <p class="event-date">📅 2024.12.15</p>
-              <p class="event-organizer">주최: 컴퓨터공학과</p>
-              <p class="event-description">24시간 코딩 마라톤에 도전하세요!</p>
-              <a href="https://forms.gle/example3" target="_blank" class="apply-button">📝 신청하기</a>
-            </div>
-          </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 여기에 새로운 카드 추가 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-
         </div>
       </div>
     </section>
@@ -1089,7 +1090,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
 
     // 네비게이션 active 상태 업데이트 (스크롤 시)
     const navLinks = document.querySelectorAll('.nav-links a');
-    const sections = ['calendar', 'events', 'community'];
+    const sections = ['events', 'calendar', 'community'];
 
     window.addEventListener('scroll', () => {
       let current = '';
