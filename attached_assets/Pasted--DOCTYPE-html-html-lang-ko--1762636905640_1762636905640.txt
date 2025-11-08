@@ -599,7 +599,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
   -->
   <nav class="navigation">
     <div class="nav-container">
-      <a class="nav-logo" onclick="scrollToTop()">🎓 서울신학대학교 총학생회</a>
+      <a class="nav-logo" onclick="scrollToTop()">🎓 총학생회</a>
       <div class="nav-links">
         <a onclick="scrollToSection('calendar')">일정</a>
         <a onclick="scrollToSection('events')">행사 & 공모전</a>
@@ -678,12 +678,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
       <div class="grid-container">
         <div class="event-grid" id="eventGrid">
           
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 1: 2024 가을 축제 (행사) -->
-          <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="event-card" data-category="행사">
-            <img src="https://drive.google.com/u/0/drive-viewer/AKGpihY1-bL30ucUrBLmIsvgpZ5w_dKamLDDRNYKVdhVIgjyF1DiuPr2uGDjkkcb9atfqo0VL2HqYntrX-tjsbkeoOiMGUVljn7ORcw=s2560" alt="2024 가을 축제">
+            <img src="https://picsum.photos/200/300" alt="2024 가을 축제">
             <div class="event-content">
               <span class="event-category">행사</span>
               <h3>2024 가을 축제</h3>
@@ -694,12 +690,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </div>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
-          <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="event-card" data-category="공모전">
-            <img src="https://picsum.photos/400/300" alt="창업 아이디어 공모전">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="창업 아이디어 공모전">
             <div class="event-content">
               <span class="event-category">공모전</span>
               <h3>창업 아이디어 공모전</h3>
@@ -710,12 +702,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </div>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 3: 겨울 MT (행사) -->
-          <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="event-card" data-category="행사">
-            <img src="https://picsum.photos/400/301" alt="겨울 MT">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="겨울 MT">
             <div class="event-content">
               <span class="event-category">행사</span>
               <h3>겨울 MT</h3>
@@ -726,12 +714,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </div>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
-          <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="event-card" data-category="공모전">
-            <img src="https://picsum.photos/400/302" alt="글쓰기 경진대회">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="글쓰기 경진대회">
             <div class="event-content">
               <span class="event-category">공모전</span>
               <h3>글쓰기 경진대회</h3>
@@ -742,12 +726,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </div>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 5: 체육대회 (행사) -->
-          <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="event-card" data-category="행사">
-            <img src="https://picsum.photos/400/303" alt="체육대회">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="체육대회">
             <div class="event-content">
               <span class="event-category">행사</span>
               <h3>체육대회</h3>
@@ -758,12 +738,8 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             </div>
           </div>
 
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
-          <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
           <div class="event-card" data-category="공모전">
-            <img src="https://picsum.photos/400/304" alt="프로그래밍 해커톤">
+            <img src="https://drive.google.com/uc?export=view&id=1Sc_IfgIeeXx0CQ4sl3cu6O77jOvoCRDa" alt="프로그래밍 해커톤">
             <div class="event-content">
               <span class="event-category">공모전</span>
               <h3>프로그래밍 해커톤</h3>
@@ -773,10 +749,6 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
               <a href="https://forms.gle/example3" target="_blank" class="apply-button">📝 신청하기</a>
             </div>
           </div>
-
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
-          <!-- 여기에 새로운 카드 추가 -->
-          <!-- //////////////////////////////////////////////////////////////////////////////// -->
 
         </div>
       </div>
