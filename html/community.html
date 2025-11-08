@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>총학생회 - 동아리 & 소모임</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">🎓 총학생회</a>
+      <div class="nav-links">
+        <a href="index.html">행사 & 공모전</a>
+        <a href="community.html" class="active">동아리 & 소모임</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>동아리 & 소모임</h1>
+      <p>관심사가 같은 친구들과 함께하세요!</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons community">
+      <button class="filter-btn active" data-filter="전체">전체</button>
+      <button class="filter-btn" data-filter="스포츠">스포츠</button>
+      <button class="filter-btn" data-filter="학술">학술</button>
+      <button class="filter-btn" data-filter="문화예술">문화예술</button>
+      <button class="filter-btn" data-filter="취미">취미</button>
+    </div>
+
+    <!-- Community Grid -->
+    <div class="grid-container">
+      <div class="community-grid" id="communityGrid">
+        <!-- Community Card 1 -->
+        <div class="community-card" data-category="스포츠">
+          <div class="community-header-card">
+            <h3>농구 동아리</h3>
+            <span class="community-category">스포츠</span>
+          </div>
+          <p class="community-members">👥 25명</p>
+          <p class="community-description">함께 농구하며 친목을 다지는 동아리입니다.</p>
+          <a href="https://open.kakao.com/o/example1" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 2 -->
+        <div class="community-card" data-category="문화예술">
+          <div class="community-header-card">
+            <h3>사진 소모임</h3>
+            <span class="community-category">문화예술</span>
+          </div>
+          <p class="community-members">👥 18명</p>
+          <p class="community-description">사진 촬영과 편집을 함께 배우는 소모임입니다.</p>
+          <a href="https://open.kakao.com/o/example2" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 3 -->
+        <div class="community-card" data-category="학술">
+          <div class="community-header-card">
+            <h3>코딩 스터디</h3>
+            <span class="community-category">학술</span>
+          </div>
+          <p class="community-members">👥 32명</p>
+          <p class="community-description">알고리즘 문제풀이 및 프로젝트 스터디</p>
+          <a href="https://open.kakao.com/o/example3" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 4 -->
+        <div class="community-card" data-category="문화예술">
+          <div class="community-header-card">
+            <h3>밴드 동아리</h3>
+            <span class="community-category">문화예술</span>
+          </div>
+          <p class="community-members">👥 15명</p>
+          <p class="community-description">다양한 악기로 밴드를 구성해 공연합니다.</p>
+          <a href="https://open.kakao.com/o/example4" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 5 -->
+        <div class="community-card" data-category="학술">
+          <div class="community-header-card">
+            <h3>영어 회화 모임</h3>
+            <span class="community-category">학술</span>
+          </div>
+          <p class="community-members">👥 20명</p>
+          <p class="community-description">자유롭게 영어로 대화하는 모임</p>
+          <a href="https://open.kakao.com/o/example5" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 6 -->
+        <div class="community-card" data-category="스포츠">
+          <div class="community-header-card">
+            <h3>등산 모임</h3>
+            <span class="community-category">스포츠</span>
+          </div>
+          <p class="community-members">👥 22명</p>
+          <p class="community-description">주말마다 함께 산을 오르는 모임</p>
+          <a href="https://open.kakao.com/o/example6" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 7 -->
+        <div class="community-card" data-category="취미">
+          <div class="community-header-card">
+            <h3>요리 동아리</h3>
+            <span class="community-category">취미</span>
+          </div>
+          <p class="community-members">👥 16명</p>
+          <p class="community-description">다양한 요리를 함께 만들어보는 동아리</p>
+          <a href="https://open.kakao.com/o/example7" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 8 -->
+        <div class="community-card" data-category="학술">
+          <div class="community-header-card">
+            <h3>독서 토론 모임</h3>
+            <span class="community-category">학술</span>
+          </div>
+          <p class="community-members">👥 14명</p>
+          <p class="community-description">책을 읽고 함께 토론하는 모임</p>
+          <a href="https://open.kakao.com/o/example8" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+
+        <!-- Community Card 9 -->
+        <div class="community-card" data-category="문화예술">
+          <div class="community-header-card">
+            <h3>댄스 동아리</h3>
+            <span class="community-category">문화예술</span>
+          </div>
+          <p class="community-members">👥 28명</p>
+          <p class="community-description">K-POP 댄스를 배우고 공연하는 동아리</p>
+          <a href="https://open.kakao.com/o/example9" target="_blank" rel="noopener noreferrer" class="kakao-button">
+            💬 오픈채팅 참여하기
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const communityCards = document.querySelectorAll('.community-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        // Get filter value
+        const filter = button.getAttribute('data-filter');
+        
+        // Filter communities
+        communityCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          
+          if (filter === '전체' || category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
