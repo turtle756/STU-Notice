@@ -44,14 +44,18 @@
 
 1. [프로젝트 개요](#프로젝트-개요)
 2. [파일 구조](#파일-구조)
-3. [섹션별 수정 가이드](#섹션별-수정-가이드)
+3. [🌐 GitHub Pages 호스팅 가이드](#-github-pages-호스팅-가이드) ⭐ NEW
+   - [GitHub에 업로드하기](#github에-업로드하기)
+   - [GitHub Pages 설정하기](#github-pages-설정하기)
+   - [이미지 GitHub에서 호스팅하기](#이미지-github에서-호스팅하기)
+4. [섹션별 수정 가이드](#섹션별-수정-가이드)
    - [행사 & 공모전 추가/수정](#1-행사--공모전-추가수정)
    - [캘린더 일정 추가/수정](#2-캘린더-일정-추가수정)
    - [동아리 & 소모임 추가/수정](#3-동아리--소모임-추가수정)
-4. [이미지 변경 방법](#이미지-변경-방법)
-5. [Ctrl+F 검색어 전체 목록](#ctrlf-검색어-전체-목록)
-6. [문제해결 (FAQ)](#문제해결-faq)
-7. [기술 스택](#기술-스택)
+5. [이미지 변경 방법](#이미지-변경-방법)
+6. [Ctrl+F 검색어 전체 목록](#ctrlf-검색어-전체-목록)
+7. [문제해결 (FAQ)](#문제해결-faq)
+8. [기술 스택](#기술-스택)
 
 ---
 
@@ -76,12 +80,211 @@
 
 ## 📁 파일 구조
 
+이 프로젝트는 **두 가지 버전**으로 구성되어 있습니다:
+
 ```
-html/
-  └── index.html        # 모든 기능이 포함된 단일 파일
+프로젝트 루트/
+├── html/                   # 구글 사이트용 (단일 파일)
+│   └── index.html          # CSS/JS 포함된 단일 HTML 파일
+│
+├── docs/                   # GitHub Pages용 (정석 구조)
+│   ├── index.html          # HTML only
+│   ├── css/
+│   │   └── style.css       # 분리된 CSS
+│   ├── js/
+│   │   └── script.js       # 분리된 JavaScript
+│   └── images/             # GitHub 호스팅 이미지
+│       └── .gitkeep
+│
+└── README.md               # 사용 설명서
 ```
 
-**`index.html` 하나로 모든 기능이 작동합니다!**
+### **두 버전의 차이**
+
+| 항목 | html/index.html | docs/ 폴더 |
+|------|-----------------|-----------|
+| **용도** | 구글 사이트 복사-붙여넣기 | GitHub Pages 호스팅 |
+| **구조** | 단일 HTML 파일 | CSS/JS 분리 |
+| **이미지** | 구글 드라이브 URL | GitHub 상대 경로 |
+| **수정** | 복사-붙여넣기 워크플로우 | Git으로 관리 |
+| **사용자** | 비개발자 (총학생회 담당자) | 일반 방문자 (웹 접속) |
+
+**💡 팁:** `html/index.html`을 **마스터 파일**로 관리하고, `docs/`는 배포용으로 사용하세요!
+
+---
+
+## 🌐 GitHub Pages 호스팅 가이드
+
+GitHub에 업로드하고 무료로 웹사이트를 호스팅하는 방법을 안내합니다.
+
+---
+
+### **GitHub에 업로드하기**
+
+#### **방법 1: Replit Git 도구 사용 (추천, 쉬움)**
+
+1. **Git 도구 열기**
+   - Replit 화면 왼쪽 사이드바 → **Tools** 클릭
+   - **+** 버튼 → **Git** 선택
+
+2. **GitHub 계정 연결**
+   - GitHub 로그인 팝업 → 로그인 (비밀번호는 GitHub만 알게 됨)
+   - OAuth 인증으로 안전하게 연결
+
+3. **저장소 생성**
+   - 새 저장소 만들기 선택
+   - 저장소 이름: `ssu-student-council` (예시)
+   - Public (공개) 또는 Private (비공개) 선택
+
+4. **파일 업로드**
+   - Git 패널에서 변경된 파일 확인
+   - 모든 파일 **Stage** (체크박스 선택)
+   - 커밋 메시지: "Initial commit - 서울신학대 총학생회 웹사이트"
+   - **Commit** → **Push** 클릭 ✨
+
+---
+
+#### **방법 2: 터미널 명령어 사용 (고급)**
+
+Replit Shell에서 다음 명령어 실행:
+
+```bash
+# 1. Git 초기화 (이미 되어 있으면 생략)
+git init
+
+# 2. GitHub 저장소 연결 (본인의 URL로 변경!)
+git remote add origin https://github.com/본인아이디/저장소이름.git
+
+# 3. 모든 파일 추가
+git add .
+
+# 4. 커밋
+git commit -m "Initial commit - 서울신학대 총학생회 웹사이트"
+
+# 5. GitHub에 업로드
+git push -u origin main
+```
+
+---
+
+### **GitHub Pages 설정하기**
+
+GitHub에 업로드한 후, 무료 호스팅을 활성화하는 방법:
+
+#### **단계 1: GitHub 저장소 페이지 접속**
+- https://github.com/본인아이디/저장소이름
+
+#### **단계 2: Settings 클릭**
+- 저장소 상단 메뉴 → **Settings** 클릭
+
+#### **단계 3: Pages 설정**
+1. 왼쪽 메뉴 → **Pages** 클릭
+2. **Source** 섹션:
+   - Branch: `main` 선택
+   - Folder: `/docs` 선택 ⭐ **중요!**
+3. **Save** 버튼 클릭
+
+#### **단계 4: 배포 완료 확인**
+- 몇 분 후 페이지 상단에 URL 표시:
+  ```
+  https://본인아이디.github.io/저장소이름/
+  ```
+- 이 URL로 접속하면 웹사이트 확인 가능! 🎉
+
+---
+
+### **이미지 GitHub에서 호스팅하기**
+
+구글 드라이브 대신 GitHub에서 이미지를 호스팅하는 방법:
+
+#### **Step 1: 이미지 파일 준비**
+1. 이미지 파일 이름을 영문으로 변경
+   - ❌ `가을축제.jpg`
+   - ✅ `autumn-festival.jpg`
+
+2. 권장 이미지 크기:
+   - **카드 이미지**: 400x300 또는 800x600
+   - **비율**: 4:3 권장
+   - **용량**: 500KB 이하 (빠른 로딩)
+
+#### **Step 2: Replit에서 이미지 업로드**
+1. Replit 파일 탐색기에서 `docs/images/` 폴더 열기
+2. 이미지 파일을 드래그 앤 드롭
+
+#### **Step 3: HTML 파일에서 경로 수정**
+`docs/index.html` 파일을 열고 이미지 경로를 수정:
+
+**수정 전:**
+```html
+<!-- TODO: 이미지 업로드 후 src를 "images/autumn-festival.jpg"로 교체 -->
+<img
+  src="https://drive.google.com/u/0/drive-viewer/AKGpi...=s2560"
+  alt="가을 축제"
+/>
+```
+
+**수정 후:**
+```html
+<img
+  src="images/autumn-festival.jpg"
+  alt="가을 축제"
+/>
+```
+
+#### **Step 4: GitHub에 다시 Push**
+```bash
+# 변경사항 추가
+git add docs/images/
+
+# 커밋
+git commit -m "Add images for GitHub hosting"
+
+# Push
+git push origin main
+```
+
+#### **Step 5: 확인**
+- 몇 분 후 GitHub Pages URL에서 이미지 확인
+- 이미지가 빠르게 로딩되는지 체크! ⚡
+
+---
+
+### **💡 이미지 URL 형식**
+
+GitHub Pages에서 이미지는 다음 URL로도 접근 가능:
+
+```
+https://본인아이디.github.io/저장소이름/images/autumn-festival.jpg
+```
+
+외부 사이트에서 링크할 때 이 URL을 사용할 수 있습니다!
+
+---
+
+### **🔄 두 버전 동기화 방법**
+
+`html/index.html`과 `docs/`를 동시에 관리하는 방법:
+
+#### **추천 워크플로우:**
+1. **html/index.html 수정** (구글 사이트용)
+   - Ctrl+F로 원하는 섹션 찾기
+   - 내용 수정 (행사, 캘린더, 동아리 등)
+
+2. **docs/ 폴더도 동일하게 수정**
+   - `docs/index.html`: HTML 내용 동기화
+   - `docs/css/style.css`: 스타일 변경사항 반영
+   - `docs/js/script.js`: JavaScript 수정사항 반영
+
+3. **Git으로 업로드**
+   - Git 도구에서 변경사항 확인
+   - Commit & Push
+
+#### **체크리스트:**
+- [ ] html/index.html 수정 완료
+- [ ] docs/index.html에 동일한 내용 반영
+- [ ] 이미지 경로 확인 (구글 드라이브 vs GitHub)
+- [ ] Git Commit & Push
+- [ ] GitHub Pages에서 정상 작동 확인
 
 ---
 

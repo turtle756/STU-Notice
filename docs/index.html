@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="ko">
+  <!--
+////////////////////////////////////////////////////////////////////////////////////////
+// 총학생회 통합 웹사이트
+////////////////////////////////////////////////////////////////////////////////////////
+
+【 📖 이 파일 수정 가이드 】
+
+1. 페이지 제목 변경
+   - <title> 태그에서 "총학생회"를 원하는 제목으로 변경
+
+2. 상단 네비게이션 수정
+   - "🎓 총학생회" 부분: 로고/학교명 변경
+   - 메뉴 이름 변경 가능
+
+3. 이번 달 주요 일정 (캘린더)
+   - 월별 네비게이션으로 9월~12월 확인 가능
+   - 날짜별 일정 추가/수정
+
+4. 행사 & 공모전 섹션
+   - 행사 카드: 주관, 장소 정보 포함
+   - 공모전 카드: 주최 정보, 신청하기 버튼 포함
+   - "행사 제안/건의하기" 버튼 링크 수정
+
+5. 동아리 & 소모임 섹션
+   - "동아리 & 소모임 신청하기" 버튼 링크 수정
+   - 카카오톡 오픈채팅 링크 수정
+
+【 이미지 URL 변경 방법 】
+구글 드라이브 공유 링크에서 파일 ID를 추출하여:
+src="https://drive.google.com/uc?export=view&id=파일ID"
+
+////////////////////////////////////////////////////////////////////////////////////////
+-->
+
+  <!-- 
+  ████████████████████████████████████████████████████████████████████████████████████
+  SECTION: HEAD - 문서 헤더, 메타 태그, 페이지 제목
+  Ctrl+F 검색어: "SECTION: HEAD"
+  
+  여기서 수정 가능한 항목:
+  - <title>: 페이지 제목 변경
+  - 메타 태그: SEO 최적화 정보
+  ████████████████████████████████████████████████████████████████████████████████████
+  -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>서울신학대학교 총학생회</title>
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████████████████
+    CSS: STYLES - 전체 스타일 시트
+    Ctrl+F 검색어: "CSS: STYLES"
+    
+    주요 CSS 섹션 검색어:
+    - "CSS: LAYOUT" - 기본 레이아웃 및 전역 스타일
+    - "CSS: NAVIGATION" - 상단 네비게이션 바 스타일
+    - "CSS: CALENDAR" - 캘린더 스타일
+    - "CSS: CARDS" - 카드 컴포넌트 스타일
+    - "CSS: MODAL" - 모달 스타일
+    - "CSS: RESPONSIVE" - 반응형 미디어 쿼리
+    ████████████████████████████████████████████████████████████████████████████████████
+    -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████████████████
+    SECTION: NAVIGATION - 상단 네비게이션 바
+    Ctrl+F 검색어: "SECTION: NAVIGATION"
+    
+    여기서 수정 가능한 항목:
+    - 로고 텍스트: "🎓 서울신학대학교 총학생회"
+    - 메뉴 항목: "일정", "행사 & 공모전", "동아리 & 소모임"
+    ████████████████████████████████████████████████████████████████████████████████████
+    -->
+    <nav class="navigation">
+      <div class="nav-container">
+        <a class="nav-logo" onclick="scrollToTop()"
+          >🎓 서울신학대학교 총학생회</a
+        >
+        <div class="nav-links">
+          <a onclick="scrollToSection('calendar')">일정</a>
+          <a onclick="scrollToSection('events')">행사 & 공모전</a>
+          <a onclick="scrollToSection('community')">동아리 & 소모임</a>
+        </div>
+      </div>
+    </nav>
+
+    <!--
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // 메인 콘텐츠
+  ////////////////////////////////////////////////////////////////////////////////////////
+  -->
+    <main class="main-content">
+      <!-- 
+      ████████████████████████████████████████████████████████████████████████████████████
+      SECTION: CALENDAR - 이번 달 주요 일정 캘린더
+      Ctrl+F 검색어: "SECTION: CALENDAR"
+      
+      여기서 수정 가능한 항목:
+      - 캘린더 제목: "📅 이번 달 주요 일정"
+      - 월별 네비게이션 버튼 (9월, 10월, 11월, 12월)
+      - 캘린더 일정 데이터는 하단 JavaScript에서 수정 (Ctrl+F: "JS: CALENDAR DATA")
+      ████████████████████████████████████████████████████████████████████████████████████
+      -->
+      <section id="calendar" class="section">
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <h2>📅 이번 달 주요 일정</h2>
+            <p class="calendar-month" id="currentMonth">2024년 11월</p>
+
+            <div class="month-navigation">
+              <button class="month-btn" data-month="9">9월</button>
+              <button class="month-btn" data-month="10">10월</button>
+              <button class="month-btn active" data-month="11">11월</button>
+              <button class="month-btn" data-month="12">12월</button>
+            </div>
+          </div>
+
+          <div class="calendar-wrapper">
+            <div class="calendar">
+              <div class="calendar-weekdays">
+                <div class="calendar-weekday">일</div>
+                <div class="calendar-weekday">월</div>
+                <div class="calendar-weekday">화</div>
+                <div class="calendar-weekday">수</div>
+                <div class="calendar-weekday">목</div>
+                <div class="calendar-weekday">금</div>
+                <div class="calendar-weekday">토</div>
+              </div>
+
+              <div class="calendar-days" id="calendarDays">
+                <!-- JavaScript로 동적 생성 -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- 
+      ████████████████████████████████████████████████████████████████████████████████████
+      SECTION: EVENTS - 행사 & 공모전
+      Ctrl+F 검색어: "SECTION: EVENTS"
+      
+      여기서 수정 가능한 항목:
+      - 행사/공모전 카드 추가/수정/삭제
+      - 각 카드의 이미지 URL, 제목, 날짜, 설명
+      - data-* 속성 (대상, 혜택, 준비물, 일정, 문의처)
+      - "행사 제안/건의하기" 버튼 링크
+      - 필터 버튼 (전체/행사/공모전)
+      ████████████████████████████████████████████████████████████████████████████████████
+      -->
+      <section id="events" class="section">
+        <div class="page-header">
+          <h1>교내 행사 & 공모전</h1>
+          <p>다양한 교내 활동에 참여해보세요!</p>
+        </div>
+
+        <div class="action-button-container">
+          <a
+            href="https://forms.gle/example"
+            target="_blank"
+            class="action-button primary"
+            >✍️ 행사 제안 / 건의하기</a
+          >
+        </div>
+
+        <div class="filter-buttons">
+          <button
+            class="filter-btn active"
+            data-filter="전체"
+            data-section="events"
+          >
+            전체
+          </button>
+          <button class="filter-btn" data-filter="행사" data-section="events">
+            행사
+          </button>
+          <button class="filter-btn" data-filter="공모전" data-section="events">
+            공모전
+          </button>
+        </div>
+
+        <div class="grid-container">
+          <div class="event-grid" id="eventGrid">
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 카드 1: 2024 가을 축제 (행사) -->
+            <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- data-* 속성으로 모달에 표시할 상세 정보 추가 -->
+            <!-- TODO: 이미지 업로드 후 src를 "images/autumn-festival.jpg"로 교체 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="event-card" data-category="행사"
+                 data-target="전체 재학생"
+                 data-benefits="무료 먹거리 제공, 푸짐한 경품 추첨, 다양한 공연 관람"
+                 data-schedule="11/15(금) 17:00-22:00, 11/16(토) 12:00-22:00"
+                 data-contact="총학생회 010-XXXX-XXXX">
+              <img
+                src="https://drive.google.com/u/0/drive-viewer/AKGpihY1-bL30ucUrBLmIsvgpZ5w_dKamLDDRNYKVdhVIgjyF1DiuPr2uGDjkkcb9atfqo0VL2HqYntrX-tjsbkeoOiMGUVljn7ORcw=s2560"
+                alt="2024 가을 축제"
+              />
+              <div class="event-content">
+                <span class="event-category">행사</span>
+                <h3>2024 가을 축제</h3>
+                <p class="event-date">📅 2024.11.15 - 2024.11.16</p>
+                <p class="event-organizer">주관: 학생회</p>
+                <p class="event-location">📍 장소: 중앙운동장</p>
+                <p class="event-description">
+                  우리 대학 가을 축제에 여러분을 초대합니다!
+                </p>
+              </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
+            <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- TODO: 이미지 업로드 후 src를 "images/startup-contest.jpg"로 교체 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="event-card" data-category="공모전"
+                 data-target="전체 재학생 및 휴학생"
+                 data-benefits="대상 200만원, 최우수상 100만원, 우수상 50만원, 창업 멘토링 제공"
+                 data-requirements="제출물: 사업계획서(10페이지 이내), PPT 발표자료"
+                 data-schedule="신청 마감: 11/20, 서류심사: 11/25, 발표심사: 12/1"
+                 data-contact="LINC+ 사업단 02-XXXX-XXXX">
+              <img
+                src="https://picsum.photos/400/300"
+                alt="창업 아이디어 공모전"
+              />
+              <div class="event-content">
+                <span class="event-category">공모전</span>
+                <h3>창업 아이디어 공모전</h3>
+                <p class="event-date">📅 2024.11.20</p>
+                <p class="event-organizer">주최: LINC+ 사업단</p>
+                <p class="event-description">
+                  혁신적인 창업 아이디어를 공모합니다.
+                </p>
+                <a
+                  href="https://forms.gle/example1"
+                  target="_blank"
+                  class="apply-button"
+                  >📝 신청하기</a
+                >
+              </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 카드 3: 겨울 MT (행사) -->
+            <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="event-card" data-category="행사">
+              <img src="https://picsum.photos/400/301" alt="겨울 MT" />
+              <div class="event-content">
+                <span class="event-category">행사</span>
+                <h3>겨울 MT</h3>
+                <p class="event-date">📅 2024.12.05</p>
+                <p class="event-organizer">주관: 학생회</p>
+                <p class="event-location">📍 장소: 강원도 평창</p>
+                <p class="event-description">학과 MT에 참여하세요!</p>
+              </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 카드 4: 글쓰기 경진대회 (공모전) -->
+            <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="event-card" data-category="공모전">
+              <img src="https://picsum.photos/400/302" alt="글쓰기 경진대회" />
+              <div class="event-content">
+                <span class="event-category">공모전</span>
+                <h3>글쓰기 경진대회</h3>
+                <p class="event-date">📅 2024.11.30</p>
+                <p class="event-organizer">주최: 학습지원센터</p>
+                <p class="event-description">
+                  다양한 글쓰기 주제로 경진대회에 도전하세요.
+                </p>
+                <a
+                  href="https://forms.gle/example2"
+                  target="_blank"
+                  class="apply-button"
+                  >📝 신청하기</a
+                >
+              </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 카드 5: 체육대회 (행사) -->
+            <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="event-card" data-category="행사">
+              <img src="https://picsum.photos/400/303" alt="체육대회" />
+              <div class="event-content">
+                <span class="event-category">행사</span>
+                <h3>체육대회</h3>
+                <p class="event-date">📅 2024.12.10</p>
+                <p class="event-organizer">주관: 체육부</p>
+                <p class="event-location">📍 장소: 체육관</p>
+                <p class="event-description">
+                  단양 조으로 자웅을 겨루는 체육대회
+                </p>
+              </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 카드 6: 프로그래밍 해커톤 (공모전) -->
+            <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="event-card" data-category="공모전">
+              <img
+                src="https://picsum.photos/400/304"
+                alt="프로그래밍 해커톤"
+              />
+              <div class="event-content">
+                <span class="event-category">공모전</span>
+                <h3>프로그래밍 해커톤</h3>
+                <p class="event-date">📅 2024.12.15</p>
+                <p class="event-organizer">주최: 컴퓨터공학과</p>
+                <p class="event-description">
+                  24시간 코딩 마라톤에 도전하세요!
+                </p>
+                <a
+                  href="https://forms.gle/example3"
+                  target="_blank"
+                  class="apply-button"
+                  >📝 신청하기</a
+                >
+              </div>
+            </div>
+
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 여기에 새로운 카드 추가 -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- 
+      ████████████████████████████████████████████████████████████████████████████████████
+      SECTION: COMMUNITY - 동아리 & 소모임
+      Ctrl+F 검색어: "SECTION: COMMUNITY"
+      
+      여기서 수정 가능한 항목:
+      - 동아리/소모임 카드 추가/수정/삭제
+      - 각 카드의 이름, 설명, 인원수 (수동 업데이트)
+      - data-detail 속성 (활동 시간, 회비, 모집 대상 등)
+      - 카카오톡 오픈채팅방 링크
+      - "동아리 & 소모임 신청하기" 버튼 링크
+      - 필터 버튼 (전체/스포츠/학술/문화예술/취미)
+      ████████████████████████████████████████████████████████████████████████████████████
+      -->
+      <section id="community" class="section">
+        <div class="page-header">
+          <h1>동아리 & 소모임</h1>
+          <p>관심사가 같은 친구들과 함께하세요!</p>
+        </div>
+
+        <div class="action-button-container">
+          <a
+            href="https://forms.gle/community-apply"
+            target="_blank"
+            class="action-button"
+            >📋 동아리 & 소모임 신청하기</a
+          >
+        </div>
+
+        <div class="filter-buttons">
+          <button
+            class="filter-btn active"
+            data-filter="전체"
+            data-section="community"
+          >
+            전체
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="스포츠"
+            data-section="community"
+          >
+            스포츠
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="학술"
+            data-section="community"
+          >
+            학술
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="문화예술"
+            data-section="community"
+          >
+            문화예술
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="취미"
+            data-section="community"
+          >
+            취미
+          </button>
+        </div>
+
+        <div class="grid-container">
+          <div class="community-grid" id="communityGrid">
+            
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 동아리 카드 1: 농구 동아리 -->
+            <!-- 💡 인원수는 수동으로 업데이트해야 합니다 (실시간 연동 불가) -->
+            <!-- data-detail 속성에 상세 정보 추가 가능 (모달용) -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="community-card" data-category="스포츠" 
+                 data-detail="매주 화/목요일 저녁 7시에 체육관에서 만나 농구를 즐깁니다. 초보자도 환영하며, 학기별로 1회 대학 연합 친선 경기를 개최합니다. 회비는 월 1만원이며, 유니폼과 음료 구매에 사용됩니다.">
+              <div class="community-header-card">
+                <h3>농구 동아리</h3>
+                <span class="community-category">스포츠</span>
+              </div>
+              <p class="community-members">👥 약 25명</p>
+              <p class="community-description">
+                함께 농구하며 친목을 다지는 동아리입니다.
+              </p>
+              <a
+                href="https://open.kakao.com/o/example1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="문화예술">
+              <div class="community-header-card">
+                <h3>사진 소모임</h3>
+                <span class="community-category">문화예술</span>
+              </div>
+              <p class="community-members">👥 18명</p>
+              <p class="community-description">
+                사진 촬영과 편집을 함께 배우는 소모임입니다.
+              </p>
+              <a
+                href="https://open.kakao.com/o/example2"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="학술">
+              <div class="community-header-card">
+                <h3>코딩 스터디</h3>
+                <span class="community-category">학술</span>
+              </div>
+              <p class="community-members">👥 32명</p>
+              <p class="community-description">
+                알고리즘 문제풀이 및 프로젝트 스터디
+              </p>
+              <a
+                href="https://open.kakao.com/o/example3"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="문화예술">
+              <div class="community-header-card">
+                <h3>밴드 동아리</h3>
+                <span class="community-category">문화예술</span>
+              </div>
+              <p class="community-members">👥 15명</p>
+              <p class="community-description">
+                다양한 악기로 밴드를 구성해 공연합니다.
+              </p>
+              <a
+                href="https://open.kakao.com/o/example4"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="학술">
+              <div class="community-header-card">
+                <h3>영어 회화 모임</h3>
+                <span class="community-category">학술</span>
+              </div>
+              <p class="community-members">👥 20명</p>
+              <p class="community-description">자유롭게 영어로 대화하는 모임</p>
+              <a
+                href="https://open.kakao.com/o/example5"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="스포츠">
+              <div class="community-header-card">
+                <h3>등산 모임</h3>
+                <span class="community-category">스포츠</span>
+              </div>
+              <p class="community-members">👥 22명</p>
+              <p class="community-description">
+                주말마다 함께 산을 오르는 모임
+              </p>
+              <a
+                href="https://open.kakao.com/o/example6"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="취미">
+              <div class="community-header-card">
+                <h3>요리 동아리</h3>
+                <span class="community-category">취미</span>
+              </div>
+              <p class="community-members">👥 16명</p>
+              <p class="community-description">
+                다양한 요리를 함께 만들어보는 동아리
+              </p>
+              <a
+                href="https://open.kakao.com/o/example7"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="학술">
+              <div class="community-header-card">
+                <h3>독서 토론 모임</h3>
+                <span class="community-category">학술</span>
+              </div>
+              <p class="community-members">👥 14명</p>
+              <p class="community-description">책을 읽고 함께 토론하는 모임</p>
+              <a
+                href="https://open.kakao.com/o/example8"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+
+            <div class="community-card" data-category="문화예술">
+              <div class="community-header-card">
+                <h3>댄스 동아리</h3>
+                <span class="community-category">문화예술</span>
+              </div>
+              <p class="community-members">👥 28명</p>
+              <p class="community-description">
+                K-POP 댄스를 배우고 공연하는 동아리
+              </p>
+              <a
+                href="https://open.kakao.com/o/example9"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="kakao-button"
+              >
+                💬 오픈채팅 참여하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████████████████
+    SECTION: MODAL - 카드 클릭 시 확대 보기 모달
+    Ctrl+F 검색어: "SECTION: MODAL"
+    
+    설명:
+    - 행사/공모전/동아리 카드를 클릭하면 확대된 모달창이 표시됩니다
+    - 모달은 ESC 키, 배경 클릭, X 버튼으로 닫을 수 있습니다
+    - 모달 내용은 JavaScript에서 동적으로 생성됩니다 (Ctrl+F: "JS: MODAL")
+    - 이 HTML 구조는 수정하지 않아도 됩니다
+    ████████████████████████████████████████████████████████████████████████████████████
+    -->
+    <div class="modal-overlay" id="cardModal" role="dialog" aria-modal="true">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="닫기">×</button>
+        <img class="modal-image" id="modalImage" src="" alt="" />
+        <div class="modal-body">
+          <span class="modal-category" id="modalCategory"></span>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <div id="modalMeta"></div>
+          <p class="modal-description" id="modalDescription"></p>
+          <div id="modalButton"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+    ████████████████████████████████████████████████████████████████████████████████████
+    JAVASCRIPT: 전체 스크립트 영역
+    Ctrl+F 검색어: "JAVASCRIPT:"
+    
+    주요 JavaScript 섹션 검색어:
+    - "JS: CALENDAR DATA" - 캘린더 일정 데이터 (여기서 일정 수정!)
+    - "JS: CALENDAR RENDER" - 캘린더 렌더링 함수
+    - "JS: FILTERS" - 필터 버튼 기능
+    - "JS: MODAL" - 모달 팝업 기능
+    - "JS: SCROLL" - 스크롤 네비게이션
+    ████████████████████████████████████████████████████████████████████████████████████
+    -->
+    <script>
+      /* 
+      ================================================================================
+    <script src="js/script.js"></script>
+  </body>
+</html>
