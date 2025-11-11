@@ -286,6 +286,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         font-size: 0.85rem;
         margin-bottom: 0.75rem;
         width: fit-content;
+        white-space: nowrap;
       }
 
       .event-card h3 {
@@ -326,6 +327,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         border-radius: 8px;
         font-weight: 600;
         transition: background-color 0.3s;
+        white-space: nowrap;
       }
 
       .apply-button:hover {
@@ -521,6 +523,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         color: white;
         border-radius: 15px;
         font-size: 0.85rem;
+        white-space: nowrap;
       }
 
       .community-members {
@@ -547,6 +550,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
         border-radius: 8px;
         font-weight: 600;
         transition: background-color 0.3s;
+        white-space: nowrap;
       }
 
       .kakao-button:hover {
@@ -930,10 +934,15 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             <!-- //////////////////////////////////////////////////////////////////////////////// -->
             <!-- 카드 1: 2024 가을 축제 (행사) -->
             <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
+            <!-- data-* 속성으로 모달에 표시할 상세 정보 추가 -->
             <!-- //////////////////////////////////////////////////////////////////////////////// -->
-            <div class="event-card" data-category="행사">
+            <div class="event-card" data-category="행사"
+                 data-target="전체 재학생"
+                 data-benefits="무료 먹거리 제공, 푸짐한 경품 추첨, 다양한 공연 관람"
+                 data-schedule="11/15(금) 17:00-22:00, 11/16(토) 12:00-22:00"
+                 data-contact="총학생회 010-XXXX-XXXX">
               <img
-                src="https://lh3.googleusercontent.com/a/ACg8ocJ49DmagPAj0RRZh1OU7VAaAj3gF5caRuAFPov5lR9JEpq_e1g=s64-c"
+                src="https://drive.google.com/u/0/drive-viewer/AKGpihY1-bL30ucUrBLmIsvgpZ5w_dKamLDDRNYKVdhVIgjyF1DiuPr2uGDjkkcb9atfqo0VL2HqYntrX-tjsbkeoOiMGUVljn7ORcw=s2560"
                 alt="2024 가을 축제"
               />
               <div class="event-content">
@@ -952,7 +961,12 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             <!-- 카드 2: 창업 아이디어 공모전 (공모전) -->
             <!-- 권장 이미지 크기: 400x300 또는 800x600 -->
             <!-- //////////////////////////////////////////////////////////////////////////////// -->
-            <div class="event-card" data-category="공모전">
+            <div class="event-card" data-category="공모전"
+                 data-target="전체 재학생 및 휴학생"
+                 data-benefits="대상 200만원, 최우수상 100만원, 우수상 50만원, 창업 멘토링 제공"
+                 data-requirements="제출물: 사업계획서(10페이지 이내), PPT 발표자료"
+                 data-schedule="신청 마감: 11/20, 서류심사: 11/25, 발표심사: 12/1"
+                 data-contact="LINC+ 사업단 02-XXXX-XXXX">
               <img
                 src="https://picsum.photos/400/300"
                 alt="창업 아이디어 공모전"
@@ -1126,12 +1140,19 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
 
         <div class="grid-container">
           <div class="community-grid" id="communityGrid">
-            <div class="community-card" data-category="스포츠">
+            
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <!-- 동아리 카드 1: 농구 동아리 -->
+            <!-- 💡 인원수는 수동으로 업데이트해야 합니다 (실시간 연동 불가) -->
+            <!-- data-detail 속성에 상세 정보 추가 가능 (모달용) -->
+            <!-- //////////////////////////////////////////////////////////////////////////////// -->
+            <div class="community-card" data-category="스포츠" 
+                 data-detail="매주 화/목요일 저녁 7시에 체육관에서 만나 농구를 즐깁니다. 초보자도 환영하며, 학기별로 1회 대학 연합 친선 경기를 개최합니다. 회비는 월 1만원이며, 유니폼과 음료 구매에 사용됩니다.">
               <div class="community-header-card">
                 <h3>농구 동아리</h3>
                 <span class="community-category">스포츠</span>
               </div>
-              <p class="community-members">👥 25명</p>
+              <p class="community-members">👥 약 25명</p>
               <p class="community-description">
                 함께 농구하며 친목을 다지는 동아리입니다.
               </p>
@@ -1322,6 +1343,36 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
   ////////////////////////////////////////////////////////////////////////////////////////
   -->
     <script>
+      /* 
+      ================================================================================
+      📅 캘린더 일정 추가/수정 방법
+      ================================================================================
+      
+      1. 원하는 월(9, 10, 11, 12) 아래에 일정 추가:
+         events: {
+           15: [{ name: "가을 축제", type: "" }],  // 15일에 일반 행사
+           20: [{ name: "창업 공모전", type: "contest" }],  // 20일에 공모전 (빨간색)
+         }
+      
+      2. 이벤트 타입 (type):
+         - "" (빈 문자열) = 파란색 일반 행사
+         - "contest" = 빨간색 공모전
+         - "club" = 녹색 동아리 행사
+      
+      3. 하루에 여러 일정 추가:
+         15: [
+           { name: "가을 축제", type: "" },
+           { name: "창업 설명회", type: "contest" }
+         ]
+      
+      4. 월 정보 (firstDay, daysInMonth):
+         - firstDay: 해당 월 1일의 요일 (0=일, 1=월, 2=화, ... 6=토)
+         - daysInMonth: 해당 월의 총 일수
+         - 캘린더 웹사이트나 달력을 보고 확인하세요!
+      
+      ================================================================================
+      */
+      
       // 캘린더 데이터 (월별)
       const calendarData = {
         9: {
@@ -1544,6 +1595,21 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
           });
         }
         
+        // 상세 정보 추가 (data-* 속성 활용)
+        if (cardData.details && cardData.details.length > 0) {
+          const detailList = document.createElement('ul');
+          detailList.style.marginTop = '1rem';
+          detailList.style.paddingLeft = '1.5rem';
+          detailList.style.lineHeight = '1.8';
+          cardData.details.forEach(detail => {
+            const li = document.createElement('li');
+            li.textContent = detail;
+            li.style.marginBottom = '0.5rem';
+            detailList.appendChild(li);
+          });
+          modalMeta.appendChild(detailList);
+        }
+        
         modalDescription.textContent = cardData.description;
         
         // 버튼 (신청하기 또는 카카오톡)
@@ -1587,6 +1653,14 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
           const description = card.querySelector('.event-description').textContent;
           const applyBtn = card.querySelector('.apply-button');
           
+          // data-* 속성에서 상세 정보 읽기
+          const details = [];
+          if (card.dataset.target) details.push(`🎯 참가 대상: ${card.dataset.target}`);
+          if (card.dataset.benefits) details.push(`🎁 참가 혜택: ${card.dataset.benefits}`);
+          if (card.dataset.requirements) details.push(`📋 준비물/제출물: ${card.dataset.requirements}`);
+          if (card.dataset.schedule) details.push(`⏰ 일정: ${card.dataset.schedule}`);
+          if (card.dataset.contact) details.push(`📞 문의: ${card.dataset.contact}`);
+          
           const cardData = {
             image: img.src,
             title: title,
@@ -1594,6 +1668,7 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
             categoryColor: category === '공모전' ? '#e74c3c' : '#3498db',
             meta: [date, organizer, location].filter(item => item),
             description: description,
+            details: details,
             buttonUrl: applyBtn?.href || null,
             buttonText: applyBtn?.textContent || null,
             buttonType: 'apply'
@@ -1617,13 +1692,17 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
           const description = card.querySelector('.community-description').textContent;
           const kakaoBtn = card.querySelector('.kakao-button');
           
+          // data-detail 속성에서 상세 정보 읽기
+          const detailText = card.dataset.detail || '';
+          
           const cardData = {
             image: 'https://picsum.photos/600/300',
             title: title,
             category: category,
             categoryColor: '#27ae60',
             meta: [members].filter(item => item),
-            description: description,
+            description: detailText || description,
+            details: [],
             buttonUrl: kakaoBtn?.href || null,
             buttonText: kakaoBtn?.textContent || null,
             buttonType: 'kakao'
