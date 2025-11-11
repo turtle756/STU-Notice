@@ -12,6 +12,8 @@
 
 const fs = require('fs');
 
+const GITHUB_PAGES_BASE_URL = 'https://turtle756.github.io/STU-Notice';
+
 function readFile(path) {
   return fs.readFileSync(path, 'utf8');
 }
@@ -29,28 +31,30 @@ function main() {
   
   console.log('  ✓ Read source files');
   
-  // Inline CSS
-  html = html.replace(
-    /<link rel="stylesheet" href="css\/style\.css" \/>/,
-    `<style>\n${css}\n    </style>`
-  );
+  const cssLinkPattern = /<link rel="stylesheet" href="css\/style\.css" \/>/;
+  if (!cssLinkPattern.test(html)) {
+    console.error('❌ ERROR: Could not find <link rel="stylesheet" href="css/style.css" /> in docs/index.html');
+    process.exit(1);
+  }
+  
+  html = html.replace(cssLinkPattern, `<style>\n${css}\n    </style>`);
   console.log('  ✓ Inlined CSS');
   
-  // Inline JavaScript
-  html = html.replace(
-    /<script src="js\/script\.js"><\/script>/,
-    `<script>\n${js}\n    </script>`
-  );
+  const jsScriptPattern = /<script src="js\/script\.js"><\/script>/;
+  if (!jsScriptPattern.test(html)) {
+    console.error('❌ ERROR: Could not find <script src="js/script.js"></script> in docs/index.html');
+    process.exit(1);
+  }
+  
+  html = html.replace(jsScriptPattern, `<script>\n${js}\n    </script>`);
   console.log('  ✓ Inlined JavaScript');
   
-  // Rewrite image paths to GitHub Pages absolute URLs
   html = html.replace(
     /src="images\/([^"]+)"/g,
-    'src="https://turtle756.github.io/STU-Notice/images/$1"'
+    `src="${GITHUB_PAGES_BASE_URL}/images/$1"`
   );
-  console.log('  ✓ Rewrote image paths to GitHub Pages URLs');
+  console.log(`  ✓ Rewrote image paths to ${GITHUB_PAGES_BASE_URL}/images/`);
   
-  // Write output
   writeFile('html/google-site.html', html);
   console.log('✅ Successfully built html/google-site.html');
   console.log('\n📋 Usage: Copy this file and paste into Google Sites HTML embed');

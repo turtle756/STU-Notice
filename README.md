@@ -84,32 +84,37 @@
 
 ```
 프로젝트 루트/
-├── html/                   # 구글 사이트용 (단일 파일)
-│   └── index.html          # CSS/JS 포함된 단일 HTML 파일
+├── html/                   # 구글 사이트용 (자동 생성)
+│   ├── google-site.html    # 빌드 스크립트로 생성된 단일 파일 ⭐
+│   └── index.html          # (구버전, 삭제 예정)
 │
-├── docs/                   # GitHub Pages용 (정석 구조)
-│   ├── index.html          # HTML only
+├── docs/                   # GitHub Pages용 + 마스터 소스 ⭐
+│   ├── index.html          # HTML (메인 소스)
 │   ├── css/
 │   │   └── style.css       # 분리된 CSS
 │   ├── js/
 │   │   └── script.js       # 분리된 JavaScript
 │   └── images/             # GitHub 호스팅 이미지
-│       └── .gitkeep
+│       ├── autumn-festival.png
+│       ├── winter-mt.png
+│       └── ... (총 9개 예시 이미지)
 │
+├── build_google_site.js    # 빌드 스크립트 (자동화)
 └── README.md               # 사용 설명서
 ```
 
 ### **두 버전의 차이**
 
-| 항목 | html/index.html | docs/ 폴더 |
-|------|-----------------|-----------|
+| 항목 | html/google-site.html | docs/ 폴더 |
+|------|----------------------|-----------|
 | **용도** | 구글 사이트 복사-붙여넣기 | GitHub Pages 호스팅 |
-| **구조** | 단일 HTML 파일 | CSS/JS 분리 |
-| **이미지** | 구글 드라이브 URL | GitHub 상대 경로 |
-| **수정** | 복사-붙여넣기 워크플로우 | Git으로 관리 |
-| **사용자** | 비개발자 (총학생회 담당자) | 일반 방문자 (웹 접속) |
+| **구조** | 단일 HTML 파일 (CSS/JS 인라인) | CSS/JS 분리 |
+| **이미지** | GitHub 절대 경로 | GitHub 상대 경로 |
+| **생성 방법** | 빌드 스크립트로 자동 생성 | 직접 편집 (단일 소스) |
+| **수정 방법** | docs/ 수정 → 빌드 스크립트 실행 | 직접 파일 편집 |
+| **사용자** | 총학생회 담당자 (구글 사이트) | 일반 방문자 (웹 접속) |
 
-**💡 팁:** `html/index.html`을 **마스터 파일**로 관리하고, `docs/`는 배포용으로 사용하세요!
+**💡 팁:** `docs/` 폴더를 **단일 소스**로 관리하고, `node build_google_site.js`로 구글 사이트 파일을 자동 생성하세요!
 
 ---
 
@@ -263,28 +268,51 @@ https://본인아이디.github.io/저장소이름/images/autumn-festival.jpg
 
 ### **🔄 두 버전 동기화 방법**
 
-`html/index.html`과 `docs/`를 동시에 관리하는 방법:
+`html/google-site.html`은 `docs/` 폴더로부터 **자동으로 생성**됩니다!
 
-#### **추천 워크플로우:**
-1. **html/index.html 수정** (구글 사이트용)
-   - Ctrl+F로 원하는 섹션 찾기
-   - 내용 수정 (행사, 캘린더, 동아리 등)
+#### **✨ 자동화된 워크플로우 (추천):**
 
-2. **docs/ 폴더도 동일하게 수정**
-   - `docs/index.html`: HTML 내용 동기화
-   - `docs/css/style.css`: 스타일 변경사항 반영
-   - `docs/js/script.js`: JavaScript 수정사항 반영
+1. **docs/ 폴더 수정** (단일 소스)
+   - `docs/index.html`: HTML 내용 수정
+   - `docs/css/style.css`: 스타일 변경
+   - `docs/js/script.js`: JavaScript 수정
+   - `docs/images/`: 이미지 추가 (영문 파일명 사용)
 
-3. **Git으로 업로드**
-   - Git 도구에서 변경사항 확인
-   - Commit & Push
+2. **빌드 스크립트 실행** (구글 사이트 파일 자동 생성)
+   ```bash
+   node build_google_site.js
+   ```
+   - CSS와 JavaScript를 자동으로 인라인 삽입
+   - 이미지 경로를 GitHub 절대 URL로 자동 변환
+   - `html/google-site.html` 파일 생성 완료!
+
+3. **결과 확인**
+   - `html/google-site.html` 파일 열기
+   - Ctrl+A → 전체 복사
+   - 구글 사이트에 붙여넣기
+
+4. **Git으로 업로드**
+   ```bash
+   git add .
+   git commit -m "Update website content"
+   git push origin main
+   ```
+
+#### **📋 빌드 스크립트가 하는 일:**
+
+| 작업 | 설명 |
+|------|------|
+| CSS 인라인 | `<link>` → `<style>` (docs/css/style.css 내용 삽입) |
+| JS 인라인 | `<script src>` → `<script>` (docs/js/script.js 내용 삽입) |
+| 이미지 경로 변환 | `images/...` → `https://turtle756.github.io/STU-Notice/images/...` |
 
 #### **체크리스트:**
-- [ ] html/index.html 수정 완료
-- [ ] docs/index.html에 동일한 내용 반영
-- [ ] 이미지 경로 확인 (구글 드라이브 vs GitHub)
+- [ ] docs/ 폴더 수정 완료
+- [ ] `node build_google_site.js` 실행
+- [ ] html/google-site.html 생성 확인
 - [ ] Git Commit & Push
 - [ ] GitHub Pages에서 정상 작동 확인
+- [ ] 구글 사이트에 복사-붙여넣기
 
 ---
 

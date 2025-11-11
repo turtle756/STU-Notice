@@ -37,31 +37,55 @@
 ## 프로젝트 구조
 ```
 프로젝트 루트/
-├── html/                   # 구글 사이트용 (단일 파일)
-│   └── index.html          # CSS/JS 포함된 단일 HTML 파일
+├── html/                   # 구글 사이트용 (자동 생성)
+│   ├── google-site.html    # 빌드 스크립트로 생성된 단일 파일 ⭐
+│   └── index.html          # (구버전, 삭제 예정)
 │
-├── docs/                   # GitHub Pages용 (정석 구조)
-│   ├── index.html          # HTML only
+├── docs/                   # GitHub Pages용 + 마스터 소스 ⭐
+│   ├── index.html          # HTML (메인 소스)
 │   ├── css/
-│   │   └── style.css       # 분리된 CSS (811 라인)
+│   │   └── style.css       # 분리된 CSS (827 라인)
 │   ├── js/
 │   │   └── script.js       # 분리된 JavaScript (416 라인)
-│   └── images/             # GitHub 호스팅 이미지
-│       └── .gitkeep
+│   └── images/             # GitHub 호스팅 이미지 (9개 예시)
+│       ├── autumn-festival.png
+│       ├── winter-mt.png
+│       ├── writing-contest.png
+│       ├── sports-day.png
+│       ├── startup-contest.png
+│       ├── soccer-club.png
+│       ├── coding-club.png
+│       ├── band-club.png
+│       └── book-club.png
 │
+├── build_google_site.js    # 빌드 스크립트 (자동화)
+├── build_google_site.py    # (사용 안 함 - Python 미설치)
 └── README.md               # 사용 설명서
 ```
 
 **두 버전 전략:**
-- `html/index.html`: **마스터 파일** (구글 사이트 복사-붙여넣기용, 단일 파일)
-- `docs/`: **배포 버전** (GitHub Pages 호스팅용, CSS/JS 분리)
+- `docs/`: **단일 소스** (직접 편집, GitHub Pages 배포)
+- `html/google-site.html`: **자동 생성** (빌드 스크립트로 생성, 구글 사이트용)
+
+**빌드 워크플로우:**
+```bash
+# 1. docs/ 폴더 수정 (HTML, CSS, JS, 이미지)
+# 2. 빌드 스크립트 실행
+node build_google_site.js
+# 3. html/google-site.html 자동 생성 (CSS/JS 인라인, GitHub 절대 경로)
+```
 
 ## 이미지 설정
-- **가을축제**: 구글 드라이브 링크 (drive-viewer 형식)
-- **나머지 이미지**: picsum.photos 임시 이미지 (400x300 크기 기준)
-- **권장 이미지 크기**: 400x300 또는 800x600 (각 카드에 주석으로 표시됨)
-- 구글 드라이브 형식: `https://drive.google.com/u/0/drive-viewer/파일ID=s2560`
-- picsum.photos 형식: `https://picsum.photos/400/300` (크기 조정 가능)
+- **GitHub 호스팅**: docs/images/ 폴더에 9개 AI 생성 예시 이미지
+- **이미지 전략**: 사용자가 같은 파일명으로 복사-붙여넣기 (예: autumn-festival.png 덮어쓰기)
+- **권장 이미지 크기**: 400x300 또는 800x600 (비율 4:3)
+- **이미지 목록**:
+  - **행사**: autumn-festival.png, winter-mt.png, sports-day.png
+  - **공모전**: writing-contest.png, startup-contest.png
+  - **동아리**: soccer-club.png, coding-club.png, band-club.png, book-club.png
+- **경로 형식**:
+  - docs/index.html: `images/autumn-festival.png` (상대 경로)
+  - google-site.html: `https://turtle756.github.io/STU-Notice/images/autumn-festival.png` (절대 경로)
 
 ## 실행 방법
 웹사이트는 현재 자동으로 실행 중입니다. 화면 상단의 웹뷰에서 확인할 수 있습니다.
@@ -73,9 +97,13 @@ HTML 파일을 브라우저에서 직접 열어도 작동합니다.
 
 ## 수정 방법
 
-### 행사 및 공모전 정보 수정
-`html/index.html` 파일의 "행사 & 공모전" 섹션에서:
-- 이미지 URL (구글 드라이브 파일 ID 교체)
+⭐ **중요**: docs/ 폴더만 편집하세요! 수정 후 빌드 스크립트를 실행하면 html/google-site.html이 자동 생성됩니다.
+
+### 1단계: docs/ 폴더 수정
+
+#### 행사 및 공모전 정보 수정
+`docs/index.html` 파일의 "행사 & 공모전" 섹션에서:
+- 이미지 경로 (images/파일명.png)
 - 행사명, 날짜, 설명
 - 주관/주최 정보
 - 장소 정보
@@ -88,10 +116,9 @@ HTML 파일을 브라우저에서 직접 열어도 작동합니다.
 - `data-requirements`: 준비물/제출물 (예: "사업계획서 10페이지 이내")
 - `data-schedule`: 상세 일정 (예: "신청 마감: 11/20, 발표: 12/1")
 - `data-contact`: 문의처 (예: "총학생회 010-XXXX-XXXX")
-→ 모달 클릭 시 이 정보들이 자동으로 표시됩니다!
 
-### 캘린더 일정 수정
-`html/index.html` 파일의 `<script>` 태그 내 `calendarData` 객체에서:
+#### 캘린더 일정 수정
+`docs/js/script.js` 파일의 `calendarData` 객체에서:
 
 **일정 추가 예시:**
 ```javascript
@@ -112,22 +139,8 @@ HTML 파일을 브라우저에서 직접 열어도 작동합니다.
 - `'contest'` = 빨간색 (공모전)
 - `'club'` = 녹색 (동아리 행사)
 
-**하루에 여러 일정:**
-```javascript
-15: [
-  { name: "가을 축제", type: "" },
-  { name: "창업 설명회", type: "contest" }
-]
-```
-
-**월 정보 확인 방법:**
-1. 캘린더 웹사이트 방문 (예: calendar.google.com)
-2. 해당 월의 1일이 무슨 요일인지 확인
-3. `firstDay`에 숫자 입력 (일요일=0, 월요일=1, ... 토요일=6)
-4. `daysInMonth`에 해당 월의 총 일수 입력 (28/29/30/31)
-
-### 동아리 및 소모임 정보 수정
-`html/index.html` 파일의 "동아리 & 소모임" 섹션에서:
+#### 동아리 및 소모임 정보 수정
+`docs/index.html` 파일의 "동아리 & 소모임" 섹션에서:
 - 동아리/소모임 이름, 설명
 - 참여 인원 수 (💡 **인원수는 수동 업데이트 필요** - "약 XX명" 형식 권장)
 - 카카오톡 오픈채팅방 링크
@@ -136,16 +149,32 @@ HTML 파일을 브라우저에서 직접 열어도 작동합니다.
 **상세 정보 추가 (data-detail 속성):**
 - `data-detail`: 활동 시간, 회비, 모집 대상 등 상세 설명
 - 예: `data-detail="매주 화/목 저녁 7시, 회비 월 1만원"`
-→ 모달 클릭 시 이 정보가 표시됩니다!
 
-### 버튼 링크 수정
-- "행사 제안/건의하기" 버튼: 구글 폼 링크
-- "동아리 & 소모임 신청하기" 버튼: 신청 폼 링크
-- 공모전 "신청하기" 버튼: 각 공모전 신청 링크
-- 카카오톡 "오픈채팅 참여하기" 버튼: 오픈채팅방 링크
+#### 스타일 변경
+`docs/css/style.css` 파일에서 CSS를 수정할 수 있습니다.
 
-### 스타일 변경
-`html/index.html` 파일의 `<style>` 태그 안에서 CSS를 수정할 수 있습니다.
+#### 이미지 변경
+`docs/images/` 폴더에 새 이미지를 업로드하세요.
+- 기존 파일명과 동일하게 저장하면 자동으로 교체됩니다.
+- 예: `autumn-festival.png` 덮어쓰기
+
+### 2단계: 빌드 스크립트 실행
+
+터미널에서 다음 명령어를 실행하세요:
+```bash
+node build_google_site.js
+```
+
+이 스크립트는:
+- CSS/JS를 인라인으로 삽입
+- 이미지 경로를 GitHub 절대 URL로 변환
+- `html/google-site.html` 파일 자동 생성
+
+### 3단계: 결과 확인
+
+- `html/google-site.html` 파일 열기
+- Ctrl+A → 전체 복사
+- 구글 사이트에 붙여넣기
 
 ## GitHub Pages 호스팅
 - **docs/ 폴더**: GitHub Pages 배포용 버전
@@ -155,15 +184,32 @@ HTML 파일을 브라우저에서 직접 열어도 작동합니다.
 - **이미지 호스팅**: `docs/images/` 폴더에 업로드 후 상대 경로 사용
 
 ## 최근 변경사항
+- 2024-11-11: **자동화 빌드 시스템 구축** ⭐
+  - **빌드 스크립트 추가**: `build_google_site.js` (Node.js)
+    - docs/index.html을 기반으로 google-site.html 자동 생성
+    - CSS/JS 인라인 삽입 (단일 파일 생성)
+    - 이미지 경로를 GitHub 절대 URL로 자동 변환
+  - **9개 AI 예시 이미지 생성** (docs/images/)
+    - 행사 3개, 공모전 2개, 동아리 4개
+    - 사용자가 같은 파일명으로 덮어쓰기 가능
+  - **docs/index.html 이미지 경로 수정**
+    - 구글 드라이브/picsum → GitHub 상대 경로 (images/...)
+    - 동아리 섹션에 이미지 추가
+  - **docs/css/style.css 업데이트**
+    - .community-card img 스타일 추가 (200px 높이, object-fit: cover)
+    - .community-content 래퍼 추가 (패딩 분리)
+  - **README.md 전면 개편**
+    - 빌드 스크립트 사용법 추가
+    - 파일 구조 섹션 업데이트 (google-site.html)
+    - 자동화 워크플로우 체크리스트 작성
+  - **단일 소스 전략**: docs/ = 마스터, google-site.html = 빌드 결과물
 - 2024-11-11: **GitHub Pages 호스팅 구조 추가**
   - docs/ 폴더 생성 (GitHub Pages 배포용)
-  - docs/css/style.css: CSS 분리 (811 라인)
+  - docs/css/style.css: CSS 분리 (811 라인 → 827 라인)
   - docs/js/script.js: JavaScript 분리 (416 라인)
   - docs/index.html: 외부 CSS/JS 링크로 생성
-  - docs/images/: 이미지 폴더 준비 (.gitkeep)
-  - TODO 주석으로 이미지 마이그레이션 경로 명시
+  - docs/images/: 이미지 폴더 생성
   - README에 GitHub 업로드 및 Pages 설정 가이드 추가
-  - 두 버전 동기화 체크리스트 작성
 - 2024-11-08: 초기 프로젝트 설정 및 React 버전 구현
 - 2024-11-08: 순수 HTML/CSS/JavaScript 버전 추가
 - 2024-11-08: 모바일 반응형 디자인 개선
