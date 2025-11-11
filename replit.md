@@ -36,11 +36,25 @@
 
 ## 프로젝트 구조
 ```
-html/
-  └── index.html        # 통합 웹사이트 (모든 기능 포함)
+프로젝트 루트/
+├── html/                   # 구글 사이트용 (단일 파일)
+│   └── index.html          # CSS/JS 포함된 단일 HTML 파일
+│
+├── docs/                   # GitHub Pages용 (정석 구조)
+│   ├── index.html          # HTML only
+│   ├── css/
+│   │   └── style.css       # 분리된 CSS (811 라인)
+│   ├── js/
+│   │   └── script.js       # 분리된 JavaScript (416 라인)
+│   └── images/             # GitHub 호스팅 이미지
+│       └── .gitkeep
+│
+└── README.md               # 사용 설명서
 ```
 
-**index.html 하나로 모든 기능이 작동합니다.**
+**두 버전 전략:**
+- `html/index.html`: **마스터 파일** (구글 사이트 복사-붙여넣기용, 단일 파일)
+- `docs/`: **배포 버전** (GitHub Pages 호스팅용, CSS/JS 분리)
 
 ## 이미지 설정
 - **가을축제**: 구글 드라이브 링크 (drive-viewer 형식)
@@ -133,7 +147,23 @@ HTML 파일을 브라우저에서 직접 열어도 작동합니다.
 ### 스타일 변경
 `html/index.html` 파일의 `<style>` 태그 안에서 CSS를 수정할 수 있습니다.
 
+## GitHub Pages 호스팅
+- **docs/ 폴더**: GitHub Pages 배포용 버전
+- **설정 방법**: README.md의 "GitHub Pages 호스팅 가이드" 참조
+- **배포 방식**: GitHub Settings → Pages → `/docs` 폴더 선택
+- **URL 형식**: `https://본인아이디.github.io/저장소이름/`
+- **이미지 호스팅**: `docs/images/` 폴더에 업로드 후 상대 경로 사용
+
 ## 최근 변경사항
+- 2024-11-11: **GitHub Pages 호스팅 구조 추가**
+  - docs/ 폴더 생성 (GitHub Pages 배포용)
+  - docs/css/style.css: CSS 분리 (811 라인)
+  - docs/js/script.js: JavaScript 분리 (416 라인)
+  - docs/index.html: 외부 CSS/JS 링크로 생성
+  - docs/images/: 이미지 폴더 준비 (.gitkeep)
+  - TODO 주석으로 이미지 마이그레이션 경로 명시
+  - README에 GitHub 업로드 및 Pages 설정 가이드 추가
+  - 두 버전 동기화 체크리스트 작성
 - 2024-11-08: 초기 프로젝트 설정 및 React 버전 구현
 - 2024-11-08: 순수 HTML/CSS/JavaScript 버전 추가
 - 2024-11-08: 모바일 반응형 디자인 개선
