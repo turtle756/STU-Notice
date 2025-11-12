@@ -1,4 +1,4 @@
-# 서울신학대학교 총학생회 웹사이트
+<img width="1586" height="120" alt="image" src="https://github.com/user-attachments/assets/c40637d2-996c-4c0a-8018-51e85780214f" /># 서울신학대학교 총학생회 웹사이트
 
 > 행사/공모전, 월간 캘린더, 동아리/소모임 정보를 한 페이지에서 제공하는 웹사이트
 
@@ -195,6 +195,14 @@ docs/
 ## 🖼️ 이미지 변경 방법
 
 ### 방법 1: GitHub 웹사이트에서 교체
+
+<img width="898" height="45" alt="image" src="https://github.com/user-attachments/assets/f4b60080-43bf-43f2-a5ce-0d328bb3ccb3" />
+---
+<img width="1546" height="43" alt="image" src="https://github.com/user-attachments/assets/9d0216f3-b03e-43a6-9872-b53c8049a695" />
+---
+<img width="1586" height="120" alt="image" src="https://github.com/user-attachments/assets/31e0b153-e14d-4d3e-ad7f-284ca0de6d6f" />
+
+[ 이곳에서 업로드 파일을 확일 할 수 있다 ]
 
 1. GitHub 저장소 → `docs/image/` 폴더 이동
 2. 교체할 이미지 클릭 (예: `example_festival.png`)
