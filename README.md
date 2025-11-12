@@ -82,9 +82,15 @@ docs/
 
 ## ✏️ 내용 수정하기
 
-### 행사 & 공모전 수정
+### 행사 & 공모전 카드 수정
 
-`docs/index.html` 파일 열기 → 행사/공모전 섹션 찾기:
+#### 🔍 빠른 찾기 방법
+`docs/index.html` 파일을 열고 **Ctrl+F**로 검색:
+- **행사 섹션 전체 찾기**: `<!-- 행사 & 공모전 카드 -->`
+- **특정 행사 찾기**: 행사 이름 검색 (예: `가을 축제`)
+- **카테고리 찾기**: `data-category="행사"` 또는 `data-category="공모전"`
+
+#### 📝 카드 구조 예시
 
 ```html
 <div class="event-card" data-category="행사">
@@ -96,9 +102,26 @@ docs/
     <p class="event-organizer">주관: 총학생회</p>
     <p class="event-location">📍 장소: 대운동장</p>
     <p class="event-description">학생들의 화합의 장...</p>
+    <a href="https://forms.gle/example" class="apply-button">
+      📝 신청하기
+    </a>
   </div>
 </div>
 ```
+
+#### 🎯 수정 가능한 항목
+
+| 항목 | 설명 | 예시 |
+|------|------|------|
+| **data-category** | 필터 카테고리 | `행사` 또는 `공모전` |
+| **이미지 경로** | `src="image/파일명.png"` | `example_festival.png` |
+| **카테고리 표시** | `<span class="event-category">` | `행사` 또는 `공모전` |
+| **제목** | `<h3>` 태그 | `2024 가을 축제` |
+| **날짜** | `event-date` 클래스 | `📅 2024.11.15-16` |
+| **주관/주최** | `event-organizer` 클래스 | `주관: 총학생회` |
+| **장소** | `event-location` 클래스 | `📍 장소: 대운동장` |
+| **설명** | `event-description` 클래스 | 짧은 소개 문구 |
+| **신청 링크** | `<a href="...">` | Google Forms 링크 등 |
 
 수정 후 GitHub에 다시 업로드하세요!
 
@@ -124,12 +147,19 @@ docs/
 - `"contest"` = 빨간색 (공모전)
 - `"club"` = 녹색 (동아리 행사)
 
-### 동아리 & 소모임 수정
+### 동아리 & 소모임 카드 수정
 
-`docs/index.html` 파일에서 동아리 섹션 찾기:
+#### 🔍 빠른 찾기 방법
+`docs/index.html` 파일을 열고 **Ctrl+F**로 검색:
+- **동아리 섹션 전체 찾기**: `<!-- 동아리 & 소모임 카드 -->`
+- **특정 동아리 찾기**: 동아리 이름 검색 (예: `축구 동아리`)
+- **카테고리 찾기**: `data-category="스포츠"` (또는 학술/문화예술/취미)
+
+#### 📝 카드 구조 예시
 
 ```html
-<div class="community-card" data-category="스포츠">
+<div class="community-card" data-category="스포츠" 
+     data-detail="⏰ 활동: 매주 수요일 17:00 | 💰 회비: 월 10,000원 | 🎯 모집: 1-4학년">
   <img src="image/example_soccer.png" alt="축구 동아리" />
   <div class="community-content">
     <div class="community-header-card">
@@ -144,7 +174,21 @@ docs/
 </div>
 ```
 
-**카테고리:** 스포츠 / 학술 / 문화예술 / 취미
+#### 🎯 수정 가능한 항목
+
+| 항목 | 설명 | 예시 |
+|------|------|------|
+| **data-category** | 필터 카테고리 | `스포츠` / `학술` / `문화예술` / `취미` |
+| **data-detail** | 모달 클릭 시 상세 정보 | `⏰ 활동: 매주 수요일...` |
+| **이미지 경로** | `src="image/파일명.png"` | `example_soccer.png` |
+| **제목** | `<h3>` 태그 | `축구 동아리` |
+| **카테고리 표시** | `<span class="community-category">` | `스포츠` |
+| **설명** | `community-description` 클래스 | 짧은 소개 문구 |
+| **오픈채팅 링크** | `<a href="...">` | 카카오톡 오픈채팅 링크 |
+
+#### 💡 동아리 이미지 없을 때
+동아리 카드에 `<img>` 태그가 없으면, 모달 클릭 시 **무작위 이미지**가 표시됩니다.  
+특정 이미지를 사용하려면 카드에 `<img src="image/파일명.png">` 태그를 추가하세요!
 
 ---
 

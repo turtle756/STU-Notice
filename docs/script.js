@@ -381,6 +381,9 @@
           // data-detail 속성에서 상세 정보 읽기
           const detailText = card.dataset.detail || '';
           
+          // 💡 이미지 무작위 설정:
+          // picsum.photos는 새로고침할 때마다 다른 무작위 이미지를 보여줍니다.
+          // 동아리 카드에 이미지를 추가하려면 HTML에서 <img> 태그를 추가하세요.
           const cardData = {
             image: 'https://picsum.photos/600/300',
             title: title,
