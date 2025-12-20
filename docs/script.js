@@ -2,14 +2,15 @@
 ================================================================================
 📅 캘린더 이미지 전환
 ================================================================================
-
-캘린더 이미지 변경 방법:
-1. docs/image/calendar/ 폴더에 새 이미지 넣기
-2. 파일명: calendar_3.jpg (3월), calendar_4.jpg (4월), calendar_5.jpg (5월), calendar_6.jpg (6월)
-3. 같은 파일명으로 덮어쓰기하면 자동 적용
-
-================================================================================
 */
+
+// 이미지 프리로드 (빠른 전환을 위해 미리 로드)
+const calendarImages = {};
+[3, 4, 5, 6].forEach(month => {
+  const img = new Image();
+  img.src = `image/calendar/calendar_${month}.jpg`;
+  calendarImages[month] = img;
+});
 
 // 캘린더 이미지 전환
 const monthButtons = document.querySelectorAll(".month-btn");
@@ -21,13 +22,13 @@ monthButtons.forEach((btn) => {
     btn.classList.add("active");
     
     const month = btn.getAttribute("data-month");
-    calendarImage.src = `image/calendar/calendar_${month}.jpg`;
+    calendarImage.src = calendarImages[month].src;
   });
 });
 
 // 페이지 로드 시 3월 캘린더 표시
 if (calendarImage) {
-  calendarImage.src = "image/calendar/calendar_3.jpg";
+  calendarImage.src = calendarImages[3].src;
   monthButtons.forEach((btn) => {
     if (btn.getAttribute("data-month") === "3") {
       btn.classList.add("active");
