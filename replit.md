@@ -18,27 +18,30 @@ GitHub Pages로 호스팅되는 순수 HTML 웹사이트로, 행사/공모전 �
 ## 프로젝트 구조
 ```
 docs/
-├── index.html          # 메인 HTML (585라인)
-├── style.css           # CSS 스타일시트 (827라인)
-├── script.js           # JavaScript (416라인)
-└── image/              # 이미지 폴더 (9개 예시)
-    ├── example_festival.png
-    ├── example_winter.png
-    ├── example_contest.png
-    ├── example_sports.png
-    ├── example_startup.png
-    ├── example_soccer.png
-    ├── example_coding.png
-    ├── example_band.png
-    └── example_book.png
+├── index.html          # 메인 HTML
+├── style.css           # CSS 스타일시트
+├── script.js           # JavaScript
+└── image/              # 이미지 폴더
+    ├── calendar/       # 캘린더 이미지 (월별)
+    │   ├── calendar_3.jpg  (3월)
+    │   ├── calendar_4.jpg  (4월)
+    │   ├── calendar_5.jpg  (5월)
+    │   └── calendar_6.jpg  (6월)
+    └── example_*.png   # 행사/동아리 예시 이미지 (9개)
 ```
 
 ## 이미지 설정
-- **폴더명**: `docs/image/` (단수형)
-- **파일명 형식**: `example_간단이름.png` (예: example_festival.png)
-- **전략**: 사용자가 같은 파일명으로 덮어쓰기 (GitHub 웹 UI 사용)
+
+### 캘린더 이미지
+- **폴더**: `docs/image/calendar/`
+- **파일명**: `calendar_3.jpg` (3월), `calendar_4.jpg` (4월), `calendar_5.jpg` (5월), `calendar_6.jpg` (6월)
+- **변경 방법**: 같은 파일명으로 덮어쓰기
+
+### 행사/동아리 이미지
+- **폴더**: `docs/image/`
+- **파일명 형식**: `example_간단이름.png`
 - **권장 크기**: 800x600 (비율 4:3)
-- **총 9개 AI 생성 예시 이미지**:
+- **총 9개 예시 이미지**:
   - 행사: example_festival.png, example_winter.png, example_sports.png
   - 공모전: example_contest.png, example_startup.png
   - 동아리: example_soccer.png, example_coding.png, example_band.png, example_book.png
@@ -59,12 +62,12 @@ docs/
 - 장소, 카테고리 (행사/공모전)
 - 공모전 신청 링크
 
-### 캘린더 일정 수정
-`docs/script.js` 파일의 `calendarData` 객체에서:
-- `firstDay`: 1일의 요일 (0=일, 1=월, ... 6=토)
-- `daysInMonth`: 해당 월의 총 일수 (28/29/30/31)
-- `events`: 날짜별 일정 추가
-- `type`: "" (파란색), "contest" (빨간색), "club" (녹색)
+### 캘린더 이미지 변경
+`docs/image/calendar/` 폴더에서 이미지 교체:
+- `calendar_3.jpg` → 3월 캘린더
+- `calendar_4.jpg` → 4월 캘린더
+- `calendar_5.jpg` → 5월 캘린더
+- `calendar_6.jpg` → 6월 캘린더
 
 ### 동아리 및 소모임 정보 수정
 `docs/index.html` 파일에서:
@@ -88,16 +91,10 @@ GitHub 웹사이트에서:
 - **이미지 URL**: `https://본인아이디.github.io/저장소이름/image/example_festival.png`
 
 ## 최근 변경사항
-- 2024-11-11: **프로젝트 간소화 (GitHub Pages 전용)** ⭐
-  - 폴더 구조 평면화 (css/, js/ 폴더 제거)
-  - 이미지 폴더 images → image로 변경
-  - 파일명 형식 통일 (example_간단이름.png)
-  - 불필요한 파일 삭제 (html/, build 스크립트)
-  - 동아리 인원수 표시 제거
-  - README.md 대폭 간소화 (GitHub Pages 호스팅 가이드만)
-- 2024-11-11: GitHub Pages 호스팅 구조 추가
+- 2024-12-20: **캘린더를 이미지로 변경** ⭐
+  - JavaScript 캘린더 → 이미지 캘린더 전환
+  - 3월~6월 캘린더 이미지 추가 (docs/image/calendar/)
+  - 불필요한 캘린더 JavaScript/CSS 코드 삭제
+  - script.js 코드 대폭 간소화
+- 2024-11-11: 프로젝트 간소화 (GitHub Pages 전용)
 - 2024-11-08: 초기 프로젝트 설정
-- 2024-11-08: 순수 HTML/CSS/JavaScript 버전으로 전환
-- 2024-11-08: 모바일 반응형 디자인 개선
-- 2024-11-08: 월간 캘린더 기능 추가
-- 2024-11-08: 모달 확대 보기 기능 추가

@@ -24,12 +24,17 @@ docs/
 ├── style.css           # 스타일시트
 ├── script.js           # JavaScript
 └── image/              # 이미지 폴더
-    ├── example_festival.png
+    ├── calendar/       # 캘린더 이미지 (월별)
+    │   ├── calendar_3.jpg  (3월)
+    │   ├── calendar_4.jpg  (4월)
+    │   ├── calendar_5.jpg  (5월)
+    │   └── calendar_6.jpg  (6월)
+    ├── example_festival.png  (행사)
     ├── example_winter.png
-    ├── example_contest.png
+    ├── example_contest.png   (공모전)
     ├── example_sports.png
     ├── example_startup.png
-    ├── example_soccer.png
+    ├── example_soccer.png    (동아리)
     ├── example_coding.png
     ├── example_band.png
     └── example_book.png
@@ -125,27 +130,23 @@ docs/
 
 수정 후 GitHub에 다시 업로드하세요!
 
-### 캘린더 일정 수정
+### 캘린더 이미지 변경
 
-`docs/script.js` 파일 열기 → `calendarData` 객체 찾기:
+캘린더는 이미지로 표시됩니다. 이미지 파일을 교체하면 됩니다.
 
-```javascript
-11: {  // 11월
-  month: "2024년 11월",
-  firstDay: 5,  // 1일의 요일 (0=일, 1=월, ... 6=토)
-  daysInMonth: 30,  // 해당 월의 총 일수
-  events: {
-    15: [{ name: "가을 축제", type: "" }],  // 파란색 일반 행사
-    20: [{ name: "창업 공모전", type: "contest" }],  // 빨간색 공모전
-    25: [{ name: "동아리 박람회", type: "club" }],  // 녹색 동아리
-  },
-}
-```
+#### 📁 캘린더 이미지 위치
+`docs/image/calendar/` 폴더:
+- `calendar_3.jpg` (3월)
+- `calendar_4.jpg` (4월)
+- `calendar_5.jpg` (5월)
+- `calendar_6.jpg` (6월)
 
-**이벤트 타입:**
-- `""` = 파란색 (일반 행사)
-- `"contest"` = 빨간색 (공모전)
-- `"club"` = 녹색 (동아리 행사)
+#### 🔄 이미지 교체 방법
+1. GitHub 저장소 → `docs/image/calendar/` 폴더 이동
+2. 교체할 이미지 삭제
+3. **같은 파일명**으로 새 이미지 업로드
+
+**권장 이미지 크기:** 정사각형 또는 4:3 비율
 
 ### 동아리 & 소모임 카드 수정
 

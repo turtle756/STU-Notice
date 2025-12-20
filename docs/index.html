@@ -14,9 +14,9 @@
    - "🎓 총학생회" 부분: 로고/학교명 변경
    - 메뉴 이름 변경 가능
 
-3. 이번 달 주요 일정 (캘린더)
-   - 월별 네비게이션으로 9월~12월 확인 가능
-   - 날짜별 일정 추가/수정
+3. 이번 달 주요 일정 (캘린더 이미지)
+   - 월별 버튼으로 3월~6월 캘린더 전환
+   - 이미지 변경: docs/image/calendar/ 폴더에서 교체
 
 4. 행사 & 공모전 섹션
    - 행사 카드: 주관, 장소 정보 포함
@@ -27,9 +27,10 @@
    - "동아리 & 소모임 신청하기" 버튼 링크 수정
    - 카카오톡 오픈채팅 링크 수정
 
-【 이미지 URL 변경 방법 】
-구글 드라이브 공유 링크에서 파일 ID를 추출하여:
-src="https://drive.google.com/uc?export=view&id=파일ID"
+【 이미지 변경 방법 】
+이미지 폴더: docs/image/
+- 캘린더: image/calendar/calendar_3.jpg ~ calendar_6.jpg
+- 행사/동아리: image/example_*.png
 
 ////////////////////////////////////////////////////////////////////////////////////////
 -->
@@ -100,45 +101,29 @@ src="https://drive.google.com/uc?export=view&id=파일ID"
     <main class="main-content">
       <!-- 
       ████████████████████████████████████████████████████████████████████████████████████
-      SECTION: CALENDAR - 이번 달 주요 일정 캘린더
+      SECTION: CALENDAR - 이번 달 주요 일정 (이미지 캘린더)
       Ctrl+F 검색어: "SECTION: CALENDAR"
       
       여기서 수정 가능한 항목:
       - 캘린더 제목: "📅 이번 달 주요 일정"
-      - 월별 네비게이션 버튼 (9월, 10월, 11월, 12월)
-      - 캘린더 일정 데이터는 하단 JavaScript에서 수정 (Ctrl+F: "JS: CALENDAR DATA")
+      - 월 버튼 (3월, 4월, 5월, 6월)
+      - 캘린더 이미지: docs/image/calendar/ 폴더에서 교체
       ████████████████████████████████████████████████████████████████████████████████████
       -->
       <section id="calendar" class="section">
         <div class="calendar-container">
           <div class="calendar-header">
             <h2>📅 이번 달 주요 일정</h2>
-            <p class="calendar-month" id="currentMonth">2024년 11월</p>
-
             <div class="month-navigation">
-              <button class="month-btn" data-month="9">9월</button>
-              <button class="month-btn" data-month="10">10월</button>
-              <button class="month-btn active" data-month="11">11월</button>
-              <button class="month-btn" data-month="12">12월</button>
+              <button class="month-btn" data-month="3">3월</button>
+              <button class="month-btn" data-month="4">4월</button>
+              <button class="month-btn active" data-month="5">5월</button>
+              <button class="month-btn" data-month="6">6월</button>
             </div>
           </div>
 
-          <div class="calendar-wrapper">
-            <div class="calendar">
-              <div class="calendar-weekdays">
-                <div class="calendar-weekday">일</div>
-                <div class="calendar-weekday">월</div>
-                <div class="calendar-weekday">화</div>
-                <div class="calendar-weekday">수</div>
-                <div class="calendar-weekday">목</div>
-                <div class="calendar-weekday">금</div>
-                <div class="calendar-weekday">토</div>
-              </div>
-
-              <div class="calendar-days" id="calendarDays">
-                <!-- JavaScript로 동적 생성 -->
-              </div>
-            </div>
+          <div class="calendar-image-wrapper">
+            <img id="calendarImage" src="image/calendar/calendar_3.jpg" alt="월간 캘린더" class="calendar-image" />
           </div>
         </div>
       </section>
