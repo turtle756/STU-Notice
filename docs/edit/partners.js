@@ -71,9 +71,23 @@ const partnersData = [
   discount: "500원 할인",
 
   // --------------------------
-  // 모달용 지도 (560x300) - 없으면 빈 문자열
+  // 모달용 지도 (560x300)
   // --------------------------
-  mapCodeModal: ``
+  mapCodeModal: `
+<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1766552216776" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+  new daum.roughmap.Lander({
+    "timestamp" : "1766552216776",
+    "key" : "esqstjy7iqi",
+    "mapWidth" : "560",
+    "mapHeight" : "300"
+  }).render();
+</script>
+  `
   // --------------------------
 }
 // #####################
@@ -90,9 +104,23 @@ const partnersData = [
   discount: "20% 할인",
 
   // --------------------------
-  // 모달용 지도 (560x300) - 없으면 빈 문자열
+  // 모달용 지도 (560x300)
   // --------------------------
-  mapCodeModal: ``
+  mapCodeModal: `
+<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1766552216777" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+  new daum.roughmap.Lander({
+    "timestamp" : "1766552216777",
+    "key" : "esqstjy7iqi",
+    "mapWidth" : "560",
+    "mapHeight" : "300"
+  }).render();
+</script>
+  `
   // --------------------------
 }
 // #####################
