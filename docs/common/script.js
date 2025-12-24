@@ -166,37 +166,6 @@ if (typeof calendarMonths !== 'undefined') {
     });
     calendarImage.src = calendarImageCache[calendarMonths[initialIndex].month].src;
   }
-  
-  // 스와이프로 탭 전환
-  let touchStartX = 0;
-  let touchEndX = 0;
-  let currentTabIndex = initialIndex;
-  
-  calendarImage.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  
-  calendarImage.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
-  
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-    const buttons = monthButtonsContainer.querySelectorAll('.month-btn');
-    
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && currentTabIndex < calendarMonths.length - 1) {
-        currentTabIndex++;
-      } else if (diff < 0 && currentTabIndex > 0) {
-        currentTabIndex--;
-      }
-      
-      buttons.forEach((btn, i) => btn.classList.toggle('active', i === currentTabIndex));
-      calendarImage.src = calendarImageCache[calendarMonths[currentTabIndex].month].src;
-    }
-  }
 }
 
 /*
