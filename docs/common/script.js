@@ -475,3 +475,157 @@ document.addEventListener('keydown', (e) => {
     closeModal();
   }
 });
+
+/*
+================================================================================
+🌙 다크모드 토글
+================================================================================
+*/
+const darkModeToggle = document.getElementById('darkModeToggle');
+
+function initDarkMode() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    if (darkModeToggle) darkModeToggle.textContent = '☀️';
+  }
+}
+
+if (darkModeToggle) {
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    darkModeToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+}
+
+initDarkMode();
+
+/*
+================================================================================
+🏠 메인 페이지 렌더링
+================================================================================
+*/
+if (typeof homeData !== 'undefined') {
+  const heroTitle = document.getElementById('heroTitle');
+  const heroSubtitle = document.getElementById('heroSubtitle');
+  const heroDescription = document.getElementById('heroDescription');
+  const welfareGrid = document.getElementById('welfareGrid');
+  const noticeList = document.getElementById('noticeList');
+  const snsGrid = document.getElementById('snsGrid');
+  
+  if (heroTitle) heroTitle.textContent = homeData.introduction.title;
+  if (heroSubtitle) heroSubtitle.textContent = homeData.introduction.subtitle;
+  if (heroDescription) heroDescription.textContent = homeData.introduction.description;
+  
+  if (welfareGrid && homeData.welfare) {
+    homeData.welfare.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'welfare-card';
+      card.innerHTML = `
+        <div class="welfare-icon">${item.icon}</div>
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+      `;
+      welfareGrid.appendChild(card);
+    });
+  }
+  
+  if (noticeList && typeof notices !== 'undefined') {
+    const recentNotices = notices.slice(0, 3);
+    recentNotices.forEach(notice => {
+      const item = document.createElement('a');
+      item.className = 'notice-item';
+      item.href = 'common/notice.html';
+      item.innerHTML = `
+        <div class="notice-item-header">
+          <span class="notice-category">${notice.category}</span>
+          ${notice.poll ? '<span class="notice-poll-badge">📊 투표</span>' : ''}
+          <span class="notice-date">${notice.date}</span>
+        </div>
+        <h3>${notice.title}</h3>
+      `;
+      noticeList.appendChild(item);
+    });
+  }
+  
+  if (snsGrid && homeData.sns) {
+    homeData.sns.forEach(sns => {
+      const button = document.createElement('a');
+      button.className = 'sns-button';
+      button.href = sns.url;
+      button.target = '_blank';
+      button.rel = 'noopener noreferrer';
+      button.style.backgroundColor = sns.color;
+      if (sns.color === '#FEE500') button.style.color = '#3c1e1e';
+      button.innerHTML = `
+        <span>${sns.icon}</span>
+        <span>${sns.name}</span>
+      `;
+      snsGrid.appendChild(button);
+    });
+  }
+}
+
+/*
+================================================================================
+📢 공지사항 페이지 렌더링
+================================================================================
+*/
+const noticeFullList = document.getElementById('noticeFullList');
+const faqList = document.getElementById('faqList');
+const suggestButton = document.getElementById('suggestButton');
+
+if (noticeFullList && typeof notices !== 'undefined') {
+  notices.forEach(notice => {
+    const item = document.createElement('div');
+    item.className = 'notice-full-item';
+    
+    let pollHtml = '';
+    if (notice.poll) {
+      pollHtml = `
+        <div class="notice-poll">
+          <div class="notice-poll-title">📊 ${notice.poll.question}</div>
+          <div class="notice-poll-options">${notice.poll.options.join(' / ')}</div>
+          <a href="${notice.poll.link}" target="_blank" rel="noopener noreferrer" class="notice-poll-link">투표 참여하기</a>
+        </div>
+      `;
+    }
+    
+    item.innerHTML = `
+      <div class="notice-item-header">
+        <span class="notice-category">${notice.category}</span>
+        <span class="notice-date">${notice.date}</span>
+      </div>
+      <h3>${notice.title}</h3>
+      <p>${notice.content}</p>
+      ${pollHtml}
+    `;
+    noticeFullList.appendChild(item);
+  });
+}
+
+if (faqList && typeof faqs !== 'undefined') {
+  faqs.forEach((faq, index) => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `
+      <div class="faq-question">
+        <span>${faq.question}</span>
+        <span class="faq-toggle">▼</span>
+      </div>
+      <div class="faq-answer">${faq.answer}</div>
+    `;
+    
+    item.querySelector('.faq-question').addEventListener('click', () => {
+      item.classList.toggle('active');
+    });
+    
+    faqList.appendChild(item);
+  });
+}
+
+if (suggestButton && typeof suggestFormLink !== 'undefined') {
+  suggestButton.href = suggestFormLink;
+}
