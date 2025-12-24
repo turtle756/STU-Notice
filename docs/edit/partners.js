@@ -76,13 +76,13 @@ const partnersData = [
   mapCodeModal: `
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
-<div id="daumRoughmapContainer1766552216776" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<div id="daumRoughmapContainer1766559121887" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
   new daum.roughmap.Lander({
-    "timestamp" : "1766552216776",
-    "key" : "esqstjy7iqi",
+    "timestamp" : "1766559121887",
+    "key" : "esqd4navtin",
     "mapWidth" : "560",
     "mapHeight" : "300"
   }).render();
@@ -109,13 +109,13 @@ const partnersData = [
   mapCodeModal: `
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
-<div id="daumRoughmapContainer1766552216777" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<div id="daumRoughmapContainer1766559121888" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
   new daum.roughmap.Lander({
-    "timestamp" : "1766552216777",
-    "key" : "esqstjy7iqi",
+    "timestamp" : "1766559121888",
+    "key" : "esqd4navtin",
     "mapWidth" : "560",
     "mapHeight" : "300"
   }).render();
