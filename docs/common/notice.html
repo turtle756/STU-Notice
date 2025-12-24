@@ -33,18 +33,20 @@
         <p>총학생회 소식과 자주 묻는 질문을 확인하세요</p>
       </div>
 
-      <div class="action-button-container">
+      <div class="notice-nav-bar">
+        <div class="notice-nav-tabs">
+          <button class="notice-nav-tab active" data-target="noticeSection">📢 공지사항</button>
+          <button class="notice-nav-tab" data-target="faqSection">❓ FAQ</button>
+        </div>
         <a id="suggestButton" href="#" target="_blank" class="action-button primary">✍️ 건의사항 접수하기</a>
       </div>
 
-      <div class="notice-section">
+      <div class="notice-section" id="noticeSection">
         <h2 class="section-title">📢 공지사항</h2>
         <div class="notice-full-list" id="noticeFullList"></div>
       </div>
 
-      <hr class="section-divider" />
-
-      <div class="faq-section">
+      <div class="faq-section" id="faqSection">
         <h2 class="section-title">❓ 자주 묻는 질문 (FAQ)</h2>
         <div class="faq-list" id="faqList"></div>
       </div>

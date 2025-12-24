@@ -1345,11 +1345,101 @@
       Ctrl+F 검색어: "CSS: NOTICE PAGE"
       ================================================================================
       */
+      .notice-nav-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 800px;
+        margin: 0 auto 1rem;
+        padding: 0 1rem;
+        gap: 1rem;
+      }
+
+      .notice-nav-tabs {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .notice-nav-tab {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: #666;
+      }
+
+      .notice-nav-tab:hover {
+        border-color: #667eea;
+        color: #667eea;
+      }
+
+      .notice-nav-tab.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+        color: white;
+      }
+
+      body.dark-mode .notice-nav-tab {
+        background: #16213e;
+        border-color: #2a3a5a;
+        color: #aaa;
+      }
+
+      body.dark-mode .notice-nav-tab:hover {
+        border-color: #667eea;
+        color: #667eea;
+      }
+
+      body.dark-mode .notice-nav-tab.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+        color: white;
+      }
+
+      .notice-nav-bar .action-button {
+        white-space: nowrap;
+      }
+
+      @media (max-width: 480px) {
+        .notice-nav-bar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .notice-nav-tabs {
+          justify-content: center;
+        }
+
+        .notice-nav-bar .action-button {
+          text-align: center;
+        }
+      }
+
       .notice-section,
       .faq-section {
         max-width: 800px;
         margin: 0 auto;
         padding: 2rem 1rem;
+      }
+
+      .faq-section {
+        display: none;
+      }
+
+      .faq-section.active {
+        display: block;
+      }
+
+      .notice-section {
+        display: none;
+      }
+
+      .notice-section.active {
+        display: block;
       }
 
       .section-title {

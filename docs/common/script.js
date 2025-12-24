@@ -630,3 +630,35 @@ if (faqList && typeof faqs !== 'undefined') {
 if (suggestButton && typeof suggestFormLink !== 'undefined') {
   suggestButton.href = suggestFormLink;
 }
+
+/*
+================================================================================
+📋 공지사항 페이지 탭 내비게이션
+================================================================================
+*/
+const noticeNavTabs = document.querySelectorAll('.notice-nav-tab');
+const noticeSection = document.getElementById('noticeSection');
+const faqSection = document.getElementById('faqSection');
+
+if (noticeNavTabs.length > 0 && noticeSection && faqSection) {
+  noticeSection.classList.add('active');
+  
+  if (window.location.hash === '#faq') {
+    noticeSection.classList.remove('active');
+    faqSection.classList.add('active');
+    noticeNavTabs.forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-target="faqSection"]').classList.add('active');
+  }
+  
+  noticeNavTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      noticeNavTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      const target = tab.dataset.target;
+      noticeSection.classList.remove('active');
+      faqSection.classList.remove('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+}
