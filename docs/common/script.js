@@ -462,6 +462,9 @@ function openModal(cardData) {
   }
   
   if (modalMap) {
+    // 먼저 기존 지도 완전히 제거
+    modalMap.innerHTML = '';
+    
     if (cardData.mapCodeModal && cardData.mapCodeModal.trim()) {
       // 카카오맵 로더 스크립트가 없으면 한 번만 로드
       if (!window.kakaoMapLoaderLoaded) {
@@ -472,7 +475,10 @@ function openModal(cardData) {
         window.kakaoMapLoaderLoaded = true;
       }
       
-      // DOM으로 파싱하여 설치 스크립트만 제거
+      // 고유한 timestamp 생성
+      const uniqueTimestamp = Date.now() + Math.random().toString(36).substr(2, 9);
+      
+      // DOM으로 파싱
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = cardData.mapCodeModal;
       
@@ -482,6 +488,24 @@ function openModal(cardData) {
           script.remove();
         }
       });
+      
+      // div id를 고유하게 변경
+      const mapContainer = tempDiv.querySelector('[id^="daumRoughmapContainer"]');
+      if (mapContainer) {
+        const oldId = mapContainer.id;
+        const newId = 'daumRoughmapContainer' + uniqueTimestamp;
+        mapContainer.id = newId;
+        
+        // 스크립트의 timestamp도 변경
+        tempDiv.querySelectorAll('script').forEach(script => {
+          if (script.textContent.includes('daum.roughmap.Lander')) {
+            script.textContent = script.textContent.replace(
+              /"timestamp"\s*:\s*"[^"]+"/,
+              `"timestamp" : "${uniqueTimestamp}"`
+            );
+          }
+        });
+      }
       
       modalMap.innerHTML = tempDiv.innerHTML;
       modalMap.style.display = 'block';
@@ -494,9 +518,8 @@ function openModal(cardData) {
           newScript.textContent = script.textContent;
           script.parentNode.replaceChild(newScript, script);
         });
-      }, 100);
+      }, 150);
     } else {
-      modalMap.innerHTML = '';
       modalMap.style.display = 'none';
     }
   }
