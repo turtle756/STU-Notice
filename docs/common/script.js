@@ -247,19 +247,38 @@ function openModal(cardData) {
   
   if (modalMap) {
     if (cardData.mapCodeModal && cardData.mapCodeModal.trim()) {
-      // 설치 스크립트(roughmapLoader.js) 자동 제거
-      let cleanedMapCode = cardData.mapCodeModal
-        .replace(/<script[^>]*roughmapLoader\.js[^>]*><\/script>/gi, '')
-        .replace(/<!--[\s\S]*?설치 스크립트[\s\S]*?-->/gi, '');
+      // 카카오맵 로더 스크립트가 없으면 한 번만 로드
+      if (!window.kakaoMapLoaderLoaded) {
+        const loaderScript = document.createElement('script');
+        loaderScript.src = 'https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js';
+        loaderScript.charset = 'UTF-8';
+        document.head.appendChild(loaderScript);
+        window.kakaoMapLoaderLoaded = true;
+      }
       
-      modalMap.innerHTML = cleanedMapCode;
-      modalMap.style.display = 'block';
-      const scripts = modalMap.querySelectorAll('script');
-      scripts.forEach(script => {
-        const newScript = document.createElement('script');
-        newScript.textContent = script.textContent;
-        script.parentNode.replaceChild(newScript, script);
+      // DOM으로 파싱하여 설치 스크립트만 제거
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = cardData.mapCodeModal;
+      
+      // roughmapLoader.js 스크립트 태그 제거
+      tempDiv.querySelectorAll('script').forEach(script => {
+        if (script.src && script.src.includes('roughmapLoader.js')) {
+          script.remove();
+        }
       });
+      
+      modalMap.innerHTML = tempDiv.innerHTML;
+      modalMap.style.display = 'block';
+      
+      // 실행 스크립트 재실행 (약간의 딜레이로 로더 로드 대기)
+      setTimeout(() => {
+        const scripts = modalMap.querySelectorAll('script');
+        scripts.forEach(script => {
+          const newScript = document.createElement('script');
+          newScript.textContent = script.textContent;
+          script.parentNode.replaceChild(newScript, script);
+        });
+      }, 100);
     } else {
       modalMap.innerHTML = '';
       modalMap.style.display = 'none';
