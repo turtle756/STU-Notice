@@ -29,6 +29,80 @@ const imgPrefix = isInCommon ? '../' : '';
 
 /*
 ================================================================================
+📄 페이지네이션 유틸리티
+================================================================================
+*/
+function createPagination(containerId, totalItems, itemsPerPage, currentPage, onPageChange) {
+  const container = document.getElementById(containerId);
+  if (!container || totalItems <= itemsPerPage) {
+    if (container) container.innerHTML = '';
+    return;
+  }
+  
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  container.innerHTML = '';
+  
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'pagination-btn';
+  prevBtn.innerHTML = '◀';
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.addEventListener('click', () => onPageChange(currentPage - 1));
+  container.appendChild(prevBtn);
+  
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+  
+  if (endPage - startPage + 1 < maxVisiblePages) {
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+  
+  if (startPage > 1) {
+    const firstBtn = document.createElement('button');
+    firstBtn.className = 'pagination-btn';
+    firstBtn.textContent = '1';
+    firstBtn.addEventListener('click', () => onPageChange(1));
+    container.appendChild(firstBtn);
+    if (startPage > 2) {
+      const dots = document.createElement('span');
+      dots.textContent = '...';
+      dots.style.padding = '0 0.5rem';
+      container.appendChild(dots);
+    }
+  }
+  
+  for (let i = startPage; i <= endPage; i++) {
+    const pageBtn = document.createElement('button');
+    pageBtn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+    pageBtn.textContent = i;
+    pageBtn.addEventListener('click', () => onPageChange(i));
+    container.appendChild(pageBtn);
+  }
+  
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      const dots = document.createElement('span');
+      dots.textContent = '...';
+      dots.style.padding = '0 0.5rem';
+      container.appendChild(dots);
+    }
+    const lastBtn = document.createElement('button');
+    lastBtn.className = 'pagination-btn';
+    lastBtn.textContent = totalPages;
+    lastBtn.addEventListener('click', () => onPageChange(totalPages));
+    container.appendChild(lastBtn);
+  }
+  
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'pagination-btn';
+  nextBtn.innerHTML = '▶';
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.addEventListener('click', () => onPageChange(currentPage + 1));
+  container.appendChild(nextBtn);
+}
+
+/*
+================================================================================
 📅 캘린더 렌더링 (일정 페이지)
 ================================================================================
 */
@@ -92,6 +166,37 @@ if (typeof calendarMonths !== 'undefined') {
     });
     calendarImage.src = calendarImageCache[calendarMonths[initialIndex].month].src;
   }
+  
+  // 스와이프로 탭 전환
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let currentTabIndex = initialIndex;
+  
+  calendarImage.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  
+  calendarImage.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    const buttons = monthButtonsContainer.querySelectorAll('.month-btn');
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0 && currentTabIndex < calendarMonths.length - 1) {
+        currentTabIndex++;
+      } else if (diff < 0 && currentTabIndex > 0) {
+        currentTabIndex--;
+      }
+      
+      buttons.forEach((btn, i) => btn.classList.toggle('active', i === currentTabIndex));
+      calendarImage.src = calendarImageCache[calendarMonths[currentTabIndex].month].src;
+    }
+  }
 }
 
 /*
@@ -99,47 +204,70 @@ if (typeof calendarMonths !== 'undefined') {
 🎉 행사 & 공모전 렌더링
 ================================================================================
 */
+let eventsCurrentFilter = '전체';
+let eventsCurrentPage = 1;
+
 if (typeof eventsData !== 'undefined') {
   const eventGrid = document.getElementById('eventGrid');
   const suggestButton = document.getElementById('suggestButton');
+  const eventsPerPage = eventsConfig?.itemsPerPage || 15;
   
   if (suggestButton && eventsConfig) {
     suggestButton.href = eventsConfig.suggestFormLink;
   }
   
-  eventsData.forEach(event => {
-    const card = document.createElement('div');
-    card.className = 'event-card';
-    card.dataset.category = event.category;
+  window.renderEvents = function(page, filter) {
+    if (filter !== undefined) eventsCurrentFilter = filter;
+    eventsCurrentPage = page;
+    eventGrid.innerHTML = '';
     
-    if (event.details) {
-      if (event.details.target) card.dataset.target = event.details.target;
-      if (event.details.benefits) card.dataset.benefits = event.details.benefits;
-      if (event.details.requirements) card.dataset.requirements = event.details.requirements;
-      if (event.details.schedule) card.dataset.schedule = event.details.schedule;
-      if (event.details.contact) card.dataset.contact = event.details.contact;
-    }
+    const filteredData = eventsCurrentFilter === '전체' 
+      ? eventsData 
+      : eventsData.filter(e => e.category === eventsCurrentFilter);
     
-    const imageSrc = event.image.startsWith('http') ? event.image : imgPrefix + event.image;
+    const start = (page - 1) * eventsPerPage;
+    const end = start + eventsPerPage;
+    const pageEvents = filteredData.slice(start, end);
     
-    card.innerHTML = `
-      <img src="${imageSrc}" alt="${event.title}" />
-      <div class="event-content">
-        <span class="event-category">${event.category}</span>
-        <h3>${event.title}</h3>
-        <p class="event-date">📅 ${event.date}</p>
-        <p class="event-organizer">${event.organizer}</p>
-        ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
-        <p class="event-description">${event.description}</p>
-        <div class="event-buttons">
-          ${event.link ? `<a href="${event.link}" target="_blank" class="link-button">🔗 바로가기</a>` : ''}
-          ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
+    pageEvents.forEach(event => {
+      const card = document.createElement('div');
+      card.className = 'event-card';
+      card.dataset.category = event.category;
+      
+      if (event.details) {
+        if (event.details.target) card.dataset.target = event.details.target;
+        if (event.details.benefits) card.dataset.benefits = event.details.benefits;
+        if (event.details.requirements) card.dataset.requirements = event.details.requirements;
+        if (event.details.schedule) card.dataset.schedule = event.details.schedule;
+        if (event.details.contact) card.dataset.contact = event.details.contact;
+      }
+      
+      const imageSrc = event.image.startsWith('http') ? event.image : imgPrefix + event.image;
+      
+      card.innerHTML = `
+        <img src="${imageSrc}" alt="${event.title}" />
+        <div class="event-content">
+          <span class="event-category">${event.category}</span>
+          <h3>${event.title}</h3>
+          <p class="event-date">📅 ${event.date}</p>
+          <p class="event-organizer">${event.organizer}</p>
+          ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
+          <p class="event-description">${event.description}</p>
+          <div class="event-buttons">
+            ${event.link ? `<a href="${event.link}" target="_blank" class="link-button">🔗 바로가기</a>` : ''}
+            ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
+          </div>
         </div>
-      </div>
-    `;
+      `;
+      
+      eventGrid.appendChild(card);
+    });
     
-    eventGrid.appendChild(card);
-  });
+    createPagination('eventPagination', filteredData.length, eventsPerPage, page, (p) => window.renderEvents(p));
+    setupCardListeners();
+  }
+  
+  window.renderEvents(1);
 }
 
 /*
@@ -147,36 +275,59 @@ if (typeof eventsData !== 'undefined') {
 👥 동아리 & 소모임 렌더링
 ================================================================================
 */
+let clubsCurrentFilter = '전체';
+let clubsCurrentPage = 1;
+
 if (typeof clubsData !== 'undefined') {
   const communityGrid = document.getElementById('communityGrid');
   const applyButton = document.getElementById('applyButton');
+  const clubsPerPage = clubsConfig?.itemsPerPage || 15;
   
   if (applyButton && clubsConfig) {
     applyButton.href = clubsConfig.applyFormLink;
   }
   
-  clubsData.forEach(club => {
-    const card = document.createElement('div');
-    card.className = 'community-card';
-    card.dataset.category = club.category;
-    if (club.detail) card.dataset.detail = club.detail;
+  window.renderClubs = function(page, filter) {
+    if (filter !== undefined) clubsCurrentFilter = filter;
+    clubsCurrentPage = page;
+    communityGrid.innerHTML = '';
     
-    const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
+    const filteredData = clubsCurrentFilter === '전체'
+      ? clubsData
+      : clubsData.filter(c => c.category === clubsCurrentFilter);
     
-    card.innerHTML = `
-      <img src="${imageSrc}" alt="${club.title}" />
-      <div class="community-content">
-        <div class="community-header-card">
-          <h3>${club.title}</h3>
-          <span class="community-category">${club.category}</span>
+    const start = (page - 1) * clubsPerPage;
+    const end = start + clubsPerPage;
+    const pageClubs = filteredData.slice(start, end);
+    
+    pageClubs.forEach(club => {
+      const card = document.createElement('div');
+      card.className = 'community-card';
+      card.dataset.category = club.category;
+      if (club.detail) card.dataset.detail = club.detail;
+      
+      const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
+      
+      card.innerHTML = `
+        <img src="${imageSrc}" alt="${club.title}" />
+        <div class="community-content">
+          <div class="community-header-card">
+            <h3>${club.title}</h3>
+            <span class="community-category">${club.category}</span>
+          </div>
+          <p class="community-description">${club.description}</p>
+          <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>
         </div>
-        <p class="community-description">${club.description}</p>
-        <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>
-      </div>
-    `;
+      `;
+      
+      communityGrid.appendChild(card);
+    });
     
-    communityGrid.appendChild(card);
-  });
+    createPagination('communityPagination', filteredData.length, clubsPerPage, page, (p) => window.renderClubs(p));
+    setupCardListeners();
+  }
+  
+  window.renderClubs(1);
 }
 
 /*
@@ -184,37 +335,60 @@ if (typeof clubsData !== 'undefined') {
 🤝 제휴사 렌더링
 ================================================================================
 */
+let partnersCurrentFilter = '전체';
+let partnersCurrentPage = 1;
+
 if (typeof partnersData !== 'undefined') {
   const partnerGrid = document.getElementById('partnerGrid');
   const suggestButton = document.getElementById('suggestButton');
+  const partnersPerPage = partnersConfig?.itemsPerPage || 15;
   
   if (suggestButton && partnersConfig) {
     suggestButton.href = partnersConfig.suggestFormLink;
   }
   
-  partnersData.forEach((partner, index) => {
-    const card = document.createElement('div');
-    card.className = 'partner-card';
-    card.dataset.category = partner.category;
-    card.dataset.index = index;
+  window.renderPartners = function(page, filter) {
+    if (filter !== undefined) partnersCurrentFilter = filter;
+    partnersCurrentPage = page;
+    partnerGrid.innerHTML = '';
     
-    const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
+    const filteredData = partnersCurrentFilter === '전체'
+      ? partnersData
+      : partnersData.filter(p => p.category === partnersCurrentFilter);
     
-    card.innerHTML = `
-      <img src="${imageSrc}" alt="${partner.title}" />
-      <div class="partner-content">
-        <div class="partner-header-card">
-          <h3>${partner.title}</h3>
-          <span class="partner-category">${partner.category}</span>
+    const start = (page - 1) * partnersPerPage;
+    const end = start + partnersPerPage;
+    const pagePartners = filteredData.slice(start, end);
+    
+    pagePartners.forEach((partner) => {
+      const card = document.createElement('div');
+      card.className = 'partner-card';
+      card.dataset.category = partner.category;
+      card.dataset.index = partnersData.indexOf(partner);
+      
+      const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
+      
+      card.innerHTML = `
+        <img src="${imageSrc}" alt="${partner.title}" />
+        <div class="partner-content">
+          <div class="partner-header-card">
+            <h3>${partner.title}</h3>
+            <span class="partner-category">${partner.category}</span>
+          </div>
+          <p class="partner-discount">${partner.discount}</p>
+          <p class="partner-location">📍 ${partner.location}</p>
+          <p class="partner-description">${partner.description}</p>
         </div>
-        <p class="partner-discount">${partner.discount}</p>
-        <p class="partner-location">📍 ${partner.location}</p>
-        <p class="partner-description">${partner.description}</p>
-      </div>
-    `;
+      `;
+      
+      partnerGrid.appendChild(card);
+    });
     
-    partnerGrid.appendChild(card);
-  });
+    createPagination('partnerPagination', filteredData.length, partnersPerPage, page, (p) => window.renderPartners(p));
+    setupCardListeners();
+  }
+  
+  window.renderPartners(1);
 }
 
 /*
@@ -236,23 +410,13 @@ filterButtons.forEach(button => {
     });
     button.classList.add('active');
     
-    let cards = [];
-    if (section === 'events') {
-      cards = document.querySelectorAll('.event-card');
-    } else if (section === 'community') {
-      cards = document.querySelectorAll('.community-card');
-    } else if (section === 'partners') {
-      cards = document.querySelectorAll('.partner-card');
+    if (section === 'events' && typeof window.renderEvents === 'function') {
+      window.renderEvents(1, filter);
+    } else if (section === 'community' && typeof window.renderClubs === 'function') {
+      window.renderClubs(1, filter);
+    } else if (section === 'partners' && typeof window.renderPartners === 'function') {
+      window.renderPartners(1, filter);
     }
-    
-    cards.forEach(card => {
-      const category = card.dataset.category;
-      if (filter === '전체' || category === filter) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
-    });
   });
 });
 
@@ -579,33 +743,49 @@ const faqList = document.getElementById('faqList');
 const suggestButton = document.getElementById('suggestButton');
 
 if (noticeFullList && typeof notices !== 'undefined') {
-  notices.forEach(notice => {
-    const item = document.createElement('div');
-    item.className = 'notice-full-item';
+  let noticesCurrentPage = 1;
+  const noticesPerPage = (typeof noticeConfig !== 'undefined' && noticeConfig.itemsPerPage) ? noticeConfig.itemsPerPage : 20;
+  
+  function renderNotices(page) {
+    noticesCurrentPage = page;
+    noticeFullList.innerHTML = '';
     
-    let pollHtml = '';
-    if (notice.poll) {
-      pollHtml = `
-        <div class="notice-poll">
-          <div class="notice-poll-title">${notice.poll.title}</div>
-          <div class="notice-poll-description">${notice.poll.description}</div>
-          <a href="${notice.poll.link}" target="_blank" rel="noopener noreferrer" class="notice-poll-link">바로가기</a>
+    const start = (page - 1) * noticesPerPage;
+    const end = start + noticesPerPage;
+    const pageNotices = notices.slice(start, end);
+    
+    pageNotices.forEach(notice => {
+      const item = document.createElement('div');
+      item.className = 'notice-full-item';
+      
+      let pollHtml = '';
+      if (notice.poll) {
+        pollHtml = `
+          <div class="notice-poll">
+            <div class="notice-poll-title">${notice.poll.title}</div>
+            <div class="notice-poll-description">${notice.poll.description}</div>
+            <a href="${notice.poll.link}" target="_blank" rel="noopener noreferrer" class="notice-poll-link">바로가기</a>
+          </div>
+        `;
+      }
+      
+      item.innerHTML = `
+        <div class="notice-item-header">
+          <span class="notice-category">${notice.category}</span>
+          ${notice.poll ? '<span class="notice-poll-badge">링크</span>' : ''}
+          <span class="notice-date">${notice.date}</span>
         </div>
+        <h3>${notice.title}</h3>
+        <p>${notice.content}</p>
+        ${pollHtml}
       `;
-    }
+      noticeFullList.appendChild(item);
+    });
     
-    item.innerHTML = `
-      <div class="notice-item-header">
-        <span class="notice-category">${notice.category}</span>
-        ${notice.poll ? '<span class="notice-poll-badge">링크</span>' : ''}
-        <span class="notice-date">${notice.date}</span>
-      </div>
-      <h3>${notice.title}</h3>
-      <p>${notice.content}</p>
-      ${pollHtml}
-    `;
-    noticeFullList.appendChild(item);
-  });
+    createPagination('noticePagination', notices.length, noticesPerPage, page, renderNotices);
+  }
+  
+  renderNotices(1);
 }
 
 if (faqList && typeof faqs !== 'undefined') {

@@ -46,8 +46,8 @@ const partnersData = [
 <div id="daumRoughmapContainer1766552216775" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!--
-	2. 설치 스크립트
-	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+        2. 설치 스크립트
+        * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
 -->
 <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
@@ -85,8 +85,8 @@ const partnersData = [
 <div id="daumRoughmapContainer1766559121887" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!--
-	2. 설치 스크립트
-	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+        2. 설치 스크립트
+        * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
 -->
 <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
@@ -124,8 +124,8 @@ const partnersData = [
 <div id="daumRoughmapContainer1766560906875" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!--
-	2. 설치 스크립트
-	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+        2. 설치 스크립트
+        * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
 -->
 <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
@@ -146,5 +146,6 @@ const partnersData = [
 ];
 
 const partnersConfig = {
-  suggestFormLink: "https://forms.gle/partner-suggest"
+  suggestFormLink: "https://forms.gle/partner-suggest",
+  itemsPerPage: 15
 };

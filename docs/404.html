@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>페이지를 찾을 수 없습니다 - 서울신학대학교 총학생회</title>
+  <link rel="stylesheet" href="common/style.css">
+  <style>
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .error-code {
+      font-size: 8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+      color: #333;
+      margin: 1rem 0;
+    }
+
+    body.dark-mode .error-title {
+      color: #eaeaea;
+    }
+
+    .error-description {
+      color: #666;
+      margin-bottom: 2rem;
+      max-width: 400px;
+    }
+
+    body.dark-mode .error-description {
+      color: #aaa;
+    }
+
+    .error-home-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .error-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .error-links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .error-link {
+      color: #667eea;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid #667eea;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .error-link:hover {
+      background: #667eea;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">🎓 서울신학대학교 총학생회</a>
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="common/schedule.html">일정</a>
+        <a href="common/events.html">행사 & 공모전</a>
+        <a href="common/clubs.html">동아리 & 소모임</a>
+        <a href="common/partners.html">제휴사</a>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="다크모드 전환">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="error-container">
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">페이지를 찾을 수 없습니다</h2>
+      <p class="error-description">
+        요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.
+        주소를 다시 확인해주세요.
+      </p>
+      <a href="index.html" class="error-home-btn">🏠 홈으로 돌아가기</a>
+      <div class="error-links">
+        <a href="common/schedule.html" class="error-link">📅 일정</a>
+        <a href="common/events.html" class="error-link">🎉 행사</a>
+        <a href="common/clubs.html" class="error-link">👥 동아리</a>
+        <a href="common/partners.html" class="error-link">🤝 제휴사</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="common/script.js"></script>
+</body>
+</html>

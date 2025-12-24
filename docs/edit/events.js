@@ -143,5 +143,6 @@ const eventsData = [
 ];
 
 const eventsConfig = {
-  suggestFormLink: "https://forms.gle/example"
+  suggestFormLink: "https://forms.gle/example",
+  itemsPerPage: 15
 };

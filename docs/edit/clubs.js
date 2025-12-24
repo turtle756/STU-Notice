@@ -73,5 +73,6 @@ const clubsData = [
 ];
 
 const clubsConfig = {
-  applyFormLink: "https://forms.gle/community-apply"
+  applyFormLink: "https://forms.gle/community-apply",
+  itemsPerPage: 15
 };

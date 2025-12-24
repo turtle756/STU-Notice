@@ -1598,3 +1598,172 @@
         max-height: 500px;
         padding: 0 1.5rem 1rem;
       }
+
+      /* 페이지네이션 */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .pagination-btn {
+        min-width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        background: #f0f0f0;
+        color: #333;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pagination-btn:hover {
+        background: #e0e0e0;
+      }
+
+      .pagination-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      body.dark-mode .pagination-btn {
+        background: #2a3a5a;
+        color: #eaeaea;
+      }
+
+      body.dark-mode .pagination-btn:hover {
+        background: #3a4a6a;
+      }
+
+      body.dark-mode .pagination-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      /* 로딩 스피너 */
+      .loading-spinner {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem;
+      }
+
+      .loading-spinner.active {
+        display: flex;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f0f0f0;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      body.dark-mode .spinner {
+        border-color: #2a3a5a;
+        border-top-color: #667eea;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* UI 애니메이션 - 페이드인 */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+
+      /* 카드 호버 효과 강화 */
+      .event-card,
+      .community-card,
+      .partner-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .event-card:hover,
+      .community-card:hover,
+      .partner-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 버튼 클릭 효과 */
+      .filter-btn,
+      .month-btn,
+      .pagination-btn {
+        transition: all 0.2s ease;
+      }
+
+      .filter-btn:active,
+      .month-btn:active,
+      .pagination-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* 섹션 페이드인 */
+      .section {
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      /* 네비게이션 링크 호버 효과 */
+      .nav-links a {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transition: width 0.3s ease, left 0.3s ease;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+        left: 0;
+      }
+
+      /* 스와이프 힌트 */
+      .swipe-hint {
+        text-align: center;
+        font-size: 0.8rem;
+        color: #999;
+        margin-top: 0.5rem;
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .swipe-hint {
+          display: block;
+        }
+      }
