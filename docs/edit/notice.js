@@ -24,6 +24,7 @@ const notices = [
   category: "공지",
   content: "2025학년도 1학기 학생회비 집행 내역을 안내드립니다. 학생회비는 학생 복지 및 각종 행사 운영에 사용됩니다.",
   poll: {
+    title: "1학기 주요 행사 투표",
     description: "1학기 주요 행사에 대한 투표를 진행합니다. 아래 버튼을 눌러 참여해주세요.",
     link: "https://forms.gle/example"
   }

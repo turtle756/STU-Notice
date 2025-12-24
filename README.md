@@ -167,6 +167,7 @@ const homeData = {
   category: "공지",                               ← "공지" 또는 "안내"
   content: "학생회비 집행 내역을 안내드립니다.",     ← 내용
   poll: {                                        ← 링크 (없으면 null)
+    title: "투표 제목",                            ← 링크 제목
     description: "투표 참여 부탁드립니다.",         ← 링크 설명
     link: "https://forms.gle/example"            ← 구글폼 또는 외부 링크
   }

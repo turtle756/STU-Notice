@@ -1500,6 +1500,12 @@
         background: #2a3a5a;
       }
 
+      .notice-poll-title {
+        font-weight: 600;
+        color: #f57c00;
+        margin-bottom: 0.5rem;
+      }
+
       .notice-poll-description {
         color: #666;
         margin-bottom: 0.75rem;

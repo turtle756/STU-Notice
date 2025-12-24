@@ -587,6 +587,7 @@ if (noticeFullList && typeof notices !== 'undefined') {
     if (notice.poll) {
       pollHtml = `
         <div class="notice-poll">
+          <div class="notice-poll-title">${notice.poll.title}</div>
           <div class="notice-poll-description">${notice.poll.description}</div>
           <a href="${notice.poll.link}" target="_blank" rel="noopener noreferrer" class="notice-poll-link">바로가기</a>
         </div>
@@ -596,6 +597,7 @@ if (noticeFullList && typeof notices !== 'undefined') {
     item.innerHTML = `
       <div class="notice-item-header">
         <span class="notice-category">${notice.category}</span>
+        ${notice.poll ? '<span class="notice-poll-badge">링크</span>' : ''}
         <span class="notice-date">${notice.date}</span>
       </div>
       <h3>${notice.title}</h3>
