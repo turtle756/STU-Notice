@@ -15,6 +15,7 @@
 - organizer: 주관/주최
 - location: 장소 (행사만)
 - description: 간단한 설명
+- link: 바로가기 링크 (없으면 null)
 - applyLink: 신청 링크 (공모전만, 없으면 null)
 - details: 상세 정보 (모달용)
   - target: 대상
@@ -37,6 +38,7 @@ const eventsData = [
   organizer: "주관: 학생회",
   location: "중앙운동장",
   description: "우리 대학 가을 축제에 여러분을 초대합니다!",
+  link: null,
   applyLink: null,
   details: {
     target: "전체 재학생",
@@ -58,6 +60,7 @@ const eventsData = [
   organizer: "주최: LINC+ 사업단",
   location: null,
   description: "혁신적인 창업 아이디어를 공모합니다.",
+  link: null,
   applyLink: "https://forms.gle/example1",
   details: {
     target: "전체 재학생 및 휴학생",
@@ -80,6 +83,7 @@ const eventsData = [
   organizer: "주관: 학생회",
   location: "강원도 평창",
   description: "학과 MT에 참여하세요!",
+  link: null,
   applyLink: null,
   details: {}
 }
@@ -96,6 +100,7 @@ const eventsData = [
   organizer: "주최: 학습지원센터",
   location: null,
   description: "다양한 글쓰기 주제로 경진대회에 도전하세요.",
+  link: null,
   applyLink: "https://forms.gle/example2",
   details: {}
 }
@@ -112,6 +117,7 @@ const eventsData = [
   organizer: "주관: 체육부",
   location: "체육관",
   description: "단합 조으로 자웅을 겨루는 체육대회",
+  link: null,
   applyLink: null,
   details: {}
 }
@@ -128,6 +134,7 @@ const eventsData = [
   organizer: "주최: 컴퓨터공학과",
   location: null,
   description: "24시간 코딩 마라톤에 도전하세요!",
+  link: null,
   applyLink: "https://forms.gle/example3",
   details: {}
 }

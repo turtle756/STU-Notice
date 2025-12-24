@@ -283,12 +283,17 @@
         flex-grow: 1;
       }
 
+      .event-buttons {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .link-button,
       .apply-button {
         display: inline-block;
-        width: 100%;
+        flex: 1;
         padding: 0.75rem 1rem;
-        margin-top: 1rem;
-        background-color: #e74c3c;
         color: white;
         text-align: center;
         text-decoration: none;
@@ -296,6 +301,18 @@
         font-weight: 600;
         transition: background-color 0.3s;
         white-space: nowrap;
+      }
+
+      .link-button {
+        background-color: #3498db;
+      }
+
+      .link-button:hover {
+        background-color: #2980b9;
+      }
+
+      .apply-button {
+        background-color: #e74c3c;
       }
 
       .apply-button:hover {
@@ -800,11 +817,16 @@
           line-height: 1.4;
         }
 
+        .link-button,
         .apply-button,
         .kakao-button {
           font-size: 0.8rem;
           padding: 0.6rem;
           word-wrap: break-word;
+        }
+
+        .event-buttons {
+          flex-direction: column;
         }
 
         .calendar {

@@ -39,9 +39,39 @@ if (typeof calendarMonths !== 'undefined') {
     monthButtonsContainer.appendChild(btn);
   });
   
-  // 첫 번째 이미지 표시
+  // 현재 월에 맞는 탭 자동 선택
+  function getTargetMonthIndex() {
+    const currentMonth = new Date().getMonth() + 1; // 1-12
+    
+    // 월 → 탭 인덱스 매핑 (방학 처리 포함)
+    const monthToIndex = {
+      1: 3,   // 1월 → 12월 (4번째, index 3)
+      2: 0,   // 2월 → 3월/9월 (1번째, index 0)
+      3: 0,   // 3월 → 1번째
+      4: 1,   // 4월 → 2번째
+      5: 2,   // 5월 → 3번째
+      6: 3,   // 6월 → 4번째
+      7: 3,   // 7월 → 6월 (4번째, index 3)
+      8: 0,   // 8월 → 9월 (1번째, index 0)
+      9: 0,   // 9월 → 1번째
+      10: 1,  // 10월 → 2번째
+      11: 2,  // 11월 → 3번째
+      12: 3   // 12월 → 4번째
+    };
+    
+    const targetIndex = monthToIndex[currentMonth];
+    return Math.min(targetIndex, calendarMonths.length - 1);
+  }
+  
+  const initialIndex = getTargetMonthIndex();
+  
+  // 초기 활성 탭 설정
   if (calendarMonths.length > 0) {
-    calendarImage.src = calendarImageCache[calendarMonths[0].month].src;
+    const buttons = monthButtonsContainer.querySelectorAll('.month-btn');
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === initialIndex);
+    });
+    calendarImage.src = calendarImageCache[calendarMonths[initialIndex].month].src;
   }
 }
 
@@ -82,7 +112,10 @@ if (typeof eventsData !== 'undefined') {
         <p class="event-organizer">${event.organizer}</p>
         ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
         <p class="event-description">${event.description}</p>
-        ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
+        <div class="event-buttons">
+          ${event.link ? `<a href="${event.link}" target="_blank" class="link-button">🔗 바로가기</a>` : ''}
+          ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
+        </div>
       </div>
     `;
     
