@@ -471,6 +471,84 @@
         background-color: #fdd835;
       }
 
+      /* Partner Grid */
+      .partner-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .partner-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .partner-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .partner-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .partner-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .partner-header-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .partner-card h3 {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin: 0;
+      }
+
+      .partner-category {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background-color: #9b59b6;
+        color: white;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+
+      .partner-discount {
+        color: #e74c3c;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .partner-location {
+        color: #7f8c8d;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .partner-description {
+        color: #555;
+        line-height: 1.6;
+        flex-grow: 1;
+      }
+
       /* Hidden class */
       .hidden {
         display: none;
@@ -661,29 +739,34 @@
           gap: 1rem;
         }
 
-        .community-grid {
+        .community-grid,
+        .partner-grid {
           grid-template-columns: repeat(2, 1fr);
           gap: 1rem;
         }
 
         .event-card,
-        .community-card {
+        .community-card,
+        .partner-card {
           cursor: pointer;
         }
 
         .event-card img,
-        .community-card img {
+        .community-card img,
+        .partner-card img {
           height: 120px;
           object-fit: cover;
         }
 
         .event-card h3,
-        .community-card h3 {
+        .community-card h3,
+        .partner-card h3 {
           font-size: 1rem;
         }
 
         .event-category,
-        .community-category {
+        .community-category,
+        .partner-category {
           font-size: 0.7rem;
           padding: 0.2rem 0.5rem;
         }
@@ -691,12 +774,15 @@
         .event-date,
         .event-organizer,
         .event-location,
-        .community-members {
+        .community-members,
+        .partner-location,
+        .partner-discount {
           font-size: 0.75rem;
         }
 
         .event-description,
-        .community-description {
+        .community-description,
+        .partner-description {
           font-size: 0.8rem;
           line-height: 1.4;
         }

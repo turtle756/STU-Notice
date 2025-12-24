@@ -1,131 +1,211 @@
-/* 
+/*
 ================================================================================
-📅 캘린더 이미지 전환
-================================================================================
-*/
-
-// 이미지 프리로드 (빠른 전환을 위해 미리 로드)
-const calendarImages = {};
-[3, 4, 5, 6].forEach(month => {
-  const img = new Image();
-  img.src = `image/calendar/calendar_${month}.jpg`;
-  calendarImages[month] = img;
-});
-
-// 캘린더 이미지 전환
-const monthButtons = document.querySelectorAll(".month-btn");
-const calendarImage = document.getElementById("calendarImage");
-
-monthButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    monthButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    
-    const month = btn.getAttribute("data-month");
-    calendarImage.src = calendarImages[month].src;
-  });
-});
-
-// 페이지 로드 시 3월 캘린더 표시
-if (calendarImage) {
-  calendarImage.src = calendarImages[3].src;
-  monthButtons.forEach((btn) => {
-    if (btn.getAttribute("data-month") === "3") {
-      btn.classList.add("active");
-    } else {
-      btn.classList.remove("active");
-    }
-  });
-}
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-/* 
-================================================================================
-JS: SCROLL - 스크롤 네비게이션 함수
+공통 스크립트 (수정 불필요)
 ================================================================================
 */
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    const navHeight = 70;
-    const sectionTop = section.offsetTop - navHeight;
-    window.scrollTo({ top: sectionTop, behavior: "smooth" });
+
+// 이미지 경로 prefix (페이지 위치에 따라 다름)
+const isInCommon = window.location.pathname.includes('/common/');
+const imgPrefix = isInCommon ? '../' : '';
+
+/*
+================================================================================
+📅 캘린더 렌더링 (일정 페이지)
+================================================================================
+*/
+if (typeof calendarMonths !== 'undefined') {
+  const monthButtonsContainer = document.getElementById('monthButtons');
+  const calendarImage = document.getElementById('calendarImage');
+  
+  // 이미지 프리로드
+  const calendarImageCache = {};
+  calendarMonths.forEach(m => {
+    const img = new Image();
+    img.src = imgPrefix + m.image;
+    calendarImageCache[m.month] = img;
+  });
+  
+  // 월 버튼 생성
+  calendarMonths.forEach((m, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'month-btn' + (index === 0 ? ' active' : '');
+    btn.textContent = m.label;
+    btn.dataset.month = m.month;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      calendarImage.src = calendarImageCache[m.month].src;
+    });
+    monthButtonsContainer.appendChild(btn);
+  });
+  
+  // 첫 번째 이미지 표시
+  if (calendarMonths.length > 0) {
+    calendarImage.src = calendarImageCache[calendarMonths[0].month].src;
   }
 }
 
-/* 
+/*
 ================================================================================
-JS: FILTERS - 필터 버튼 기능
+🎉 행사 & 공모전 렌더링
 ================================================================================
 */
-const filterButtons = document.querySelectorAll(".filter-btn");
-const eventCards = document.querySelectorAll(".event-card");
-const communityCards = document.querySelectorAll(".community-card");
+if (typeof eventsData !== 'undefined') {
+  const eventGrid = document.getElementById('eventGrid');
+  const suggestButton = document.getElementById('suggestButton');
+  
+  if (suggestButton && eventsConfig) {
+    suggestButton.href = eventsConfig.suggestFormLink;
+  }
+  
+  eventsData.forEach(event => {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.dataset.category = event.category;
+    
+    if (event.details) {
+      if (event.details.target) card.dataset.target = event.details.target;
+      if (event.details.benefits) card.dataset.benefits = event.details.benefits;
+      if (event.details.requirements) card.dataset.requirements = event.details.requirements;
+      if (event.details.schedule) card.dataset.schedule = event.details.schedule;
+      if (event.details.contact) card.dataset.contact = event.details.contact;
+    }
+    
+    const imageSrc = event.image.startsWith('http') ? event.image : imgPrefix + event.image;
+    
+    card.innerHTML = `
+      <img src="${imageSrc}" alt="${event.title}" />
+      <div class="event-content">
+        <span class="event-category">${event.category}</span>
+        <h3>${event.title}</h3>
+        <p class="event-date">📅 ${event.date}</p>
+        <p class="event-organizer">${event.organizer}</p>
+        ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
+        <p class="event-description">${event.description}</p>
+        ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
+      </div>
+    `;
+    
+    eventGrid.appendChild(card);
+  });
+}
 
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const section = button.getAttribute("data-section");
-    const filter = button.getAttribute("data-filter");
+/*
+================================================================================
+👥 동아리 & 소모임 렌더링
+================================================================================
+*/
+if (typeof clubsData !== 'undefined') {
+  const communityGrid = document.getElementById('communityGrid');
+  const applyButton = document.getElementById('applyButton');
+  
+  if (applyButton && clubsConfig) {
+    applyButton.href = clubsConfig.applyFormLink;
+  }
+  
+  clubsData.forEach(club => {
+    const card = document.createElement('div');
+    card.className = 'community-card';
+    card.dataset.category = club.category;
+    if (club.detail) card.dataset.detail = club.detail;
+    
+    const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
+    
+    card.innerHTML = `
+      <img src="${imageSrc}" alt="${club.title}" />
+      <div class="community-content">
+        <div class="community-header-card">
+          <h3>${club.title}</h3>
+          <span class="community-category">${club.category}</span>
+        </div>
+        <p class="community-description">${club.description}</p>
+        <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 오픈채팅 참여하기</a>
+      </div>
+    `;
+    
+    communityGrid.appendChild(card);
+  });
+}
 
-    filterButtons.forEach((btn) => {
-      if (btn.getAttribute("data-section") === section) {
-        btn.classList.remove("active");
+/*
+================================================================================
+🤝 제휴사 렌더링
+================================================================================
+*/
+if (typeof partnersData !== 'undefined') {
+  const partnerGrid = document.getElementById('partnerGrid');
+  const suggestButton = document.getElementById('suggestButton');
+  
+  if (suggestButton && partnersConfig) {
+    suggestButton.href = partnersConfig.suggestFormLink;
+  }
+  
+  partnersData.forEach(partner => {
+    const card = document.createElement('div');
+    card.className = 'partner-card';
+    card.dataset.category = partner.category;
+    
+    const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
+    
+    card.innerHTML = `
+      <img src="${imageSrc}" alt="${partner.title}" />
+      <div class="partner-content">
+        <div class="partner-header-card">
+          <h3>${partner.title}</h3>
+          <span class="partner-category">${partner.category}</span>
+        </div>
+        <p class="partner-discount">${partner.discount}</p>
+        <p class="partner-location">📍 ${partner.location}</p>
+        <p class="partner-description">${partner.description}</p>
+      </div>
+    `;
+    
+    partnerGrid.appendChild(card);
+  });
+}
+
+/*
+================================================================================
+🔍 필터 기능
+================================================================================
+*/
+const filterButtons = document.querySelectorAll('.filter-btn');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const section = button.dataset.section;
+    const filter = button.dataset.filter;
+    
+    filterButtons.forEach(btn => {
+      if (btn.dataset.section === section) {
+        btn.classList.remove('active');
       }
     });
-
-    button.classList.add("active");
-
-    if (section === "events") {
-      eventCards.forEach((card) => {
-        const category = card.getAttribute("data-category");
-        if (filter === "전체" || category === filter) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-        }
-      });
-    } else if (section === "community") {
-      communityCards.forEach((card) => {
-        const category = card.getAttribute("data-category");
-        if (filter === "전체" || category === filter) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-        }
-      });
+    button.classList.add('active');
+    
+    let cards = [];
+    if (section === 'events') {
+      cards = document.querySelectorAll('.event-card');
+    } else if (section === 'community') {
+      cards = document.querySelectorAll('.community-card');
+    } else if (section === 'partners') {
+      cards = document.querySelectorAll('.partner-card');
     }
-  });
-});
-
-const navLinks = document.querySelectorAll(".nav-links a");
-const sections = ["calendar", "events", "community"];
-
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach((sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const sectionTop = section.offsetTop - 100;
-      if (window.pageYOffset >= sectionTop) {
-        current = sectionId;
+    
+    cards.forEach(card => {
+      const category = card.dataset.category;
+      if (filter === '전체' || category === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
       }
-    }
-  });
-
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("onclick")?.includes(current)) {
-      link.classList.add("active");
-    }
+    });
   });
 });
 
-/* 
+/*
 ================================================================================
-JS: MODAL - 모달 팝업 기능
+🪟 모달 기능
 ================================================================================
 */
 const modal = document.getElementById('cardModal');
@@ -172,92 +252,125 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// 행사 카드 클릭
-document.querySelectorAll('.event-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    if (e.target.classList.contains('apply-button') || e.target.closest('.apply-button')) {
-      return;
-    }
-    
-    const img = card.querySelector('img');
-    const title = card.querySelector('h3').textContent;
-    const category = card.querySelector('.event-category').textContent;
-    const date = card.querySelector('.event-date')?.textContent || '';
-    const organizer = card.querySelector('.event-organizer')?.textContent || '';
-    const location = card.querySelector('.event-location')?.textContent || '';
-    const description = card.querySelector('.event-description').textContent;
-    const applyBtn = card.querySelector('.apply-button');
-    
-    const details = [];
-    if (card.dataset.target) details.push(`🎯 대상: ${card.dataset.target}`);
-    if (card.dataset.benefit) details.push(`🎁 혜택: ${card.dataset.benefit}`);
-    if (card.dataset.preparation) details.push(`📦 준비물: ${card.dataset.preparation}`);
-    if (card.dataset.schedule) details.push(`📅 일정: ${card.dataset.schedule}`);
-    if (card.dataset.contact) details.push(`📞 문의: ${card.dataset.contact}`);
-    
-    const cardData = {
-      image: img.src,
-      title: title,
-      category: category,
-      categoryColor: category === '공모전' ? '#e74c3c' : '#3498db',
-      meta: [date, organizer, location].filter(item => item),
-      description: description,
-      details: details,
-      buttonUrl: applyBtn?.href || null,
-      buttonText: applyBtn?.textContent || null,
-      buttonType: 'apply'
-    };
-    
-    openModal(cardData);
+// 카드 클릭 이벤트 등록 함수
+function setupCardListeners() {
+  // 행사 카드 클릭
+  document.querySelectorAll('.event-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.classList.contains('apply-button') || e.target.closest('.apply-button')) {
+        return;
+      }
+      
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3').textContent;
+      const category = card.querySelector('.event-category').textContent;
+      const date = card.querySelector('.event-date')?.textContent || '';
+      const organizer = card.querySelector('.event-organizer')?.textContent || '';
+      const location = card.querySelector('.event-location')?.textContent || '';
+      const description = card.querySelector('.event-description').textContent;
+      const applyBtn = card.querySelector('.apply-button');
+      
+      const details = [];
+      if (card.dataset.target) details.push(`🎯 대상: ${card.dataset.target}`);
+      if (card.dataset.benefits) details.push(`🎁 혜택: ${card.dataset.benefits}`);
+      if (card.dataset.requirements) details.push(`📦 준비물: ${card.dataset.requirements}`);
+      if (card.dataset.schedule) details.push(`📅 일정: ${card.dataset.schedule}`);
+      if (card.dataset.contact) details.push(`📞 문의: ${card.dataset.contact}`);
+      
+      const cardData = {
+        image: img.src,
+        title: title,
+        category: category,
+        categoryColor: category === '공모전' ? '#e74c3c' : '#3498db',
+        meta: [date, organizer, location].filter(item => item),
+        description: description,
+        details: details,
+        buttonUrl: applyBtn?.href || null,
+        buttonText: applyBtn?.textContent || null,
+        buttonType: 'apply'
+      };
+      
+      openModal(cardData);
+    });
   });
-});
 
-// 동아리 카드 클릭
-document.querySelectorAll('.community-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button')) {
-      return;
-    }
-    
-    const title = card.querySelector('h3').textContent;
-    const category = card.querySelector('.community-category').textContent;
-    const members = card.querySelector('.community-members')?.textContent || '';
-    const description = card.querySelector('.community-description').textContent;
-    const kakaoBtn = card.querySelector('.kakao-button');
-    
-    const detailText = card.dataset.detail || '';
-    
-    // 동아리 카드에 이미지가 없으면 무작위 이미지 사용
-    const cardData = {
-      image: 'https://picsum.photos/600/300',
-      title: title,
-      category: category,
-      categoryColor: '#27ae60',
-      meta: [members].filter(item => item),
-      description: detailText || description,
-      details: [],
-      buttonUrl: kakaoBtn?.href || null,
-      buttonText: kakaoBtn?.textContent || null,
-      buttonType: 'kakao'
-    };
-    
-    openModal(cardData);
+  // 동아리 카드 클릭
+  document.querySelectorAll('.community-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button')) {
+        return;
+      }
+      
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3').textContent;
+      const category = card.querySelector('.community-category').textContent;
+      const description = card.querySelector('.community-description').textContent;
+      const kakaoBtn = card.querySelector('.kakao-button');
+      const detailText = card.dataset.detail || '';
+      
+      const cardData = {
+        image: img ? img.src : 'https://picsum.photos/600/300',
+        title: title,
+        category: category,
+        categoryColor: '#27ae60',
+        meta: [],
+        description: detailText || description,
+        details: [],
+        buttonUrl: kakaoBtn?.href || null,
+        buttonText: kakaoBtn?.textContent || null,
+        buttonType: 'kakao'
+      };
+      
+      openModal(cardData);
+    });
   });
-});
 
-// 닫기 버튼 클릭
-modalClose.addEventListener('click', closeModal);
+  // 제휴사 카드 클릭
+  document.querySelectorAll('.partner-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3').textContent;
+      const category = card.querySelector('.partner-category').textContent;
+      const discount = card.querySelector('.partner-discount')?.textContent || '';
+      const location = card.querySelector('.partner-location')?.textContent || '';
+      const description = card.querySelector('.partner-description').textContent;
+      
+      const cardData = {
+        image: img.src,
+        title: title,
+        category: category,
+        categoryColor: '#9b59b6',
+        meta: [discount, location].filter(item => item),
+        description: description,
+        details: [],
+        buttonUrl: null,
+        buttonText: null,
+        buttonType: null
+      };
+      
+      openModal(cardData);
+    });
+  });
+}
 
-// 배경 클릭으로 닫기
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    closeModal();
-  }
-});
+// 카드 렌더링 후 이벤트 리스너 등록
+setupCardListeners();
 
-// ESC 키로 닫기
+// 모달 닫기
+if (modalClose) {
+  modalClose.addEventListener('click', closeModal);
+}
+
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+}
+
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.classList.contains('active')) {
+  if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
     closeModal();
   }
 });

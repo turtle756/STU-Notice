@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>서울신학대학교 총학생회 - 동아리 & 소모임</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navigation">
+    <div class="nav-container">
+      <a class="nav-logo" href="../index.html">🎓 서울신학대학교 총학생회</a>
+      <div class="nav-links">
+        <a href="../index.html">일정</a>
+        <a href="events.html">행사 & 공모전</a>
+        <a href="clubs.html" class="active">동아리 & 소모임</a>
+        <a href="partners.html">제휴사</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <section id="community" class="section">
+      <div class="page-header">
+        <h1>동아리 & 소모임</h1>
+        <p>관심사가 같은 친구들과 함께하세요!</p>
+      </div>
+
+      <div class="action-button-container">
+        <a id="applyButton" href="#" target="_blank" class="action-button">📋 동아리 & 소모임 신청하기</a>
+      </div>
+
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="전체" data-section="community">전체</button>
+        <button class="filter-btn" data-filter="스포츠" data-section="community">스포츠</button>
+        <button class="filter-btn" data-filter="학술" data-section="community">학술</button>
+        <button class="filter-btn" data-filter="문화예술" data-section="community">문화예술</button>
+        <button class="filter-btn" data-filter="취미" data-section="community">취미</button>
+      </div>
+
+      <div class="grid-container">
+        <div class="community-grid" id="communityGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="cardModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <img id="modalImage" class="modal-image" src="" alt="" />
+      <div class="modal-body">
+        <span id="modalCategory" class="modal-category"></span>
+        <h2 id="modalTitle" class="modal-title"></h2>
+        <div id="modalMeta" class="modal-meta"></div>
+        <p id="modalDescription" class="modal-description"></p>
+        <div id="modalButton"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../edit/clubs.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
