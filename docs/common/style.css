@@ -1225,9 +1225,13 @@
 
       .notice-item-header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        gap: 0.5rem;
         margin-bottom: 0.3rem;
+      }
+
+      .notice-item-header .notice-date {
+        margin-left: auto;
       }
 
       .notice-item h3 {
