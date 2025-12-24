@@ -158,22 +158,10 @@ if (typeof partnersData !== 'undefined') {
         <p class="partner-discount">${partner.discount}</p>
         <p class="partner-location">📍 ${partner.location}</p>
         <p class="partner-description">${partner.description}</p>
-        <div class="partner-map-container" id="partnerMap${index}"></div>
       </div>
     `;
     
     partnerGrid.appendChild(card);
-    
-    if (partner.mapCodeCard && partner.mapCodeCard.trim()) {
-      const mapContainer = document.getElementById(`partnerMap${index}`);
-      mapContainer.innerHTML = partner.mapCodeCard;
-      const scripts = mapContainer.querySelectorAll('script');
-      scripts.forEach(script => {
-        const newScript = document.createElement('script');
-        newScript.textContent = script.textContent;
-        script.parentNode.replaceChild(newScript, script);
-      });
-    }
   });
 }
 
