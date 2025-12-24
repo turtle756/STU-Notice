@@ -15,8 +15,9 @@
 - description: 혜택 설명
 - location: 위치
 - discount: 할인 정보
-- mapEmbed: 네이버 지도 임베드 URL (선택사항)
-  → 네이버 지도에서 장소 검색 → 공유 → 퍼가기 → src="..." 부분 복사
+- mapEmbed: 카카오맵 place ID (선택사항)
+  → 카카오맵에서 장소 검색 → URL에서 place/뒤의 숫자가 ID
+  → 예: https://place.map.kakao.com/17733370 → ID는 17733370
 
 ================================================================================
 */
@@ -29,7 +30,7 @@ const partnersData = [
     description: "학생증 제시 시 10% 할인",
     location: "정문 앞 100m",
     discount: "10% 할인",
-    mapEmbed: "https://map.naver.com/p/entry/place/1100286950?c=15.00,0,0,0,dh"
+    mapEmbed: "17733370"
   },
   {
     category: "카페",
@@ -38,7 +39,7 @@ const partnersData = [
     description: "음료 전 메뉴 500원 할인",
     location: "학교 내 학생회관 1층",
     discount: "500원 할인",
-    mapEmbed: "https://map.naver.com/p/entry/place/37271925?c=15.00,0,0,0,dh"
+    mapEmbed: "26338954"
   },
   {
     category: "문화",
@@ -47,7 +48,7 @@ const partnersData = [
     description: "주중 영화 관람 20% 할인",
     location: "후문 버스정류장 앞",
     discount: "20% 할인",
-    mapEmbed: "https://map.naver.com/p/entry/place/11583195?c=15.00,0,0,0,dh"
+    mapEmbed: "8137464"
   }
 ];
 

@@ -150,7 +150,7 @@ if (typeof partnersData !== 'undefined') {
     
     const mapHtml = partner.mapEmbed ? `
       <div class="partner-map-container">
-        <iframe src="${partner.mapEmbed}" class="partner-map" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://place.map.kakao.com/m/${partner.mapEmbed}" class="partner-map" frameborder="0" allowfullscreen></iframe>
       </div>
     ` : '';
     
@@ -254,7 +254,7 @@ function openModal(cardData) {
   
   if (modalMap) {
     if (cardData.mapEmbed) {
-      modalMap.innerHTML = `<iframe src="${cardData.mapEmbed}" class="modal-map-iframe" frameborder="0" allowfullscreen></iframe>`;
+      modalMap.innerHTML = `<iframe src="https://place.map.kakao.com/m/${cardData.mapEmbed}" class="modal-map-iframe" frameborder="0" allowfullscreen></iframe>`;
       modalMap.style.display = 'block';
     } else {
       modalMap.innerHTML = '';
