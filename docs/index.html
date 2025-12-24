@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <title>서울신학대학교 총학생회 - 일정</title>
+  <title>서울신학대학교 총학생회</title>
   <link rel="stylesheet" href="common/style.css" />
 </head>
 <body>
@@ -17,43 +17,70 @@
         <span></span>
       </button>
       <div class="nav-links" id="navLinks">
-        <a href="index.html" class="active">일정</a>
+        <a href="common/schedule.html">일정</a>
         <a href="common/events.html">행사 & 공모전</a>
         <a href="common/clubs.html">동아리 & 소모임</a>
         <a href="common/partners.html">제휴사</a>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="다크모드 전환">🌙</button>
       </div>
     </div>
   </nav>
 
   <main class="main-content">
-    <section id="calendar" class="section">
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <h2>📅 이번 달 주요 일정</h2>
-          <div class="month-navigation" id="monthButtons"></div>
-        </div>
-        <div class="calendar-image-wrapper">
-          <img id="calendarImage" src="" alt="월간 캘린더" class="calendar-image" />
-        </div>
+    <section class="home-hero">
+      <div class="hero-content">
+        <h1 id="heroTitle"></h1>
+        <p id="heroSubtitle"></p>
+        <p id="heroDescription"></p>
       </div>
+    </section>
+
+    <section class="home-navigation">
+      <div class="home-nav-grid">
+        <a href="common/schedule.html" class="home-nav-card">
+          <span class="home-nav-icon">📅</span>
+          <span class="home-nav-text">일정</span>
+        </a>
+        <a href="common/events.html" class="home-nav-card">
+          <span class="home-nav-icon">🎪</span>
+          <span class="home-nav-text">행사 & 공모전</span>
+        </a>
+        <a href="common/clubs.html" class="home-nav-card">
+          <span class="home-nav-icon">👥</span>
+          <span class="home-nav-text">동아리 & 소모임</span>
+        </a>
+        <a href="common/partners.html" class="home-nav-card">
+          <span class="home-nav-icon">🤝</span>
+          <span class="home-nav-text">제휴사</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-welfare">
+      <h2>🎁 학생 복지</h2>
+      <div class="welfare-grid" id="welfareGrid"></div>
+    </section>
+
+    <section class="home-notice">
+      <div class="notice-header">
+        <h2>📢 공지사항</h2>
+        <a href="common/notice.html" class="notice-more">더보기 →</a>
+      </div>
+      <div class="notice-list" id="noticeList"></div>
+    </section>
+
+    <section class="home-sns">
+      <h2>📱 SNS</h2>
+      <div class="sns-grid" id="snsGrid"></div>
     </section>
   </main>
 
-  <div id="cardModal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose">&times;</button>
-      <img id="modalImage" class="modal-image" src="" alt="" />
-      <div class="modal-body">
-        <span id="modalCategory" class="modal-category"></span>
-        <h2 id="modalTitle" class="modal-title"></h2>
-        <div id="modalMeta" class="modal-meta"></div>
-        <p id="modalDescription" class="modal-description"></p>
-        <div id="modalButton"></div>
-      </div>
-    </div>
-  </div>
+  <footer class="home-footer">
+    <p>© 2025 서울신학대학교 총학생회</p>
+  </footer>
 
-  <script src="edit/schedule.js"></script>
+  <script src="edit/home.js"></script>
+  <script src="edit/notice.js"></script>
   <script src="common/script.js"></script>
 </body>
 </html>
