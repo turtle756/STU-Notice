@@ -166,10 +166,9 @@ const homeData = {
   date: "2025-01-15",                            ← 날짜
   category: "공지",                               ← "공지" 또는 "안내"
   content: "학생회비 집행 내역을 안내드립니다.",     ← 내용
-  poll: {                                        ← 투표 (없으면 null)
-    question: "1학기 주요 행사 투표",              ← 투표 질문
-    options: ["옵션1", "옵션2", "옵션3"],          ← 투표 선택지
-    link: "https://forms.gle/example"            ← 구글폼 링크
+  poll: {                                        ← 링크 (없으면 null)
+    description: "투표 참여 부탁드립니다.",         ← 링크 설명
+    link: "https://forms.gle/example"            ← 구글폼 또는 외부 링크
   }
 }
 // #####################
