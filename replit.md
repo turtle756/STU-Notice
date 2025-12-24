@@ -1,13 +1,14 @@
 # 서울신학대학교 총학생회 웹사이트
 
 ## 프로젝트 개요
-GitHub Pages로 호스팅되는 순수 HTML 웹사이트로, 행사/공모전 정보, 월간 일정 캘린더, 동아리/소모임 커뮤니티를 제공합니다.
+GitHub Pages로 호스팅되는 4페이지 웹사이트입니다. 일정, 행사/공모전, 동아리/소모임, 제휴사 정보를 제공합니다.
 
 ## 주요 기능
-1. **월간 캘린더** (9월~12월, 날짜별 일정 표시)
-2. **행사 & 공모전** (필터 기능, 모달 상세보기)
-3. **동아리 & 소모임** (카테고리별 필터, 오픈채팅 링크)
-4. **반응형 디자인** (데스크톱, 태블릿, 모바일 최적화)
+1. **일정 페이지** - 월간 캘린더 이미지 (3~6월)
+2. **행사 & 공모전** - 필터 기능, 모달 상세보기
+3. **동아리 & 소모임** - 카테고리별 필터, 오픈채팅 링크
+4. **제휴사** - 학생 할인/혜택 정보
+5. **반응형 디자인** - 데스크톱, 태블릿, 모바일 최적화
 
 ## 기술 스택
 - **HTML5** - 구조
@@ -18,83 +19,105 @@ GitHub Pages로 호스팅되는 순수 HTML 웹사이트로, 행사/공모전 �
 ## 프로젝트 구조
 ```
 docs/
-├── index.html          # 메인 HTML
-├── style.css           # CSS 스타일시트
-├── script.js           # JavaScript
-└── image/              # 이미지 폴더
-    ├── calendar/       # 캘린더 이미지 (월별)
-    │   ├── calendar_3.jpg  (3월)
-    │   ├── calendar_4.jpg  (4월)
-    │   ├── calendar_5.jpg  (5월)
-    │   └── calendar_6.jpg  (6월)
-    └── example_*.png   # 행사/동아리 예시 이미지 (9개)
+├── index.html              # 메인 페이지 (일정)
+├── common/                 # 공통 파일 (수정 불필요)
+│   ├── style.css           # CSS 스타일시트
+│   ├── script.js           # JavaScript
+│   ├── events.html         # 행사 & 공모전 페이지
+│   ├── clubs.html          # 동아리 & 소모임 페이지
+│   └── partners.html       # 제휴사 페이지
+├── edit/                   # 수정 파일 (여기만 수정!)
+│   ├── schedule.js         # 캘린더 데이터
+│   ├── events.js           # 행사/공모전 데이터
+│   ├── clubs.js            # 동아리/소모임 데이터
+│   └── partners.js         # 제휴사 데이터
+└── image/                  # 이미지 폴더
+    ├── calendar/           # 캘린더 이미지 (월별)
+    └── example_*.png       # 카드 이미지
 ```
 
-## 이미지 설정
+## 콘텐츠 수정 방법 (edit/ 폴더만 수정)
 
-### 캘린더 이미지
-- **폴더**: `docs/image/calendar/`
-- **파일명**: `calendar_3.jpg` (3월), `calendar_4.jpg` (4월), `calendar_5.jpg` (5월), `calendar_6.jpg` (6월)
-- **변경 방법**: 같은 파일명으로 덮어쓰기
+### 1. 캘린더 일정 수정
+**파일**: `docs/edit/schedule.js`
+```javascript
+const calendarMonths = [
+  { month: 3, label: "3월", image: "image/calendar/calendar_3.jpg" },
+  // 월 추가/삭제/순서 변경 가능
+];
+```
 
-### 행사/동아리 이미지
-- **폴더**: `docs/image/`
-- **파일명 형식**: `example_간단이름.png`
-- **권장 크기**: 800x600 (비율 4:3)
-- **총 9개 예시 이미지**:
-  - 행사: example_festival.png, example_winter.png, example_sports.png
-  - 공모전: example_contest.png, example_startup.png
-  - 동아리: example_soccer.png, example_coding.png, example_band.png, example_book.png
+### 2. 행사 & 공모전 수정
+**파일**: `docs/edit/events.js`
+```javascript
+const eventsData = [
+  {
+    title: "행사명",
+    category: "행사",  // 또는 "공모전"
+    date: "2025.01.01",
+    organizer: "주관: 총학생회",
+    location: "대강당",
+    description: "설명...",
+    image: "image/example_festival.png",
+    applyLink: "https://forms.gle/...",  // 선택사항
+  }
+];
+```
+
+### 3. 동아리 & 소모임 수정
+**파일**: `docs/edit/clubs.js`
+```javascript
+const clubsData = [
+  {
+    title: "동아리명",
+    category: "스포츠",  // 스포츠/학술/문화예술/취미
+    description: "짧은 설명",
+    detail: "상세 설명 (모달에 표시)",
+    image: "image/example_soccer.png",
+    kakaoLink: "https://open.kakao.com/...",
+  }
+];
+```
+
+### 4. 제휴사 수정
+**파일**: `docs/edit/partners.js`
+```javascript
+const partnersData = [
+  {
+    title: "업체명",
+    category: "음식",  // 음식/카페/문화/기타
+    discount: "학생증 제시 10% 할인",
+    location: "학교 앞 200m",
+    description: "상세 정보",
+    image: "image/partner_restaurant.png",
+  }
+];
+```
+
+### 5. 건의/신청 폼 링크 수정
+각 데이터 파일의 `Config` 객체에서 수정:
+```javascript
+const eventsConfig = { suggestFormLink: "https://forms.gle/..." };
+const clubsConfig = { applyFormLink: "https://forms.gle/..." };
+const partnersConfig = { suggestFormLink: "https://forms.gle/..." };
+```
+
+## 이미지 변경
+1. `docs/image/` 폴더에 이미지 업로드
+2. 데이터 파일에서 경로 수정: `image: "image/파일명.png"`
 
 ## 실행 방법
-웹사이트는 현재 자동으로 실행 중입니다. 화면 상단의 웹뷰에서 확인할 수 있습니다.
-
 **워크플로우**: `npx http-server docs -p 5000 --cors -c-1`
-- 캐시 비활성화로 변경사항 즉시 반영
-
-## 수정 방법
-
-### 행사 및 공모전 정보 수정
-`docs/index.html` 파일에서:
-- 이미지 경로 (image/example_파일명.png)
-- 행사명, 날짜, 설명
-- 주관/주최 정보
-- 장소, 카테고리 (행사/공모전)
-- 공모전 신청 링크
-
-### 캘린더 이미지 변경
-`docs/image/calendar/` 폴더에서 이미지 교체:
-- `calendar_3.jpg` → 3월 캘린더
-- `calendar_4.jpg` → 4월 캘린더
-- `calendar_5.jpg` → 5월 캘린더
-- `calendar_6.jpg` → 6월 캘린더
-
-### 동아리 및 소모임 정보 수정
-`docs/index.html` 파일에서:
-- 동아리/소모임 이름, 설명
-- 카카오톡 오픈채팅방 링크
-- 카테고리 (스포츠/학술/문화예술/취미)
-- data-detail 속성: 활동 시간, 회비 등 상세 정보
-
-### 스타일 변경
-`docs/style.css` 파일에서 CSS를 수정할 수 있습니다.
-
-### 이미지 변경
-GitHub 웹사이트에서:
-1. `docs/image/` 폴더 이동
-2. 교체할 이미지 삭제
-3. 같은 파일명으로 새 이미지 업로드
 
 ## GitHub Pages 호스팅
-- **배포 폴더**: `docs/` (GitHub Settings → Pages → `/docs` 선택)
-- **URL 형식**: `https://본인아이디.github.io/저장소이름/`
-- **이미지 URL**: `https://본인아이디.github.io/저장소이름/image/example_festival.png`
+1. GitHub Settings → Pages → `/docs` 선택
+2. URL: `https://아이디.github.io/저장소이름/`
 
 ## 최근 변경사항
-- 2024-12-20: **캘린더를 이미지로 변경** ⭐
-  - JavaScript 캘린더 → 이미지 캘린더 전환
-  - 3월~6월 캘린더 이미지 추가 (docs/image/calendar/)
-  - 불필요한 캘린더 JavaScript/CSS 코드 삭제
-  - script.js 코드 대폭 간소화
-- 2024-11-11: 프로젝트 간소화 (GitHub Pages 전용)
-- 2024-11-08: 초기 프로젝트 설정
+- 2024-12-24: **멀티페이지 + 데이터 분리 구조로 변경**
+  - 4개 페이지 분리 (일정, 행사, 동아리, 제휴사)
+  - edit/ 폴더로 콘텐츠 관리 분리
+  - common/ 폴더에 공통 파일 정리
+  - 카드 동적 렌더링 시스템 도입
+- 2024-12-20: 캘린더를 이미지로 변경
+- 2024-11-11: 프로젝트 간소화
