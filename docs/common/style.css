@@ -1251,8 +1251,6 @@
         color: #3498db;
         padding: 0.2rem 0.5rem;
         border-radius: 4px;
-        display: inline-block;
-        margin-bottom: 0.3rem;
       }
 
       .notice-poll-badge {
@@ -1261,7 +1259,6 @@
         color: #f57c00;
         padding: 0.2rem 0.5rem;
         border-radius: 4px;
-        margin-left: 0.5rem;
       }
 
       .sns-grid {
