@@ -4,24 +4,37 @@
 
 ```
 docs/
-├── index.html              ← 메인 페이지 (일정) - GitHub Pages 필수
+├── index.html              ← 메인 페이지 (홈) - GitHub Pages 필수
 │
 ├── common/                 ← 수정 불필요
 │   ├── style.css           ← 전체 스타일
 │   ├── script.js           ← 전체 기능
+│   ├── schedule.html       ← 일정 페이지
 │   ├── events.html         ← 행사/공모전 페이지
 │   ├── clubs.html          ← 동아리/소모임 페이지
-│   └── partners.html       ← 제휴사 페이지
+│   ├── partners.html       ← 제휴사 페이지
+│   └── notice.html         ← 공지사항/FAQ 페이지
 │
 ├── edit/                   ← 정기 수정 파일
 │   ├── schedule.js         ← 캘린더 이미지 경로
 │   ├── events.js           ← 행사/공모전 카드 데이터
 │   ├── clubs.js            ← 동아리/소모임 카드 데이터
-│   └── partners.js         ← 제휴사 카드 데이터 + 지도
+│   ├── partners.js         ← 제휴사 카드 데이터 + 지도
+│   ├── home.js             ← 메인 페이지 데이터 (소개, 복지, SNS)
+│   └── notice.js           ← 공지사항/FAQ 데이터
 │
 └── image/                  ← 이미지 저장 폴더
     └── calendar/           ← 월별 캘린더 이미지
 ```
+
+## 페이지 구성
+
+- **index.html**: 메인 홈 페이지 (바로가기 버튼, 복지 정보, 공지사항 미리보기, SNS)
+- **schedule.html**: 월별 캘린더 일정
+- **events.html**: 행사 & 공모전 목록
+- **clubs.html**: 동아리 & 소모임 목록
+- **partners.html**: 제휴사 목록 (카카오맵 지원)
+- **notice.html**: 공지사항 전체 + FAQ (네비게이션에 없음)
 
 ## 카드 수정 방법
 
@@ -47,17 +60,34 @@ docs/
 - **카드 삭제**: `@@@@` ~ `####` 블록 통째로 삭제
 - **쉼표(,)**: 블록 사이에 위치 (삭제 시 영향 없음)
 
+## 공지사항 투표/설문 추가
+
+```javascript
+{
+  title: "공지 제목",
+  date: "2025-01-15",
+  category: "공지",
+  content: "내용...",
+  poll: {  // null이면 투표 없음
+    question: "투표 질문",
+    options: ["옵션1", "옵션2", "옵션3"],
+    link: "https://forms.gle/..."
+  }
+}
+```
+
 ## 제휴사 지도 추가
 
 카카오맵 "지도 퍼가기" 코드를 그대로 복붙:
 
 ```javascript
-// --------------------------
-// 모달용 지도 (560x300)
-// --------------------------
 mapCodeModal: `여기에 카카오맵 코드 붙여넣기`
-// --------------------------
 ```
+
+## 다크모드
+
+- 네비게이션 우측 🌙 버튼으로 전환
+- localStorage에 설정 저장됨
 
 ## 실행
 
