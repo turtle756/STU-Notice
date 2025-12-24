@@ -1,25 +1,6 @@
 # 서울신학대학교 총학생회 웹사이트
 
-GitHub Pages로 호스팅되는 HTML/CSS/JS 웹사이트
-
----
-
-## 🔍 Ctrl+F 검색어 (복사해서 사용)
-
-**index.html**
-```
-SECTION: CALENDAR
-SECTION: EVENTS
-SECTION: COMMUNITY
-```
-
-**style.css**
-```
-CSS: CALENDAR
-CSS: CARDS
-CSS: MODAL
-CSS: RESPONSIVE
-```
+**사이트 주소:** https://turtle756.github.io/STU-Notice/index.html
 
 ---
 
@@ -27,68 +8,189 @@ CSS: RESPONSIVE
 
 ```
 docs/
-├── index.html
-├── style.css
-├── script.js
-└── image/
-    ├── calendar/        ← 캘린더 이미지
-    └── example_*.png    ← 행사/동아리 이미지
+├── index.html                      ← 메인 홈 페이지
+│
+├── common/                         ← 수정 불필요 (코드 파일)
+│   ├── style.css                   ← 전체 스타일
+│   ├── script.js                   ← 전체 기능
+│   ├── schedule.html               ← 일정 페이지
+│   ├── events.html                 ← 행사/공모전 페이지
+│   ├── clubs.html                  ← 동아리/소모임 페이지
+│   ├── partners.html               ← 제휴사 페이지
+│   └── notice.html                 ← 공지사항/FAQ 페이지
+│
+├── edit/                           ← 정기 수정 파일
+│   ├── schedule.js                 ← 캘린더 월별 탭 데이터
+│   ├── events.js                   ← 행사/공모전 카드 데이터
+│   ├── clubs.js                    ← 동아리/소모임 카드 데이터
+│   ├── partners.js                 ← 제휴사 카드 데이터
+│   ├── home.js                     ← 메인 페이지 소개글/SNS 데이터
+│   └── notice.js                   ← 공지사항/FAQ 데이터
+│
+└── image/                          ← 이미지 저장 폴더
+    └── calendar/                   ← 월별 캘린더 이미지
 ```
 
 ---
 
-## 🚀 GitHub Pages 배포
+## 📝 카드 수정 방법
 
-1. GitHub → **New repository** (Public)
-2. `docs` 폴더 업로드
-3. **Settings** → **Pages** → Branch: `main`, Folder: `/docs`
-4. URL: `https://아이디.github.io/저장소이름/`
-
----
-
-## ✏️ 수정 방법
-
-### 캘린더 이미지
-
-`docs/image/calendar/` 폴더에서 같은 파일명으로 교체
-- `calendar_3.jpg` ~ `calendar_6.jpg`
+모든 데이터 파일은 동일한 구분선 형식을 사용합니다:
+- `@@@@@@@@@@@@@@@@@` → 카드 시작선
+- `#####################` → 카드 끝선
 
 ---
 
-### 행사 카드
+> ### 📅 schedule.js
+> 캘린더 월별 탭 데이터
 
-`docs/index.html` → `SECTION: EVENTS` 검색
+```javascript
+{ month: 3, label: "3월", image: "image/calendar/calendar_3.jpg" }
+```
+- `month` ← 월 숫자 (자동 선택용)
+- `label` ← 탭에 표시될 이름
+- `image` ← 캘린더 이미지 경로
 
-수정: 이미지, 제목, 날짜, 주관, 장소, 설명, 신청 링크
-
----
-
-### 동아리 카드
-
-`docs/index.html` → `SECTION: COMMUNITY` 검색
-
-수정: 이미지, 이름, 카테고리, 설명, 오픈채팅 링크
-
-카테고리: `스포츠` / `학술` / `문화예술` / `취미`
+```
+이미지 변경: docs/image/calendar/ 폴더에서 같은 파일명으로 교체
+```
 
 ---
 
-## 🖼️ 이미지 교체
+> ### 🎉 events.js
+> 행사 & 공모전 카드 데이터
 
-1. GitHub → `docs/image/` 폴더
-2. 기존 이미지 삭제
-3. **같은 파일명**으로 새 이미지 업로드
+```javascript
+// @@@@@@@@@@@@@@@@@
+{
+  category: "행사",                              ← "행사" 또는 "공모전"
+  image: "image/example_festival.png",           ← 이미지 경로
+  title: "2024 가을 축제",                        ← 제목
+  date: "2024.11.15 - 2024.11.16",               ← 날짜
+  organizer: "주관: 학생회",                      ← 주관/주최
+  location: "중앙운동장",                         ← 장소 (행사만)
+  description: "가을 축제에 초대합니다!",          ← 간단한 설명
+  link: "https://example.com",                   ← 바로가기 링크 (없으면 null)
+  applyLink: null,                               ← 신청 링크 (공모전만, 없으면 null)
+  details: {
+    target: "전체 재학생",                        ← 대상
+    benefits: "무료 먹거리, 경품 추첨",            ← 혜택
+    schedule: "11/15(금) 17:00-22:00",           ← 일정
+    contact: "총학생회 010-XXXX-XXXX"             ← 문의처
+  }
+}
+// #####################
+```
 
 ---
 
-## 🔧 문제해결
+> ### 👥 clubs.js
+> 동아리 & 소모임 카드 데이터
 
-**변경사항 안 보임** → `Ctrl + Shift + R` (캐시 삭제)
-
-**404 에러** → Settings → Pages에서 `/docs` 선택 확인
+```javascript
+// @@@@@@@@@@@@@@@@@
+{
+  category: "스포츠",                             ← "스포츠", "학술", "문화예술", "취미" 중 하나
+  image: "image/example_soccer.png",             ← 이미지 경로
+  title: "축구 동아리",                           ← 동아리/소모임 이름
+  description: "함께 축구하며 친목을 다지는 동아리",  ← 간단한 설명
+  kakaoLink: "https://open.kakao.com/o/example", ← 카카오톡 오픈채팅 링크
+  detail: "매주 화/목요일 저녁 7시에 만나 축구"     ← 상세 설명 (모달용)
+}
+// #####################
+```
 
 ---
 
-## 📝 라이선스
+> ### 🤝 partners.js
+> 제휴사 카드 데이터
 
-자유롭게 사용 가능
+```javascript
+// @@@@@@@@@@@@@@@@@
+{
+  category: "음식",                              ← "음식", "카페", "문화", "기타" 등
+  image: "https://picsum.photos/400/300?1",      ← 이미지 경로
+  title: "맛있는 식당",                           ← 제휴사 이름
+  description: "학생증 제시 시 10% 할인",          ← 혜택 설명
+  location: "정문 앞 100m",                       ← 위치
+  discount: "10% 할인",                          ← 할인 정보
+  mapCodeModal: `여기에 카카오맵 코드`             ← 카카오맵 퍼가기 코드 (모달용)
+}
+// #####################
+```
+
+```
+지도 추가 방법:
+1. 카카오맵(map.kakao.com)에서 장소 검색
+2. 공유 → 지도 퍼가기 클릭
+3. 크기: 560x300 설정
+4. 생성된 코드 전체를 mapCodeModal에 그대로 복붙
+```
+
+---
+
+> ### 🏠 home.js
+> 메인 페이지 소개글/SNS 데이터
+
+```javascript
+const homeData = {
+  introduction: {
+    title: "서울신학대학교 총학생회",               ← 메인 타이틀
+    subtitle: "학생들의 목소리를 대변합니다",        ← 서브타이틀
+    description: "총학생회는 학생들의..."          ← 소개 설명
+  },
+  
+  sns: [
+    {
+      name: "Instagram",                         ← SNS 이름
+      icon: "📷",                                 ← 아이콘
+      url: "https://instagram.com",              ← 링크
+      color: "#E4405F"                           ← 버튼 색상
+    }
+  ],
+  
+  suggestLink: "https://forms.gle/example"       ← 건의사항 링크
+};
+```
+
+---
+
+> ### 📢 notice.js
+> 공지사항 & FAQ 데이터
+
+**공지사항:**
+```javascript
+// @@@@@@@@@@@@@@@@@
+{
+  title: "2025학년도 1학기 학생회비 사용 안내",     ← 공지 제목
+  date: "2025-01-15",                            ← 날짜
+  category: "공지",                               ← "공지" 또는 "안내"
+  content: "학생회비 집행 내역을 안내드립니다.",     ← 내용
+  poll: {                                        ← 투표 (없으면 null)
+    question: "1학기 주요 행사 투표",              ← 투표 질문
+    options: ["옵션1", "옵션2", "옵션3"],          ← 투표 선택지
+    link: "https://forms.gle/example"            ← 구글폼 링크
+  }
+}
+// #####################
+```
+
+**FAQ:**
+```javascript
+// @@@@@@@@@@@@@@@@@
+{
+  question: "학생회비는 어디에 사용되나요?",        ← 질문
+  answer: "체육대회, 축제, 동아리 지원 등에..."    ← 답변
+}
+// #####################
+```
+
+---
+
+## 📞 제작자 문의
+
+- **이메일:** rlarlgu5333@naver.com
+- **전화:** 010-9141-7836
+
+기능 추가 및 기능 오류에 대해서 이메일로 보내주시면 해결해드리겠습니다.
+개인 일정 때문에 시간이 걸릴 수 있는 점 양해부탁드립니다.
