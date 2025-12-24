@@ -167,36 +167,6 @@ if (typeof calendarMonths !== 'undefined') {
     calendarImage.src = calendarImageCache[calendarMonths[initialIndex].month].src;
   }
   
-  // 스와이프로 탭 전환
-  let touchStartX = 0;
-  let touchEndX = 0;
-  let currentTabIndex = initialIndex;
-  
-  calendarImage.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  
-  calendarImage.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
-  
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-    const buttons = monthButtonsContainer.querySelectorAll('.month-btn');
-    
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && currentTabIndex < calendarMonths.length - 1) {
-        currentTabIndex++;
-      } else if (diff < 0 && currentTabIndex > 0) {
-        currentTabIndex--;
-      }
-      
-      buttons.forEach((btn, i) => btn.classList.toggle('active', i === currentTabIndex));
-      calendarImage.src = calendarImageCache[calendarMonths[currentTabIndex].month].src;
-    }
-  }
 }
 
 /*
@@ -663,10 +633,36 @@ function initDarkMode() {
 
 if (darkModeToggle) {
   darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
     const isDark = document.body.classList.contains('dark-mode');
-    darkModeToggle.textContent = isDark ? '☀️' : '🌙';
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    // 전환 오버레이 생성
+    const overlay = document.createElement('div');
+    overlay.className = 'theme-transition-overlay';
+    overlay.style.background = isDark 
+      ? 'radial-gradient(circle at center, #fff 0%, #f5f5f5 100%)'
+      : 'radial-gradient(circle at center, #1a1a2e 0%, #16213e 100%)';
+    document.body.appendChild(overlay);
+    
+    // 오버레이 애니메이션 시작
+    requestAnimationFrame(() => {
+      overlay.classList.add('active');
+    });
+    
+    // 테마 전환
+    setTimeout(() => {
+      document.body.classList.toggle('dark-mode');
+      const newIsDark = document.body.classList.contains('dark-mode');
+      darkModeToggle.textContent = newIsDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+      
+      // 오버레이 페이드아웃
+      overlay.classList.remove('active');
+      overlay.classList.add('fade-out');
+      
+      setTimeout(() => {
+        overlay.remove();
+      }, 400);
+    }, 300);
   });
 }
 
