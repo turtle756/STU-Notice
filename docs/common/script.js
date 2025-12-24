@@ -4,6 +4,25 @@
 ================================================================================
 */
 
+// 햄버거 메뉴 토글
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // 메뉴 항목 클릭 시 메뉴 닫기
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+}
+
 // 이미지 경로 prefix (페이지 위치에 따라 다름)
 const isInCommon = window.location.pathname.includes('/common/');
 const imgPrefix = isInCommon ? '../' : '';
@@ -152,7 +171,7 @@ if (typeof clubsData !== 'undefined') {
           <span class="community-category">${club.category}</span>
         </div>
         <p class="community-description">${club.description}</p>
-        <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 오픈채팅 참여하기</a>
+        <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>
       </div>
     `;
     
