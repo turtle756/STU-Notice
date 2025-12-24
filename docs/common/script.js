@@ -140,19 +140,13 @@ if (typeof partnersData !== 'undefined') {
     suggestButton.href = partnersConfig.suggestFormLink;
   }
   
-  partnersData.forEach(partner => {
+  partnersData.forEach((partner, index) => {
     const card = document.createElement('div');
     card.className = 'partner-card';
     card.dataset.category = partner.category;
-    if (partner.mapEmbed) card.dataset.mapEmbed = partner.mapEmbed;
+    card.dataset.index = index;
     
     const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
-    
-    const mapHtml = partner.mapEmbed ? `
-      <div class="partner-map-container">
-        <iframe src="https://place.map.kakao.com/m/${partner.mapEmbed}" class="partner-map" frameborder="0" allowfullscreen></iframe>
-      </div>
-    ` : '';
     
     card.innerHTML = `
       <img src="${imageSrc}" alt="${partner.title}" />
@@ -164,11 +158,22 @@ if (typeof partnersData !== 'undefined') {
         <p class="partner-discount">${partner.discount}</p>
         <p class="partner-location">📍 ${partner.location}</p>
         <p class="partner-description">${partner.description}</p>
-        ${mapHtml}
+        <div class="partner-map-container" id="partnerMap${index}"></div>
       </div>
     `;
     
     partnerGrid.appendChild(card);
+    
+    if (partner.mapCodeCard && partner.mapCodeCard.trim()) {
+      const mapContainer = document.getElementById(`partnerMap${index}`);
+      mapContainer.innerHTML = partner.mapCodeCard;
+      const scripts = mapContainer.querySelectorAll('script');
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        newScript.textContent = script.textContent;
+        script.parentNode.replaceChild(newScript, script);
+      });
+    }
   });
 }
 
@@ -253,9 +258,15 @@ function openModal(cardData) {
   }
   
   if (modalMap) {
-    if (cardData.mapEmbed) {
-      modalMap.innerHTML = `<iframe src="https://place.map.kakao.com/m/${cardData.mapEmbed}" class="modal-map-iframe" frameborder="0" allowfullscreen></iframe>`;
+    if (cardData.mapCodeModal && cardData.mapCodeModal.trim()) {
+      modalMap.innerHTML = cardData.mapCodeModal;
       modalMap.style.display = 'block';
+      const scripts = modalMap.querySelectorAll('script');
+      scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        newScript.textContent = script.textContent;
+        script.parentNode.replaceChild(newScript, script);
+      });
     } else {
       modalMap.innerHTML = '';
       modalMap.style.display = 'none';
@@ -357,7 +368,8 @@ function setupCardListeners() {
       const discount = card.querySelector('.partner-discount')?.textContent || '';
       const location = card.querySelector('.partner-location')?.textContent || '';
       const description = card.querySelector('.partner-description').textContent;
-      const mapEmbed = card.dataset.mapEmbed || null;
+      const index = parseInt(card.dataset.index);
+      const partner = typeof partnersData !== 'undefined' ? partnersData[index] : null;
       
       const cardData = {
         image: img.src,
@@ -370,7 +382,7 @@ function setupCardListeners() {
         buttonUrl: null,
         buttonText: null,
         buttonType: null,
-        mapEmbed: mapEmbed
+        mapCodeModal: partner?.mapCodeModal || null
       };
       
       openModal(cardData);

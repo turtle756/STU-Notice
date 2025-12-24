@@ -4,52 +4,131 @@
 ================================================================================
 
 【 수정 방법 】
-1. partnersData 배열에 새 제휴사 추가
-2. 기존 제휴사 수정/삭제
-3. 이미지는 docs/image/ 폴더에 저장
+1. 카드 추가: @@@@ 부터 #### 까지 통째로 복사해서 붙여넣기
+2. 카드 삭제: @@@@ 부터 #### 까지 통째로 삭제
+3. 지도 추가: 카카오맵에서 "지도 퍼가기" 코드를 ----- 사이에 붙여넣기
 
 【 카드 속성 설명 】
-- category: "음식", "카페", "문화", "기타" 등 자유롭게
-- image: 이미지 경로 (예: "image/partner_example.png")
+- category: "음식", "카페", "문화", "기타" 등
+- image: 이미지 경로
 - title: 제휴사 이름
 - description: 혜택 설명
 - location: 위치
 - discount: 할인 정보
-- mapEmbed: 카카오맵 place ID (선택사항)
-  → 카카오맵에서 장소 검색 → URL에서 place/뒤의 숫자가 ID
-  → 예: https://place.map.kakao.com/17733370 → ID는 17733370
+- mapCode: 카카오맵 퍼가기 코드 (통째로 복붙)
+
+【 지도 퍼가기 방법 】
+1. 카카오맵(map.kakao.com)에서 장소 검색
+2. 공유 → 지도 퍼가기 클릭
+3. 크기 설정 (카드용: 360x200, 모달용: 560x300)
+4. 생성된 코드 전체를 mapCode에 붙여넣기
 
 ================================================================================
 */
 
 const partnersData = [
-  {
-    category: "음식",
-    image: "https://picsum.photos/400/300?1",
-    title: "맛있는 식당",
-    description: "학생증 제시 시 10% 할인",
-    location: "정문 앞 100m",
-    discount: "10% 할인",
-    mapEmbed: "17733370"
-  },
-  {
-    category: "카페",
-    image: "https://picsum.photos/400/300?2",
-    title: "캠퍼스 카페",
-    description: "음료 전 메뉴 500원 할인",
-    location: "학교 내 학생회관 1층",
-    discount: "500원 할인",
-    mapEmbed: "26338954"
-  },
-  {
-    category: "문화",
-    image: "https://picsum.photos/400/300?3",
-    title: "시네마 영화관",
-    description: "주중 영화 관람 20% 할인",
-    location: "후문 버스정류장 앞",
-    discount: "20% 할인",
-    mapEmbed: "8137464"
-  }
+
+// @@@@@@@@@@@@@@@@@
+{
+  category: "음식",
+  image: "https://picsum.photos/400/300?1",
+  title: "맛있는 식당",
+  description: "학생증 제시 시 10% 할인",
+  location: "정문 앞 100m",
+  discount: "10% 할인",
+
+  // --------------------------
+  // 카드용 지도 (360x200)
+  // --------------------------
+  mapCodeCard: `
+<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1766552190722" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+  new daum.roughmap.Lander({
+    "timestamp" : "1766552190722",
+    "key" : "esqs8eo7kzs",
+    "mapWidth" : "360",
+    "mapHeight" : "200"
+  }).render();
+</script>
+  `,
+  // --------------------------
+
+  // --------------------------
+  // 모달용 지도 (560x300)
+  // --------------------------
+  mapCodeModal: `
+<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1766552216775" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+  new daum.roughmap.Lander({
+    "timestamp" : "1766552216775",
+    "key" : "esqstjy7iqi",
+    "mapWidth" : "560",
+    "mapHeight" : "300"
+  }).render();
+</script>
+  `
+  // --------------------------
+}
+// #####################
+
+,
+
+// @@@@@@@@@@@@@@@@@
+{
+  category: "카페",
+  image: "https://picsum.photos/400/300?2",
+  title: "캠퍼스 카페",
+  description: "음료 전 메뉴 500원 할인",
+  location: "학교 내 학생회관 1층",
+  discount: "500원 할인",
+
+  // --------------------------
+  // 카드용 지도 (360x200) - 없으면 빈 문자열
+  // --------------------------
+  mapCodeCard: ``,
+  // --------------------------
+
+  // --------------------------
+  // 모달용 지도 (560x300) - 없으면 빈 문자열
+  // --------------------------
+  mapCodeModal: ``
+  // --------------------------
+}
+// #####################
+
+,
+
+// @@@@@@@@@@@@@@@@@
+{
+  category: "문화",
+  image: "https://picsum.photos/400/300?3",
+  title: "시네마 영화관",
+  description: "주중 영화 관람 20% 할인",
+  location: "후문 버스정류장 앞",
+  discount: "20% 할인",
+
+  // --------------------------
+  // 카드용 지도 (360x200) - 없으면 빈 문자열
+  // --------------------------
+  mapCodeCard: ``,
+  // --------------------------
+
+  // --------------------------
+  // 모달용 지도 (560x300) - 없으면 빈 문자열
+  // --------------------------
+  mapCodeModal: ``
+  // --------------------------
+}
+// #####################
+
 ];
 
 const partnersConfig = {
