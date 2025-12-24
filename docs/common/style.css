@@ -549,6 +549,32 @@
         flex-grow: 1;
       }
 
+      .partner-map-container {
+        margin-top: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+
+      .partner-map {
+        width: 100%;
+        height: 150px;
+        display: block;
+      }
+
+      .modal-map-container {
+        margin-top: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+      }
+
+      .modal-map-iframe {
+        width: 100%;
+        height: 300px;
+        display: block;
+      }
+
       /* Hidden class */
       .hidden {
         display: none;

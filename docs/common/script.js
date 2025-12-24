@@ -144,8 +144,15 @@ if (typeof partnersData !== 'undefined') {
     const card = document.createElement('div');
     card.className = 'partner-card';
     card.dataset.category = partner.category;
+    if (partner.mapEmbed) card.dataset.mapEmbed = partner.mapEmbed;
     
     const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
+    
+    const mapHtml = partner.mapEmbed ? `
+      <div class="partner-map-container">
+        <iframe src="${partner.mapEmbed}" class="partner-map" frameborder="0" allowfullscreen></iframe>
+      </div>
+    ` : '';
     
     card.innerHTML = `
       <img src="${imageSrc}" alt="${partner.title}" />
@@ -157,6 +164,7 @@ if (typeof partnersData !== 'undefined') {
         <p class="partner-discount">${partner.discount}</p>
         <p class="partner-location">📍 ${partner.location}</p>
         <p class="partner-description">${partner.description}</p>
+        ${mapHtml}
       </div>
     `;
     
@@ -216,6 +224,7 @@ const modalCategory = document.getElementById('modalCategory');
 const modalMeta = document.getElementById('modalMeta');
 const modalDescription = document.getElementById('modalDescription');
 const modalButton = document.getElementById('modalButton');
+const modalMap = document.getElementById('modalMap');
 
 function openModal(cardData) {
   modalImage.src = cardData.image;
@@ -241,6 +250,16 @@ function openModal(cardData) {
     modalButton.innerHTML = `<a href="${cardData.buttonUrl}" target="_blank" class="${buttonClass}">${cardData.buttonText}</a>`;
   } else {
     modalButton.innerHTML = '';
+  }
+  
+  if (modalMap) {
+    if (cardData.mapEmbed) {
+      modalMap.innerHTML = `<iframe src="${cardData.mapEmbed}" class="modal-map-iframe" frameborder="0" allowfullscreen></iframe>`;
+      modalMap.style.display = 'block';
+    } else {
+      modalMap.innerHTML = '';
+      modalMap.style.display = 'none';
+    }
   }
   
   modal.classList.add('active');
@@ -327,13 +346,18 @@ function setupCardListeners() {
 
   // 제휴사 카드 클릭
   document.querySelectorAll('.partner-card').forEach(card => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.partner-map-container')) {
+        return;
+      }
+      
       const img = card.querySelector('img');
       const title = card.querySelector('h3').textContent;
       const category = card.querySelector('.partner-category').textContent;
       const discount = card.querySelector('.partner-discount')?.textContent || '';
       const location = card.querySelector('.partner-location')?.textContent || '';
       const description = card.querySelector('.partner-description').textContent;
+      const mapEmbed = card.dataset.mapEmbed || null;
       
       const cardData = {
         image: img.src,
@@ -345,7 +369,8 @@ function setupCardListeners() {
         details: [],
         buttonUrl: null,
         buttonText: null,
-        buttonType: null
+        buttonType: null,
+        mapEmbed: mapEmbed
       };
       
       openModal(cardData);
