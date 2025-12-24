@@ -462,9 +462,6 @@ function openModal(cardData) {
   }
   
   if (modalMap) {
-    // 먼저 기존 지도 완전히 제거
-    modalMap.innerHTML = '';
-    
     if (cardData.mapCodeModal && cardData.mapCodeModal.trim()) {
       // 카카오맵 로더 스크립트가 없으면 한 번만 로드
       if (!window.kakaoMapLoaderLoaded) {
@@ -475,10 +472,7 @@ function openModal(cardData) {
         window.kakaoMapLoaderLoaded = true;
       }
       
-      // 고유한 timestamp 생성
-      const uniqueTs = Date.now().toString();
-      
-      // DOM으로 파싱
+      // DOM으로 파싱하여 설치 스크립트만 제거
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = cardData.mapCodeModal;
       
@@ -489,38 +483,20 @@ function openModal(cardData) {
         }
       });
       
-      // div id와 스크립트의 timestamp를 동일한 고유값으로 변경
-      const mapContainer = tempDiv.querySelector('[id^="daumRoughmapContainer"]');
-      if (mapContainer) {
-        mapContainer.id = 'daumRoughmapContainer' + uniqueTs;
-      }
-      
-      // 스크립트의 timestamp 변경
-      tempDiv.querySelectorAll('script').forEach(script => {
-        if (script.textContent && script.textContent.includes('daum.roughmap.Lander')) {
-          script.textContent = script.textContent.replace(
-            /"timestamp"\s*:\s*"[^"]+"/g,
-            '"timestamp" : "' + uniqueTs + '"'
-          );
-        }
-      });
-      
       modalMap.innerHTML = tempDiv.innerHTML;
       modalMap.style.display = 'block';
       
-      // 실행 스크립트 재실행 (로더 로드 대기)
+      // 실행 스크립트 재실행 (약간의 딜레이로 로더 로드 대기)
       setTimeout(() => {
         const scripts = modalMap.querySelectorAll('script');
         scripts.forEach(script => {
-          if (script.textContent && script.textContent.includes('daum.roughmap.Lander')) {
-            const newScript = document.createElement('script');
-            newScript.textContent = script.textContent;
-            document.body.appendChild(newScript);
-            newScript.remove();
-          }
+          const newScript = document.createElement('script');
+          newScript.textContent = script.textContent;
+          script.parentNode.replaceChild(newScript, script);
         });
-      }, 200);
+      }, 100);
     } else {
+      modalMap.innerHTML = '';
       modalMap.style.display = 'none';
     }
   }
@@ -532,16 +508,14 @@ function openModal(cardData) {
 function closeModal() {
   modal.classList.remove('active');
   document.body.style.overflow = '';
-  if (modalMap) {
-    modalMap.innerHTML = '';
-    modalMap.style.display = 'none';
-  }
 }
 
 // 카드 클릭 이벤트 등록 함수
 function setupCardListeners() {
   // 행사 카드 클릭
   document.querySelectorAll('.event-card').forEach(card => {
+    if (card.dataset.listenerAdded) return;
+    card.dataset.listenerAdded = 'true';
     card.addEventListener('click', (e) => {
       if (e.target.classList.contains('apply-button') || e.target.closest('.apply-button')) {
         return;
@@ -582,6 +556,8 @@ function setupCardListeners() {
 
   // 동아리 카드 클릭
   document.querySelectorAll('.community-card').forEach(card => {
+    if (card.dataset.listenerAdded) return;
+    card.dataset.listenerAdded = 'true';
     card.addEventListener('click', (e) => {
       if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button')) {
         return;
@@ -613,6 +589,8 @@ function setupCardListeners() {
 
   // 제휴사 카드 클릭
   document.querySelectorAll('.partner-card').forEach(card => {
+    if (card.dataset.listenerAdded) return;
+    card.dataset.listenerAdded = 'true';
     card.addEventListener('click', (e) => {
       if (e.target.closest('.partner-map-container')) {
         return;
