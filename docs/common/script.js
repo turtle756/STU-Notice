@@ -476,7 +476,7 @@ function openModal(cardData) {
       }
       
       // 고유한 timestamp 생성
-      const uniqueTimestamp = Date.now() + Math.random().toString(36).substr(2, 9);
+      const uniqueTs = Date.now().toString();
       
       // DOM으로 파싱
       const tempDiv = document.createElement('div');
@@ -489,36 +489,37 @@ function openModal(cardData) {
         }
       });
       
-      // div id를 고유하게 변경
+      // div id와 스크립트의 timestamp를 동일한 고유값으로 변경
       const mapContainer = tempDiv.querySelector('[id^="daumRoughmapContainer"]');
       if (mapContainer) {
-        const oldId = mapContainer.id;
-        const newId = 'daumRoughmapContainer' + uniqueTimestamp;
-        mapContainer.id = newId;
-        
-        // 스크립트의 timestamp도 변경
-        tempDiv.querySelectorAll('script').forEach(script => {
-          if (script.textContent.includes('daum.roughmap.Lander')) {
-            script.textContent = script.textContent.replace(
-              /"timestamp"\s*:\s*"[^"]+"/,
-              `"timestamp" : "${uniqueTimestamp}"`
-            );
-          }
-        });
+        mapContainer.id = 'daumRoughmapContainer' + uniqueTs;
       }
+      
+      // 스크립트의 timestamp 변경
+      tempDiv.querySelectorAll('script').forEach(script => {
+        if (script.textContent && script.textContent.includes('daum.roughmap.Lander')) {
+          script.textContent = script.textContent.replace(
+            /"timestamp"\s*:\s*"[^"]+"/g,
+            '"timestamp" : "' + uniqueTs + '"'
+          );
+        }
+      });
       
       modalMap.innerHTML = tempDiv.innerHTML;
       modalMap.style.display = 'block';
       
-      // 실행 스크립트 재실행 (약간의 딜레이로 로더 로드 대기)
+      // 실행 스크립트 재실행 (로더 로드 대기)
       setTimeout(() => {
         const scripts = modalMap.querySelectorAll('script');
         scripts.forEach(script => {
-          const newScript = document.createElement('script');
-          newScript.textContent = script.textContent;
-          script.parentNode.replaceChild(newScript, script);
+          if (script.textContent && script.textContent.includes('daum.roughmap.Lander')) {
+            const newScript = document.createElement('script');
+            newScript.textContent = script.textContent;
+            document.body.appendChild(newScript);
+            newScript.remove();
+          }
         });
-      }, 150);
+      }, 200);
     } else {
       modalMap.style.display = 'none';
     }
