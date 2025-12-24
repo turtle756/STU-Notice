@@ -508,6 +508,10 @@ function openModal(cardData) {
 function closeModal() {
   modal.classList.remove('active');
   document.body.style.overflow = '';
+  if (modalMap) {
+    modalMap.innerHTML = '';
+    modalMap.style.display = 'none';
+  }
 }
 
 // 카드 클릭 이벤트 등록 함수

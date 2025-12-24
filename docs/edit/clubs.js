@@ -19,60 +19,56 @@
 */
 
 const clubsData = [
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "스포츠",
+    image: "image/example_soccer.png",
+    title: "축구 동아리",
+    description: "함께 축구하며 친목을 다지는 동아리입니다.",
+    kakaoLink: "https://open.kakao.com/o/example1",
+    detail:
+      "매주 화/목요일 저녁 7시에 체육관에서 만나 축구를 즐깁니다. 초보자도 환영하며, 학기별로 1회 대학 연합 친선 경기를 개최합니다. 회비는 월 1만원이며, 유니폼과 음료 구매에 사용됩니다.",
+  },
 
-// @@@@@@@@@@@@@@@@@
-{
-  category: "스포츠",
-  image: "image/example_soccer.png",
-  title: "축구 동아리",
-  description: "함께 축구하며 친목을 다지는 동아리입니다.",
-  kakaoLink: "https://open.kakao.com/o/example1",
-  detail: "매주 화/목요일 저녁 7시에 체육관에서 만나 축구를 즐깁니다. 초보자도 환영하며, 학기별로 1회 대학 연합 친선 경기를 개최합니다. 회비는 월 1만원이며, 유니폼과 음료 구매에 사용됩니다."
-}
-// #####################
+  // #####################
 
-,
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "학술",
+    image: "image/example_coding.png",
+    title: "코딩 스터디",
+    description: "알고리즘 문제풀이 및 프로젝트 스터디",
+    kakaoLink: "https://open.kakao.com/o/example3",
+    detail: "",
+  },
 
-// @@@@@@@@@@@@@@@@@
-{
-  category: "학술",
-  image: "image/example_coding.png",
-  title: "코딩 스터디",
-  description: "알고리즘 문제풀이 및 프로젝트 스터디",
-  kakaoLink: "https://open.kakao.com/o/example3",
-  detail: ""
-}
-// #####################
+  // #####################
 
-,
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "문화예술",
+    image: "image/example_band.png",
+    title: "밴드 동아리",
+    description: "다양한 악기로 밴드를 구성해 공연합니다.",
+    kakaoLink: "https://open.kakao.com/o/example4",
+    detail: "",
+  },
 
-// @@@@@@@@@@@@@@@@@
-{
-  category: "문화예술",
-  image: "image/example_band.png",
-  title: "밴드 동아리",
-  description: "다양한 악기로 밴드를 구성해 공연합니다.",
-  kakaoLink: "https://open.kakao.com/o/example4",
-  detail: ""
-}
-// #####################
+  // #####################
 
-,
-
-// @@@@@@@@@@@@@@@@@
-{
-  category: "학술",
-  image: "image/example_book.png",
-  title: "독서 토론 모임",
-  description: "매주 한 권의 책을 읽고 토론합니다.",
-  kakaoLink: "https://open.kakao.com/o/example5",
-  detail: ""
-}
-// #####################
-
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "학술",
+    image: "image/example_book.png",
+    title: "독서 토론 모임",
+    description: "매주 한 권의 책을 읽고 토론합니다.",
+    kakaoLink: "https://open.kakao.com/o/example5",
+    detail: "",
+  },
+  // #####################
 ];
 
 const clubsConfig = {
   applyFormLink: "https://forms.gle/community-apply",
-  itemsPerPage: 15
+  itemsPerPage: 15,
 };
