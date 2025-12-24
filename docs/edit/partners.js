@@ -109,13 +109,13 @@ const partnersData = [
   mapCodeModal: `
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
-<div id="daumRoughmapContainer1766559121888" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<div id="daumRoughmapContainer1766560906875" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
   new daum.roughmap.Lander({
-    "timestamp" : "1766559121888",
-    "key" : "esqd4navtin",
+    "timestamp" : "1766560906875",
+    "key" : "ef9qo797zhm",
     "mapWidth" : "560",
     "mapHeight" : "300"
   }).render();
