@@ -38,7 +38,7 @@ const eventsData = [
   organizer: "주관: 학생회",
   location: "중앙운동장",
   description: "우리 대학 가을 축제에 여러분을 초대합니다!",
-  link: null,
+  link: "https://example.com/festival",
   applyLink: null,
   details: {
     target: "전체 재학생",
