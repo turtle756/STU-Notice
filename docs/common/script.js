@@ -511,26 +511,13 @@ if (typeof homeData !== 'undefined') {
   const heroTitle = document.getElementById('heroTitle');
   const heroSubtitle = document.getElementById('heroSubtitle');
   const heroDescription = document.getElementById('heroDescription');
-  const welfareGrid = document.getElementById('welfareGrid');
   const noticeList = document.getElementById('noticeList');
+  const faqPreviewList = document.getElementById('faqPreviewList');
   const snsGrid = document.getElementById('snsGrid');
   
   if (heroTitle) heroTitle.textContent = homeData.introduction.title;
   if (heroSubtitle) heroSubtitle.textContent = homeData.introduction.subtitle;
   if (heroDescription) heroDescription.textContent = homeData.introduction.description;
-  
-  if (welfareGrid && homeData.welfare) {
-    homeData.welfare.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'welfare-card';
-      card.innerHTML = `
-        <div class="welfare-icon">${item.icon}</div>
-        <h3>${item.title}</h3>
-        <p>${item.description}</p>
-      `;
-      welfareGrid.appendChild(card);
-    });
-  }
   
   if (noticeList && typeof notices !== 'undefined') {
     const recentNotices = notices.slice(0, 3);
@@ -547,6 +534,20 @@ if (typeof homeData !== 'undefined') {
         <h3>${notice.title}</h3>
       `;
       noticeList.appendChild(item);
+    });
+  }
+  
+  if (faqPreviewList && typeof faqs !== 'undefined') {
+    const recentFaqs = faqs.slice(0, 3);
+    recentFaqs.forEach(faq => {
+      const item = document.createElement('a');
+      item.className = 'faq-preview-item';
+      item.href = 'common/notice.html#faq';
+      item.innerHTML = `
+        <span class="faq-preview-icon">Q</span>
+        <span class="faq-preview-text">${faq.question}</span>
+      `;
+      faqPreviewList.appendChild(item);
     });
   }
   

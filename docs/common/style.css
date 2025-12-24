@@ -1131,49 +1131,60 @@
         font-weight: 600;
       }
 
-      .home-welfare,
       .home-notice,
+      .home-faq,
       .home-sns {
         padding: 2rem 1rem;
         max-width: 800px;
         margin: 0 auto;
       }
 
-      .home-welfare h2,
       .home-notice h2,
+      .home-faq h2,
       .home-sns h2 {
         font-size: 1.3rem;
         margin-bottom: 1rem;
         color: #333;
       }
 
-      .welfare-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+      .faq-preview-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
       }
 
-      .welfare-card {
+      .faq-preview-item {
         background: white;
-        border-radius: 12px;
-        padding: 1.2rem;
+        border-radius: 10px;
+        padding: 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        transition: transform 0.2s;
       }
 
-      .welfare-icon {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+      .faq-preview-item:hover {
+        transform: translateX(5px);
       }
 
-      .welfare-card h3 {
-        font-size: 1rem;
-        margin-bottom: 0.3rem;
+      .faq-preview-icon {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-weight: bold;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .faq-preview-text {
         color: #333;
-      }
-
-      .welfare-card p {
-        font-size: 0.85rem;
-        color: #666;
+        font-size: 0.95rem;
       }
 
       .notice-header {
@@ -1297,23 +1308,19 @@
       }
 
       body.dark-mode .home-nav-card,
-      body.dark-mode .welfare-card,
-      body.dark-mode .notice-item {
+      body.dark-mode .notice-item,
+      body.dark-mode .faq-preview-item {
         background-color: #16213e;
       }
 
       body.dark-mode .home-nav-card,
-      body.dark-mode .welfare-card h3,
-      body.dark-mode .notice-item h3 {
+      body.dark-mode .notice-item h3,
+      body.dark-mode .faq-preview-text {
         color: #eaeaea;
       }
 
-      body.dark-mode .welfare-card p {
-        color: #aaa;
-      }
-
-      body.dark-mode .home-welfare h2,
       body.dark-mode .home-notice h2,
+      body.dark-mode .home-faq h2,
       body.dark-mode .home-sns h2 {
         color: #eaeaea;
       }
@@ -1325,10 +1332,6 @@
       @media (max-width: 768px) {
         .home-nav-grid {
           grid-template-columns: repeat(2, 1fr);
-        }
-
-        .welfare-grid {
-          grid-template-columns: 1fr;
         }
 
         .hero-content h1 {
