@@ -6,7 +6,7 @@
 【 수정 방법 】
 1. 카드 추가: @@@@ 부터 #### 까지 통째로 복사해서 붙여넣기
 2. 카드 삭제: @@@@ 부터 #### 까지 통째로 삭제
-3. 지도 추가: 카카오맵에서 "지도 퍼가기" 코드를 ----- 사이에 붙여넣기
+3. 지도 추가: 카카오맵에서 "지도 퍼가기" 코드를 그대로 복붙 (설치 스크립트 포함해도 자동 처리됨)
 
 【 카드 속성 설명 】
 - category: "음식", "카페", "문화", "기타" 등
@@ -21,7 +21,7 @@
 1. 카카오맵(map.kakao.com)에서 장소 검색
 2. 공유 → 지도 퍼가기 클릭
 3. 크기: 560x300 설정
-4. 생성된 코드 전체를 mapCodeModal에 붙여넣기
+4. 생성된 코드 전체를 mapCodeModal에 그대로 복붙 (설치 스크립트 포함해도 OK)
 
 ================================================================================
 */
@@ -38,12 +38,18 @@ const partnersData = [
   discount: "10% 할인",
 
   // --------------------------
-  // 모달용 지도 (560x300)
+  // 모달용 지도 (카카오맵 퍼가기 코드 그대로 복붙)
   // --------------------------
   mapCodeModal: `
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1766552216775" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
@@ -71,12 +77,18 @@ const partnersData = [
   discount: "500원 할인",
 
   // --------------------------
-  // 모달용 지도 (560x300)
+  // 모달용 지도 (카카오맵 퍼가기 코드 그대로 복붙)
   // --------------------------
   mapCodeModal: `
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1766559121887" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">
@@ -104,12 +116,18 @@ const partnersData = [
   discount: "20% 할인",
 
   // --------------------------
-  // 모달용 지도 (560x300)
+  // 모달용 지도 (카카오맵 퍼가기 코드 그대로 복붙)
   // --------------------------
   mapCodeModal: `
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1766560906875" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
 <!-- 3. 실행 스크립트 -->
 <script charset="UTF-8">

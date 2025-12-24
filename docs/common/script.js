@@ -247,7 +247,12 @@ function openModal(cardData) {
   
   if (modalMap) {
     if (cardData.mapCodeModal && cardData.mapCodeModal.trim()) {
-      modalMap.innerHTML = cardData.mapCodeModal;
+      // 설치 스크립트(roughmapLoader.js) 자동 제거
+      let cleanedMapCode = cardData.mapCodeModal
+        .replace(/<script[^>]*roughmapLoader\.js[^>]*><\/script>/gi, '')
+        .replace(/<!--[\s\S]*?설치 스크립트[\s\S]*?-->/gi, '');
+      
+      modalMap.innerHTML = cleanedMapCode;
       modalMap.style.display = 'block';
       const scripts = modalMap.querySelectorAll('script');
       scripts.forEach(script => {
