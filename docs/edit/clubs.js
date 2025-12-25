@@ -2,34 +2,18 @@
 ================================================================================
 👥 동아리 & 소모임 데이터
 ================================================================================
-
-【 수정 방법 】
-1. 카드 추가: @@@@ 부터 #### 까지 통째로 복사해서 붙여넣기
-2. 카드 삭제: @@@@ 부터 #### 까지 통째로 삭제
-
-【 카드 속성 설명 】
-- category: "스포츠", "학술", "문화예술", "취미" 중 하나
-- image: 이미지 경로 (예: "image/example_soccer.png")
-- title: 동아리/소모임 이름
-- description: 간단한 설명
-- kakaoLink: 카카오톡 오픈채팅 링크
-- detail: 상세 설명 (모달용)
-
-================================================================================
 */
 
 const clubsData = [
   // @@@@@@@@@@@@@@@@@
   {
-    category: "스포츠",
-    image: "image/example_soccer.png",
+    category: "스포츠", // 카테고리 필터용 (clubsConfig.categories 중 하나)
+    image: "image/example_soccer.png", // 카드 이미지 경로
     title: "축구 동아리",
     description: "함께 축구하며 친목을 다지는 동아리입니다.",
-    kakaoLink: "https://open.kakao.com/o/example1",
-    detail:
-      "매주 화/목요일 저녁 7시에 체육관에서 만나 축구를 즐깁니다. 초보자도 환영하며, 학기별로 1회 대학 연합 친선 경기를 개최합니다. 회비는 월 1만원이며, 유니폼과 음료 구매에 사용됩니다.",
+    kakaoLink: "https://open.kakao.com/o/example1", // 카카오톡 오픈채팅 링크 (가입 문의용)
+    detail: "매주 화/목요일 저녁 7시에 체육관에서 만나 축구를 즐깁니다. 초보자도 환영하며, 학기별로 1회 대학 연합 친선 경기를 개최합니다. 회비는 월 1만원이며, 유니폼과 음료 구매에 사용됩니다.", // 모달 팝업에 표시될 상세 설명
   },
-
   // #####################
 
   // @@@@@@@@@@@@@@@@@
@@ -41,7 +25,6 @@ const clubsData = [
     kakaoLink: "https://open.kakao.com/o/example3",
     detail: "",
   },
-
   // #####################
 
   // @@@@@@@@@@@@@@@@@
@@ -53,7 +36,6 @@ const clubsData = [
     kakaoLink: "https://open.kakao.com/o/example4",
     detail: "",
   },
-
   // #####################
 
   // @@@@@@@@@@@@@@@@@
@@ -69,7 +51,7 @@ const clubsData = [
 ];
 
 const clubsConfig = {
-  applyFormLink: "https://forms.gle/community-apply",
-  itemsPerPage: 15,
-  categories: ["스포츠", "학술", "문화예술", "취미"]
+  applyFormLink: "https://forms.gle/community-apply", // 페이지 상단 "신청하기" 버튼 링크
+  itemsPerPage: 15, // 한 페이지에 표시할 카드 수
+  categories: ["스포츠", "학술", "문화예술", "취미"] // 필터 버튼 목록 (추가/삭제 가능)
 };
