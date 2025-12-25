@@ -71,4 +71,5 @@ const clubsData = [
 const clubsConfig = {
   applyFormLink: "https://forms.gle/community-apply",
   itemsPerPage: 15,
+  categories: ["스포츠", "학술", "문화예술", "취미"]
 };

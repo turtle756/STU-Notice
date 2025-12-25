@@ -144,5 +144,6 @@ const eventsData = [
 
 const eventsConfig = {
   suggestFormLink: "https://forms.gle/example",
-  itemsPerPage: 15
+  itemsPerPage: 15,
+  categories: ["행사", "공모전"]
 };

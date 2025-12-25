@@ -84,6 +84,7 @@ docs/
 
 - `suggestFormLink` ← 건의/신청하기 버튼 링크
 - `itemsPerPage` ← 한 페이지에 표시할 카드 수 (기본 15개)
+- `categories` ← 카테고리 목록 (추가/삭제/변경 가능)
 
 ---
 
@@ -102,6 +103,10 @@ docs/
 }
 // #####################
 ```
+
+- `applyFormLink` ← 신청하기 버튼 링크
+- `itemsPerPage` ← 한 페이지에 표시할 카드 수 (기본 15개)
+- `categories` ← 카테고리 목록 (추가/삭제/변경 가능)
 
 ---
 
@@ -129,6 +134,10 @@ docs/
 3. 크기: 560x300 설정
 4. 생성된 코드 전체를 mapCodeModal에 그대로 복붙
 ```
+
+- `suggestFormLink` ← 제안하기 버튼 링크
+- `itemsPerPage` ← 한 페이지에 표시할 카드 수 (기본 15개)
+- `categories` ← 카테고리 목록 (추가/삭제/변경 가능)
 
 ---
 

@@ -136,20 +136,20 @@ if (typeof calendarMonths !== 'undefined') {
   function getTargetMonthIndex() {
     const currentMonth = new Date().getMonth() + 1; // 1-12
     
-    // 월 → 탭 인덱스 매핑 (방학 처리 포함)
+    // 월 → 탭 인덱스 매핑 (8개월: 3~6월, 9~12월)
     const monthToIndex = {
-      1: 3,   // 1월 → 12월 (4번째, index 3)
-      2: 0,   // 2월 → 3월/9월 (1번째, index 0)
+      1: 7,   // 1월 → 12월 (8번째, index 7)
+      2: 7,   // 2월 → 12월 (8번째, index 7)
       3: 0,   // 3월 → 1번째
       4: 1,   // 4월 → 2번째
       5: 2,   // 5월 → 3번째
       6: 3,   // 6월 → 4번째
       7: 3,   // 7월 → 6월 (4번째, index 3)
-      8: 0,   // 8월 → 9월 (1번째, index 0)
-      9: 0,   // 9월 → 1번째
-      10: 1,  // 10월 → 2번째
-      11: 2,  // 11월 → 3번째
-      12: 3   // 12월 → 4번째
+      8: 4,   // 8월 → 9월 (5번째, index 4)
+      9: 4,   // 9월 → 5번째
+      10: 5,  // 10월 → 6번째
+      11: 6,  // 11월 → 7번째
+      12: 7   // 12월 → 8번째
     };
     
     const targetIndex = monthToIndex[currentMonth];
@@ -362,32 +362,50 @@ if (typeof partnersData !== 'undefined') {
 
 /*
 ================================================================================
-🔍 필터 기능
+🔍 필터 기능 (동적 카테고리 생성)
 ================================================================================
 */
-const filterButtons = document.querySelectorAll('.filter-btn');
-
-filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const section = button.dataset.section;
-    const filter = button.dataset.filter;
-    
-    filterButtons.forEach(btn => {
-      if (btn.dataset.section === section) {
-        btn.classList.remove('active');
-      }
-    });
-    button.classList.add('active');
-    
-    if (section === 'events' && typeof window.renderEvents === 'function') {
-      window.renderEvents(1, filter);
-    } else if (section === 'community' && typeof window.renderClubs === 'function') {
-      window.renderClubs(1, filter);
-    } else if (section === 'partners' && typeof window.renderPartners === 'function') {
-      window.renderPartners(1, filter);
-    }
+function createFilterButtons(containerId, categories, section, renderFn) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  container.innerHTML = '';
+  
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.dataset.filter = '전체';
+  allBtn.dataset.section = section;
+  allBtn.textContent = '전체';
+  container.appendChild(allBtn);
+  
+  categories.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.filter = cat;
+    btn.dataset.section = section;
+    btn.textContent = cat;
+    container.appendChild(btn);
   });
-});
+  
+  container.querySelectorAll('.filter-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      renderFn(1, filter);
+    });
+  });
+}
+
+if (typeof eventsConfig !== 'undefined' && eventsConfig.categories) {
+  createFilterButtons('eventsFilterButtons', eventsConfig.categories, 'events', window.renderEvents);
+}
+if (typeof clubsConfig !== 'undefined' && clubsConfig.categories) {
+  createFilterButtons('clubsFilterButtons', clubsConfig.categories, 'community', window.renderClubs);
+}
+if (typeof partnersConfig !== 'undefined' && partnersConfig.categories) {
+  createFilterButtons('partnersFilterButtons', partnersConfig.categories, 'partners', window.renderPartners);
+}
 
 /*
 ================================================================================

@@ -147,5 +147,6 @@ const partnersData = [
 
 const partnersConfig = {
   suggestFormLink: "https://forms.gle/partner-suggest",
-  itemsPerPage: 15
+  itemsPerPage: 15,
+  categories: ["음식", "카페", "문화", "기타"]
 };
