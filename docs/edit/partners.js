@@ -43,14 +43,14 @@ const partnersData = [
 
 // @@@@@@@@@@@@@@@@@
 {
-  category: "카페",
-  image: "https://picsum.photos/400/300?2",
+  category: "카페", // 카테고리 필터용 (partnersConfig.categories 중 하나)
+  image: "https://picsum.photos/400/300?2", // 카드 이미지 경로
   title: "캠퍼스 카페",
   description: "음료 전 메뉴 500원 할인",
-  location: "학교 내 학생회관 1층",
-  discount: "500원 할인",
+  location: "학교 내 학생회관 1층", // 위치 정보
+  discount: "500원 할인", // 할인 정보 배지
 
-  mapCodeModal: `
+  mapCodeModal: ` // 모달에 표시될 카카오맵 지도 (카카오맵 "지도 퍼가기" 코드 복붙)
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1766559121887" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -78,14 +78,14 @@ const partnersData = [
 
 // @@@@@@@@@@@@@@@@@
 {
-  category: "문화",
-  image: "https://picsum.photos/400/300?3",
+  category: "문화", // 카테고리 필터용 (partnersConfig.categories 중 하나)
+  image: "https://picsum.photos/400/300?3", // 카드 이미지 경로
   title: "시네마 영화관",
   description: "주중 영화 관람 20% 할인",
-  location: "후문 버스정류장 앞",
-  discount: "20% 할인",
+  location: "후문 버스정류장 앞", // 위치 정보
+  discount: "20% 할인", // 할인 정보 배지
 
-  mapCodeModal: `
+  mapCodeModal: ` // 모달에 표시될 카카오맵 지도 (카카오맵 "지도 퍼가기" 코드 복붙)
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1766560906875" class="root_daum_roughmap root_daum_roughmap_landing"></div>

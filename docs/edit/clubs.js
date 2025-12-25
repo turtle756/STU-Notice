@@ -18,34 +18,34 @@ const clubsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "학술",
-    image: "image/example_coding.png",
+    category: "학술", // 카테고리 필터용 (clubsConfig.categories 중 하나)
+    image: "image/example_coding.png", // 카드 이미지 경로
     title: "코딩 스터디",
     description: "알고리즘 문제풀이 및 프로젝트 스터디",
-    kakaoLink: "https://open.kakao.com/o/example3",
-    detail: "",
+    kakaoLink: "https://open.kakao.com/o/example3", // 카카오톡 오픈채팅 링크 (가입 문의용)
+    detail: "", // 모달 팝업에 표시될 상세 설명
   },
   // #####################
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "문화예술",
-    image: "image/example_band.png",
+    category: "문화예술", // 카테고리 필터용 (clubsConfig.categories 중 하나)
+    image: "image/example_band.png", // 카드 이미지 경로
     title: "밴드 동아리",
     description: "다양한 악기로 밴드를 구성해 공연합니다.",
-    kakaoLink: "https://open.kakao.com/o/example4",
-    detail: "",
+    kakaoLink: "https://open.kakao.com/o/example4", // 카카오톡 오픈채팅 링크 (가입 문의용)
+    detail: "", // 모달 팝업에 표시될 상세 설명
   },
   // #####################
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "학술",
-    image: "image/example_book.png",
+    category: "학술", // 카테고리 필터용 (clubsConfig.categories 중 하나)
+    image: "image/example_book.png", // 카드 이미지 경로
     title: "독서 토론 모임",
     description: "매주 한 권의 책을 읽고 토론합니다.",
-    kakaoLink: "https://open.kakao.com/o/example5",
-    detail: "",
+    kakaoLink: "https://open.kakao.com/o/example5", // 카카오톡 오픈채팅 링크 (가입 문의용)
+    detail: "", // 모달 팝업에 표시될 상세 설명
   },
   // #####################
 ];
