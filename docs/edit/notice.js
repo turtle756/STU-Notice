@@ -96,7 +96,3 @@ const faqs = [
 ];
 
 const suggestFormLink = "https://forms.gle/example";
-
-const noticeConfig = {
-  itemsPerPage: 20
-};
