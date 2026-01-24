@@ -147,9 +147,9 @@ docs/
 ```javascript
 const homeData = {
   introduction: {
-    title: "서울신학대학교 총학생회",               ← 메인 타이틀
-    subtitle: "학생들의 목소리를 대변합니다",        ← 서브타이틀
-    description: "총학생회는 학생들의..."          ← 소개 설명
+    title: "서울신학대학교 제42대 시드 총학생회",               ← 메인 타이틀
+    subtitle: "학우분들의 편하고 즐거운 학교 생활을 위한 포털입니다.",        ← 서브타이틀
+    description: "시드 총학생회는 학우분들의 더 나은 학교 생활을 위해 노력하겠습니다."          ← 소개 설명
   },
   
   sns: [
