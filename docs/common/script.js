@@ -111,28 +111,19 @@ if (typeof calendarMonths !== 'undefined') {
   const calendarImage = document.getElementById('calendarImage');
   const currentMonth = new Date().getMonth() + 1; // 1-12
   
-  // 현재 학기 판단: 3~8월=1학기(3~6월 표시), 9~2월=2학기(9~12월 표시)
-  const isSecondSemester = (currentMonth >= 9 || currentMonth <= 2);
-  
-  // 학기에 맞는 월만 필터링
-  const semesterMonths = calendarMonths.filter(m => {
-    if (isSecondSemester) {
-      return m.month >= 9 && m.month <= 12;
-    } else {
-      return m.month >= 3 && m.month <= 6;
-    }
-  });
+  // status가 "on"인 월만 필터링
+  const activeMonths = calendarMonths.filter(m => m.status === 'on');
   
   // 이미지 프리로드
   const calendarImageCache = {};
-  semesterMonths.forEach(m => {
+  activeMonths.forEach(m => {
     const img = new Image();
     img.src = imgPrefix + m.image;
     calendarImageCache[m.month] = img;
   });
   
   // 월 버튼 생성
-  semesterMonths.forEach((m, index) => {
+  activeMonths.forEach((m, index) => {
     const btn = document.createElement('button');
     btn.className = 'month-btn';
     btn.textContent = m.label;
@@ -145,28 +136,41 @@ if (typeof calendarMonths !== 'undefined') {
     monthButtonsContainer.appendChild(btn);
   });
   
-  // 현재 월에 맞는 탭 자동 선택
-  function getTargetMonthIndex() {
-    if (isSecondSemester) {
-      // 2학기: 1~2월→12월, 9~12월→해당월
-      if (currentMonth <= 2) return 3; // 12월 (index 3)
-      return currentMonth - 9; // 9월=0, 10월=1, 11월=2, 12월=3
-    } else {
-      // 1학기: 7~8월→6월, 3~6월→해당월
-      if (currentMonth >= 7) return 3; // 6월 (index 3)
-      return currentMonth - 3; // 3월=0, 4월=1, 5월=2, 6월=3
+  // 현재 월에 맞는 탭 자동 선택 (현재 월이 off면 가장 가까운 on인 월로 이동)
+  function findNearestActiveMonth() {
+    // 현재 월이 on인지 확인
+    const currentMonthIndex = activeMonths.findIndex(m => m.month === currentMonth);
+    if (currentMonthIndex !== -1) {
+      return currentMonthIndex;
     }
+    
+    // 현재 월이 off인 경우, 가장 가까운 on인 월 찾기
+    let nearestIndex = 0;
+    let minDistance = Infinity;
+    
+    activeMonths.forEach((m, index) => {
+      // 순환 거리 계산 (12월과 1월은 가까움)
+      let distance = Math.abs(m.month - currentMonth);
+      if (distance > 6) distance = 12 - distance;
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestIndex = index;
+      }
+    });
+    
+    return nearestIndex;
   }
   
-  const initialIndex = Math.min(getTargetMonthIndex(), semesterMonths.length - 1);
+  const initialIndex = findNearestActiveMonth();
   
   // 초기 활성 탭 설정
-  if (semesterMonths.length > 0) {
+  if (activeMonths.length > 0) {
     const buttons = monthButtonsContainer.querySelectorAll('.month-btn');
     buttons.forEach((btn, i) => {
       btn.classList.toggle('active', i === initialIndex);
     });
-    calendarImage.src = calendarImageCache[semesterMonths[initialIndex].month].src;
+    calendarImage.src = calendarImageCache[activeMonths[initialIndex].month].src;
   }
 }
 

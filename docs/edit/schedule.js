@@ -5,12 +5,16 @@
 */
 
 const calendarMonths = [
-  { month: 3, label: "3월", image: "image/calendar/calendar_3.jpg" }, // month: 월 숫자 (자동선택용) / label: 탭에 표시될 텍스트 / image: 캘린더 이미지 경로
-  { month: 4, label: "4월", image: "image/calendar/calendar_4.jpg" },
-  { month: 5, label: "5월", image: "image/calendar/calendar_5.jpg" },
-  { month: 6, label: "6월", image: "image/calendar/calendar_6.jpg" },
-  { month: 9, label: "9월", image: "image/calendar/calendar_9.jpg" },
-  { month: 10, label: "10월", image: "image/calendar/calendar_10.jpg" },
-  { month: 11, label: "11월", image: "image/calendar/calendar_11.jpg" },
-  { month: 12, label: "12월", image: "image/calendar/calendar_12.jpg" }
+  { month: 1, label: "1월", image: "image/calendar/calendar_1.jpg", status: "off" }, // month: 월 숫자 / label: 버튼 텍스트 / image: 이미지 경로 / status: "on"=표시, "off"=숨김
+  { month: 2, label: "2월", image: "image/calendar/calendar_2.jpg", status: "on" },
+  { month: 3, label: "3월", image: "image/calendar/calendar_3.jpg", status: "on" },
+  { month: 4, label: "4월", image: "image/calendar/calendar_4.jpg", status: "on" },
+  { month: 5, label: "5월", image: "image/calendar/calendar_5.jpg", status: "on" },
+  { month: 6, label: "6월", image: "image/calendar/calendar_6.jpg", status: "on" },
+  { month: 7, label: "7월", image: "image/calendar/calendar_7.jpg", status: "off" },
+  { month: 8, label: "8월", image: "image/calendar/calendar_8.jpg", status: "off" },
+  { month: 9, label: "9월", image: "image/calendar/calendar_9.jpg", status: "off" },
+  { month: 10, label: "10월", image: "image/calendar/calendar_10.jpg", status: "off" },
+  { month: 11, label: "11월", image: "image/calendar/calendar_11.jpg", status: "off" },
+  { month: 12, label: "12월", image: "image/calendar/calendar_12.jpg", status: "off" }
 ];
