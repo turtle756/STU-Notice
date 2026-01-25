@@ -45,14 +45,18 @@ docs/
 > 캘린더 월별 탭 데이터
 
 ```javascript
-{ month: 3, label: "3월", image: "image/calendar/calendar_3.jpg" }
+{ month: 3, label: "3월", image: "image/calendar/calendar_3.jpg", status: "on" }
 ```
 - `month` ← 월 숫자 (자동 선택용)
 - `label` ← 탭에 표시될 이름
 - `image` ← 캘린더 이미지 경로
+- `status` ← "on"=버튼 표시, "off"=버튼 숨김
 
 ```
 이미지 변경: docs/image/calendar/ 폴더에서 같은 파일명으로 교체
+파일명 형식: calendar_1.jpg, calendar_2.jpg, ... calendar_12.jpg
+
+자동 선택: 현재 달이 off면 가장 가까운 on인 달로 자동 이동
 ```
 
 ---
