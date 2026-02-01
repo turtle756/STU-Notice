@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <title>서울신학대학교 총학생회 - 일정</title>
+  <title>서울신학대학교 총학생회 - 정규 동아리</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,9 +17,9 @@
         <span></span>
       </button>
       <div class="nav-links" id="navLinks">
-        <a href="schedule.html" class="active">일정</a>
+        <a href="schedule.html">일정</a>
         <a href="events.html">행사 & 공모전</a>
-        <a href="official-clubs.html">정규 동아리</a>
+        <a href="official-clubs.html" class="active">정규 동아리</a>
         <a href="clubs.html">자율 동아리 & 소모임</a>
         <a href="partners.html">제휴사</a>
         <button class="dark-mode-toggle" id="darkModeToggle" aria-label="다크모드 전환">🌙</button>
@@ -28,19 +28,17 @@
   </nav>
 
   <main class="main-content">
-    <section id="calendar" class="section">
-      <div class="calendar-container">
-        <div class="calendar-header">
-          <h2>📅 이번 달 주요 일정</h2>
-          <div class="month-navigation" id="monthButtons"></div>
-        </div>
-        <div class="calendar-image-wrapper">
-          <img id="calendarImage" src="" alt="월간 캘린더" class="calendar-image" />
-          <p class="swipe-hint">← 좌우로 스와이프하여 월 전환 →</p>
-        </div>
+    <section id="official-clubs" class="section">
+      <div class="page-header">
+        <h1>정규 동아리</h1>
+        <p>학교에서 공식 인정받은 동아리입니다</p>
       </div>
-      <div class="external-link-footer">
-        <a href="https://www.stu.ac.kr" target="_blank" rel="noopener noreferrer">학사일정 바로가기 →</a>
+
+      <div class="filter-buttons" id="officialClubsFilterButtons"></div>
+
+      <div class="grid-container">
+        <div class="community-grid" id="officialClubsGrid"></div>
+        <div class="pagination" id="officialClubsPagination"></div>
       </div>
     </section>
   </main>
@@ -59,7 +57,7 @@
     </div>
   </div>
 
-  <script src="../edit/schedule.js"></script>
+  <script src="../edit/official-clubs.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

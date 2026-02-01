@@ -324,6 +324,61 @@ if (typeof clubsData !== 'undefined') {
 
 /*
 ================================================================================
+🏆 정규 동아리 렌더링
+================================================================================
+*/
+let officialClubsCurrentFilter = '전체';
+let officialClubsCurrentPage = 1;
+
+if (typeof officialClubsData !== 'undefined') {
+  const officialClubsGrid = document.getElementById('officialClubsGrid');
+  const officialClubsPerPage = officialClubsConfig?.itemsPerPage || 15;
+  
+  window.renderOfficialClubs = function(page, filter) {
+    if (filter !== undefined) officialClubsCurrentFilter = filter;
+    officialClubsCurrentPage = page;
+    officialClubsGrid.innerHTML = '';
+    
+    const filteredData = officialClubsCurrentFilter === '전체'
+      ? officialClubsData
+      : officialClubsData.filter(c => c.category === officialClubsCurrentFilter);
+    
+    const start = (page - 1) * officialClubsPerPage;
+    const end = start + officialClubsPerPage;
+    const pageClubs = filteredData.slice(start, end);
+    
+    pageClubs.forEach(club => {
+      const card = document.createElement('div');
+      card.className = 'community-card';
+      card.dataset.category = club.category;
+      if (club.detail) card.dataset.detail = club.detail;
+      
+      const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
+      
+      card.innerHTML = `
+        <img src="${imageSrc}" alt="${club.title}" />
+        <div class="community-content">
+          <div class="community-header-card">
+            <h3>${club.title}</h3>
+            <span class="community-category">${club.category}</span>
+          </div>
+          <p class="community-description">${club.description}</p>
+          ${club.kakaoLink ? `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>` : ''}
+        </div>
+      `;
+      
+      officialClubsGrid.appendChild(card);
+    });
+    
+    createPagination('officialClubsPagination', filteredData.length, officialClubsPerPage, page, (p) => window.renderOfficialClubs(p));
+    setupCardListeners();
+  }
+  
+  window.renderOfficialClubs(1);
+}
+
+/*
+================================================================================
 🤝 제휴사 렌더링
 ================================================================================
 */
@@ -425,6 +480,9 @@ if (typeof eventsConfig !== 'undefined' && eventsConfig.categories) {
 }
 if (typeof clubsConfig !== 'undefined' && clubsConfig.categories) {
   createFilterButtons('clubsFilterButtons', clubsConfig.categories, 'community', window.renderClubs);
+}
+if (typeof officialClubsConfig !== 'undefined' && officialClubsConfig.categories) {
+  createFilterButtons('officialClubsFilterButtons', officialClubsConfig.categories, 'official-clubs', window.renderOfficialClubs);
 }
 if (typeof partnersConfig !== 'undefined' && partnersConfig.categories) {
   createFilterButtons('partnersFilterButtons', partnersConfig.categories, 'partners', window.renderPartners);
