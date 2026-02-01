@@ -332,7 +332,12 @@ let officialClubsCurrentPage = 1;
 
 if (typeof officialClubsData !== 'undefined') {
   const officialClubsGrid = document.getElementById('officialClubsGrid');
+  const officialClubsApplyButton = document.getElementById('applyButton');
   const officialClubsPerPage = officialClubsConfig?.itemsPerPage || 15;
+  
+  if (officialClubsApplyButton && officialClubsConfig?.applyFormLink) {
+    officialClubsApplyButton.href = officialClubsConfig.applyFormLink;
+  }
   
   window.renderOfficialClubs = function(page, filter) {
     if (filter !== undefined) officialClubsCurrentFilter = filter;

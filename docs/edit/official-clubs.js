@@ -19,5 +19,6 @@ const officialClubsData = [
 
 const officialClubsConfig = {
   itemsPerPage: 15, // 한 페이지에 표시할 카드 수
-  categories: ["종교", "봉사", "학술", "문화예술", "체육"] // 필터 버튼 목록 (추가/삭제 가능)
+  categories: ["종교", "봉사", "학술", "문화예술", "체육"], // 필터 버튼 목록 (추가/삭제 가능)
+  applyFormLink: "https://forms.gle/example" // 정규 동아리 신청 폼 링크
 };
