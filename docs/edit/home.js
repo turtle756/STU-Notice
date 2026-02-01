@@ -6,22 +6,22 @@
 
 const homeData = {
   introduction: {
-    title: "서울신학대학교 제42대 시드 총학생회",
-    subtitle: "학우분들의 편하고 즐거운 학교 생활을 위한 포털입니다.",
+    title: "서울신학대학교 시드 총학생회",
+    subtitle: "학교의 여러 정보들을 한눈에 확인할 수 있는 총학생회 포털입니다.",
     description: "시드 총학생회는 학우분들의 더 나은 학교 생활을 위해 노력하겠습니다."
   },
   
   sns: [ // SNS 버튼 목록
     {
-      name: "Instagram", // 버튼에 표시될 이름
+      name: "총학생회 인스타", // 버튼에 표시될 이름
       icon: "📷", // 버튼 아이콘
-      url: "https://instagram.com", // 클릭 시 이동할 링크
+      url: "https://www.instagram.com/stu__seed?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", // 클릭 시 이동할 링크
       color: "#E4405F" // 버튼 배경색
     },
     {
-      name: "카카오톡 채널",
+      name: "총학생회 플러스채널",
       icon: "💬",
-      url: "https://pf.kakao.com",
+      url: "http://pf.kakao.com/_xkDJfj",
       color: "#FEE500"
     }
   ],
