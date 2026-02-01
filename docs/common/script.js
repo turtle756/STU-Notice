@@ -114,13 +114,30 @@ if (typeof calendarMonths !== 'undefined') {
   // status가 "on"인 월만 필터링
   const activeMonths = calendarMonths.filter(m => m.status === 'on');
   
-  // 이미지 프리로드
+  // 이미지 프리로드 (jpg 실패 시 png로 대체)
   const calendarImageCache = {};
   activeMonths.forEach(m => {
     const img = new Image();
-    img.src = imgPrefix + m.image;
+    const basePath = imgPrefix + m.image.replace(/\.(jpg|png)$/i, '');
+    img.src = basePath + '.jpg';
+    img.onerror = function() {
+      this.onerror = null;
+      this.src = basePath + '.png';
+    };
     calendarImageCache[m.month] = img;
   });
+  
+  // 이미지 로드 함수 (jpg 실패 시 png로 대체)
+  function loadCalendarImage(month) {
+    const m = activeMonths.find(item => item.month === month);
+    if (!m) return;
+    const basePath = imgPrefix + m.image.replace(/\.(jpg|png)$/i, '');
+    calendarImage.src = basePath + '.jpg';
+    calendarImage.onerror = function() {
+      this.onerror = null;
+      this.src = basePath + '.png';
+    };
+  }
   
   // 월 버튼 생성
   activeMonths.forEach((m, index) => {
@@ -131,7 +148,7 @@ if (typeof calendarMonths !== 'undefined') {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      calendarImage.src = calendarImageCache[m.month].src;
+      loadCalendarImage(m.month);
     });
     monthButtonsContainer.appendChild(btn);
   });
@@ -170,7 +187,7 @@ if (typeof calendarMonths !== 'undefined') {
     buttons.forEach((btn, i) => {
       btn.classList.toggle('active', i === initialIndex);
     });
-    calendarImage.src = calendarImageCache[activeMonths[initialIndex].month].src;
+    loadCalendarImage(activeMonths[initialIndex].month);
   }
 }
 
