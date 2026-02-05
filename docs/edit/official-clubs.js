@@ -9,10 +9,12 @@ const officialClubsData = [
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
     image: "image/example_club.png", // 카드 이미지 경로
-    title: "예시 정규 동아리",
-    description: "정규 동아리 예시입니다.",
-    kakaoLink: "https://open.kakao.com/o/example", // 카카오톡 오픈채팅 링크 (가입 문의용)
-    detail: "정규 동아리 상세 설명입니다.", // 모달 팝업에 표시될 상세 설명
+    title: "증인들",
+    description: "null.",
+    kakaoLink: "null", // 카카오톡 오픈채팅 링크 (가입 문의용)
+    detail: "안녕하세요, 찬양선교동아리 증인들입니다! 은혜를 사모하고 기쁘게 찬양하고 싶은 모든 분들 환영합니다! 평생 함께 예배할 수 있는 동역자를 만드시고 싶으시다면 증인들로 오세요 :)
+
+문의) 010-3805-4577", // 모달 팝업에 표시될 상세 설명
   },
   // #####################
 ];
