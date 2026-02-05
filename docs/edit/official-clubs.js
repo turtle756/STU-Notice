@@ -16,7 +16,7 @@ const officialClubsData = [
   }, 
 
 {
-    category: "엘피스", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
+    category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
     image: "엘피스 1", // 카드 이미지 경로
     title: "엘피스",
     description: "엘피스 찬양팀입니다",
