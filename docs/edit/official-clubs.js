@@ -8,7 +8,7 @@ const officialClubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
-    image: "", // 카드 이미지 경로
+    image: "증인들 3.png", // 카드 이미지 경로
     title: "증인들",
     description: "null.",
     kakaoLink: "null", // 카카오톡 오픈채팅 링크 (가입 문의용)
