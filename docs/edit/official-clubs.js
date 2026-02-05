@@ -8,7 +8,7 @@ const officialClubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
-    image: "C:\Users\owner\Documents\시드 총학 문서\홈페이지 정규 동아리들 정보\동아리 사진\증인들\증인들 3.png", // 카드 이미지 경로
+    image: "", // 카드 이미지 경로
     title: "증인들",
     description: "null.",
     kakaoLink: "null", // 카카오톡 오픈채팅 링크 (가입 문의용)
