@@ -17,7 +17,7 @@ const officialClubsData = [
 
 {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
-    image: "엘피스 1", // 카드 이미지 경로
+    image: "https://github.com/turtle756/STU-Notice/blob/main/docs/image/%EC%97%98%ED%94%BC%EC%8A%A4%201.jpg", // 카드 이미지 경로
     title: "엘피스",
     description: "엘피스 찬양팀입니다",
     kakaoLink: "null", // 카카오톡 오픈채팅 링크 (가입 문의용)
