@@ -11,8 +11,8 @@ const officialClubsData = [
     image: "https://github.com/turtle756/STU-Notice/blob/main/docs/image/%EC%A6%9D%EC%9D%B8%EB%93%A4%203.png", // 카드 이미지 경로
     title: "증인들",
     description: "안녕하세요, 찬양선교동아리 증인들입니다! 은혜를 사모하고 기쁘게 찬양하고 싶은 모든 분들 환영합니다! 평생 함께 예배할 수 있는 동역자를 만드시고 싶으시다면 증인들로 오세요 :)  문의) 010-3805-4577",
-    kakaoLink: "null", // 카카오톡 오픈채팅 링크 (가입 문의용)
-    detail: "null", // 모달 팝업에 표시될 상세 설명
+    kakaoLink: null, // 카카오톡 오픈채팅 링크 (가입 문의용)
+    detail: null, // 모달 팝업에 표시될 상세 설명
   }, 
 
 {
