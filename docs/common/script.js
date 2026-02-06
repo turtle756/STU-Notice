@@ -370,17 +370,18 @@ if (typeof officialClubsData !== 'undefined') {
     officialClubsGrid.innerHTML = '';
     
     const filteredData = officialClubsCurrentFilter === '전체'
-      ? officialClubsData
-      : officialClubsData.filter(c => c.category === officialClubsCurrentFilter);
+      ? officialClubsData.map((c, i) => ({...c, _origIdx: i}))
+      : officialClubsData.map((c, i) => ({...c, _origIdx: i})).filter(c => c.category === officialClubsCurrentFilter);
     
     const start = (page - 1) * officialClubsPerPage;
     const end = start + officialClubsPerPage;
     const pageClubs = filteredData.slice(start, end);
     
-    pageClubs.forEach(club => {
+    pageClubs.forEach((club, idx) => {
       const card = document.createElement('div');
-      card.className = 'community-card';
+      card.className = 'community-card official-club-card';
       card.dataset.category = club.category;
+      card.dataset.officialIndex = club._origIdx;
       if (club.detail) card.dataset.detail = club.detail;
       
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
@@ -532,6 +533,10 @@ const modalMeta = document.getElementById('modalMeta');
 const modalDescription = document.getElementById('modalDescription');
 const modalButton = document.getElementById('modalButton');
 const modalMap = document.getElementById('modalMap');
+const modalSubImages = document.getElementById('modalSubImages');
+const modalContact = document.getElementById('modalContact');
+const modalSocialLinks = document.getElementById('modalSocialLinks');
+const modalQrCode = document.getElementById('modalQrCode');
 
 function openModal(cardData) {
   modalImage.src = cardData.image;
@@ -551,13 +556,66 @@ function openModal(cardData) {
     ).join('');
     modalDescription.innerHTML = modalDescription.textContent + '<br><br>' + detailsHtml;
   }
-  
+
+  if (modalSubImages) {
+    if (cardData.subImages && cardData.subImages.length > 0) {
+      modalSubImages.innerHTML = cardData.subImages.map(src =>
+        `<img src="${src}" alt="서브 이미지" class="modal-sub-image" />`
+      ).join('');
+      modalSubImages.style.display = 'flex';
+    } else {
+      modalSubImages.innerHTML = '';
+      modalSubImages.style.display = 'none';
+    }
+  }
+
+  if (modalContact) {
+    if (cardData.contact) {
+      modalContact.innerHTML = `<span class="modal-contact-label">연락처 :</span> ${cardData.contact}`;
+      modalContact.style.display = 'block';
+    } else {
+      modalContact.innerHTML = '';
+      modalContact.style.display = 'none';
+    }
+  }
+
+  if (modalSocialLinks) {
+    let socialHtml = '';
+    if (cardData.instagram) {
+      socialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-social-btn instagram">📷 Instagram</a>`;
+    }
+    if (cardData.facebook) {
+      socialHtml += `<a href="${cardData.facebook}" target="_blank" rel="noopener noreferrer" class="modal-social-btn facebook">👤 Facebook</a>`;
+    }
+    if (socialHtml) {
+      modalSocialLinks.innerHTML = socialHtml;
+      modalSocialLinks.style.display = 'flex';
+    } else {
+      modalSocialLinks.innerHTML = '';
+      modalSocialLinks.style.display = 'none';
+    }
+  }
+
+  if (modalQrCode) {
+    if (cardData.qrCodeImage) {
+      const qrSrc = cardData.qrCodeImage.startsWith('http') ? cardData.qrCodeImage : imgPrefix + cardData.qrCodeImage;
+      modalQrCode.innerHTML = `<p class="modal-qr-label">QR 코드</p><img src="${qrSrc}" alt="QR 코드" class="modal-qr-image" />`;
+      modalQrCode.style.display = 'block';
+    } else {
+      modalQrCode.innerHTML = '';
+      modalQrCode.style.display = 'none';
+    }
+  }
+
+  let buttonsHtml = '';
+  if (cardData.googleFormLink) {
+    buttonsHtml += `<a href="${cardData.googleFormLink}" target="_blank" class="modal-button google-form">📋 구글폼 바로가기</a>`;
+  }
   if (cardData.buttonUrl) {
     const buttonClass = cardData.buttonType === 'kakao' ? 'modal-button kakao' : 'modal-button';
-    modalButton.innerHTML = `<a href="${cardData.buttonUrl}" target="_blank" class="${buttonClass}">${cardData.buttonText}</a>`;
-  } else {
-    modalButton.innerHTML = '';
+    buttonsHtml += `<a href="${cardData.buttonUrl}" target="_blank" class="${buttonClass}">${cardData.buttonText}</a>`;
   }
+  modalButton.innerHTML = buttonsHtml;
   
   if (modalMap) {
     if (cardData.mapCodeModal && cardData.mapCodeModal.trim()) {
@@ -667,6 +725,24 @@ function setupCardListeners() {
       const description = card.querySelector('.community-description').textContent;
       const kakaoBtn = card.querySelector('.kakao-button');
       const detailText = card.dataset.detail || '';
+
+      const isOfficialClub = card.classList.contains('official-club-card');
+      let clubData = null;
+      if (isOfficialClub && typeof officialClubsData !== 'undefined' && card.dataset.officialIndex !== undefined) {
+        clubData = officialClubsData[parseInt(card.dataset.officialIndex)];
+      }
+
+      const subImages = [];
+      if (clubData) {
+        if (clubData.subImage1) {
+          const s1 = clubData.subImage1.startsWith('http') ? clubData.subImage1 : imgPrefix + clubData.subImage1;
+          subImages.push(s1);
+        }
+        if (clubData.subImage2) {
+          const s2 = clubData.subImage2.startsWith('http') ? clubData.subImage2 : imgPrefix + clubData.subImage2;
+          subImages.push(s2);
+        }
+      }
       
       const cardData = {
         image: img ? img.src : 'https://picsum.photos/600/300',
@@ -678,7 +754,13 @@ function setupCardListeners() {
         details: [],
         buttonUrl: kakaoBtn?.href || null,
         buttonText: kakaoBtn?.textContent || null,
-        buttonType: 'kakao'
+        buttonType: 'kakao',
+        subImages: subImages,
+        contact: clubData?.contact || null,
+        googleFormLink: clubData?.googleFormLink || null,
+        qrCodeImage: clubData?.qrCodeImage || null,
+        instagram: clubData?.instagram || null,
+        facebook: clubData?.facebook || null,
       };
       
       openModal(cardData);
