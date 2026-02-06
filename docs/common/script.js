@@ -29,6 +29,31 @@ const imgPrefix = isInCommon ? '../' : '';
 
 /*
 ================================================================================
+📝 페이지 제목/부제목 동적 적용
+================================================================================
+*/
+function applyPageHeader(config) {
+  if (!config) return;
+  const header = document.querySelector('.page-header');
+  const calendarHeader = document.querySelector('.calendar-header h2');
+  if (header) {
+    if (config.pageTitle) header.querySelector('h1').textContent = config.pageTitle;
+    if (config.pageSubtitle) header.querySelector('p').textContent = config.pageSubtitle;
+  }
+  if (calendarHeader && config.pageTitle) {
+    calendarHeader.textContent = config.pageTitle;
+  }
+}
+
+if (typeof eventsConfig !== 'undefined') applyPageHeader(eventsConfig);
+if (typeof clubsConfig !== 'undefined') applyPageHeader(clubsConfig);
+if (typeof officialClubsConfig !== 'undefined') applyPageHeader(officialClubsConfig);
+if (typeof partnersConfig !== 'undefined') applyPageHeader(partnersConfig);
+if (typeof noticeConfig !== 'undefined') applyPageHeader(noticeConfig);
+if (typeof scheduleConfig !== 'undefined') applyPageHeader(scheduleConfig);
+
+/*
+================================================================================
 📄 페이지네이션 유틸리티
 ================================================================================
 */
@@ -887,8 +912,8 @@ if (faqList && typeof faqs !== 'undefined') {
   });
 }
 
-if (suggestButton && typeof suggestFormLink !== 'undefined') {
-  suggestButton.href = suggestFormLink;
+if (suggestButton && typeof noticeConfig !== 'undefined' && noticeConfig.suggestFormLink) {
+  suggestButton.href = noticeConfig.suggestFormLink;
 }
 
 /*

@@ -51,6 +51,8 @@ const clubsData = [
 ];
 
 const clubsConfig = {
+  pageTitle: "자율 동아리 & 소모임", // 페이지 상단 제목
+  pageSubtitle: "관심사가 같은 친구들과 함께하세요!", // 페이지 상단 부제목
   applyFormLink: "https://forms.gle/3t7igzSKnyMeLT1n8", // 페이지 상단 "신청하기" 버튼 링크
   itemsPerPage: 15, // 한 페이지에 표시할 카드 수
   categories: ["스포츠", "학술", "문화예술", "취미"] // 필터 버튼 목록 (추가/삭제 가능)

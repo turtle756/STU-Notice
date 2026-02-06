@@ -4,6 +4,10 @@
 ================================================================================
 */
 
+const scheduleConfig = {
+  pageTitle: "📅 이번 달 주요 일정", // 페이지 상단 제목
+};
+
 const calendarMonths = [
   { month: 1, label: "1월", image: "image/calendar/calendar_1.jpg", status: "off" }, // month: 월 숫자 / label: 버튼 텍스트 / image: 이미지 경로 / status: "on"=표시, "off"=숨김
   { month: 2, label: "2월", image: "image/calendar/calendar_2.jpg", status: "on" },

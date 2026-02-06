@@ -108,6 +108,8 @@ const eventsData = [
 ];
 
 const eventsConfig = {
+  pageTitle: "교내 행사 & 공모전", // 페이지 상단 제목
+  pageSubtitle: "다양한 교내 활동에 참여해보세요!", // 페이지 상단 부제목
   suggestFormLink: "https://forms.gle/edD7CaFW92pCbjQm8", // 페이지 상단 "건의하기" 버튼 링크
   itemsPerPage: 15, // 한 페이지에 표시할 카드 수
   categories: ["행사", "공모전"], // 필터 버튼 목록 (추가/삭제 가능)

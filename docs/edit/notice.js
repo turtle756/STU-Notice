@@ -105,4 +105,8 @@ const faqs = [
 
 ];
 
-const suggestFormLink = "https://forms.gle/example"; // 페이지 하단 건의사항 버튼 링크
+const noticeConfig = {
+  pageTitle: "공지사항 & FAQ", // 페이지 상단 제목
+  pageSubtitle: "총학생회 소식과 자주 묻는 질문을 확인하세요", // 페이지 상단 부제목
+  suggestFormLink: "https://forms.gle/example" // 페이지 하단 건의사항 버튼 링크
+};

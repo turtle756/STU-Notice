@@ -29,7 +29,9 @@ const officialClubsData = [
 ];
 
 const officialClubsConfig = {
+  pageTitle: "정규 동아리", // 페이지 상단 제목
+  pageSubtitle: "학교에서 공식 인정받은 동아리입니다", // 페이지 상단 부제목
   itemsPerPage: 15, // 한 페이지에 표시할 카드 수
   categories: ["종교", "봉사", "학술", "취미"], // 필터 버튼 목록 (추가/삭제 가능)
-  applyFormLink: null,// 정규 동아리 신청 폼 링크
+  applyFormLink: null, // 정규 동아리 신청 폼 링크
 };
