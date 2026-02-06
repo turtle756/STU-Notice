@@ -410,7 +410,7 @@ if (typeof officialClubsData !== 'undefined') {
 
 /*
 ================================================================================
-🤝 제휴사 렌더링
+🤝 제휴업체 렌더링
 ================================================================================
 */
 let partnersCurrentFilter = '전체';
@@ -767,7 +767,7 @@ function setupCardListeners() {
     });
   });
 
-  // 제휴사 카드 클릭
+  // 제휴업체 카드 클릭
   document.querySelectorAll('.partner-card').forEach(card => {
     if (card.dataset.listenerAdded) return;
     card.dataset.listenerAdded = 'true';

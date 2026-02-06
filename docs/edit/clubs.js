@@ -8,7 +8,7 @@ const clubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "스포츠", // 카테고리 필터용 (clubsConfig.categories 중 하나)
-    image: "image/축구동아리/축구동아리.png", // 카드 이미지 경로
+    image: "image/자율동아리&소모임/축구동아리/축구동아리.png", // 카드 이미지 경로
     title: "축구 동아리",
     description: "함께 축구하며 친목을 다지는 동아리입니다.",
     kakaoLink: "https://open.kakao.com/o/example1", // 카카오톡 오픈채팅 링크 (가입 문의용)
@@ -19,7 +19,7 @@ const clubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "학술", // 카테고리 필터용 (clubsConfig.categories 중 하나)
-    image: "image/코딩스터디/코딩스터디.png", // 카드 이미지 경로
+    image: "image/자율동아리&소모임/코딩스터디/코딩스터디.png", // 카드 이미지 경로
     title: "코딩 스터디",
     description: "알고리즘 문제풀이 및 프로젝트 스터디",
     kakaoLink: "https://open.kakao.com/o/example3", // 카카오톡 오픈채팅 링크 (가입 문의용)
@@ -30,7 +30,7 @@ const clubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "문화예술", // 카테고리 필터용 (clubsConfig.categories 중 하나)
-    image: "image/밴드동아리/밴드동아리.png", // 카드 이미지 경로
+    image: "image/자율동아리&소모임/밴드동아리/밴드동아리.png", // 카드 이미지 경로
     title: "밴드 동아리",
     description: "다양한 악기로 밴드를 구성해 공연합니다.",
     kakaoLink: "https://open.kakao.com/o/example4", // 카카오톡 오픈채팅 링크 (가입 문의용)
@@ -41,7 +41,7 @@ const clubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "학술", // 카테고리 필터용 (clubsConfig.categories 중 하나)
-    image: "image/독서토론/독서토론.png", // 카드 이미지 경로
+    image: "image/자율동아리&소모임/독서토론/독서토론.png", // 카드 이미지 경로
     title: "독서 토론 모임",
     description: "매주 한 권의 책을 읽고 토론합니다.",
     kakaoLink: "https://open.kakao.com/o/example5", // 카카오톡 오픈채팅 링크 (가입 문의용)
