@@ -582,10 +582,10 @@ function openModal(cardData) {
   if (modalSocialLinks) {
     let socialHtml = '';
     if (cardData.instagram) {
-      socialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-social-btn instagram">📷 Instagram</a>`;
+      socialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-social-btn instagram"><img src="${imgPrefix}image/로고/인스타그램.png" alt="Instagram" class="social-logo"> Instagram</a>`;
     }
     if (cardData.facebook) {
-      socialHtml += `<a href="${cardData.facebook}" target="_blank" rel="noopener noreferrer" class="modal-social-btn facebook">👤 Facebook</a>`;
+      socialHtml += `<a href="${cardData.facebook}" target="_blank" rel="noopener noreferrer" class="modal-social-btn facebook"><img src="${imgPrefix}image/로고/페이스북.png" alt="Facebook" class="social-logo"> Facebook</a>`;
     }
     if (socialHtml) {
       modalSocialLinks.innerHTML = socialHtml;

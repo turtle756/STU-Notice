@@ -822,6 +822,13 @@
         transform: translateY(-1px);
       }
 
+      .social-logo {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        border-radius: 3px;
+      }
+
       .modal-social-btn.instagram {
         background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
         color: white;

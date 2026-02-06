@@ -8,7 +8,7 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/example_festival.png", // 카드 이미지 경로
+    image: "image/행사/가을축제.png", // 카드 이미지 경로
     title: "2024 가을 축제",
     date: "2024.11.15 - 2024.11.16", // 카드에 표시될 날짜
     organizer: "주관: 학생회", // 주관/주최 정보
@@ -28,7 +28,7 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "공모전", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/example_startup.png", // 카드 이미지 경로
+    image: "image/행사/창업공모전.png", // 카드 이미지 경로
     title: "창업 아이디어 공모전",
     date: "2024.11.20", // 카드에 표시될 날짜
     organizer: "주최: LINC+ 사업단", // 주관/주최 정보
@@ -49,7 +49,7 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/example_winter.png", // 카드 이미지 경로
+    image: "image/행사/겨울MT.png", // 카드 이미지 경로
     title: "겨울 MT",
     date: "2024.12.05", // 카드에 표시될 날짜
     organizer: "주관: 학생회", // 주관/주최 정보
@@ -64,7 +64,7 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "공모전", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/example_contest.png", // 카드 이미지 경로
+    image: "image/행사/글쓰기대회.png", // 카드 이미지 경로
     title: "글쓰기 경진대회",
     date: "2024.11.30", // 카드에 표시될 날짜
     organizer: "주최: 학습지원센터", // 주관/주최 정보
@@ -79,7 +79,7 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/example_sports.png", // 카드 이미지 경로
+    image: "image/행사/체육대회.png", // 카드 이미지 경로
     title: "체육대회",
     date: "2024.12.10", // 카드에 표시될 날짜
     organizer: "주관: 체육부", // 주관/주최 정보
