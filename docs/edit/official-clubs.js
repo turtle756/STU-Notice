@@ -8,7 +8,7 @@ const officialClubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
-    image: "image/정규동아리/증인들.png", // 대표 이미지 경로
+    image: "image/증인들/증인들.png", // 대표 이미지 경로
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "증인들",
@@ -26,7 +26,7 @@ const officialClubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
-    image: "image/정규동아리/엘피스.jpg", // 대표 이미지 경로
+    image: "image/엘피스/엘피스.jpg", // 대표 이미지 경로
     subImage1: "image/엘피스/테스트용1.png", // 서브 이미지 1 (없으면 null)
     subImage2: "image/엘피스/테스트용2.png", // 서브 이미지 2 (없으면 null)
     title: "엘피스",
