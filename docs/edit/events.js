@@ -8,19 +8,19 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/행사&공모전/2024가을축제/가을축제.png", // 카드 이미지 경로
-    title: "2024 가을 축제",
-    date: "2024.11.15 - 2024.11.16", // 카드에 표시될 날짜
-    organizer: "주관: 학생회", // 주관/주최 정보
-    location: "중앙운동장", // 장소 (행사만 해당, 공모전은 null)
-    description: "우리 대학 가을 축제에 여러분을 초대합니다!",
-    link: "https://example.com/festival", // 바로가기 버튼 링크 (없으면 null)
+    image: "docs/image/행사&공모전/신입생 오티.png", // 카드 이미지 경로
+    title: "2026 신입생 오리엔테이션",
+    date: "2024.4.24 - 2026.4.26", // 카드에 표시될 날짜
+    organizer: "주관:총학생회", // 주관/주최 정보
+    location: "강원도 정선 하이캐슬 리조트", // 장소 (행사만 해당, 공모전은 null)
+    description: "신입생 오리엔테이션이 강원도에서 진행됩니다!",
+    link: null, // 바로가기 버튼 링크 (없으면 null)
     applyLink: null, // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: { // 모달 팝업에 표시될 상세 정보
-      target: "전체 재학생", // 대상
-      benefits: "무료 먹거리 제공, 푸짐한 경품 추첨, 다양한 공연 관람", // 혜택
-      schedule: "11/15(금) 17:00-22:00, 11/16(토) 12:00-22:00", // 일정
-      contact: "총학생회 010-XXXX-XXXX", // 문의처
+      target: null, // 대상
+      benefits: null, // 혜택
+      schedule: null, // 일정
+      contact: null, // 문의처
     },
   },
   // #####################
