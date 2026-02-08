@@ -48,7 +48,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "CCC",
-    description: "서울신학대학교 중앙동아리 CCC는 전국 41개 도시,\n 320여 개 대학에서 약 2만 명의 대학생들이 함께하는 전국 연합 기독교 동아리입니다.\n 'Movements Everywhere'라는 비전 아래 성령의 능력으로 그리스도를 전하고 제자를 세우며,\n 1:1 순모임, 캠퍼스 모임, 연합 채플, 수련회와 단기선교 등 다양한 활동을 통해\n 신앙과 공동체의 성장을 경험할 수 있는 동아리입니다.",
+    description: "서울신학대학교 중앙동아리 CCC는 전국 41개 도시,\n 320여 개 대학에서 약 2만 명의 대학생들이 함께하는 전국 연합 기독교 동아리입니다.\n \"Movements Everywhere\"라는 비전 아래 성령의 능력으로 그리스도를 전하고 제자를 세우며,\n 1:1 순모임, 캠퍼스 모임, 연합 채플, 수련회와 단기선교 등 다양한 활동을 통해\n 신앙과 공동체의 성장을 경험할 수 있는 동아리입니다.",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://forms.gle/FAiHWku5BQAqffDN8", // 구글폼 링크 (없으면 null)
