@@ -44,8 +44,8 @@ const officialClubsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
-    image: "image/정규동아리/엘피스/엘피스.jpg", // 대표 이미지 경로
-    subImage1: "image/정규동아리/엘피스/엘피스 2.png", // 서브 이미지 1 (없으면 null)
+    image: "image/정규동아리/CCC/CCC.jpg", // 대표 이미지 경로
+    subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "CCC",
     description: "서울신학대학교 중앙동아리 CCC는
