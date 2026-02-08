@@ -16,7 +16,7 @@ const officialClubsData = [
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
-    qrCodeImage: "docs/image/정규동아리/증인들/증인들 4.png", // QR 코드 이미지 경로 (없으면 null)
+    qrCodeImage: "image/정규동아리/증인들/증인들 4.png", // QR 코드 이미지 경로 (없으면 null)
     contact: "010-3805-4577", // 연락처 (없으면 null)
     instagram: "https://www.instagram.com/witness.official_?igsh=ZnlvYjJsNGdleXcy", // 인스타그램 링크 (없으면 null)
     facebook: null, // 페이스북 링크 (없으면 null)
