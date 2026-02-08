@@ -12,7 +12,7 @@ const officialClubsData = [
     subImage1: "image/정규동아리/증인들/증인들 1.jpg", // 서브 이미지 1 (없으면 null)
     subImage2: "image/정규동아리/증인들/증인들 2.jpg", // 서브 이미지 2 (없으면 null)
     title: "증인들",
-    description: "안녕하세요, 찬양선교동아리 증인들입니다!\n 은혜를 사모하고 기쁘게 찬양하고 싶은 모든 분들 환영합니다!\n 평생 함께 예배할 수 있는 동역자를 만드시고 싶으시다면 증인들로 오세요 :)",
+    description: "안녕하세요, 찬양선교동아리 증인들입니다!\n은혜를 사모하고 기쁘게 찬양하고 싶은 모든 분들 환영합니다!\n평생 함께 예배할 수 있는 동역자를 만드시고 싶으시다면 증인들로 오세요 :)",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
@@ -30,7 +30,7 @@ const officialClubsData = [
     subImage1: "image/정규동아리/엘피스/엘피스 2.png", // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "엘피스",
-    description: "엘피스는 기독교정신을 바탕으로\n 예수 그리스도의 사랑과 실천으로 공동체를 이루며 그 시대의문화에 맞춰 어느 곳에서든지 복음을 전하는 데 목적을 두고 있습니다! \n 주된 활동은 학교 채플과 신앙수련회 찬양팀 방중사역 (수련회, 고교채플) 등이 있습니다!",
+    description: "엘피스는 기독교정신을 바탕으로\n예수 그리스도의 사랑과 실천으로 공동체를 이루며 그 시대의문화에 맞춰 어느 곳에서든지 복음을 전하는 데 목적을 두고 있습니다!\n주된 활동은 학교 채플과 신앙수련회 찬양팀 방중사역 (수련회, 고교채플) 등이 있습니다!",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://forms.gle/example-elpeace", // 구글폼 링크 (없으면 null)
@@ -48,7 +48,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "CCC",
-    description: "서울신학대학교 중앙동아리 CCC는 전국 41개 도시,\n 320여 개 대학에서 약 2만 명의 대학생들이 함께하는 전국 연합 기독교 동아리입니다.\n \"Movements Everywhere\"라는 비전 아래 성령의 능력으로 그리스도를 전하고 제자를 세우며,\n 1:1 순모임, 캠퍼스 모임, 연합 채플, 수련회와 단기선교 등 다양한 활동을 통해\n 신앙과 공동체의 성장을 경험할 수 있는 동아리입니다.",
+    description: "서울신학대학교 중앙동아리 CCC는 전국 41개 도시,\n320여 개 대학에서 약 2만 명의 대학생들이 함께하는 전국 연합 기독교 동아리입니다.\n\"Movements Everywhere\"라는 비전 아래 성령의 능력으로 그리스도를 전하고 제자를 세우며,\n1:1 순모임, 캠퍼스 모임, 연합 채플, 수련회와 단기선교 등 다양한 활동을 통해\n신앙과 공동체의 성장을 경험할 수 있는 동아리입니다.",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://forms.gle/FAiHWku5BQAqffDN8", // 구글폼 링크 (없으면 null)
