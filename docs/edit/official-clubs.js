@@ -9,8 +9,8 @@ const officialClubsData = [
   {
     category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
     image: "image/정규동아리/증인들/증인들.png", // 대표 이미지 경로
-    subImage1: "docs/image/정규동아리/증인들/증인들 1.jpg", // 서브 이미지 1 (없으면 null)
-    subImage2: "docs/image/정규동아리/증인들/증인들 2.jpg", // 서브 이미지 2 (없으면 null)
+    subImage1: "image/정규동아리/증인들/증인들 1.jpg", // 서브 이미지 1 (없으면 null)
+    subImage2: "image/정규동아리/증인들/증인들 2.jpg", // 서브 이미지 2 (없으면 null)
     title: "증인들",
     description: "안녕하세요, 찬양선교동아리 증인들입니다!\n 은혜를 사모하고 기쁘게 찬양하고 싶은 모든 분들 환영합니다!\n 평생 함께 예배할 수 있는 동역자를 만드시고 싶으시다면 증인들로 오세요 :)",
     detail: null, // 모달 팝업에 표시될 상세 설명
@@ -48,12 +48,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "CCC",
-    description: "서울신학대학교 중앙동아리 CCC는
-      전국 41개 도시, 320여 개 대학에서 약 2만 명의 대학생들이 함께하는 전국 연합 기독교 동아리입니다.
-“Movements Everywhere”라는 비전 아래
-성령의 능력으로 그리스도를 전하고 제자를 세우며,
-1:1 순모임, 캠퍼스 모임, 연합 채플, 수련회와 단기선교 등
-다양한 활동을 통해 신앙과 공동체의 성장을 경험할 수 있는 동아리입니다.
+    description: "서울신학대학교 중앙동아리 CCC는 전국 41개 도시,\n 320여 개 대학에서 약 2만 명의 대학생들이 함께하는 전국 연합 기독교 동아리입니다.\n“Movements Everywhere”라는 비전 아래성령의 능력으로 그리스도를 전하고 제자를 세우며,\n 1:1 순모임, 캠퍼스 모임, 연합 채플, 수련회와 단기선교 등다양한 활동을 통해\n신앙과 공동체의 성장을 경험할 수 있는 동아리입니다.
 ",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
