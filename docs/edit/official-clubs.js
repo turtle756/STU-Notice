@@ -315,7 +315,7 @@ const officialClubsData = [
     image: "image/정규동아리/사이다/사이다.png", // 대표 이미지 경로
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
-    title: "사이",
+    title: "사이다",
     description: "사이다 동아리는 사진을 사랑하는 학우면 누구나 가입할 수 있는 본교 사진동아리로 학우님들이 서로 사진에 대한 정보를 공유하고, 친밀해지는 것을 목적으로 합니다.",
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
