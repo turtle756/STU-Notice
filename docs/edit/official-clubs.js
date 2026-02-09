@@ -33,10 +33,28 @@ const officialClubsData = [
     description: "엘피스는 기독교정신을 바탕으로\n예수 그리스도의 사랑과 실천으로 공동체를 이루며 그 시대의문화에 맞춰 어느 곳에서든지 복음을 전하는 데 목적을 두고 있습니다!\n주된 활동은 학교 채플과 신앙수련회 찬양팀 방중사역 (수련회, 고교채플) 등이 있습니다!",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
-    googleFormLink: "https://forms.gle/example-elpeace", // 구글폼 링크 (없으면 null)
+    googleFormLink: null, // 구글폼 링크 (없으면 null)
     qrCodeImage: null, // QR 코드 이미지 경로 (없으면 null)
     contact: "010-9552-8018", // 연락처 (없으면 null)
     instagram: "https://instagram.com/_elpeace_", // 인스타그램 링크 (없으면 null)
+    facebook: null, // 페이스북 링크 (없으면 null)
+  },
+  // #####################
+
+   // @@@@@@@@@@@@@@@@@
+  {
+    category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
+    image: "image/정규동아리/아침햇살/아침햇살 1.jpg", // 대표 이미지 경로
+    subImage1: "image/정규동아리/아침햇살/아침햇살 2.jpg", // 서브 이미지 1 (없으면 null)
+    subImage2: null, // 서브 이미지 2 (없으면 null)
+    title: "아침햇살",
+    description: "안녕하세요 저희는 아침을 깨우고 새벽채플을 여는 아침햇살 찬양팀입니다!저희는 매주 화요일 기도회를 진행하고, 목,금 생활관 새벽채플 찬양인도를 맡고있습니다. 그 외에 선후배가 서로 교제하는 기도짝, 매 달 진행되는 생활관 영성집회 마지막으로 방중활동 같은 활동들을 하고 있습니다. 자세한 내용은 인스타 서울신학대학교 아침햇살 홍보 포스터 참고해주세요!",
+    detail: null, // 모달 팝업에 표시될 상세 설명
+    kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
+    googleFormLink:"https://docs.google.com/forms/d/e/1FAIpQLSeX-lNKkAwe607ChqSy1WqSLnI_hFZqzeeGckfFpW71tWVxLA/viewform?usp=header", // 구글폼 링크 (없으면 null)
+    qrCodeImage: null, // QR 코드 이미지 경로 (없으면 null)
+    contact: "(전체리더)010-9625-8440", // 연락처 (없으면 null)
+    instagram: "https://www.instagram.com/morning_sunshine_official?igsh=MTFpMDlhaHcwcHlqdA==", // 인스타그램 링크 (없으면 null)
     facebook: null, // 페이스북 링크 (없으면 null)
   },
   // #####################
@@ -55,6 +73,25 @@ const officialClubsData = [
     qrCodeImage: null, // QR 코드 이미지 경로 (없으면 null)
     contact: "010-7467-5623", // 연락처 (없으면 null)
     instagram: null, // 인스타그램 링크 (없으면 null)
+    facebook: null, // 페이스북 링크 (없으면 null)
+  },
+  // #####################
+
+  
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
+    image: "image/정규동아리/북한선교동아리/북한선교동아리 1.jpg", // 대표 이미지 경로
+    subImage1: "image/정규동아리/북한선교동아리/북한선교동아리 2.jpg," // 서브 이미지 1 (없으면 null)
+    subImage2: null, // 서브 이미지 2 (없으면 null)
+    title: "북한선교동아리",
+    description: "북한선교 동아리는 하나님의 마음으로 북한을 위해서 기도하는 동아리입니다. 그리고 나라와 민족, 온 열방을 위해서 기도하고 있습니다. 하나님의 마음으로 북한을 사랑하며 기도하고 싶으신 분들 대환영합니다!",
+    detail: null, // 모달 팝업에 표시될 상세 설명
+    kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
+    googleFormLink: null, // 구글폼 링크 (없으면 null)
+    qrCodeImage: null, // QR 코드 이미지 경로 (없으면 null)
+    contact: null, // 연락처 (없으면 null)
+    instagram:"stu__nkmc", // 인스타그램 링크 (없으면 null)
     facebook: null, // 페이스북 링크 (없으면 null)
   },
   // #####################
