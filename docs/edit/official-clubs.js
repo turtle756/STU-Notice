@@ -91,7 +91,7 @@ const officialClubsData = [
     googleFormLink: null, // 구글폼 링크 (없으면 null)
     qrCodeImage: null, // QR 코드 이미지 경로 (없으면 null)
     contact: null, // 연락처 (없으면 null)
-    instagram:"stu__nkmc", // 인스타그램 링크 (없으면 null)
+    instagram:"https://www.instagram.com/stu__nkmc?igsh=MTJwMnh6MThwM3F2eg==", // 인스타그램 링크 (없으면 null)
     facebook: null, // 페이스북 링크 (없으면 null)
   },
   // #####################
