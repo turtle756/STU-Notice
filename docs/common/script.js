@@ -27,9 +27,6 @@ if (hamburger && navLinks) {
 const isInCommon = window.location.pathname.includes('/common/');
 const imgPrefix = isInCommon ? '../' : '';
 
-function escapeAttr(str) {
-  return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;');
-}
 
 /*
 ================================================================================
@@ -330,8 +327,7 @@ if (typeof clubsData !== 'undefined') {
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
 
       const clubDescText = club.description || '';
-      const clubNeedsTruncate = clubDescText.length > 80;
-      const clubTruncatedDesc = clubNeedsTruncate ? clubDescText.substring(0, 80) + '...' : clubDescText;
+      const clubTruncatedDesc = clubDescText.length > 80 ? clubDescText.substring(0, 80) + '...' : clubDescText;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
@@ -340,8 +336,7 @@ if (typeof clubsData !== 'undefined') {
             <h3>${club.title}</h3>
             <span class="community-category">${club.category}</span>
           </div>
-          <p class="community-description ${clubNeedsTruncate ? 'truncated' : ''}" data-full="${escapeAttr(clubDescText)}" data-short="${escapeAttr(clubTruncatedDesc)}">${clubTruncatedDesc}</p>
-          ${clubNeedsTruncate ? '<span class="desc-toggle">더보기</span>' : ''}
+          <p class="community-description">${clubTruncatedDesc}</p>
           <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>
         </div>
       `;
@@ -403,8 +398,7 @@ if (typeof officialClubsData !== 'undefined') {
       }
 
       const descText = club.description || '';
-      const needsTruncate = descText.length > 80;
-      const truncatedDesc = needsTruncate ? descText.substring(0, 80) + '...' : descText;
+      const truncatedDesc = descText.length > 80 ? descText.substring(0, 80) + '...' : descText;
 
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
@@ -413,8 +407,7 @@ if (typeof officialClubsData !== 'undefined') {
             <h3>${club.title}</h3>
             <span class="community-category">${club.category}</span>
           </div>
-          <p class="community-description ${needsTruncate ? 'truncated' : ''}" data-full="${escapeAttr(descText)}" data-short="${escapeAttr(truncatedDesc)}">${truncatedDesc}</p>
-          ${needsTruncate ? '<span class="desc-toggle">더보기</span>' : ''}
+          <p class="community-description">${truncatedDesc}</p>
           ${cardButtonHtml}
         </div>
       `;
@@ -689,26 +682,6 @@ function closeModal() {
 
 // 카드 클릭 이벤트 등록 함수
 function setupCardListeners() {
-  document.querySelectorAll('.desc-toggle').forEach(toggle => {
-    if (toggle.dataset.listenerAdded) return;
-    toggle.dataset.listenerAdded = 'true';
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const desc = toggle.previousElementSibling;
-      if (!desc) return;
-      const isExpanded = toggle.dataset.expanded === 'true';
-      if (isExpanded) {
-        desc.textContent = desc.dataset.short;
-        toggle.textContent = '더보기';
-        toggle.dataset.expanded = 'false';
-      } else {
-        desc.textContent = desc.dataset.full;
-        toggle.textContent = '접기';
-        toggle.dataset.expanded = 'true';
-      }
-    });
-  });
-
   // 행사 카드 클릭
   document.querySelectorAll('.event-card').forEach(card => {
     if (card.dataset.listenerAdded) return;
@@ -757,8 +730,7 @@ function setupCardListeners() {
     card.dataset.listenerAdded = 'true';
     card.addEventListener('click', (e) => {
       if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button') ||
-          e.target.classList.contains('card-google-form-button') || e.target.closest('.card-google-form-button') ||
-          e.target.classList.contains('desc-toggle')) {
+          e.target.classList.contains('card-google-form-button') || e.target.closest('.card-google-form-button')) {
         return;
       }
       
