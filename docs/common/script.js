@@ -640,7 +640,7 @@ function openModal(cardData) {
 
   let buttonsHtml = '';
   if (cardData.googleFormLink) {
-    buttonsHtml += `<a href="${cardData.googleFormLink}" target="_blank" class="modal-button google-form">📋 바로가기</a>`;
+    buttonsHtml += `<a href="${cardData.googleFormLink}" target="_blank" class="modal-button google-form">📋 구글폼 바로가기</a>`;
   }
   if (cardData.buttonUrl) {
     const buttonClass = cardData.buttonType === 'kakao' ? 'modal-button kakao' : 'modal-button';
