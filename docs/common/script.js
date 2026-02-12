@@ -386,6 +386,13 @@ if (typeof officialClubsData !== 'undefined') {
       
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
       
+      let cardButtonHtml = '';
+      if (club.kakaoLink) {
+        cardButtonHtml = `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>`;
+      } else if (club.googleFormLink) {
+        cardButtonHtml = `<a href="${club.googleFormLink}" target="_blank" rel="noopener noreferrer" class="card-google-form-button">📋 구글폼</a>`;
+      }
+
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
         <div class="community-content">
@@ -394,7 +401,7 @@ if (typeof officialClubsData !== 'undefined') {
             <span class="community-category">${club.category}</span>
           </div>
           <p class="community-description">${club.description}</p>
-          ${club.kakaoLink ? `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>` : ''}
+          ${cardButtonHtml}
         </div>
       `;
       
@@ -715,7 +722,8 @@ function setupCardListeners() {
     if (card.dataset.listenerAdded) return;
     card.dataset.listenerAdded = 'true';
     card.addEventListener('click', (e) => {
-      if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button')) {
+      if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button') ||
+          e.target.classList.contains('card-google-form-button') || e.target.closest('.card-google-form-button')) {
         return;
       }
       
