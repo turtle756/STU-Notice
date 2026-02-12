@@ -401,10 +401,9 @@ if (typeof officialClubsData !== 'undefined') {
       
       let cardButtonHtml = '';
       if (club.googleFormLink) {
-        cardButtonHtml += `<a href="${club.googleFormLink}" target="_blank" rel="noopener noreferrer" class="card-google-form-button">📋 바로가기</a>`;
-      }
-      if (club.kakaoLink) {
-        cardButtonHtml += `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>`;
+        cardButtonHtml = `<a href="${club.googleFormLink}" target="_blank" rel="noopener noreferrer" class="card-google-form-button">📋 바로가기</a>`;
+      } else if (club.kakaoLink) {
+        cardButtonHtml = `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>`;
       }
 
       const descText = club.description || '';
