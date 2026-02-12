@@ -261,6 +261,10 @@ if (typeof eventsData !== 'undefined') {
       }
       
       const imageSrc = event.image.startsWith('http') ? event.image : imgPrefix + event.image;
+
+      const eventDescText = event.description || '';
+      const eventTruncatedDesc = eventDescText.length > 80 ? eventDescText.substring(0, 80) + '...' : eventDescText;
+      card.dataset.fullDesc = eventDescText;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${event.title}" />
@@ -270,7 +274,8 @@ if (typeof eventsData !== 'undefined') {
           <p class="event-date">📅 ${event.date}</p>
           <p class="event-organizer">${event.organizer}</p>
           ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
-          <p class="event-description">${event.description}</p>
+          <p class="event-description">${eventTruncatedDesc}</p>
+          ${eventDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
           <div class="event-buttons">
             ${event.link ? `<a href="${event.link}" target="_blank" class="link-button">🔗 바로가기</a>` : ''}
             ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
@@ -462,6 +467,10 @@ if (typeof partnersData !== 'undefined') {
       card.dataset.index = partnersData.indexOf(partner);
       
       const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
+
+      const partnerDescText = partner.description || '';
+      const partnerTruncatedDesc = partnerDescText.length > 80 ? partnerDescText.substring(0, 80) + '...' : partnerDescText;
+      card.dataset.fullDesc = partnerDescText;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${partner.title}" />
@@ -472,7 +481,8 @@ if (typeof partnersData !== 'undefined') {
           </div>
           <p class="partner-discount">${partner.discount}</p>
           <p class="partner-location">📍 ${partner.location}</p>
-          <p class="partner-description">${partner.description}</p>
+          <p class="partner-description">${partnerTruncatedDesc}</p>
+          ${partnerDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
         </div>
       `;
       
@@ -701,6 +711,7 @@ function setupCardListeners() {
       const organizer = card.querySelector('.event-organizer')?.textContent || '';
       const location = card.querySelector('.event-location')?.textContent || '';
       const description = card.querySelector('.event-description').textContent;
+      const fullDesc = card.dataset.fullDesc || '';
       const applyBtn = card.querySelector('.apply-button');
       
       const details = [];
@@ -716,7 +727,7 @@ function setupCardListeners() {
         category: category,
         categoryColor: category === '공모전' ? '#e74c3c' : '#3498db',
         meta: [date, organizer, location].filter(item => item),
-        description: description,
+        description: fullDesc || description,
         details: details,
         buttonUrl: applyBtn?.href || null,
         buttonText: applyBtn?.textContent || null,
@@ -801,6 +812,7 @@ function setupCardListeners() {
       const discount = card.querySelector('.partner-discount')?.textContent || '';
       const location = card.querySelector('.partner-location')?.textContent || '';
       const description = card.querySelector('.partner-description').textContent;
+      const fullDesc = card.dataset.fullDesc || '';
       const index = parseInt(card.dataset.index);
       const partner = typeof partnersData !== 'undefined' ? partnersData[index] : null;
       
@@ -810,7 +822,7 @@ function setupCardListeners() {
         category: category,
         categoryColor: '#9b59b6',
         meta: [discount, location].filter(item => item),
-        description: description,
+        description: fullDesc || description,
         details: [],
         buttonUrl: null,
         buttonText: null,
