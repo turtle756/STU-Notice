@@ -574,6 +574,15 @@ function openModal(cardData) {
   modalTitle.textContent = cardData.title;
   modalCategory.textContent = cardData.category;
   modalCategory.style.backgroundColor = cardData.categoryColor;
+
+  const modalTitleSocial = document.getElementById('modalTitleSocial');
+  if (modalTitleSocial) {
+    let titleSocialHtml = '';
+    if (cardData.instagram) {
+      titleSocialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-title-social-link"><img src="${imgPrefix}image/로고/인스타그램.png" alt="Instagram" class="modal-title-social-icon"></a>`;
+    }
+    modalTitleSocial.innerHTML = titleSocialHtml;
+  }
   
   modalMeta.innerHTML = cardData.meta.map(item => 
     `<p class="modal-meta-item">${item}</p>`
@@ -602,7 +611,9 @@ function openModal(cardData) {
 
   if (modalContact) {
     if (cardData.contact) {
-      modalContact.innerHTML = `<span class="modal-contact-label">연락처 :</span> ${cardData.contact}`;
+      const contactLines = cardData.contact.split('\n').filter(l => l.trim());
+      const contactHtml = contactLines.map(line => `<span class="modal-contact-value">${line.trim()}</span>`).join('');
+      modalContact.innerHTML = `<div class="modal-contact-block"><span class="modal-contact-label">📞 연락처</span>${contactHtml}</div>`;
       modalContact.style.display = 'block';
     } else {
       modalContact.innerHTML = '';
@@ -611,20 +622,8 @@ function openModal(cardData) {
   }
 
   if (modalSocialLinks) {
-    let socialHtml = '';
-    if (cardData.instagram) {
-      socialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-social-btn instagram"><img src="${imgPrefix}image/로고/인스타그램.png" alt="Instagram" class="social-logo"> Instagram</a>`;
-    }
-    if (cardData.facebook) {
-      socialHtml += `<a href="${cardData.facebook}" target="_blank" rel="noopener noreferrer" class="modal-social-btn facebook"><img src="${imgPrefix}image/로고/페이스북.png" alt="Facebook" class="social-logo"> Facebook</a>`;
-    }
-    if (socialHtml) {
-      modalSocialLinks.innerHTML = socialHtml;
-      modalSocialLinks.style.display = 'flex';
-    } else {
-      modalSocialLinks.innerHTML = '';
-      modalSocialLinks.style.display = 'none';
-    }
+    modalSocialLinks.innerHTML = '';
+    modalSocialLinks.style.display = 'none';
   }
 
   if (modalQrCode) {
