@@ -8,12 +8,12 @@ const eventsData = [
   // @@@@@@@@@@@@@@@@@
   {
     category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "docs/image/행사&공모전/신입생 오티.png", // 카드 이미지 경로
+    image: "image/행사&공모전/신입생 오티.png", // 카드 이미지 경로
     title: "2026 신입생 오리엔테이션",
-    date: "2024.4.24 - 2026.4.26", // 카드에 표시될 날짜
+    date: "2024.2.24 - 2026.2.26", // 카드에 표시될 날짜
     organizer: "주관:총학생회", // 주관/주최 정보
     location: "강원도 정선 하이캐슬 리조트", // 장소 (행사만 해당, 공모전은 null)
-    description: "신입생 오리엔테이션이 강원도에서 진행됩니다!",
+    description: "신입생 오리엔테이션이 강원도 정에서 진행됩니다!",
     link: null, // 바로가기 버튼 링크 (없으면 null)
     applyLink: null, // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: { // 모달 팝업에 표시될 상세 정보
@@ -27,13 +27,13 @@ const eventsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "공모전", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/행사&공모전/창업아이디어공모전/창업공모전.png", // 카드 이미지 경로
-    title: "창업 아이디어 공모전",
-    date: "2024.11.20", // 카드에 표시될 날짜
-    organizer: "주최: LINC+ 사업단", // 주관/주최 정보
+    category: "프로젝트", // 카테고리 필터용 (eventsConfig.categories 중 하나)
+    image: "image/행사&공모전/자율형 스터디그룹.png", // 카드 이미지 경로
+    title: "자율형 스터디그룹 ",
+    date: "2026.03.09 ~ 2026.6.30 (기간 중 7회 스터디)", // 카드에 표시될 날짜
+    organizer: "주최:미래인재개발센터", // 주관/주최 정보
     location: null, // 장소 (행사만 해당, 공모전은 null)
-    description: "혁신적인 창업 아이디어를 공모합니다.",
+    description: null,
     link: null, // 바로가기 버튼 링크 (없으면 null)
     applyLink: "https://forms.gle/example1", // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: { // 모달 팝업에 표시될 상세 정보
@@ -112,5 +112,5 @@ const eventsConfig = {
   pageSubtitle: "다양한 교내 활동에 참여해보세요!", // 페이지 상단 부제목
   suggestFormLink: "https://forms.gle/edD7CaFW92pCbjQm8", // 페이지 상단 "건의하기" 버튼 링크
   itemsPerPage: 15, // 한 페이지에 표시할 카드 수
-  categories: ["행사", "공모전"], // 필터 버튼 목록 (추가/삭제 가능)
+  categories: ["행사", "공모전","프로젝트"], // 필터 버튼 목록 (추가/삭제 가능)
 };
