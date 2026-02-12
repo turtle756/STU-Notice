@@ -316,6 +316,7 @@
         line-height: 1.6;
         margin-top: 0.75rem;
         flex-grow: 1;
+        white-space: pre-line;
       }
 
       .event-buttons {
@@ -600,6 +601,7 @@
         color: #555;
         line-height: 1.6;
         flex-grow: 1;
+        white-space: pre-line;
       }
 
       .modal-map-container {
