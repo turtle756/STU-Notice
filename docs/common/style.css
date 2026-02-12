@@ -507,6 +507,19 @@
         white-space: pre-line;
       }
 
+      .desc-toggle {
+        display: inline-block;
+        color: #4285f4;
+        font-size: 0.85rem;
+        cursor: pointer;
+        margin-bottom: 0.75rem;
+        font-weight: 500;
+      }
+
+      .desc-toggle:hover {
+        text-decoration: underline;
+      }
+
       .kakao-button {
         display: inline-block;
         width: 100%;
@@ -1146,6 +1159,10 @@
       body.dark-mode .community-description,
       body.dark-mode .partner-description {
         color: #aaa;
+      }
+
+      body.dark-mode .desc-toggle {
+        color: #64b5f6;
       }
 
       body.dark-mode .filter-btn {
