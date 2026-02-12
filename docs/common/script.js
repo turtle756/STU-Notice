@@ -401,9 +401,10 @@ if (typeof officialClubsData !== 'undefined') {
       
       let cardButtonHtml = '';
       if (club.googleFormLink) {
-        cardButtonHtml = `<a href="${club.googleFormLink}" target="_blank" rel="noopener noreferrer" class="card-google-form-button">📋 구글폼</a>`;
-      } else if (club.kakaoLink) {
-        cardButtonHtml = `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>`;
+        cardButtonHtml += `<a href="${club.googleFormLink}" target="_blank" rel="noopener noreferrer" class="card-google-form-button">📋 바로가기</a>`;
+      }
+      if (club.kakaoLink) {
+        cardButtonHtml += `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>`;
       }
 
       const descText = club.description || '';
@@ -640,7 +641,7 @@ function openModal(cardData) {
 
   let buttonsHtml = '';
   if (cardData.googleFormLink) {
-    buttonsHtml += `<a href="${cardData.googleFormLink}" target="_blank" class="modal-button google-form">📋 구글폼 바로가기</a>`;
+    buttonsHtml += `<a href="${cardData.googleFormLink}" target="_blank" class="modal-button google-form">📋 바로가기</a>`;
   }
   if (cardData.buttonUrl) {
     const buttonClass = cardData.buttonType === 'kakao' ? 'modal-button kakao' : 'modal-button';
