@@ -263,7 +263,8 @@ if (typeof eventsData !== 'undefined') {
       const imageSrc = event.image.startsWith('http') ? event.image : imgPrefix + event.image;
 
       const eventDescText = event.description || '';
-      const eventTruncatedDesc = eventDescText.length > 80 ? eventDescText.substring(0, 80) + '...' : eventDescText;
+      const eventDescFlat = eventDescText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const eventTruncatedDesc = eventDescFlat.length > 80 ? eventDescFlat.substring(0, 80) + '...' : eventDescFlat;
       card.dataset.fullDesc = eventDescText;
       
       card.innerHTML = `
@@ -333,7 +334,8 @@ if (typeof clubsData !== 'undefined') {
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
 
       const clubDescText = club.description || '';
-      const clubTruncatedDesc = clubDescText.length > 80 ? clubDescText.substring(0, 80) + '...' : clubDescText;
+      const clubDescFlat = clubDescText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const clubTruncatedDesc = clubDescFlat.length > 80 ? clubDescFlat.substring(0, 80) + '...' : clubDescFlat;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
@@ -405,7 +407,8 @@ if (typeof officialClubsData !== 'undefined') {
       }
 
       const descText = club.description || '';
-      const truncatedDesc = descText.length > 80 ? descText.substring(0, 80) + '...' : descText;
+      const descFlat = descText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const truncatedDesc = descFlat.length > 80 ? descFlat.substring(0, 80) + '...' : descFlat;
 
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
@@ -469,7 +472,8 @@ if (typeof partnersData !== 'undefined') {
       const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
 
       const partnerDescText = partner.description || '';
-      const partnerTruncatedDesc = partnerDescText.length > 80 ? partnerDescText.substring(0, 80) + '...' : partnerDescText;
+      const partnerDescFlat = partnerDescText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const partnerTruncatedDesc = partnerDescFlat.length > 80 ? partnerDescFlat.substring(0, 80) + '...' : partnerDescFlat;
       card.dataset.fullDesc = partnerDescText;
       
       card.innerHTML = `
