@@ -507,6 +507,15 @@
         white-space: pre-line;
       }
 
+      .desc-more-hint {
+        display: inline-block;
+        color: #888;
+        font-size: 0.82rem;
+        margin-top: -1rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+      }
+
       .kakao-button {
         display: inline-block;
         width: 100%;
@@ -1146,6 +1155,10 @@
       body.dark-mode .community-description,
       body.dark-mode .partner-description {
         color: #aaa;
+      }
+
+      body.dark-mode .desc-more-hint {
+        color: #777;
       }
 
       body.dark-mode .filter-btn {

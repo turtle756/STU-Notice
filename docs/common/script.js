@@ -323,6 +323,7 @@ if (typeof clubsData !== 'undefined') {
       card.className = 'community-card';
       card.dataset.category = club.category;
       if (club.detail) card.dataset.detail = club.detail;
+      card.dataset.fullDesc = club.description || '';
       
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
 
@@ -337,6 +338,7 @@ if (typeof clubsData !== 'undefined') {
             <span class="community-category">${club.category}</span>
           </div>
           <p class="community-description">${clubTruncatedDesc}</p>
+          ${clubDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
           <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>
         </div>
       `;
@@ -408,6 +410,7 @@ if (typeof officialClubsData !== 'undefined') {
             <span class="community-category">${club.category}</span>
           </div>
           <p class="community-description">${truncatedDesc}</p>
+          ${descText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
           ${cardButtonHtml}
         </div>
       `;
@@ -740,6 +743,7 @@ function setupCardListeners() {
       const description = card.querySelector('.community-description').textContent;
       const kakaoBtn = card.querySelector('.kakao-button');
       const detailText = card.dataset.detail || '';
+      const fullDesc = card.dataset.fullDesc || '';
 
       const isOfficialClub = card.classList.contains('official-club-card');
       let clubData = null;
@@ -765,7 +769,7 @@ function setupCardListeners() {
         category: category,
         categoryColor: '#27ae60',
         meta: [],
-        description: detailText || description,
+        description: clubData?.detail || clubData?.description || detailText || fullDesc || description,
         details: [],
         buttonUrl: kakaoBtn?.href || null,
         buttonText: kakaoBtn?.textContent || null,
