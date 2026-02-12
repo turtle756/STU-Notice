@@ -7,7 +7,7 @@
 const officialClubsData = [
   // @@@@@@@@@@@@@@@@@
   {
-    category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
+    category: "찬양팀", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
     image: "image/정규동아리/증인들/증인들.png", // 대표 이미지 경로
     subImage1: "image/정규동아리/증인들/증인들 1.jpg", // 서브 이미지 1 (없으면 null)
     subImage2: "image/정규동아리/증인들/증인들 2.jpg", // 서브 이미지 2 (없으면 null)
@@ -25,7 +25,7 @@ const officialClubsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
+    category: "찬양팀", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
     image: "image/정규동아리/엘피스/엘피스.jpg", // 대표 이미지 경로
     subImage1: "image/정규동아리/엘피스/엘피스 2.png", // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
@@ -43,12 +43,12 @@ const officialClubsData = [
 
    // @@@@@@@@@@@@@@@@@
   {
-    category: "종교", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
+    category: "찬양팀", // 카테고리 필터용 (officialClubsConfig.categories 중 하나)
     image: "image/정규동아리/아침햇살/아침햇살 1.jpg", // 대표 이미지 경로
     subImage1: "image/정규동아리/아침햇살/아침햇살 2.jpg", // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "아침햇살",
-    description: "안녕하세요 저희는 아침을 깨우고 새벽채플을 여는 아침햇살 찬양팀입니다!저희는 매주 화요일 기도회를 진행하고, 목,금 생활관 새벽채플 찬양인도를 맡고있습니다. 그 외에 선후배가 서로 교제하는 기도짝, 매 달 진행되는 생활관 영성집회 마지막으로 방중활동 같은 활동들을 하고 있습니다. 자세한 내용은 인스타 서울신학대학교 아침햇살 홍보 포스터 참고해주세요!",
+    description: "안녕하세요 저희는 아침을 깨우고 새벽채플을 여는 아침햇살 찬양팀입니다!\n저희는 매주 화요일 기도회를 진행하고, 목,금 생활관 새벽채플 찬양인도를 맡고있습니다.\n그 외에 선후배가 서로 교제하는 기도짝, 매 달 진행되는 생활관 영성집회,\n마지막으로 방중활동 같은 활동들을 하고 있습니다.\n자세한 내용은 인스타 서울신학대학교 아침햇살 홍보 포스터 참고해주세요!",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink:"https://docs.google.com/forms/d/e/1FAIpQLSeX-lNKkAwe607ChqSy1WqSLnI_hFZqzeeGckfFpW71tWVxLA/viewform?usp=header", // 구글폼 링크 (없으면 null)
@@ -85,7 +85,7 @@ const officialClubsData = [
     subImage1: "image/정규동아리/북한선교동아리/북한선교동아리 2.jpg", // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "북한선교동아리",
-    description: "북한선교 동아리는 하나님의 마음으로 북한을 위해서 기도하는 동아리입니다. 그리고 나라와 민족, 온 열방을 위해서 기도하고 있습니다. 하나님의 마음으로 북한을 사랑하며 기도하고 싶으신 분들 대환영합니다!",
+    description: "북한선교 동아리는 하나님의 마음으로 북한을 위해서 기도하는 동아리입니다.\n그리고 나라와 민족, 온 열방을 위해서 기도하고 있습니다.\n하나님의 마음으로 북한을 사랑하며 기도하고 싶으신 분들 대환영합니다!",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
@@ -103,7 +103,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "ECU",
-    description: "ECU(Evangelical Christian Union)는 복음주의 신앙을 바탕으로 한 기독교 연합 동아리로, 캠퍼스 복음화를 위해 말씀 공부, 전도, 양육에 힘쓰고 있습니다. 하나님을 더 알아가고 싶은 분, 성경이 궁금한 분, 대학 생활을 함께할 믿음의 공동체를 찾고 있는 분이라면 누구나 환영합니다!",
+    description: "ECU(Evangelical Christian Union)는 복음주의 신앙을 바탕으로 한 기독교 연합 동아리로,\n캠퍼스 복음화를 위해 말씀 공부, 전도, 양육에 힘쓰고 있습니다.\n하나님을 더 알아가고 싶은 분, 성경이 궁금한 분, 대학 생활을 함께할 믿음의 공동체를 찾고 있는 분이라면 누구나 환영합니다!",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://forms.gle/qbXPHuETE89nwCsz8", // 구글폼 링크 (없으면 null)
@@ -120,7 +120,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "IVF",
-    description: "IVF에는 하나님과 나 사이의 살아있는 이야기가 있습니다.우리는 함께 읽고, 묻고, 해석합니다성경공부를 통해 우리가 누구인지 그리고 하나님이 어떤 분인지 알아갑니다.IVF에는 하나님 앞에 서 있는 나와 같은 친구들이 있습니다.우리는 함께 고민하고, 걸어갑니다.서로의 삶을 나누며 나의 일상이 더욱 의미 있어집니다.IVF에는 비교나 경쟁, 증명이아닌 진정한 변화의 이야기가 있습니다.우리는 온전하게 달라집니다.그리고 나는 더 나다워집니다.",
+    description: "IVF에는 하나님과 나 사이의 살아있는 이야기가 있습니다.\n우리는 함께 읽고, 묻고, 해석합니다.\n성경공부를 통해 우리가 누구인지 그리고 하나님이 어떤 분인지 알아갑니다.\nIVF에는 하나님 앞에 서 있는 나와 같은 친구들이 있습니다.\n우리는 함께 고민하고, 걸어갑니다.\n서로의 삶을 나누며 나의 일상이 더욱 의미 있어집니다.\nIVF에는 비교나 경쟁, 증명이아닌 진정한 변화의 이야기가 있습니다.\n우리는 온전하게 달라집니다.그리고 나는 더 나다워집니다.",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
@@ -138,7 +138,7 @@ const officialClubsData = [
     subImage1: "image/정규동아리/OCC/OCC 2.jpg", // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "OCC",
-    description: "원바디캠퍼스커뮤니티(OCC)는 예수님의 지상명령에 따라 캠퍼스에 있는 각 과에 복음의 일꾼을 세워 캠퍼스를 복음화합니다. 또한 교회와 사회와 가정을 섬기며 초대교회적인 교회개척과 무한대 선교사역을 수행합니다.",
+    description: "원바디캠퍼스커뮤니티(OCC)는 예수님의 지상명령에 따라 캠퍼스에 있는 각 과에 복음의 일꾼을 세워 캠퍼스를 복음화합니다.\n또한 교회와 사회와 가정을 섬기며 초대교회적인 교회개척과 무한대 선교사역을 수행합니다.",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://docs.google.com/forms/d/e/1FAIpQLSeA6Fv-pdaA51_NIZsPIK5Z1hzEzrJtkRuBfd4HD7QFGkrFIQ/viewform", // 구글폼 링크 (없으면 null)
@@ -192,7 +192,7 @@ const officialClubsData = [
     subImage1:"image/정규동아리/전도폭발/전도폭발 2.png", // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "전도폭발",
-    description: "친교와 전도, 제자훈련 및 건강한 성장이란 사명을 가지고 전세계 지역교회를 무장시킴으로써 주님의 지상명령을 행하고, 하나님을 영화롭게 하는데 있습니다. 매주 월,목 백주년 607호 오후 9시, 화 명헌기념관 동아리방 12시에서 기도모임이 진행되고 있으니 기도하고 싶은 분들은 누구든지 오셔서 언제든지 함께 기도해요.   ",
+    description: "친교와 전도, 제자훈련 및 건강한 성장이란 사명을 가지고 전세계 지역교회를 무장시킴으로써 주님의 지상명령을 행하고,\n하나님을 영화롭게 하는데 있습니다.\n매주 월,목 백주년 607호 오후 9시, 화 명헌기념관 동아리방 12시에서 기도모임이 진행되고 있으니 기도하고 싶은 분들은 누구든지 오셔서 언제든지 함께 기도해요.",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
@@ -210,7 +210,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "위스캠프",
-    description: "위스캠프는 방중에 작은교회와 자체적으로 캠프를 열지못하고 청소년 수련회를 경험하지 못한 다음세대 청소년들의 뜨거운 예배와 캠프를 경험시켜주기 위해 함께할 동역자들과 이야기와 추억을 만드는 동아리입니다!",
+    description: "위스캠프는 방중에 작은교회와 자체적으로 캠프를 열지못하고,청소년 수련회를 경험하지 못한 다음세대 청소년들의 뜨거운 예배와 캠프를 경험시켜주기 위해 함께할 동역자들과 이야기와 추억을 만드는 동아리입니다!",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: null, // 구글폼 링크 (없으면 null)
@@ -247,7 +247,7 @@ const officialClubsData = [
     subImage1: "image/정규동아리/그리너스/그리너스 2.jpg", // 서브 이미지 1 (없으면 null)
     subImage2: "image/정규동아리/그리너스/그리너스 1.jpg", // 서브 이미지 2 (없으면 null)
     title: "그린어스",
-    description: "🌱 GREENUS | 환경과 사람을 잇는 ESG 실천 동아리 🌱\nGREENUS는환경 및 생태를 주제로 다양한 봉사와 공모사업을 진행하며 지속가능한 발전과 친환경 미래사회를 위해 나아가는 동아리입니다.\nGREENUS는 국가지속가능발전가치 SDG-s 중 자원의 순환과 양질의 교육 중점을 바탕으로 업사이클을 활용한 교육 컨텐츠 개발을 진행하고 있습니다.\n2025년에는 환경 공모전 참여를 위한 콘텐츠 개발 및 교육자료 제작,\n업사이클 키트를 활용한 청소년 대상 환경 교육 프로그램 기획 및 운영,\n지역 주민 및 학생 대상 무료 점심 제공 봉사활동을 진행하며 ESG 가치를 실천 중심의 활동으로 확장해 나가고 있습니다.\nGREENUS에서 ESG에 대해 배우고 다양한 실무 경험과 의미 있는 스펙을 쌓을 수 있으며,\n선배들과의 활발한 교류를 통해 즐겁고 보람 있는 학교생활을 경험해 보세요 😊",
+    description: "🌱환경과 사람을 잇는 ESG 실천 동아리 🌱\nGREENUS는환경 및 생태를 주제로 다양한 봉사와 공모사업을 진행하며 지속가능한 발전과 친환경 미래사회를 위해 나아가는 동아리입니다.\nGREENUS는 국가지속가능발전가치 SDG-s 중 자원의 순환과 양질의 교육 중점을 바탕으로 업사이클을 활용한 교육 컨텐츠 개발을 진행하고 있습니다.\n2025년에는 환경 공모전 참여를 위한 콘텐츠 개발 및 교육자료 제작,\n업사이클 키트를 활용한 청소년 대상 환경 교육 프로그램 기획 및 운영,\n지역 주민 및 학생 대상 무료 점심 제공 봉사활동을 진행하며 ESG 가치를 실천 중심의 활동으로 확장해 나가고 있습니다.\nGREENUS에서 ESG에 대해 배우고 다양한 실무 경험과 의미 있는 스펙을 쌓을 수 있으며,\n선배들과의 활발한 교류를 통해 즐겁고 보람 있는 학교생활을 경험해 보세요 😊",
     detail: null, // 모달 팝업에 표시될 상세 설명
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://m.site.naver.com/20jNZ", // 구글폼 링크 (없으면 null)
@@ -333,7 +333,7 @@ const officialClubsData = [
     subImage1: null, // 서브 이미지 1 (없으면 null)
     subImage2: null, // 서브 이미지 2 (없으면 null)
     title: "솔트",
-    description: "세상의 소금이 되어 봉사로 선을 행하는 봉사동아리 SALT입니다. 저희는 부천과 서울 지역의 봉사지와 연계하여, 자율적으로 봉사활동에 참여하는 동아리입니다. 학기 중 개강 및 종강모임, MT와 각종 다양한 내부 이벤트도 진행하니 많은 관심 바랍니다.",
+    description: "세상의 소금이 되어 봉사로 선을 행하는 봉사동아리 SALT입니다.\n저희는 부천과 서울 지역의 봉사지와 연계하여, 자율적으로 봉사활동에 참여하는 동아리입니다.\n학기 중 개강 및 종강모임, MT와 각종 다양한 내부 이벤트도 진행하니 많은 관심 바랍니다.",
     kakaoLink: null, // 카카오톡 오픈채팅 링크 (없으면 null)
     googleFormLink: "https://docs.google.com/forms/d/e/1FAIpQLSdWz988yuBl7c0TnOMKrjBYc6qnv1e3IXhHypA-wzXSXApohQ/viewform?usp=preview", // 구글폼 링크 (없으면 null)
     qrCodeImage: null, // QR 코드 이미지 경로 (없으면 null)
@@ -389,8 +389,8 @@ const officialClubsData = [
 
 const officialClubsConfig = {
   pageTitle: "정규 동아리", // 페이지 상단 제목
-  pageSubtitle: "학교에서 공식 인정받은 동아리입니다", // 페이지 상단 부제목
+  pageSubtitle: "학교에서 공식 승인된 동아리입니다", // 페이지 상단 부제목
   itemsPerPage: 15, // 한 페이지에 표시할 카드 수
-  categories: ["종교", "봉사", "학술", "취미"], // 필터 버튼 목록 (추가/삭제 가능)
+  categories: ["찬양팀", "종교", "봉사", "취미"], // 필터 버튼 목록 (추가/삭제 가능)
   applyFormLink: null, // 정규 동아리 신청 폼 링크
 };
