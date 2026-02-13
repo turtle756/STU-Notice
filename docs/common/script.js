@@ -27,6 +27,7 @@ if (hamburger && navLinks) {
 const isInCommon = window.location.pathname.includes('/common/');
 const imgPrefix = isInCommon ? '../' : '';
 
+
 /*
 ================================================================================
 📝 페이지 제목/부제목 동적 적용
@@ -260,6 +261,11 @@ if (typeof eventsData !== 'undefined') {
       }
       
       const imageSrc = event.image.startsWith('http') ? event.image : imgPrefix + event.image;
+
+      const eventDescText = event.description || '';
+      const eventDescFlat = eventDescText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const eventTruncatedDesc = eventDescFlat.length > 80 ? eventDescFlat.substring(0, 80) + '...' : eventDescFlat;
+      card.dataset.fullDesc = eventDescText;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${event.title}" />
@@ -269,7 +275,8 @@ if (typeof eventsData !== 'undefined') {
           <p class="event-date">📅 ${event.date}</p>
           <p class="event-organizer">${event.organizer}</p>
           ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
-          <p class="event-description">${event.description}</p>
+          <p class="event-description">${eventTruncatedDesc}</p>
+          ${eventDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
           <div class="event-buttons">
             ${event.link ? `<a href="${event.link}" target="_blank" class="link-button">🔗 바로가기</a>` : ''}
             ${event.applyLink ? `<a href="${event.applyLink}" target="_blank" class="apply-button">📝 신청하기</a>` : ''}
@@ -322,8 +329,13 @@ if (typeof clubsData !== 'undefined') {
       card.className = 'community-card';
       card.dataset.category = club.category;
       if (club.detail) card.dataset.detail = club.detail;
+      card.dataset.fullDesc = club.description || '';
       
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
+
+      const clubDescText = club.description || '';
+      const clubDescFlat = clubDescText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const clubTruncatedDesc = clubDescFlat.length > 80 ? clubDescFlat.substring(0, 80) + '...' : clubDescFlat;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
@@ -332,7 +344,8 @@ if (typeof clubsData !== 'undefined') {
             <h3>${club.title}</h3>
             <span class="community-category">${club.category}</span>
           </div>
-          <p class="community-description">${club.description}</p>
+          <p class="community-description">${clubTruncatedDesc}</p>
+          ${clubDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
           <a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>
         </div>
       `;
@@ -386,6 +399,17 @@ if (typeof officialClubsData !== 'undefined') {
       
       const imageSrc = club.image.startsWith('http') ? club.image : imgPrefix + club.image;
       
+      let cardButtonHtml = '';
+      if (club.googleFormLink) {
+        cardButtonHtml = `<a href="${club.googleFormLink}" target="_blank" rel="noopener noreferrer" class="card-google-form-button">📋 바로가기</a>`;
+      } else if (club.kakaoLink) {
+        cardButtonHtml = `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>`;
+      }
+
+      const descText = club.description || '';
+      const descFlat = descText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const truncatedDesc = descFlat.length > 80 ? descFlat.substring(0, 80) + '...' : descFlat;
+
       card.innerHTML = `
         <img src="${imageSrc}" alt="${club.title}" />
         <div class="community-content">
@@ -393,8 +417,9 @@ if (typeof officialClubsData !== 'undefined') {
             <h3>${club.title}</h3>
             <span class="community-category">${club.category}</span>
           </div>
-          <p class="community-description">${club.description}</p>
-          ${club.kakaoLink ? `<a href="${club.kakaoLink}" target="_blank" rel="noopener noreferrer" class="kakao-button">💬 참여하기</a>` : ''}
+          <p class="community-description">${truncatedDesc}</p>
+          ${descText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
+          ${cardButtonHtml}
         </div>
       `;
       
@@ -445,6 +470,11 @@ if (typeof partnersData !== 'undefined') {
       card.dataset.index = partnersData.indexOf(partner);
       
       const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
+
+      const partnerDescText = partner.description || '';
+      const partnerDescFlat = partnerDescText.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim();
+      const partnerTruncatedDesc = partnerDescFlat.length > 80 ? partnerDescFlat.substring(0, 80) + '...' : partnerDescFlat;
+      card.dataset.fullDesc = partnerDescText;
       
       card.innerHTML = `
         <img src="${imageSrc}" alt="${partner.title}" />
@@ -455,7 +485,8 @@ if (typeof partnersData !== 'undefined') {
           </div>
           <p class="partner-discount">${partner.discount}</p>
           <p class="partner-location">📍 ${partner.location}</p>
-          <p class="partner-description">${partner.description}</p>
+          <p class="partner-description">${partnerTruncatedDesc}</p>
+          ${partnerDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
         </div>
       `;
       
@@ -543,6 +574,15 @@ function openModal(cardData) {
   modalTitle.textContent = cardData.title;
   modalCategory.textContent = cardData.category;
   modalCategory.style.backgroundColor = cardData.categoryColor;
+
+  const modalTitleSocial = document.getElementById('modalTitleSocial');
+  if (modalTitleSocial) {
+    let titleSocialHtml = '';
+    if (cardData.instagram) {
+      titleSocialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-title-social-link"><img src="${imgPrefix}image/로고/인스타그램.png" alt="Instagram" class="modal-title-social-icon"></a>`;
+    }
+    modalTitleSocial.innerHTML = titleSocialHtml;
+  }
   
   modalMeta.innerHTML = cardData.meta.map(item => 
     `<p class="modal-meta-item">${item}</p>`
@@ -571,7 +611,9 @@ function openModal(cardData) {
 
   if (modalContact) {
     if (cardData.contact) {
-      modalContact.innerHTML = `<span class="modal-contact-label">연락처 :</span> ${cardData.contact}`;
+      const contactLines = cardData.contact.split('\n').filter(l => l.trim());
+      const contactHtml = contactLines.map(line => `<span class="modal-contact-value">${line.trim()}</span>`).join('');
+      modalContact.innerHTML = `<div class="modal-contact-block"><span class="modal-contact-label">📞 연락처</span>${contactHtml}</div>`;
       modalContact.style.display = 'block';
     } else {
       modalContact.innerHTML = '';
@@ -580,20 +622,8 @@ function openModal(cardData) {
   }
 
   if (modalSocialLinks) {
-    let socialHtml = '';
-    if (cardData.instagram) {
-      socialHtml += `<a href="${cardData.instagram}" target="_blank" rel="noopener noreferrer" class="modal-social-btn instagram"><img src="${imgPrefix}image/로고/인스타그램.png" alt="Instagram" class="social-logo"> Instagram</a>`;
-    }
-    if (cardData.facebook) {
-      socialHtml += `<a href="${cardData.facebook}" target="_blank" rel="noopener noreferrer" class="modal-social-btn facebook"><img src="${imgPrefix}image/로고/페이스북.png" alt="Facebook" class="social-logo"> Facebook</a>`;
-    }
-    if (socialHtml) {
-      modalSocialLinks.innerHTML = socialHtml;
-      modalSocialLinks.style.display = 'flex';
-    } else {
-      modalSocialLinks.innerHTML = '';
-      modalSocialLinks.style.display = 'none';
-    }
+    modalSocialLinks.innerHTML = '';
+    modalSocialLinks.style.display = 'none';
   }
 
   if (modalQrCode) {
@@ -684,6 +714,7 @@ function setupCardListeners() {
       const organizer = card.querySelector('.event-organizer')?.textContent || '';
       const location = card.querySelector('.event-location')?.textContent || '';
       const description = card.querySelector('.event-description').textContent;
+      const fullDesc = card.dataset.fullDesc || '';
       const applyBtn = card.querySelector('.apply-button');
       
       const details = [];
@@ -699,7 +730,7 @@ function setupCardListeners() {
         category: category,
         categoryColor: category === '공모전' ? '#e74c3c' : '#3498db',
         meta: [date, organizer, location].filter(item => item),
-        description: description,
+        description: fullDesc || description,
         details: details,
         buttonUrl: applyBtn?.href || null,
         buttonText: applyBtn?.textContent || null,
@@ -715,7 +746,8 @@ function setupCardListeners() {
     if (card.dataset.listenerAdded) return;
     card.dataset.listenerAdded = 'true';
     card.addEventListener('click', (e) => {
-      if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button')) {
+      if (e.target.classList.contains('kakao-button') || e.target.closest('.kakao-button') ||
+          e.target.classList.contains('card-google-form-button') || e.target.closest('.card-google-form-button')) {
         return;
       }
       
@@ -725,6 +757,7 @@ function setupCardListeners() {
       const description = card.querySelector('.community-description').textContent;
       const kakaoBtn = card.querySelector('.kakao-button');
       const detailText = card.dataset.detail || '';
+      const fullDesc = card.dataset.fullDesc || '';
 
       const isOfficialClub = card.classList.contains('official-club-card');
       let clubData = null;
@@ -750,10 +783,10 @@ function setupCardListeners() {
         category: category,
         categoryColor: '#27ae60',
         meta: [],
-        description: detailText || description,
+        description: clubData?.detail || clubData?.description || detailText || fullDesc || description,
         details: [],
-        buttonUrl: kakaoBtn?.href || null,
-        buttonText: kakaoBtn?.textContent || null,
+        buttonUrl: kakaoBtn?.href || clubData?.kakaoLink || null,
+        buttonText: kakaoBtn?.textContent || (clubData?.kakaoLink ? '💬 참여하기' : null),
         buttonType: 'kakao',
         subImages: subImages,
         contact: clubData?.contact || null,
@@ -782,6 +815,7 @@ function setupCardListeners() {
       const discount = card.querySelector('.partner-discount')?.textContent || '';
       const location = card.querySelector('.partner-location')?.textContent || '';
       const description = card.querySelector('.partner-description').textContent;
+      const fullDesc = card.dataset.fullDesc || '';
       const index = parseInt(card.dataset.index);
       const partner = typeof partnersData !== 'undefined' ? partnersData[index] : null;
       
@@ -791,7 +825,7 @@ function setupCardListeners() {
         category: category,
         categoryColor: '#9b59b6',
         meta: [discount, location].filter(item => item),
-        description: description,
+        description: fullDesc || description,
         details: [],
         buttonUrl: null,
         buttonText: null,

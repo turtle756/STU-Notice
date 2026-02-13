@@ -11,7 +11,7 @@ const partnersData = [
   category: "음식", // 카테고리 필터용 (partnersConfig.categories 중 하나)
   image: "https://picsum.photos/400/300?1", // 카드 이미지 경로
   title: "맛있는 식당",
-  description: "학생증 제시 시 10% 할인",
+  description: `학생증 제시 시 10% 할인`,
   location: "정문 앞 100m", // 위치 정보
   discount: "10% 할인", // 할인 정보 배지
 
@@ -46,7 +46,7 @@ const partnersData = [
   category: "카페", // 카테고리 필터용 (partnersConfig.categories 중 하나)
   image: "https://picsum.photos/400/300?2", // 카드 이미지 경로
   title: "캠퍼스 카페",
-  description: "음료 전 메뉴 500원 할인",
+  description: `음료 전 메뉴 500원 할인`,
   location: "학교 내 학생회관 1층", // 위치 정보
   discount: "500원 할인", // 할인 정보 배지
 
@@ -81,7 +81,7 @@ const partnersData = [
   category: "문화", // 카테고리 필터용 (partnersConfig.categories 중 하나)
   image: "https://picsum.photos/400/300?3", // 카드 이미지 경로
   title: "시네마 영화관",
-  description: "주중 영화 관람 20% 할인",
+  description: `주중 영화 관람 20% 할인`,
   location: "후문 버스정류장 앞", // 위치 정보
   discount: "20% 할인", // 할인 정보 배지
 
