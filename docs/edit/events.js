@@ -74,9 +74,9 @@ const eventsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
+    category: "프로젝트", // 카테고리 필터용 (eventsConfig.categories 중 하나)
     image: "image/행사&공모전/학생 모니터링단 모집.png", // 카드 이미지 경로
-    title: "학생 모니터링단 모집",
+    title: "미래인재개발센터 모니터링단",
     date: "카드뉴스 참고", // 카드에 표시될 날짜
     organizer: "주관:미래인재개발센터", // 주관/주최 정보
     location: null, // 장소 (행사만 해당, 공모전은 null)
@@ -111,48 +111,28 @@ const eventsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "공모전", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/행사&공모전/글쓰기경진대회/글쓰기대회.png", // 카드 이미지 경로
-    title: "글쓰기 경진대회",
+    category: "프로젝트", // 카테고리 필터용 (eventsConfig.categories 중 하나)
+    image: "image/행사&공모전/대학혁신 모니터링단.jpg", // 카드 이미지 경로
+    title: "대학혁신지사업 모니터링단",
     date: "2024.11.30", // 카드에 표시될 날짜
-    organizer: "주최: 학습지원센터", // 주관/주최 정보
+    organizer: "주최: 대학혁신지원사업", // 주관/주최 정보
     location: null, // 장소 (행사만 해당, 공모전은 null)
-    description: `다양한 글쓰기 주제로 경진대회에 도전하세요.`,
+    description: `2026-1 대학혁신지원사업 학생모니터링단 모집]
+
+안녕하세요! 대학혁신지원사업단 입니다.
+2026년 1학기, 학생모니터링단으로 함께할 센스있는 학우분들을 모집하오니 많은 관심과 신청 바랍니다✨
+
+📍신청기한
+: 2026.02.06(금)~2026.02.19(목)
+
+📍문의
+: 032-340-9625(dptmej1104@stu.ac.kr)`,
     link: null, // 바로가기 버튼 링크 (없으면 null)
-    applyLink: "https://forms.gle/example2", // 신청하기 버튼 링크 (공모전용, 없으면 null)
+    applyLink: "https://myip.kr/AgJya", // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: {}, // 모달 팝업에 표시될 상세 정보
   },
   // #####################
 
-  // @@@@@@@@@@@@@@@@@
-  {
-    category: "행사", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "image/행사&공모전/체육대회/체육대회.png", // 카드 이미지 경로
-    title: "체육대회",
-    date: "2024.12.10", // 카드에 표시될 날짜
-    organizer: "주관: 체육부", // 주관/주최 정보
-    location: "체육관", // 장소 (행사만 해당, 공모전은 null)
-    description: `단합 조으로 자웅을 겨루는 체육대회`,
-    link: null, // 바로가기 버튼 링크 (없으면 null)
-    applyLink: null, // 신청하기 버튼 링크 (공모전용, 없으면 null)
-    details: {}, // 모달 팝업에 표시될 상세 정보
-  },
-  // #####################
-
-  // @@@@@@@@@@@@@@@@@
-  {
-    category: "공모전", // 카테고리 필터용 (eventsConfig.categories 중 하나)
-    image: "https://picsum.photos/400/304", // 카드 이미지 경로
-    title: "프로그래밍 해커톤",
-    date: "2024.12.15", // 카드에 표시될 날짜
-    organizer: "주최: 컴퓨터공학과", // 주관/주최 정보
-    location: null, // 장소 (행사만 해당, 공모전은 null)
-    description: `24시간 코딩 마라톤에 도전하세요!`,
-    link: null, // 바로가기 버튼 링크 (없으면 null)
-    applyLink: "https://forms.gle/example3", // 신청하기 버튼 링크 (공모전용, 없으면 null)
-    details: {}, // 모달 팝업에 표시될 상세 정보
-  },
-  // #####################
 ];
 
 const eventsConfig = {
