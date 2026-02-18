@@ -373,8 +373,13 @@ if (typeof officialClubsData !== 'undefined') {
   const officialClubsApplyButton = document.getElementById('applyButton');
   const officialClubsPerPage = officialClubsConfig?.itemsPerPage || 15;
   
-  if (officialClubsApplyButton && officialClubsConfig?.applyFormLink) {
-    officialClubsApplyButton.href = officialClubsConfig.applyFormLink;
+  if (officialClubsApplyButton) {
+    if (officialClubsConfig?.applyFormLink) {
+      officialClubsApplyButton.href = officialClubsConfig.applyFormLink;
+      officialClubsApplyButton.style.display = '';
+    } else {
+      officialClubsApplyButton.style.display = 'none';
+    }
   }
   
   window.renderOfficialClubs = function(page, filter) {
