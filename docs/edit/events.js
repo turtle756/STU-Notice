@@ -13,11 +13,11 @@ const eventsData = [
     date: "2024.2.24 - 2026.2.26", // 카드에 표시될 날짜
     organizer: "주관:총학생회", // 주관/주최 정보
     location: "강원도 정선 하이캐슬 리조트", // 장소 (행사만 해당, 공모전은 null)
-    description: `신입생 오리엔테이션이 강원도 정에서 진행됩니다!`,
+    description: `신입생 오리엔테이션이 강원도 정선에서 진행됩니다!`,
     link: null, // 바로가기 버튼 링크 (없으면 null)
     applyLink: null, // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: { // 모달 팝업에 표시될 상세 정보
-      target: null, // 대상
+      target: null, // 대상   
       benefits: null, // 혜택
       schedule: null, // 일정
       contact: null, // 문의처
