@@ -9,7 +9,7 @@ const partnersData = [
 // @@@@@@@@@@@@@@@@@
 {
   category: "음식", // 카테고리 필터용 (partnersConfig.categories 중 하나)
-  image: "image/제휴 업체/제휴/1.png", // 카드 이미지 경로
+  image: "image/제휴 업체/제휴/홍대개미/1.png", // 카드 이미지 경로
   title: "홍대개미",
   description: `학생증 제시 시 전 메뉴 10% 할인`,
   location: "경기 부천시 원미구 부천로 9번길 24", // 위치 정보
