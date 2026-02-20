@@ -576,6 +576,7 @@ const modalQrCode = document.getElementById('modalQrCode');
 
 function openModal(cardData) {
   modalImage.src = cardData.image;
+  modalImage.onclick = function() { openLightbox(this.src); };
   modalTitle.textContent = cardData.title;
   modalCategory.textContent = cardData.category;
   modalCategory.style.backgroundColor = cardData.categoryColor;
@@ -605,7 +606,7 @@ function openModal(cardData) {
   if (modalSubImages) {
     if (cardData.subImages && cardData.subImages.length > 0) {
       modalSubImages.innerHTML = cardData.subImages.map(src =>
-        `<img src="${src}" alt="서브 이미지" class="modal-sub-image" />`
+        `<img src="${src}" alt="서브 이미지" class="modal-sub-image" onclick="openLightbox(this.src)" />`
       ).join('');
       modalSubImages.style.display = 'flex';
     } else {
@@ -1082,3 +1083,24 @@ if (noticeNavTabs.length > 0 && noticeSection && faqSection) {
     });
   });
 }
+
+/*
+================================================================================
+🔍 이미지 라이트박스 (클릭하면 크게 보기)
+================================================================================
+*/
+const lightboxOverlay = document.createElement('div');
+lightboxOverlay.className = 'image-lightbox';
+lightboxOverlay.innerHTML = '<img src="" alt="">';
+document.body.appendChild(lightboxOverlay);
+
+function openLightbox(src) {
+  lightboxOverlay.querySelector('img').src = src;
+  lightboxOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+lightboxOverlay.addEventListener('click', function() {
+  lightboxOverlay.classList.remove('show');
+  document.body.style.overflow = '';
+});
