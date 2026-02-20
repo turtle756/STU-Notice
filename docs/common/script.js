@@ -823,6 +823,18 @@ function setupCardListeners() {
       const fullDesc = card.dataset.fullDesc || '';
       const index = parseInt(card.dataset.index);
       const partner = typeof partnersData !== 'undefined' ? partnersData[index] : null;
+
+      const partnerSubImages = [];
+      if (partner) {
+        if (partner.subImage1) {
+          const s1 = partner.subImage1.startsWith('http') ? partner.subImage1 : imgPrefix + partner.subImage1;
+          partnerSubImages.push(s1);
+        }
+        if (partner.subImage2) {
+          const s2 = partner.subImage2.startsWith('http') ? partner.subImage2 : imgPrefix + partner.subImage2;
+          partnerSubImages.push(s2);
+        }
+      }
       
       const cardData = {
         image: img.src,
@@ -835,6 +847,7 @@ function setupCardListeners() {
         buttonUrl: null,
         buttonText: null,
         buttonType: null,
+        subImages: partnerSubImages,
         mapCodeModal: partner?.mapCodeModal || null
       };
       

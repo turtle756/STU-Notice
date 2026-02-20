@@ -12,6 +12,8 @@ const partnersData = [
   image: "image/제휴 업체/제휴/홍대개미/1.png", // 카드 이미지 경로
   title: "홍대개미",
   description: `학생증 제시 시 전 메뉴 10% 할인`,
+  subImage1: null, // 서브 이미지 1 (설명 아래 표시, 최대 2개)
+  subImage2: null, // 서브 이미지 2
   location: "경기 부천시 원미구 부천로 9번길 24", // 위치 정보
   discount: "10% 할인", // 할인 정보 배지
 
@@ -45,6 +47,8 @@ const partnersData = [
   image: "https://picsum.photos/400/300?2", // 카드 이미지 경로
   title: "캠퍼스 카페",
   description: `음료 전 메뉴 500원 할인`,
+  subImage1: null, // 서브 이미지 1 (설명 아래 표시, 최대 2개)
+  subImage2: null, // 서브 이미지 2
   location: "학교 내 학생회관 1층", // 위치 정보
   discount: "500원 할인", // 할인 정보 배지
 
@@ -78,8 +82,10 @@ const partnersData = [
   image: "image/제휴 업체/제휴/제휴 (2)/1.png", // 카드 이미지 경로
   title: "학생화방문구센터",
   description: `2만원 이상 결제시 5%할인`,
+  subImage1: null, // 서브 이미지 1 (설명 아래 표시, 최대 2개)
+  subImage2: null, // 서브 이미지 2
   location: "경기도 부천시 원미구 부천로 24번길 3", // 위치 정보
-  discount: null , // 할인 정보 배지
+  discount: null, // 할인 정보 배지
 
   mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
