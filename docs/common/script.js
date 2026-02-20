@@ -1017,12 +1017,13 @@ if (faqList && typeof faqs !== 'undefined') {
   faqs.forEach((faq, index) => {
     const item = document.createElement('div');
     item.className = 'faq-item';
+    const faqLinkHtml = faq.link ? `<a href="${faq.link}" target="_blank" rel="noopener noreferrer" class="faq-link-button">🔗 바로가기</a>` : '';
     item.innerHTML = `
       <div class="faq-question">
         <span>${faq.question}</span>
         <span class="faq-toggle">▼</span>
       </div>
-      <div class="faq-answer">${faq.answer}</div>
+      <div class="faq-answer">${faq.answer}${faqLinkHtml}</div>
     `;
     
     item.querySelector('.faq-question').addEventListener('click', () => {

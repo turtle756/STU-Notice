@@ -1828,6 +1828,23 @@
         padding: 0 1.5rem 1rem;
       }
 
+      .faq-link-button {
+        display: inline-block;
+        margin-top: 0.8rem;
+        padding: 0.5rem 1.2rem;
+        background-color: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: background-color 0.2s;
+      }
+
+      .faq-link-button:hover {
+        background-color: #2563eb;
+      }
+
       /* 페이지네이션 */
       .pagination {
         display: flex;
