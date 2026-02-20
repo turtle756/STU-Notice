@@ -159,7 +159,7 @@ const eventsData = [
     applyLink: "https://eroom.stu.ac.kr?YXWs2v0SE", // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: {}, // 모달 팝업에 표시될 상세 정보
   },
-  ######################################
+  // #####################
 
   // @@@@@@@@@@@@@@@@@
   {
@@ -182,9 +182,8 @@ const eventsData = [
     applyLink: "https://eroom.stu.ac.kr?VE2uYkyIO", // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: {}, // 모달 팝업에 표시될 상세 정보
   },
-  ######################################
+  // #####################
 
-  
   // @@@@@@@@@@@@@@@@@
   {
     category: "프로젝트", // 카테고리 필터용 (eventsConfig.categories 중 하나)
@@ -213,7 +212,7 @@ const eventsData = [
     applyLink:  null, // 신청하기 버튼 링크 (공모전용, 없으면 null)
     details: {}, // 모달 팝업에 표시될 상세 정보
   },
-  ######################################
+  // #####################
 ];
 
 const eventsConfig = {
