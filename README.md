@@ -1,6 +1,8 @@
 # 서울신학대학교 총학생회 웹사이트
 
-**사이트 주소:** https://turtle756.github.io/STU-Notice/index.html
+**사이트 본 주소:** https://turtle756.github.io/STU-Notice/index.html
+**사이트 주소:** https://stuseed.site/login
+**관리자 사이트 주소:** https://admin.stuseed.site/login
 
 ---
 
