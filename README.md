@@ -2,7 +2,7 @@
 
 **사이트 본 주소:** https://turtle756.github.io/STU-Notice/index.html
 
-**사이트 주소:** https://stuseed.site/login
+**사이트 주소:** https://stuseed.site
 
 **관리자 사이트 주소:** https://admin.stuseed.site/login
 
