@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="서울신학대학교 총학생회 공식 포털 - 일정, 행사, 동아리, 제휴업체 정보">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>서울신학대학교 총학생회</title>
   <link rel="stylesheet" href="common/style.css" />
@@ -29,10 +30,22 @@
 
   <main class="main-content">
     <section class="home-hero">
+      <div class="hero-particles">
+        <div class="hero-particle"></div>
+        <div class="hero-particle"></div>
+        <div class="hero-particle"></div>
+        <div class="hero-particle"></div>
+        <div class="hero-particle"></div>
+        <div class="hero-particle"></div>
+      </div>
       <div class="hero-content">
         <h1 id="heroTitle"></h1>
         <p id="heroSubtitle"></p>
         <p id="heroDescription"></p>
+        <a id="heroSuggestBtn" class="hero-suggest-btn" href="#" target="_blank" rel="noopener noreferrer">📩 건의사항 접수</a>
+      </div>
+      <div class="hero-scroll-indicator">
+        <span>▼</span>
       </div>
     </section>
 
@@ -61,6 +74,14 @@
       </div>
     </section>
 
+    <section class="home-events">
+      <div class="notice-header">
+        <h2>🎪 최근 행사</h2>
+        <a href="common/events.html" class="notice-more">더보기 →</a>
+      </div>
+      <div class="home-events-grid" id="eventsHighlight"></div>
+    </section>
+
     <section class="home-notice">
       <div class="notice-header">
         <h2>📢 공지사항</h2>
@@ -84,10 +105,12 @@
   </main>
 
   <footer class="home-footer">
+    <a id="footerSuggestBtn" class="footer-suggest-btn" href="#" target="_blank" rel="noopener noreferrer">📩 건의사항 접수하기</a>
     <p>© 2025 서울신학대학교 총학생회</p>
   </footer>
 
   <script src="edit/home.js"></script>
+  <script src="edit/events.js"></script>
   <script src="edit/notice.js"></script>
   <script src="common/script.js"></script>
 </body>

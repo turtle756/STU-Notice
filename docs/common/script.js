@@ -234,7 +234,7 @@ if (typeof eventsData !== 'undefined') {
     suggestButton.href = eventsConfig.suggestFormLink;
   }
   
-  window.renderEvents = function(page, filter) {
+  if (eventGrid) window.renderEvents = function(page, filter) {
     if (filter !== undefined) eventsCurrentFilter = filter;
     eventsCurrentPage = page;
     eventGrid.innerHTML = '';
@@ -268,7 +268,7 @@ if (typeof eventsData !== 'undefined') {
       card.dataset.fullDesc = eventDescText;
       
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${event.title}" />
+        <img src="${imageSrc}" alt="${event.title}" loading="lazy" />
         <div class="event-content">
           <span class="event-category">${event.category}</span>
           <h3>${event.title}</h3>
@@ -289,9 +289,9 @@ if (typeof eventsData !== 'undefined') {
     
     createPagination('eventPagination', filteredData.length, eventsPerPage, page, (p) => window.renderEvents(p));
     setupCardListeners();
-  }
+  };
   
-  window.renderEvents(1);
+  if (window.renderEvents) window.renderEvents(1);
 }
 
 /*
@@ -338,7 +338,7 @@ if (typeof clubsData !== 'undefined') {
       const clubTruncatedDesc = clubDescFlat.length > 80 ? clubDescFlat.substring(0, 80) + '...' : clubDescFlat;
       
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${club.title}" />
+        <img src="${imageSrc}" alt="${club.title}" loading="lazy" />
         <div class="community-content">
           <div class="community-header-card">
             <h3>${club.title}</h3>
@@ -416,7 +416,7 @@ if (typeof officialClubsData !== 'undefined') {
       const truncatedDesc = descFlat.length > 80 ? descFlat.substring(0, 80) + '...' : descFlat;
 
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${club.title}" />
+        <img src="${imageSrc}" alt="${club.title}" loading="lazy" />
         <div class="community-content">
           <div class="community-header-card">
             <h3>${club.title}</h3>
@@ -482,7 +482,7 @@ if (typeof partnersData !== 'undefined') {
       card.dataset.fullDesc = partnerDescText;
       
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${partner.title}" />
+        <img src="${imageSrc}" alt="${partner.title}" loading="lazy" />
         <div class="partner-content">
           <div class="partner-header-card">
             <h3>${partner.title}</h3>
@@ -954,6 +954,39 @@ if (typeof homeData !== 'undefined') {
     });
   }
   
+  // Suggest button in hero
+  const heroSuggestBtn = document.getElementById('heroSuggestBtn');
+  if (heroSuggestBtn && homeData.suggestLink) {
+    heroSuggestBtn.href = homeData.suggestLink;
+  }
+
+  // Suggest button in footer
+  const footerSuggestBtn = document.getElementById('footerSuggestBtn');
+  if (footerSuggestBtn && homeData.suggestLink) {
+    footerSuggestBtn.href = homeData.suggestLink;
+  }
+
+  // Events Highlight
+  const eventsHighlight = document.getElementById('eventsHighlight');
+  if (eventsHighlight && typeof eventsData !== 'undefined') {
+    const recentEvents = eventsData.slice(0, 3);
+    recentEvents.forEach(event => {
+      const card = document.createElement('a');
+      card.className = 'home-event-card';
+      card.href = 'common/events.html';
+      const eventImgSrc = event.image.startsWith('http') ? event.image : event.image;
+      card.innerHTML = `
+        <img class="home-event-card-image" src="${eventImgSrc}" alt="${event.title}" loading="lazy" />
+        <div class="home-event-card-info">
+          <span class="home-event-card-category">${event.category}</span>
+          <span class="home-event-card-title">${event.title}</span>
+          ${event.date ? `<span class="home-event-card-date">📅 ${event.date}</span>` : ''}
+        </div>
+      `;
+      eventsHighlight.appendChild(card);
+    });
+  }
+
   if (snsGrid && homeData.sns) {
     homeData.sns.forEach(sns => {
       const button = document.createElement('a');
@@ -963,10 +996,14 @@ if (typeof homeData !== 'undefined') {
       button.rel = 'noopener noreferrer';
       button.style.backgroundColor = sns.color;
       if (sns.color === '#FEE500') button.style.color = '#3c1e1e';
+      const iconHtml = sns.iconImage
+        ? `<img class="sns-icon-image" src="${imgPrefix}${sns.iconImage}" alt="${sns.name}" />`
+        : `<span>${sns.icon}</span>`;
       button.innerHTML = `
-        <span>${sns.icon}</span>
+        ${iconHtml}
         <span>${sns.name}</span>
       `;
+      button.style.boxShadow = `0 4px 15px ${sns.color}40`;
       snsGrid.appendChild(button);
     });
   }
