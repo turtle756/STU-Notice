@@ -987,6 +987,57 @@ if (typeof homeData !== 'undefined') {
     });
   }
 
+  // SNS Feed Section
+  const snsFeedSection = document.getElementById('snsFeedSection');
+  const snsHighlightsGrid = document.getElementById('snsHighlightsGrid');
+  const snsEmbedsGrid = document.getElementById('snsEmbedsGrid');
+
+  const hasEmbeds = typeof snsEmbeds !== 'undefined' && snsEmbeds.length > 0;
+  const hasHighlights = typeof snsHighlights !== 'undefined' && snsHighlights.length > 0;
+
+  if (snsFeedSection && (hasEmbeds || hasHighlights)) {
+    snsFeedSection.style.display = '';
+
+    if (snsHighlightsGrid && hasHighlights) {
+      snsHighlights.forEach(post => {
+        if (!post.title && !post.link) return;
+        const card = document.createElement('a');
+        card.className = 'sns-highlight-card';
+        card.href = post.link;
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+        const imgSrc = post.image ? (post.image.startsWith('http') ? post.image : imgPrefix + post.image) : '';
+        card.innerHTML = `
+          ${imgSrc ? `<div class="sns-highlight-img-wrap"><img src="${imgSrc}" alt="${post.title}" loading="lazy" /></div>` : ''}
+          <div class="sns-highlight-info">
+            <span class="sns-highlight-badge">PICK</span>
+            <h3 class="sns-highlight-title">${post.title}</h3>
+            ${post.description ? `<p class="sns-highlight-desc">${post.description}</p>` : ''}
+            ${post.date ? `<span class="sns-highlight-date">${post.date}</span>` : ''}
+          </div>
+        `;
+        snsHighlightsGrid.appendChild(card);
+      });
+    }
+
+    if (snsEmbedsGrid && hasEmbeds) {
+      snsEmbeds.forEach(embed => {
+        if (!embed.url || !embed.url.includes('instagram.com/')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'sns-embed-item';
+        const url = embed.url.replace(/\/$/, '') + '/embed';
+        wrapper.innerHTML = `<iframe src="${url}" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>`;
+        snsEmbedsGrid.appendChild(wrapper);
+      });
+      if (!document.querySelector('script[src*="instagram.com/embed"]')) {
+        const igScript = document.createElement('script');
+        igScript.async = true;
+        igScript.src = '//www.instagram.com/embed.js';
+        document.body.appendChild(igScript);
+      }
+    }
+  }
+
   if (snsGrid && homeData.sns) {
     homeData.sns.forEach(sns => {
       const button = document.createElement('a');
