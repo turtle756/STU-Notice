@@ -27,16 +27,16 @@ const homeData = {
     
      {
       name: "학식을 부탁해", // 버튼에 표시될 이름
-      icon: "📷", // 버튼 아이콘
+      icon: "🍚", // 버튼 아이콘
       url: "https://www.instagram.com/stu_please_haksik?igsh=OTZyeHRvbzhldDY1", // 클릭 시 이동할 링크
-      color: "#E4405F" // 버튼 배경색
+      color: "#FF6F31" // 버튼 배경색
     },
 
      {
       name: "제휴를 부탁해", // 버튼에 표시될 이름
-      icon: "📷", // 버튼 아이콘
+      icon: "🤝", // 버튼 아이콘
       url: "https://www.instagram.com/stu_please_partnership?igsh=MTMzeDN2YTNnaGt3Yg==", // 클릭 시 이동할 링크
-      color: "#E4405F" // 버튼 배경색
+      color: "#7C3AED" // 버튼 배경색
     }
   ],
   
