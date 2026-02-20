@@ -1023,7 +1023,7 @@ if (faqList && typeof faqs !== 'undefined') {
         <span>${faq.question}</span>
         <span class="faq-toggle">▼</span>
       </div>
-      <div class="faq-answer">${faq.answer}${faqLinkHtml}</div>
+      <div class="faq-answer">${faqLinkHtml}${faq.answer}</div>
     `;
     
     item.querySelector('.faq-question').addEventListener('click', () => {
