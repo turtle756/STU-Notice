@@ -79,8 +79,7 @@ const partnersData = [
     subImage2: null,
     location: "학교 내 학생회관 1층",
     discount: "500원 할인",
-    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
-<!-- 1. 지도 노드 -->
+    mapCodeModal: `<!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1771820707204" class="root_daum_roughmap root_daum_roughmap_landing"></div>
 
 <!--
@@ -97,7 +96,7 @@ const partnersData = [
 		"mapWidth" : "560",
 		"mapHeight" : "300"
 	}).render();
-</script>
+</script>`,
   },
   // #####################
 
