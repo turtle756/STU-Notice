@@ -247,10 +247,11 @@ if (typeof eventsData !== 'undefined') {
     const end = start + eventsPerPage;
     const pageEvents = filteredData.slice(start, end);
     
-    pageEvents.forEach(event => {
+    pageEvents.forEach((event, pIdx) => {
       const card = document.createElement('div');
       card.className = 'event-card';
       card.dataset.category = event.category;
+      card.dataset.eventIndex = eventsData.indexOf(event);
       
       if (event.details) {
         if (event.details.target) card.dataset.target = event.details.target;
@@ -328,6 +329,7 @@ if (typeof clubsData !== 'undefined') {
       const card = document.createElement('div');
       card.className = 'community-card';
       card.dataset.category = club.category;
+      card.dataset.clubIndex = clubsData.indexOf(club);
       if (club.detail) card.dataset.detail = club.detail;
       card.dataset.fullDesc = club.description || '';
       
@@ -730,6 +732,18 @@ function setupCardListeners() {
       if (card.dataset.schedule) details.push(`📅 일정: ${card.dataset.schedule}`);
       if (card.dataset.contact) details.push(`📞 문의: ${card.dataset.contact}`);
       
+      const eventIdx = parseInt(card.dataset.eventIndex);
+      const eventData = typeof eventsData !== 'undefined' && !isNaN(eventIdx) ? eventsData[eventIdx] : null;
+      const eventSubImages = [];
+      if (eventData) {
+        if (eventData.subImage1) {
+          eventSubImages.push(eventData.subImage1.startsWith('http') ? eventData.subImage1 : imgPrefix + eventData.subImage1);
+        }
+        if (eventData.subImage2) {
+          eventSubImages.push(eventData.subImage2.startsWith('http') ? eventData.subImage2 : imgPrefix + eventData.subImage2);
+        }
+      }
+
       const cardData = {
         image: img.src,
         title: title,
@@ -740,7 +754,8 @@ function setupCardListeners() {
         details: details,
         buttonUrl: applyBtn?.href || null,
         buttonText: applyBtn?.textContent || null,
-        buttonType: 'apply'
+        buttonType: 'apply',
+        subImages: eventSubImages,
       };
       
       openModal(cardData);
@@ -771,14 +786,20 @@ function setupCardListeners() {
         clubData = officialClubsData[parseInt(card.dataset.officialIndex)];
       }
 
+      let autoClubData = null;
+      if (!isOfficialClub && typeof clubsData !== 'undefined' && card.dataset.clubIndex !== undefined) {
+        autoClubData = clubsData[parseInt(card.dataset.clubIndex)];
+      }
+
+      const subImageSource = clubData || autoClubData;
       const subImages = [];
-      if (clubData) {
-        if (clubData.subImage1) {
-          const s1 = clubData.subImage1.startsWith('http') ? clubData.subImage1 : imgPrefix + clubData.subImage1;
+      if (subImageSource) {
+        if (subImageSource.subImage1) {
+          const s1 = subImageSource.subImage1.startsWith('http') ? subImageSource.subImage1 : imgPrefix + subImageSource.subImage1;
           subImages.push(s1);
         }
-        if (clubData.subImage2) {
-          const s2 = clubData.subImage2.startsWith('http') ? clubData.subImage2 : imgPrefix + clubData.subImage2;
+        if (subImageSource.subImage2) {
+          const s2 = subImageSource.subImage2.startsWith('http') ? subImageSource.subImage2 : imgPrefix + subImageSource.subImage2;
           subImages.push(s2);
         }
       }

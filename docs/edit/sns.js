@@ -17,6 +17,12 @@ const snsEmbeds = [
   },
   // #####################
 
+  // @@@@@@@@@@@@@@@@@
+  {
+    url: "https://www.instagram.com/stu_please_partnership/",
+  },
+  // #####################
+
 ];
 
 const snsHighlights = [
