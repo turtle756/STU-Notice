@@ -15,7 +15,7 @@ const homeData = {
     {
       name: "총학생회 인스타",
       icon: "📷",
-      url: "https://www.instagram.com/stu_seed?igsh=MjJ4NW1qZnpxaGNv",
+      url: "https://www.instagram.com/stu_seed/",
       color: "#E4405F",
     },
     {
