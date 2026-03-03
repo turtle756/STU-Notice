@@ -7,7 +7,7 @@
 const snsEmbeds = [
   // @@@@@@@@@@@@@@@@@
   {
-    url: "https://www.instagram.com/stu__seed/",
+    url: "https://www.instagram.com/stu_seed/",
   },
   // #####################
 
