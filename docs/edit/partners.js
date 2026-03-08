@@ -145,7 +145,25 @@ const partnersData = [
     subImage2: "image/제휴 업체/더홀릭 보드게임/3.png",
     location: null,
     discount: null,
-    mapCodeModal: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985078888" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985078888",
+		"key" : "jz9eygdh7w3",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -159,7 +177,25 @@ const partnersData = [
     subImage2: "image/제휴 업체/비원비 스트라이크/3.png",
     location: null,
     discount: null,
-    mapCodeModal: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985117202" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985117202",
+		"key" : "jz9fv5gqegk",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -201,7 +237,25 @@ const partnersData = [
     subImage2: "image/제휴 업체/신의주 찹쌀순대/3.png",
     location: null,
     discount: null,
-    mapCodeModal: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985154240" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985154240",
+		"key" : "ixufvzm2qi8",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -215,7 +269,25 @@ const partnersData = [
     subImage2: null,
     location: null,
     discount: null,
-    mapCodeModal: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985182606" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985182606",
+		"key" : "ixugiyh9ee8",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -226,10 +298,28 @@ const partnersData = [
     title: "카츠돼왕 + 쓰리퍼 쌀국수",
     description: null,
     subImage1: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/2.png",
-    subImage2: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/3.png",
+    subImage2: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/5.png",
     location: null,
     discount: null,
-    mapCodeModal: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985405798" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985405798",
+		"key" : "jz9nnkxymzg",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -243,7 +333,25 @@ const partnersData = [
     subImage2: "image/제휴 업체/하늘식당/3.png",
     location: null,
     discount: null,
-    mapCodeModal: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985433050" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985433050",
+		"key" : "jz9oapdnemb",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -275,12 +383,44 @@ const partnersData = [
   },
   // #####################
 
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "카페",
+    image: "image/제휴 업체/셀렉토 커피/1.png",
+    title: "셀렉토 커피",
+    description: null,
+    subImage1: "image/제휴 업체/셀렉토 커피/2.png",
+    subImage2: "image/제휴 업체/셀렉토 커피/3.png",
+    location: null,
+    discount: null,
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1772985455067" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1772985455067",
+		"key" : "ixunwxqzeh4",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
+  },
+  // #####################
+
 ];
 
 const partnersConfig = {
   pageTitle: "제휴업체",
-  pageSubtitle: "학생증을 제시하고 다양한 혜택을 받으세요!",
-  suggestFormLink: "https://forms.gle/partner-suggest",
-  itemsPerPage: 15,
+  pageSubtitle: "학생증을 제시하고 다양한 재학생 혜택을 받으세요!",
+  suggestFormLink: "https://forms.gle/c7DLgWqnUJWFLUGQ7",
+  itemsPerPage: 25,
   categories: ["음식","카페","문화","의료","교육"],
 };
