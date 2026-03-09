@@ -32,7 +32,8 @@ const eventsData = [
     applyLink: "https://docs.google.com/forms/d/e/1FAIpQLScTKEuuL52ILXHMgxyN8nYRsLUIT3upjuroGzgMjCGbE1x3Hw/viewform",
     details: {
       target: " 한국의 모든 예배자",
-      contact: "서울신학대학교 교학과 (032-340-9265)"
+      contact: "서울신학대학교 교학과 (032-340-9265)",
+      benefits: "재학생 저녁7시 집회 참여시 채플 마스터카드(채플1회 결석권) 배부"
     },
   },
   // #####################
