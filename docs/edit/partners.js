@@ -256,7 +256,7 @@ const partnersData = [
     subImage1: "image/제휴 업체/시원스쿨/2.png",
     subImage2: "image/제휴 업체/시원스쿨/3.png",
     location: null,
-    discount: null,
+    discount: "설명 참고",
     mapCodeModal: null,
   },
   // #####################
@@ -408,7 +408,7 @@ const partnersData = [
     subImage1: "image/제휴 업체/한국인터넷교육방송/2.png",
     subImage2: null,
     location: "온라인 교육",
-    discount: null,
+    discount: "설명 참고",
     mapCodeModal: null,
   },
   // #####################
