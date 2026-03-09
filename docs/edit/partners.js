@@ -140,7 +140,8 @@ const partnersData = [
     category: "문화",
     image: "image/제휴 업체/더홀릭 보드게임/1.png",
     title: "더홀릭 보드게임 카페",
-    description: null,
+    description: `3월, 7월 한 달간 서울신대 학생(대학원생 포함) 이용요금 반값 > 2500원(평일)  
+*1인 1메뉴 필수`,
     subImage1: "image/제휴 업체/더홀릭 보드게임/2.png",
     subImage2: "image/제휴 업체/더홀릭 보드게임/3.png",
     location: null,
@@ -172,7 +173,17 @@ const partnersData = [
     category: "문화",
     image: "image/제휴 업체/비원비 스트라이크/1.png",
     title: "비원비 스트라이크 볼링",
-    description: null,
+    description: `혜택 1) 평일 만원의 행복
+3게임 + 신발대화료 + 음료 한 개 
+정가 17,000원 >>> 혜택가 10,000원 
+
+혜택 2) 주말 2게임 + 신발대화료 + 음료 한 개 >>> 10,000원  
+
+혜택 3) 평일 게임요금 할인 
+볼링 1게임 : 4,500원 >>> 3,500원
+
+혜택 4) 특별 서비스
+보드게임 or 포켓볼 기본 무료제`,
     subImage1: "image/제휴 업체/비원비 스트라이크/2.png",
     subImage2: "image/제휴 업체/비원비 스트라이크/3.png",
     location: null,
@@ -204,7 +215,7 @@ const partnersData = [
     category: "의료",
     image: "image/제휴 업체/삼성 미라클안과/1.png",
     title: "삼성 미라클 안과",
-    description: null,
+    description: "세부 제휴사항 및 프로모션 카톡 공지방을 통해 공지",
     subImage1: "image/제휴 업체/삼성 미라클안과/4.png",
     subImage2: "image/제휴 업체/삼성 미라클안과/5.png",
     location: null,
@@ -218,7 +229,13 @@ const partnersData = [
     category: "교육",
     image: "image/제휴 업체/시원스쿨/1.png",
     title: "시원스쿨",
-    description: null,
+    description: `- 수강료 80% 할인 >> 혜택가 298,000원 
+
+- 시원스쿨 토익과정
+
+- 매학기 프로모션 카톡 공지방을 통해 공지
+
+`,
     subImage1: "image/제휴 업체/시원스쿨/2.png",
     subImage2: "image/제휴 업체/시원스쿨/3.png",
     location: null,
@@ -232,7 +249,7 @@ const partnersData = [
     category: "음식",
     image: "image/제휴 업체/신의주 찹쌀순대/1.png",
     title: "신의주 찹쌀순대",
-    description: null,
+    description: "뚝배기류 현금결제 시 1000원 할인",
     subImage1: "image/제휴 업체/신의주 찹쌀순대/2.png",
     subImage2: "image/제휴 업체/신의주 찹쌀순대/3.png",
     location: null,
@@ -264,7 +281,7 @@ const partnersData = [
     category: "카페",
     image: "image/제휴 업체/이디야 커피/1.png",
     title: "이디야 커피",
-    description: null,
+    description: "음료 + 베이커리 세트 500원 할인",
     subImage1: "image/제휴 업체/이디야 커피/2.png",
     subImage2: null,
     location: null,
@@ -296,7 +313,7 @@ const partnersData = [
     category: "음식",
     image: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/1.png",
     title: "카츠돼왕 + 쓰리퍼 쌀국수",
-    description: null,
+    description: "카츠돼왕 영수증 쓰리포쌀국수에 제시시 영수증에 있는 메뉴 개수만큼 쓰리포쌀국수 전메뉴 1000원 할인",
     subImage1: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/2.png",
     subImage2: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/5.png",
     location: null,
@@ -328,7 +345,7 @@ const partnersData = [
     category: "음식",
     image: "image/제휴 업체/하늘식당/1.png",
     title: "하늘식당",
-    description: null,
+    description: "매주 화요일 계란프라이 제공 및 밥 리필",
     subImage1: "image/제휴 업체/하늘식당/2.png",
     subImage2: "image/제휴 업체/하늘식당/3.png",
     location: null,
@@ -360,7 +377,17 @@ const partnersData = [
     category: "교육",
     image: "image/제휴 업체/한국인터넷교육방송/1.png",
     title: "한국인터넷교육방송",
-    description: null,
+    description: `- 전 강좌, 1년 총 수강료 85% 할인 2,367,000원 >>> 360,000원 
+
+- 강의 신청한 학우분들께 교재 무상지원
+
+- 어학 및 자격증시험 모의고사, 기출문제 무료
+
+- 수강기간 내 일시정지 기능(장기:3개월~2년/1회, 단기: 누적 3개월 지원)
+
+- 모바일 강좌 지원
+
+- 수강 기간(1년) 내 출석 80% 이상 참여시 전액 환급`,
     subImage1: "image/제휴 업체/한국인터넷교육방송/2.png",
     subImage2: null,
     location: null,
@@ -374,7 +401,7 @@ const partnersData = [
     category: "교육",
     image: "image/제휴 업체/YBM/1.png",
     title: "YBM",
-    description: null,
+    description: "매학기 프로모션 학과 공지방을 통해 공지",
     subImage1: "image/제휴 업체/YBM/2.png",
     subImage2: null,
     location: null,
@@ -388,7 +415,7 @@ const partnersData = [
     category: "카페",
     image: "image/제휴 업체/셀렉토 커피/1.png",
     title: "셀렉토 커피",
-    description: null,
+    description: "제조음료 10% 할",
     subImage1: "image/제휴 업체/셀렉토 커피/2.png",
     subImage2: "image/제휴 업체/셀렉토 커피/3.png",
     location: null,
