@@ -459,6 +459,76 @@ const partnersData = [
   },
   // #####################
 
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "문화",
+    image: "image/제휴 업체/우비공 파티룸/1.png",
+    title: "우비공 파티룸",
+    description: `- 월~목 낮타임 (11:00~18:00) 5만원 
+
+- 밤타임 (19:00~ 익일 10:00) 7만원 
+
+- 올타임 (11:00 ~ 익일 10:00) 10만원
+
+- 서울신학대학교 학우 및 임직원 할`,
+    subImage1: "image/제휴 업체/우비공 파티룸/2.png",
+    subImage2: "image/제휴 업체/우비공 파티룸/3.png",
+    location: "경기 부천시 소사구 경인로 257 6층",
+    discount: "설명 참고",
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1773042419763" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1773042419763",
+		"key" : "inv8aaoegfg",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
+  },
+  // #####################
+
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: "문화",
+    image: "image/제휴 업체/뮤 합주실/1.png",
+    title: "뮤 합주실",
+    description: null,
+    subImage1: "image/제휴 업체/뮤 합주실/2.png",
+    subImage2: "image/제휴 업체/뮤 합주실/3.png",
+    location: "경기 부천시 원미구 부일로 414-7",
+    discount: "시간당 1,500원 할인",
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1773042746307" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1773042746307",
+		"key" : "invfx5uxoar",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
+  },
+  // #####################
+
 ];
 
 const partnersConfig = {
