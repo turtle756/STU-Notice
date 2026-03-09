@@ -108,11 +108,11 @@ const partnersData = [
     category: "카페",
     image: "image/제휴 업체/체리콩/1.png",
     title: "체리콩",
-    description: "음료 전 메뉴 500원 할인",
+    description: "",
     subImage1: "image/제휴 업체/체리콩/2.png",
     subImage2: "image/제휴 업체/체리콩/3.png",
-    location: "",
-    discount: "",
+    location: "경기 부천시 소사구 호현로489번나길 3 1층",
+    discount: "음료 전 메뉴 500원 할인",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772983665682" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -140,12 +140,11 @@ const partnersData = [
     category: "문화",
     image: "image/제휴 업체/더홀릭 보드게임/1.png",
     title: "더홀릭 보드게임 카페",
-    description: `3월, 7월 한 달간 서울신대 학생(대학원생 포함) 이용요금 반값 > 2500원(평일)  
-*1인 1메뉴 필수`,
+    description: "",
     subImage1: "image/제휴 업체/더홀릭 보드게임/2.png",
     subImage2: "image/제휴 업체/더홀릭 보드게임/3.png",
-    location: null,
-    discount: null,
+    location: "경기 부천시 원미구 부일로 460 시네마존 3층 301호",
+    discount: "3월, 7월 한 달간 서울신대 학생(대학원생 포함) 이용요금 반값 > 2500원(평일)   *1인 1메뉴 필수",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772985078888" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -186,7 +185,7 @@ const partnersData = [
 보드게임 or 포켓볼 기본 무료제`,
     subImage1: "image/제휴 업체/비원비 스트라이크/2.png",
     subImage2: "image/제휴 업체/비원비 스트라이크/3.png",
-    location: null,
+    location: "경기 부천시 원미구 부천로 7 4층",
     discount: null,
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
@@ -215,12 +214,30 @@ const partnersData = [
     category: "의료",
     image: "image/제휴 업체/삼성 미라클안과/1.png",
     title: "삼성 미라클 안과",
-    description: "세부 제휴사항 및 프로모션 카톡 공지방을 통해 공지",
+    description: "",
     subImage1: "image/제휴 업체/삼성 미라클안과/4.png",
     subImage2: "image/제휴 업체/삼성 미라클안과/5.png",
-    location: null,
-    discount: null,
-    mapCodeModal: null,
+    location: "서울 강남구 테헤란로 115 서림빌딩 7층, 14층",
+    discount: "세부 제휴사항 및 프로모션 카톡 공지방을 통해 공지",
+    mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
+<!-- 1. 지도 노드 -->
+<div id="daumRoughmapContainer1773041803977" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+<!--
+	2. 설치 스크립트
+	* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+-->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<!-- 3. 실행 스크립트 -->
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1773041803977",
+		"key" : "j2gqykwh36z",
+		"mapWidth" : "560",
+		"mapHeight" : "300"
+	}).render();
+</script>`,
   },
   // #####################
 
@@ -249,11 +266,11 @@ const partnersData = [
     category: "음식",
     image: "image/제휴 업체/신의주 찹쌀순대/1.png",
     title: "신의주 찹쌀순대",
-    description: "뚝배기류 현금결제 시 1000원 할인",
+    description: "",
     subImage1: "image/제휴 업체/신의주 찹쌀순대/2.png",
     subImage2: "image/제휴 업체/신의주 찹쌀순대/3.png",
-    location: null,
-    discount: null,
+    location: "경기 부천시 소사구 경인옛로 30 1층",
+    discount: "뚝배기류 현금결제 시 1000원 할인",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772985154240" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -281,11 +298,11 @@ const partnersData = [
     category: "카페",
     image: "image/제휴 업체/이디야 커피/1.png",
     title: "이디야 커피",
-    description: "음료 + 베이커리 세트 500원 할인",
+    description: "",
     subImage1: "image/제휴 업체/이디야 커피/2.png",
     subImage2: null,
-    location: null,
-    discount: null,
+    location: "경기 부천시 소사구 호현로489번길 39 1층",
+    discount: "음료 + 베이커리 세트 500원 할인",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772985182606" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -313,11 +330,11 @@ const partnersData = [
     category: "음식",
     image: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/1.png",
     title: "카츠돼왕 + 쓰리퍼 쌀국수",
-    description: "카츠돼왕 영수증 쓰리포쌀국수에 제시시 영수증에 있는 메뉴 개수만큼 쓰리포쌀국수 전메뉴 1000원 할인",
+    description: "",
     subImage1: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/2.png",
     subImage2: "image/제휴 업체/카츠돼왕+쓰리퍼 쌀국수/5.png",
-    location: null,
-    discount: null,
+    location: "경기 부천시 소사구 호현로489번길 25 2층",
+    discount: "카츠돼왕 영수증 쓰리포쌀국수에 제시시 영수증에 있는 메뉴 개수만큼 쓰리포쌀국수 전메뉴 1000원 할인",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772985405798" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -345,11 +362,11 @@ const partnersData = [
     category: "음식",
     image: "image/제휴 업체/하늘식당/1.png",
     title: "하늘식당",
-    description: "매주 화요일 계란프라이 제공 및 밥 리필",
+    description: "",
     subImage1: "image/제휴 업체/하늘식당/2.png",
     subImage2: "image/제휴 업체/하늘식당/3.png",
-    location: null,
-    discount: null,
+    location: "경기 부천시 소사구 호현로489번길 45-4 1층",
+    discount: "매주 화요일 계란프라이 제공 및 밥 리필",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772985433050" class="root_daum_roughmap root_daum_roughmap_landing"></div>
@@ -390,7 +407,7 @@ const partnersData = [
 - 수강 기간(1년) 내 출석 80% 이상 참여시 전액 환급`,
     subImage1: "image/제휴 업체/한국인터넷교육방송/2.png",
     subImage2: null,
-    location: null,
+    location: "온라인 교육",
     discount: null,
     mapCodeModal: null,
   },
@@ -404,7 +421,7 @@ const partnersData = [
     description: "매학기 프로모션 학과 공지방을 통해 공지",
     subImage1: "image/제휴 업체/YBM/2.png",
     subImage2: null,
-    location: null,
+    location: "온라인 교육",
     discount: null,
     mapCodeModal: null,
   },
@@ -415,11 +432,11 @@ const partnersData = [
     category: "카페",
     image: "image/제휴 업체/셀렉토 커피/1.png",
     title: "셀렉토 커피",
-    description: "제조음료 10% 할",
+    description: "",
     subImage1: "image/제휴 업체/셀렉토 커피/2.png",
     subImage2: "image/제휴 업체/셀렉토 커피/3.png",
-    location: null,
-    discount: null,
+    location: "경기 부천시 소사구 호현로469번길 25 1-2층",
+    discount: "제조음료 10% 할인",
     mapCodeModal: `<!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 <div id="daumRoughmapContainer1772985455067" class="root_daum_roughmap root_daum_roughmap_landing"></div>
