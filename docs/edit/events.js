@@ -145,31 +145,6 @@ const eventsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
-    category: "프로젝트",
-    image: "image/행사&공모전/피어나크루.png",
-    subImage1: null,
-    subImage2: null,
-    title: "피어나 크루(또래 상담사 모집)",
-    date: null,
-    organizer: "주최: 학생상담센터",
-    location: null,
-    description: `[26-1 피어나크루 또래상담사 모집]
-
-안녕하세요 학생상담센터입니다. 26년 새학기 또래상담사(크루원)을 모집하오니 많은 관심 부탁드립니다.
-
-- 대상: 2-3학년 학부생
-- 신청기간 : 2월13일~2월26일(밤11시)
-- 모집인원 : 5명
-- 활동기간 : 1학기
-- 장학금 지급`,
-    link: null,
-    applyLink: "https://eroom.stu.ac.kr?VE2uYkyIO",
-    details: {},
-  },
-  // #####################
-
-  // @@@@@@@@@@@@@@@@@
-  {
     category: "행사",
     image: "image/행사&공모전/아나바나 플리마켓.png",
     subImage1: null,
