@@ -40,6 +40,38 @@ const eventsData = [
 
   // @@@@@@@@@@@@@@@@@
   {
+    category: "안내사항",
+    image: "image/행사&공모전/KakaoTalk_20260311_105709679.jpg",
+    subImage1: "image/행사&공모전/KakaoTalk_20260311_105709679_01.jpg",
+    subImage2: null,
+    title: "2026-1학기 신앙상담 신청안내",
+    date: null,
+    organizer: "교목처",
+    location: null,
+    description: `[📢 2026-1학기 신앙상담 신청 안내]
+
+신앙상담은 비신자 학생들의 교회봉사 / 신앙생활 평가서를 대체하기 위한 제도입니다.
+학기 중 1~2회 상담으로 대체할 수 있으니, 필요한 학생들은 아래 내용을 확인해 주세요.
+
+- 신청 기간: 3월 10일(화) ~ 4월 24일(금)
+- 상담 기간: 3월 17일(화) ~ 5월 22일(금)
+- 신청 가능 시간: 09:00 ~ 17:30
+  ※ 이후 문의는 다음 날 답변드립니다.
+- 신청 방법: 본인 학년 / 학과 담당 목사님(교목, 멘토)께 개별 연락
+- 유의 사항: 상담 미진행 시 해당 학기 채플 미이수 처리
+
+자세한 담당자 배정 및 연락처는 첨부 이미지를 확인해 주세요.
+감사합니다.
+
+서울신학대학교 교목처`,
+    link: null,
+    applyLink: null,
+    details: {},
+  },
+  // #####################
+
+  // @@@@@@@@@@@@@@@@@
+  {
     category: "프로젝트",
     image: "image/행사&공모전/한국장학재단 멘토링 사업.png",
     subImage1: null,
@@ -210,5 +242,5 @@ const eventsConfig = {
   pageSubtitle: "다양한 교내 활동에 참여해보세요!",
   suggestFormLink: "https://forms.gle/edD7CaFW92pCbjQm8",
   itemsPerPage: 15,
-  categories: ["행사","공모전","프로젝트"],
+  categories: ["행사","공모전","프로젝트","안내사항"],
 };
