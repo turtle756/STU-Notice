@@ -38,7 +38,7 @@ const eventsData = [
 하나님의 임재 속에서 새로운 부흥을 기대하는
 특별한 은혜의 시간이 되길 소망합니다!`,
     link: null,
-    applyLink: "📌사전 신청 링크 : https://forms.gle/8cQX6HpBWMiTwLNH8",
+    applyLink: "https://forms.gle/8cQX6HpBWMiTwLNH8",
     details: {
       contact: "서울신학대학교 총학생회 카카오톡 플러스 채널 ",
       target: "서울신학대학교 모든 재학생 "
