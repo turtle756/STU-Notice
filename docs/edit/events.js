@@ -40,7 +40,7 @@ const eventsData = [
     link: null,
     applyLink: "📌사전 신청 링크 : https://forms.gle/8cQX6HpBWMiTwLNH8",
     details: {
-      contact: "☎️ 문의: 서울신학대학교 총학생회 카카오톡 플러스 채널 ",
+      contact: "서울신학대학교 총학생회 카카오톡 플러스 채널 ",
       target: "서울신학대학교 모든 재학생 "
     },
   },
