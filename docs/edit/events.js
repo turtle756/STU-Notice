@@ -119,7 +119,7 @@ const eventsData = [
     subImage2: null,
     title: "교양교육원 학생 모니터링단 ",
     date: null,
-    organizer: null,
+    organizer: "교양교육원",
     location: null,
     description: `[교양교육원 2026-1학기 학생모니터링단 모집 안내]
 
@@ -152,6 +152,36 @@ const eventsData = [
     applyLink: "https://eroom.stu.ac.kr?djkSNAr",
     details: {
       contact: "교양교육원 STU교양교육연구센터 032-340-9239"
+    },
+  },
+  // #####################
+
+  // @@@@@@@@@@@@@@@@@
+  {
+    category: null,
+    image: "image/행사&공모전/KakaoTalk_20260311_171053167.png",
+    subImage1: null,
+    subImage2: null,
+    title: "이음멘토링 멘티모집",
+    date: "3월 15일까지 신청",
+    organizer: "학생상담센터",
+    location: null,
+    description: `[26-1 이음멘토링 멘티 추가 모집]
+
+안녕하세요 학생상담센터입니다.
+
+26-1학기 이음멘토링 신·편입생 멘티를 추가모집합니다. 이음멘토링을 통해 선배멘토와 만나 학교생활 및 성적관리 방법, 진로고민 등을 나눌 수 있습니다. 처음 시작하는 대학생활, 어떻게 해야 할 지 걱정된다면, 이음멘토링 멘티에 참여해보세요!
+
+✔ 대상 : 신·편입생 
+✔ 신청기간 : ~3월15일까지⭐
+✔ 활동기간 : 26-1학기
+✔ 혜택 : 마일리지 3만점
+✔ 자세한 안내는 포스터를 참고해주시기 바랍니다. `,
+    link: null,
+    applyLink: "https://eroom.stu.ac.kr?mdlCxZxh0",
+    details: {
+      contact: "학생상담센터(032-340-9380)",
+      benefits: "마일리지 3만점"
     },
   },
   // #####################
