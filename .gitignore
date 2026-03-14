@@ -26,3 +26,6 @@ dist-ssr
 # Replit
 .replit
 replit.md
+
+# Draft data (admin working area)
+draft/
