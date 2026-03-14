@@ -292,7 +292,20 @@ if (typeof eventsData !== 'undefined') {
     setupCardListeners();
   };
   
-  if (window.renderEvents) window.renderEvents(1);
+  if (window.renderEvents) {
+    window.renderEvents(1);
+    // Auto-open event from URL param (e.g., ?event=0)
+    const eventParam = new URLSearchParams(window.location.search).get('event');
+    if (eventParam !== null) {
+      const idx = parseInt(eventParam);
+      if (!isNaN(idx) && idx >= 0 && idx < eventsData.length) {
+        setTimeout(() => {
+          const card = eventGrid.querySelector(`[data-event-index="${idx}"]`);
+          if (card) card.click();
+        }, 100);
+      }
+    }
+  }
 }
 
 /*
@@ -945,10 +958,10 @@ if (typeof homeData !== 'undefined') {
   
   if (noticeList && typeof notices !== 'undefined') {
     const recentNotices = notices.slice(0, 3);
-    recentNotices.forEach(notice => {
+    recentNotices.forEach((notice, idx) => {
       const item = document.createElement('a');
       item.className = 'notice-item';
-      item.href = 'common/notice.html';
+      item.href = `common/notice.html?notice=${idx}`;
       item.innerHTML = `
         <div class="notice-item-header">
           <span class="notice-category">${notice.category}</span>
@@ -963,10 +976,10 @@ if (typeof homeData !== 'undefined') {
   
   if (faqPreviewList && typeof faqs !== 'undefined') {
     const recentFaqs = faqs.slice(0, 3);
-    recentFaqs.forEach(faq => {
+    recentFaqs.forEach((faq, idx) => {
       const item = document.createElement('a');
       item.className = 'faq-preview-item';
-      item.href = 'common/notice.html#faq';
+      item.href = `common/notice.html?faq=${idx}#faq`;
       item.innerHTML = `
         <span class="faq-preview-icon">Q</span>
         <span class="faq-preview-text">${faq.question}</span>
@@ -991,10 +1004,10 @@ if (typeof homeData !== 'undefined') {
   const eventsHighlight = document.getElementById('eventsHighlight');
   if (eventsHighlight && typeof eventsData !== 'undefined') {
     const recentEvents = eventsData.slice(0, 3);
-    recentEvents.forEach(event => {
+    recentEvents.forEach((event, idx) => {
       const card = document.createElement('a');
       card.className = 'home-event-card';
-      card.href = 'common/events.html';
+      card.href = `common/events.html?event=${idx}`;
       const eventImgSrc = event.image.startsWith('http') ? event.image : event.image;
       card.innerHTML = `
         <img class="home-event-card-image" src="${eventImgSrc}" alt="${event.title}" loading="lazy" />
@@ -1184,13 +1197,47 @@ if (noticeNavTabs.length > 0 && noticeSection && faqSection) {
     tab.addEventListener('click', () => {
       noticeNavTabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      
+
       const target = tab.dataset.target;
       noticeSection.classList.remove('active');
       faqSection.classList.remove('active');
       document.getElementById(target).classList.add('active');
     });
   });
+
+  // Auto-scroll to specific notice or FAQ from URL params
+  const urlParams = new URLSearchParams(window.location.search);
+  const noticeIdx = urlParams.get('notice');
+  const faqIdx = urlParams.get('faq');
+
+  if (noticeIdx !== null) {
+    const idx = parseInt(noticeIdx);
+    if (!isNaN(idx)) {
+      setTimeout(() => {
+        const items = noticeSection.querySelectorAll('.notice-full-item');
+        if (items[idx]) {
+          items[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          items[idx].style.boxShadow = '0 0 0 3px #667eea';
+          setTimeout(() => { items[idx].style.boxShadow = ''; }, 2000);
+        }
+      }, 200);
+    }
+  }
+
+  if (faqIdx !== null) {
+    const idx = parseInt(faqIdx);
+    if (!isNaN(idx)) {
+      setTimeout(() => {
+        const items = faqSection.querySelectorAll('.faq-item');
+        if (items[idx]) {
+          items[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          items[idx].classList.add('active');
+          items[idx].style.boxShadow = '0 0 0 3px #667eea';
+          setTimeout(() => { items[idx].style.boxShadow = ''; }, 2000);
+        }
+      }, 200);
+    }
+  }
 }
 
 /*

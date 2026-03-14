@@ -950,6 +950,18 @@ body {
 }
 .drag-handle:hover { color: #667eea; }
 .item-card:active .drag-handle { cursor: grabbing; }
+.btn-move-sm {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+  transition: all 0.15s;
+}
+.btn-move-sm:hover { border-color: #667eea; color: #667eea; background: #f0f3ff; }
 
 /* 파일매니저 드래그&드롭 업로드 */
 .fm-dropzone {

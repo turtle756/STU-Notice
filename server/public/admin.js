@@ -562,6 +562,63 @@ function makeFormGroup(label, type, value, onChange, options = {}) {
   return group;
 }
 
+function setupDragReorder(card, idx, items, renderFn) {
+  card.dataset.idx = idx;
+  card.draggable = true;
+  card.addEventListener('dragstart', (e) => {
+    if (card.classList.contains('editing')) { e.preventDefault(); return; }
+    card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', idx);
+  });
+  card.addEventListener('dragend', () => card.classList.remove('dragging'));
+  card.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const rect = card.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    card.classList.toggle('drag-over-top', e.clientY < midY);
+    card.classList.toggle('drag-over-bottom', e.clientY >= midY);
+  });
+  card.addEventListener('dragleave', () => {
+    card.classList.remove('drag-over-top', 'drag-over-bottom');
+  });
+  card.addEventListener('drop', (e) => {
+    e.preventDefault();
+    card.classList.remove('drag-over-top', 'drag-over-bottom');
+    const fromIdx = parseInt(e.dataTransfer.getData('text/plain'));
+    let toIdx = parseInt(card.dataset.idx);
+    if (fromIdx === toIdx) return;
+    const rect = card.getBoundingClientRect();
+    const isTopHalf = e.clientY < rect.top + rect.height / 2;
+    const [moved] = items.splice(fromIdx, 1);
+    if (fromIdx < toIdx) toIdx--;
+    if (!isTopHalf) toIdx++;
+    items.splice(toIdx, 0, moved);
+    markChanged();
+    renderFn();
+  });
+}
+
+function addMoveButtons(container, idx, items, renderFn) {
+  if (idx > 0) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-move-sm';
+    btn.textContent = '▲';
+    btn.title = '위로 이동';
+    btn.onclick = (e) => { e.stopPropagation(); [items[idx], items[idx-1]] = [items[idx-1], items[idx]]; markChanged(); renderFn(); };
+    container.appendChild(btn);
+  }
+  if (idx < items.length - 1) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-move-sm';
+    btn.textContent = '▼';
+    btn.title = '아래로 이동';
+    btn.onclick = (e) => { e.stopPropagation(); [items[idx], items[idx+1]] = [items[idx+1], items[idx]]; markChanged(); renderFn(); };
+    container.appendChild(btn);
+  }
+}
+
 function renderSchedule() {
   const section = document.getElementById('section-schedule');
   const data = allData['schedule.js'];
@@ -665,42 +722,13 @@ function renderItemList(sectionId, filename, dataKey, configKey, fields, title) 
   header.appendChild(headerBtns);
   section.appendChild(header);
 
+  const rerender = () => renderItemList(sectionId, filename, dataKey, configKey, fields, title);
+
   items.forEach((item, idx) => {
     const card = document.createElement('div');
     card.className = 'item-card';
-    card.dataset.idx = idx;
 
-    // Drag reordering
-    card.draggable = true;
-    card.addEventListener('dragstart', (e) => {
-      if (card.classList.contains('editing')) { e.preventDefault(); return; }
-      card.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', idx);
-    });
-    card.addEventListener('dragend', () => card.classList.remove('dragging'));
-    card.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      const rect = card.getBoundingClientRect();
-      const midY = rect.top + rect.height / 2;
-      card.classList.toggle('drag-over-top', e.clientY < midY);
-      card.classList.toggle('drag-over-bottom', e.clientY >= midY);
-    });
-    card.addEventListener('dragleave', () => {
-      card.classList.remove('drag-over-top', 'drag-over-bottom');
-    });
-    card.addEventListener('drop', (e) => {
-      e.preventDefault();
-      card.classList.remove('drag-over-top', 'drag-over-bottom');
-      const fromIdx = parseInt(e.dataTransfer.getData('text/plain'));
-      const toIdx = parseInt(card.dataset.idx);
-      if (fromIdx === toIdx) return;
-      const [moved] = items.splice(fromIdx, 1);
-      items.splice(toIdx, 0, moved);
-      markChanged();
-      renderItemList(sectionId, filename, dataKey, configKey, fields, title);
-    });
+    setupDragReorder(card, idx, items, rerender);
 
     const itemHeader = document.createElement('div');
     itemHeader.className = 'item-header';
@@ -709,6 +737,8 @@ function renderItemList(sectionId, filename, dataKey, configKey, fields, title) 
     titleDiv.innerHTML = `<span class="drag-handle" title="드래그하여 순서 변경">☰</span> ${item.category ? `<span class="badge">${item.category}</span>` : ''} ${item.title || item.question || item.label || `항목 ${idx + 1}`}`;
     const actions = document.createElement('div');
     actions.className = 'item-actions';
+
+    addMoveButtons(actions, idx, items, rerender);
 
     const editBtn = document.createElement('button');
     editBtn.className = 'btn-edit';
@@ -726,7 +756,7 @@ function renderItemList(sectionId, filename, dataKey, configKey, fields, title) 
       if (confirm('이 항목을 삭제하시겠습니까?')) {
         items.splice(idx, 1);
         markChanged();
-        renderItemList(sectionId, filename, dataKey, configKey, fields, title);
+        rerender();
       }
     };
     actions.appendChild(delBtn);
@@ -963,16 +993,26 @@ function renderNotice() {
   data.notices.forEach((n, idx) => {
     const card = document.createElement('div');
     card.className = 'item-card';
+    setupDragReorder(card, idx, data.notices, renderNotice);
     card.innerHTML = `
       <div class="item-header">
-        <div class="item-title"><span class="badge">${n.category}</span> ${n.title}</div>
-        <div class="item-actions">
-          <button class="btn-edit" onclick="this.closest('.item-card').classList.toggle('editing')">✏️ 편집</button>
-          <button class="btn-delete" onclick="if(confirm('삭제?')){allData['notice.js'].notices.splice(${idx},1);markChanged();renderNotice()}">🗑️</button>
-        </div>
+        <div class="item-title"><span class="drag-handle" title="드래그하여 순서 변경">☰</span> <span class="badge">${n.category}</span> ${n.title}</div>
+        <div class="item-actions"></div>
       </div>
       <div class="item-preview"><div class="preview-text"><span style="color:#999">${n.date}</span> · ${(n.content || '').substring(0, 100).replace(/\n/g, ' ')}</div></div>
     `;
+    const actions = card.querySelector('.item-actions');
+    addMoveButtons(actions, idx, data.notices, renderNotice);
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn-edit';
+    editBtn.textContent = '✏️ 편집';
+    editBtn.onclick = () => { const isEditing = card.classList.toggle('editing'); card.draggable = !isEditing; };
+    actions.appendChild(editBtn);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn-delete';
+    delBtn.textContent = '🗑️';
+    delBtn.onclick = () => { if (confirm('삭제?')) { data.notices.splice(idx, 1); markChanged(); renderNotice(); } };
+    actions.appendChild(delBtn);
     const form = document.createElement('div');
     form.className = 'edit-form';
     form.appendChild(makeFormGroup('제목', 'text', n.title, v => { n.title = v; markChanged(); }));
@@ -1037,16 +1077,26 @@ function renderNotice() {
   data.faqs.forEach((f, idx) => {
     const card = document.createElement('div');
     card.className = 'item-card';
+    setupDragReorder(card, idx, data.faqs, renderNotice);
     card.innerHTML = `
       <div class="item-header">
-        <div class="item-title">${f.category ? `<span class="badge">${f.category}</span>` : ''} ${f.question}</div>
-        <div class="item-actions">
-          <button class="btn-edit" onclick="this.closest('.item-card').classList.toggle('editing')">✏️ 편집</button>
-          <button class="btn-delete" onclick="if(confirm('삭제?')){allData['notice.js'].faqs.splice(${idx},1);markChanged();renderNotice()}">🗑️</button>
-        </div>
+        <div class="item-title"><span class="drag-handle" title="드래그하여 순서 변경">☰</span> ${f.category ? `<span class="badge">${f.category}</span>` : ''} ${f.question}</div>
+        <div class="item-actions"></div>
       </div>
       <div class="item-preview"><div class="preview-text">${(f.answer || '').substring(0, 100).replace(/\n/g, ' ')}</div></div>
     `;
+    const actions = card.querySelector('.item-actions');
+    addMoveButtons(actions, idx, data.faqs, renderNotice);
+    const editBtn = document.createElement('button');
+    editBtn.className = 'btn-edit';
+    editBtn.textContent = '✏️ 편집';
+    editBtn.onclick = () => { const isEditing = card.classList.toggle('editing'); card.draggable = !isEditing; };
+    actions.appendChild(editBtn);
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn-delete';
+    delBtn.textContent = '🗑️';
+    delBtn.onclick = () => { if (confirm('삭제?')) { data.faqs.splice(idx, 1); markChanged(); renderNotice(); } };
+    actions.appendChild(delBtn);
     const form = document.createElement('div');
     form.className = 'edit-form';
     form.appendChild(makeFormGroup('질문', 'text', f.question, v => { f.question = v; markChanged(); }));

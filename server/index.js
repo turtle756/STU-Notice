@@ -44,6 +44,14 @@ app.get('/', (req, res) => {
 
 // Sub-pages like /schedule, /events etc. → serve from docs/common/
 const PUBLIC_PAGES = ['schedule', 'events', 'official-clubs', 'clubs', 'partners', 'notice'];
+const PAGE_OG = {
+  schedule: { title: '일정', desc: '서울신학대학교 총학생회 월별 일정 캘린더' },
+  events: { title: '행사 & 공모전', desc: '서울신학대학교 교내 행사 및 공모전 정보' },
+  'official-clubs': { title: '정규 동아리', desc: '서울신학대학교 공식 승인 정규 동아리 소개' },
+  clubs: { title: '자율 동아리 & 소모임', desc: '서울신학대학교 자율 동아리 및 소모임 안내' },
+  partners: { title: '제휴업체', desc: '서울신학대학교 학생 제휴업체 할인 혜택 안내' },
+  notice: { title: '공지사항', desc: '서울신학대학교 총학생회 공지사항 및 자주 묻는 질문' },
+};
 PUBLIC_PAGES.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     const htmlPath = path.join(DOCS_DIR, 'common', `${page}.html`);
@@ -56,9 +64,22 @@ PUBLIC_PAGES.forEach(page => {
     html = html.replace(/"\.\.\/index\.html"/g, '"/"');
     html = html.replace(/href="([a-z-]+)\.html"/g, 'href="/$1"');
     html = html.replace(/\.\.\/image\//g, '/image/');
+    // Inject OG tags
+    const og = PAGE_OG[page];
+    if (og) {
+      const ogTags = `<meta property="og:title" content="서울신학대학교 총학생회 - ${og.title}"><meta property="og:description" content="${og.desc}"><meta property="og:type" content="website"><meta property="og:url" content="https://stuseed.site/${page}">`;
+      html = html.replace('</head>', ogTags + '</head>');
+    }
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.send(html);
   });
+});
+
+// Redirect old common/*.html paths to clean URLs (preserving query/hash)
+app.get('/common/:page.html', (req, res) => {
+  const page = req.params.page;
+  const qs = req.originalUrl.split('?')[1];
+  res.redirect(301, `/${page}${qs ? '?' + qs : ''}`);
 });
 
 // Serve index.html with fixed paths
