@@ -29,15 +29,14 @@ document.querySelectorAll('.admin-nav button').forEach(btn => {
 
 async function loadData() {
   const files = ['home.js', 'schedule.js', 'events.js', 'official-clubs.js', 'clubs.js', 'partners.js', 'notice.js', 'sns.js'];
-  for (const file of files) {
+  await Promise.all(files.map(async (file) => {
     try {
       const res = await fetch(`/admin/api/data/${file}`);
-      const data = await res.json();
-      allData[file] = data;
+      allData[file] = await res.json();
     } catch (e) {
       console.error(`Error loading ${file}:`, e);
     }
-  }
+  }));
   renderAll();
 }
 
@@ -327,6 +326,8 @@ function closeRevertModal() { document.getElementById('revertModal').classList.r
 
 async function revertToLive() {
   closeRevertModal();
+  const btn = document.querySelector('.btn-pull');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 되돌리는 중...'; }
   try {
     const res = await fetch('/admin/api/revert', { method: 'POST' });
     const data = await res.json();
@@ -340,6 +341,8 @@ async function revertToLive() {
     }
   } catch (e) {
     showToast('되돌리기 실패: ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '📥 되돌리기'; }
   }
 }
 
@@ -348,6 +351,8 @@ function closeDeployModal() { document.getElementById('deployModal').classList.r
 
 async function deploy() {
   closeDeployModal();
+  const btn = document.querySelector('.btn-deploy');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ 적용 중...'; }
   try {
     const res = await fetch('/admin/api/publish', { method: 'POST' });
     const data = await res.json();
@@ -360,6 +365,8 @@ async function deploy() {
     }
   } catch (e) {
     showToast('적용 실패: ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '✅ 적용하기'; }
   }
 }
 
@@ -663,33 +670,53 @@ function renderItemList(sectionId, filename, dataKey, configKey, fields, title) 
     card.className = 'item-card';
     card.dataset.idx = idx;
 
+    // Drag reordering
+    card.draggable = true;
+    card.addEventListener('dragstart', (e) => {
+      if (card.classList.contains('editing')) { e.preventDefault(); return; }
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', idx);
+    });
+    card.addEventListener('dragend', () => card.classList.remove('dragging'));
+    card.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const rect = card.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      card.classList.toggle('drag-over-top', e.clientY < midY);
+      card.classList.toggle('drag-over-bottom', e.clientY >= midY);
+    });
+    card.addEventListener('dragleave', () => {
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+    });
+    card.addEventListener('drop', (e) => {
+      e.preventDefault();
+      card.classList.remove('drag-over-top', 'drag-over-bottom');
+      const fromIdx = parseInt(e.dataTransfer.getData('text/plain'));
+      const toIdx = parseInt(card.dataset.idx);
+      if (fromIdx === toIdx) return;
+      const [moved] = items.splice(fromIdx, 1);
+      items.splice(toIdx, 0, moved);
+      markChanged();
+      renderItemList(sectionId, filename, dataKey, configKey, fields, title);
+    });
+
     const itemHeader = document.createElement('div');
     itemHeader.className = 'item-header';
     const titleDiv = document.createElement('div');
     titleDiv.className = 'item-title';
-    titleDiv.innerHTML = `${item.category ? `<span class="badge">${item.category}</span>` : ''} ${item.title || item.question || item.label || `항목 ${idx + 1}`}`;
+    titleDiv.innerHTML = `<span class="drag-handle" title="드래그하여 순서 변경">☰</span> ${item.category ? `<span class="badge">${item.category}</span>` : ''} ${item.title || item.question || item.label || `항목 ${idx + 1}`}`;
     const actions = document.createElement('div');
     actions.className = 'item-actions';
-
-    if (idx > 0) {
-      const upBtn = document.createElement('button');
-      upBtn.className = 'btn-move';
-      upBtn.textContent = '▲';
-      upBtn.onclick = () => { [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; markChanged(); renderItemList(sectionId, filename, dataKey, configKey, fields, title); };
-      actions.appendChild(upBtn);
-    }
-    if (idx < items.length - 1) {
-      const downBtn = document.createElement('button');
-      downBtn.className = 'btn-move';
-      downBtn.textContent = '▼';
-      downBtn.onclick = () => { [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; markChanged(); renderItemList(sectionId, filename, dataKey, configKey, fields, title); };
-      actions.appendChild(downBtn);
-    }
 
     const editBtn = document.createElement('button');
     editBtn.className = 'btn-edit';
     editBtn.textContent = '✏️ 편집';
-    editBtn.onclick = () => card.classList.toggle('editing');
+    editBtn.onclick = () => {
+      const isEditing = card.classList.toggle('editing');
+      card.draggable = !isEditing;
+    };
     actions.appendChild(editBtn);
 
     const delBtn = document.createElement('button');
@@ -722,6 +749,15 @@ function renderItemList(sectionId, filename, dataKey, configKey, fields, title) 
     const form = document.createElement('div');
     form.className = 'edit-form';
     fields.forEach(f => {
+      // #2 Category dropdown from config categories
+      if (f.key === 'category' && config && Array.isArray(config.categories)) {
+        const g = makeFormGroup(f.label, 'select', item[f.key], v => {
+          item[f.key] = v || null;
+          markChanged();
+        }, { choices: config.categories });
+        form.appendChild(g);
+        return;
+      }
       if (f.type === 'image') {
         const g = document.createElement('div');
         g.className = 'form-group';
@@ -828,7 +864,7 @@ function renderEvents() {
     { key: 'subImage1', label: '서브 이미지 1', type: 'image', uploadDir: '행사&공모전', nullable: true, sizeHint: '권장: 너비 600px · 높이 400px' },
     { key: 'subImage2', label: '서브 이미지 2', type: 'image', uploadDir: '행사&공모전', nullable: true, sizeHint: '권장: 너비 600px · 높이 400px' },
     { key: 'title', label: '제목', type: 'text' },
-    { key: 'date', label: '날짜', type: 'text', nullable: true, placeholder: '없으면 비워두세요' },
+    { key: 'date', label: '날짜', type: 'text', nullable: true, placeholder: '예: 2026.04.25(토) 또는 2026-04-25' },
     { key: 'organizer', label: '주관/주최', type: 'text', nullable: true },
     { key: 'location', label: '장소', type: 'text', nullable: true, placeholder: '없으면 비워두세요' },
     { key: 'description', label: '설명', type: 'textarea', rows: 6 },
@@ -892,6 +928,10 @@ function renderNotice() {
   const section = document.getElementById('section-notice');
   const data = allData['notice.js'];
   if (!data) { section.innerHTML = '<div class="empty-state"><div class="empty-icon">⏳</div>로딩 중...</div>'; return; }
+  // Migrate poll from string to object if needed
+  if (data.notices) data.notices.forEach(n => {
+    if (typeof n.poll === 'string') n.poll = { title: '바로가기', description: '', link: n.poll };
+  });
   section.innerHTML = '';
 
   const configCard = document.createElement('div');
@@ -942,7 +982,39 @@ function renderNotice() {
     row.appendChild(makeFormGroup('카테고리', 'select', n.category, v => { n.category = v; markChanged(); }, { choices: ['공지', '안내'] }));
     form.appendChild(row);
     form.appendChild(makeFormGroup('내용', 'textarea', n.content, v => { n.content = v; markChanged(); }, { rows: 5 }));
-    form.appendChild(makeFormGroup('링크 버튼 URL', 'text', n.poll, v => { n.poll = v || null; markChanged(); }, { placeholder: '없으면 비워두세요' }));
+    // Poll (structured: {title, description, link} or null)
+    const pollGroup = document.createElement('div');
+    pollGroup.className = 'form-group';
+    const pollLabel = document.createElement('label');
+    pollLabel.textContent = '📎 링크 버튼 (선택사항)';
+    pollGroup.appendChild(pollLabel);
+    const pollToggle = document.createElement('label');
+    pollToggle.style.cssText = 'display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;margin-bottom:0.5rem;cursor:pointer';
+    const pollCheck = document.createElement('input');
+    pollCheck.type = 'checkbox';
+    pollCheck.checked = !!n.poll;
+    pollToggle.appendChild(pollCheck);
+    pollToggle.appendChild(document.createTextNode('링크 버튼 사용'));
+    pollGroup.appendChild(pollToggle);
+    const pollFields = document.createElement('div');
+    pollFields.className = 'form-row-3';
+    pollFields.style.display = n.poll ? '' : 'none';
+    const pObj = n.poll || { title: '바로가기', description: '', link: '' };
+    pollFields.appendChild(makeFormGroup('버튼 텍스트', 'text', pObj.title, v => { pObj.title = v; if(n.poll) n.poll.title = v; markChanged(); }, { placeholder: '바로가기' }));
+    pollFields.appendChild(makeFormGroup('설명', 'text', pObj.description, v => { pObj.description = v; if(n.poll) n.poll.description = v; markChanged(); }, { placeholder: '선택사항' }));
+    pollFields.appendChild(makeFormGroup('URL', 'text', pObj.link, v => { pObj.link = v; if(n.poll) n.poll.link = v; markChanged(); }, { placeholder: 'https://...' }));
+    pollGroup.appendChild(pollFields);
+    pollCheck.addEventListener('change', () => {
+      if (pollCheck.checked) {
+        n.poll = { title: pObj.title || '바로가기', description: pObj.description || '', link: pObj.link || '' };
+        pollFields.style.display = '';
+      } else {
+        n.poll = null;
+        pollFields.style.display = 'none';
+      }
+      markChanged();
+    });
+    form.appendChild(pollGroup);
     card.appendChild(form);
     section.appendChild(card);
   });
@@ -967,7 +1039,7 @@ function renderNotice() {
     card.className = 'item-card';
     card.innerHTML = `
       <div class="item-header">
-        <div class="item-title"><span class="badge">${f.category}</span> ${f.question}</div>
+        <div class="item-title">${f.category ? `<span class="badge">${f.category}</span>` : ''} ${f.question}</div>
         <div class="item-actions">
           <button class="btn-edit" onclick="this.closest('.item-card').classList.toggle('editing')">✏️ 편집</button>
           <button class="btn-delete" onclick="if(confirm('삭제?')){allData['notice.js'].faqs.splice(${idx},1);markChanged();renderNotice()}">🗑️</button>
@@ -1449,6 +1521,34 @@ async function renderFileManager() {
       }
     });
     section.appendChild(breadcrumb);
+
+    // Drag-and-drop upload zone
+    const dropzone = document.createElement('div');
+    dropzone.className = 'fm-dropzone';
+    dropzone.textContent = '📷 이미지를 여기에 드래그하여 업로드';
+    ['dragenter', 'dragover'].forEach(evt => {
+      dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.add('drag-active'); });
+    });
+    ['dragleave', 'drop'].forEach(evt => {
+      dropzone.addEventListener(evt, () => dropzone.classList.remove('drag-active'));
+    });
+    dropzone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      const files = [...e.dataTransfer.files].filter(f => f.type.startsWith('image/'));
+      if (files.length === 0) { showToast('이미지 파일만 업로드 가능합니다', 'error'); return; }
+      const currentDir = fileManagerCurrentPath.replace(/^image\/?/, '');
+      if (files.length === 1) {
+        openImageEditorForUpload(files[0], '', currentDir, () => renderFileManager());
+      } else {
+        dropzone.textContent = `⏳ ${files.length}개 파일 업로드 중...`;
+        for (const file of files) {
+          try { await uploadImage(file, currentDir); } catch (err) { showToast('업로드 실패: ' + err.message, 'error'); }
+        }
+        showToast(`${files.length}개 파일 업로드 완료`, 'success');
+        renderFileManager();
+      }
+    });
+    section.appendChild(dropzone);
 
     if (fmState.clipboard.length > 0) updateFmToolbar();
 
@@ -2119,6 +2219,14 @@ async function showMoveModal(file) {
     } catch (e) { showToast('이동 실패: ' + e.message, 'error'); }
   };
 }
+
+// #1 beforeunload warning
+window.addEventListener('beforeunload', (e) => {
+  if (hasChanges) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
 
 async function initApp() {
   const params = new URLSearchParams(window.location.search);

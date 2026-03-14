@@ -1213,3 +1213,24 @@ lightboxOverlay.addEventListener('click', function() {
   lightboxOverlay.classList.remove('show');
   document.body.style.overflow = '';
 });
+
+/*
+================================================================================
+📅 푸터 연도 동적화
+================================================================================
+*/
+const footerYear = document.getElementById('footerYear');
+if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+/*
+================================================================================
+🖼️ 이미지 로드 실패 시 placeholder
+================================================================================
+*/
+document.addEventListener('error', (e) => {
+  if (e.target.tagName === 'IMG' && !e.target.dataset.fallback) {
+    e.target.dataset.fallback = '1';
+    e.target.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect fill="#f0f0f0" width="300" height="200"/><text x="150" y="100" text-anchor="middle" dominant-baseline="middle" fill="#bbb" font-size="14" font-family="sans-serif">이미지를 불러올 수 없습니다</text></svg>');
+    e.target.style.objectFit = 'contain';
+  }
+}, true);

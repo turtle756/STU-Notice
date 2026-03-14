@@ -35,7 +35,11 @@ app.use('/common', express.static(path.join(DOCS_DIR, 'common')));
 app.use('/image', express.static(IMAGE_DIR));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(DOCS_DIR, 'index.html'));
+  let html = fs.readFileSync(path.join(DOCS_DIR, 'index.html'), 'utf-8');
+  // Fix links: common/page.html → /page
+  html = html.replace(/href="common\/([a-z-]+)\.html(#[^"]*)?"/g, 'href="/$1$2"');
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.send(html);
 });
 
 // Sub-pages like /schedule, /events etc. → serve from docs/common/
@@ -51,6 +55,7 @@ PUBLIC_PAGES.forEach(page => {
     html = html.replace(/\.\.\/edit\//g, '/edit/');
     html = html.replace(/"\.\.\/index\.html"/g, '"/"');
     html = html.replace(/href="([a-z-]+)\.html"/g, 'href="/$1"');
+    html = html.replace(/\.\.\/image\//g, '/image/');
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.send(html);
   });

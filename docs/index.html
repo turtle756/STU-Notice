@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="서울신학대학교 총학생회 공식 포털 - 일정, 행사, 동아리, 제휴업체 정보">
+  <meta property="og:title" content="서울신학대학교 총학생회">
+  <meta property="og:description" content="서울신학대학교 총학생회 공식 포털 - 일정, 행사, 동아리, 제휴업체 정보">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stuseed.site">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>서울신학대학교 총학생회</title>
+  <link rel="icon" href="image/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="common/style.css" />
 </head>
 <body>
@@ -17,13 +22,14 @@
         <span></span>
         <span></span>
       </button>
+      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="다크모드 전환">🌙</button>
       <div class="nav-links" id="navLinks">
         <a href="common/schedule.html">일정</a>
         <a href="common/events.html">행사 & 공모전</a>
         <a href="common/official-clubs.html">정규 동아리</a>
         <a href="common/clubs.html">자율 동아리 & 소모임</a>
         <a href="common/partners.html">제휴업체</a>
-        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="다크모드 전환">🌙</button>
+        <a href="common/notice.html">공지사항</a>
       </div>
     </div>
   </nav>
@@ -71,6 +77,10 @@
           <span class="home-nav-icon">🤝</span>
           <span class="home-nav-text">제휴업체</span>
         </a>
+        <a href="common/notice.html" class="home-nav-card">
+          <span class="home-nav-icon">📢</span>
+          <span class="home-nav-text">공지사항</span>
+        </a>
       </div>
     </section>
 
@@ -114,7 +124,7 @@
 
   <footer class="home-footer">
     <a id="footerSuggestBtn" class="footer-suggest-btn" href="#" target="_blank" rel="noopener noreferrer">📩 건의사항 접수하기</a>
-    <p>© 2025 서울신학대학교 총학생회</p>
+    <p>© <span id="footerYear">2025</span> 서울신학대학교 총학생회</p>
   </footer>
 
   <script src="edit/home.js"></script>
