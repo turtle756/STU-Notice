@@ -1,216 +1,93 @@
 # 서울신학대학교 총학생회 웹사이트
 
-**사이트 본 주소:** https://turtle756.github.io/STU-Notice/index.html
-
 **사이트 주소:** https://stuseed.site
 
-**관리자 사이트 주소:** https://admin.stuseed.site/login
+**관리자 페이지:** https://stuseed.site/admin
 
 ---
 
-## 📁 파일 구조
+## 구조
 
 ```
-docs/
-├── index.html                      ← 메인 홈 페이지
-│
-├── common/                         ← 수정 불필요 (코드 파일)
-│   ├── style.css                   ← 전체 스타일
-│   ├── script.js                   ← 전체 기능
-│   ├── schedule.html               ← 일정 페이지
-│   ├── events.html                 ← 행사/공모전 페이지
-│   ├── clubs.html                  ← 동아리/소모임 페이지
-│   ├── partners.html               ← 제휴사 페이지
-│   └── notice.html                 ← 공지사항/FAQ 페이지
-│
-├── edit/                           ← 정기 수정 파일
-│   ├── schedule.js                 ← 캘린더 월별 탭 데이터
-│   ├── events.js                   ← 행사/공모전 카드 데이터
-│   ├── clubs.js                    ← 동아리/소모임 카드 데이터
-│   ├── partners.js                 ← 제휴사 카드 데이터
-│   ├── home.js                     ← 메인 페이지 소개글/SNS 데이터
-│   └── notice.js                   ← 공지사항/FAQ 데이터
-│
-└── image/                          ← 이미지 저장 폴더
-    └── calendar/                   ← 월별 캘린더 이미지
-```
-
----
-
-## 📝 카드 수정 방법
-
-모든 데이터 파일은 동일한 구분선 형식을 사용합니다:
-- `@@@@@@@@@@@@@@@@@` → 카드 시작선
-- `#####################` → 카드 끝선
-
----
-
-> ### 📅 schedule.js
-> 캘린더 월별 탭 데이터
-
-```javascript
-{ month: 3, label: "3월", image: "image/calendar/calendar_3.jpg", status: "on" }
-```
-- `month` ← 월 숫자 (자동 선택용)
-- `label` ← 탭에 표시될 이름
-- `image` ← 캘린더 이미지 경로
-- `status` ← "on"=버튼 표시, "off"=버튼 숨김
-
-```
-이미지 변경: docs/image/calendar/ 폴더에서 같은 파일명으로 교체
-파일명 형식: calendar_1.jpg, calendar_2.jpg, ... calendar_12.jpg
-
-자동 선택: 현재 달이 off면 가장 가까운 on인 달로 자동 이동
+STU-Notice/
+├── server/                    ← Express 통합 서버
+│   ├── index.js               ← 엔트리포인트 (공개 사이트 + 관리자)
+│   ├── lib/
+│   │   ├── data-engine.js     ← 데이터 읽기/쓰기/적용/되돌리기
+│   │   └── github-sync.js     ← 적용 시 GitHub 백업 동기화
+│   └── public/                ← 관리자 UI
+│       ├── admin.html
+│       ├── admin.js
+│       ├── admin.css
+│       └── login.html
+├── docs/                      ← 공개 사이트 (정적 파일)
+│   ├── index.html             ← 메인 홈 페이지
+│   ├── common/                ← HTML/CSS/JS (수정 불필요)
+│   ├── edit/                  ← 라이브 데이터 파일 (*.js)
+│   └── image/                 ← 이미지 파일
+├── draft/                     ← 관리자 작업 영역 (.gitignore)
+│   └── edit/                  ← 수정 중인 데이터
+├── package.json
+└── .gitignore
 ```
 
 ---
 
-> ### 🎉 events.js
-> 행사 & 공모전 카드 데이터
-
-```javascript
-// @@@@@@@@@@@@@@@@@
-{
-  category: "행사",                              ← "행사" 또는 "공모전"
-  image: "image/example_festival.png",           ← 이미지 경로
-  title: "2024 가을 축제",                        ← 제목
-  date: "2024.11.15 - 2024.11.16",               ← 날짜
-  organizer: "주관: 학생회",                      ← 주관/주최
-  location: "중앙운동장",                         ← 장소 (행사만)
-  description: "가을 축제에 초대합니다!",          ← 간단한 설명
-  link: "https://example.com",                   ← 바로가기 링크 (없으면 null)
-  applyLink: null,                               ← 신청 링크 (공모전만, 없으면 null)
-  details: {
-    target: "전체 재학생",                        ← 대상
-    benefits: "무료 먹거리, 경품 추첨",            ← 혜택
-    schedule: "11/15(금) 17:00-22:00",           ← 일정
-    contact: "총학생회 010-XXXX-XXXX"             ← 문의처
-  }
-}
-// #####################
-```
-
-- `suggestFormLink` ← 건의/신청하기 버튼 링크
-- `itemsPerPage` ← 한 페이지에 표시할 카드 수 (기본 15개)
-- `categories` ← 카테고리 목록 (추가/삭제/변경 가능)
-
----
-
-> ### 👥 clubs.js
-> 동아리 & 소모임 카드 데이터
-
-```javascript
-// @@@@@@@@@@@@@@@@@
-{
-  category: "스포츠",                             ← categories 목록 중 하나
-  image: "image/example_soccer.png",             ← 이미지 경로
-  title: "축구 동아리",                           ← 동아리/소모임 이름
-  description: "함께 축구하며 친목을 다지는 동아리",  ← 간단한 설명
-  kakaoLink: "https://open.kakao.com/o/example", ← 카카오톡 오픈채팅 링크
-  detail: "매주 화/목요일 저녁 7시에 만나 축구"     ← 상세 설명 (모달용)
-}
-// #####################
-```
-
-- `applyFormLink` ← 신청하기 버튼 링크
-- `itemsPerPage` ← 한 페이지에 표시할 카드 수 (기본 15개)
-- `categories` ← 카테고리 목록 (추가/삭제/변경 가능)
-
----
-
-> ### 🤝 partners.js
-> 제휴사 카드 데이터
-
-```javascript
-// @@@@@@@@@@@@@@@@@
-{
-  category: "음식",                              ← "음식", "카페", "문화", "기타" 등
-  image: "https://picsum.photos/400/300?1",      ← 이미지 경로
-  title: "맛있는 식당",                           ← 제휴사 이름
-  description: "학생증 제시 시 10% 할인",          ← 혜택 설명
-  location: "정문 앞 100m",                       ← 위치
-  discount: "10% 할인",                          ← 할인 정보
-  mapCodeModal: `여기에 카카오맵 코드`             ← 카카오맵 퍼가기 코드 (모달용)
-}
-// #####################
-```
+## 데이터 플로우
 
 ```
-지도 추가 방법:
-1. 카카오맵(map.kakao.com)에서 장소 검색
-2. 공유 → 지도 퍼가기 클릭
-3. 크기: 560x300 설정
-4. 생성된 코드 전체를 mapCodeModal에 그대로 복붙
-```
-
-- `suggestFormLink` ← 제안하기 버튼 링크
-- `itemsPerPage` ← 한 페이지에 표시할 카드 수 (기본 15개)
-- `categories` ← 카테고리 목록 (추가/삭제/변경 가능)
-
----
-
-> ### 🏠 home.js
-> 메인 페이지 소개글/SNS 데이터
-
-```javascript
-const homeData = {
-  introduction: {
-    title: "서울신학대학교 제42대 시드 총학생회",               ← 메인 타이틀
-    subtitle: "학우분들의 편하고 즐거운 학교 생활을 위한 포털입니다.",        ← 서브타이틀
-    description: "시드 총학생회는 학우분들의 더 나은 학교 생활을 위해 노력하겠습니다."          ← 소개 설명
-  },
-  
-  sns: [
-    {
-      name: "Instagram",                         ← SNS 이름
-      icon: "📷",                                 ← 아이콘
-      url: "https://instagram.com",              ← 링크
-      color: "#E4405F"                           ← 버튼 색상
-    }
-  ],
-  
-  suggestLink: "https://forms.gle/example"       ← 건의사항 링크
-};
+[관리자 편집] → draft/edit/*.js에 자동저장
+      ↓
+[미리보기]   → 적용 전 변경사항 확인
+      ↓
+[적용하기]   → draft/edit/ → docs/edit/ 복사 + GitHub 동기화
+      ↓
+[공개 사이트] → docs/ 기반으로 서빙
 ```
 
 ---
 
-> ### 📢 notice.js
-> 공지사항 & FAQ 데이터
+## 로컬 실행
 
-**공지사항:**
-```javascript
-// @@@@@@@@@@@@@@@@@
-{
-  title: "2025학년도 1학기 학생회비 사용 안내",     ← 공지 제목
-  date: "2025-01-15",                            ← 날짜
-  category: "공지",                               ← "공지" 또는 "안내"
-  content: "학생회비 집행 내역을 안내드립니다.",     ← 내용
-  poll: {                                        ← 링크 (없으면 null)
-    title: "투표 제목",                            ← 링크 제목
-    description: "투표 참여 부탁드립니다.",         ← 링크 설명
-    link: "https://forms.gle/example"            ← 구글폼 또는 외부 링크
-  }
-}
-// #####################
-```
-
-**FAQ:**
-```javascript
-// @@@@@@@@@@@@@@@@@
-{
-  question: "학생회비는 어디에 사용되나요?",        ← 질문
-  answer: "체육대회, 축제, 동아리 지원 등에..."    ← 답변
-}
-// #####################
+```bash
+npm install
+npm start
+# http://localhost:5000/       ← 공개 사이트
+# http://localhost:5000/admin  ← 관리자 페이지
 ```
 
 ---
 
-## 📞 제작자 문의
+## 환경변수
+
+| 변수 | 설명 | 기본값 |
+|------|------|--------|
+| `PORT` | 서버 포트 | `5000` |
+| `ADMIN_PASSWORD` | 관리자 비밀번호 | `admin1911` |
+| `SESSION_SECRET` | 세션 암호화 키 | 랜덤 생성 |
+| `DATA_ROOT` | 영구 저장소 경로 (Railway Volume) | 미설정 시 docs/ 사용 |
+| `GITHUB_TOKEN` | GitHub PAT (적용 시 동기화) | 미설정 시 동기화 안 함 |
+| `GITHUB_REPO` | GitHub 저장소 | `turtle756/STU-Notice` |
+| `NODE_ENV` | 환경 (`production`에서 secure 쿠키) | - |
+
+---
+
+## 데이터 파일 (edit/*.js)
+
+| 파일 | 내용 |
+|------|------|
+| `home.js` | 메인 페이지 소개글, SNS 링크 |
+| `schedule.js` | 캘린더 월별 탭 데이터 |
+| `events.js` | 행사 & 공모전 카드 |
+| `official-clubs.js` | 정규 동아리 카드 |
+| `clubs.js` | 자율 동아리 & 소모임 카드 |
+| `partners.js` | 제휴업체 카드 |
+| `notice.js` | 공지사항 & FAQ |
+| `sns.js` | SNS 피드 |
+
+---
+
+## 제작자 문의
 
 - **이메일:** rlarlgu5333@naver.com
 - **카톡:** turtle753
-
-기능 추가 및 기능 오류에 대해서 이메일로 보내주시면 해결해드리겠습니다.
-개인 일정 때문에 시간이 걸릴 수 있는 점 양해부탁드립니다.
