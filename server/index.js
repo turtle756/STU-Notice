@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
-const { readDataFile, writeDataFile, publishDraft, revertDraft, ensureDraft, DOCS_DIR, DRAFT_EDIT_DIR } = require('./lib/data-engine');
+const { readDataFile, writeDataFile, publishDraft, revertDraft, ensureDraft, initPersistentData, DOCS_DIR, DRAFT_EDIT_DIR, LIVE_EDIT_DIR, IMAGE_DIR } = require('./lib/data-engine');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,7 +22,6 @@ app.use(session({
 }));
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin1911';
-const IMAGE_DIR = path.join(DOCS_DIR, 'image');
 const DATA_FILES = ['home.js', 'schedule.js', 'events.js', 'official-clubs.js', 'clubs.js', 'partners.js', 'notice.js', 'sns.js'];
 
 // ============================================================
@@ -30,7 +29,7 @@ const DATA_FILES = ['home.js', 'schedule.js', 'events.js', 'official-clubs.js', 
 // ============================================================
 
 // Serve edit/*.js and common/ for the public site
-app.use('/edit', express.static(path.join(DOCS_DIR, 'edit')));
+app.use('/edit', express.static(LIVE_EDIT_DIR));
 app.use('/common', express.static(path.join(DOCS_DIR, 'common')));
 app.use('/image', express.static(IMAGE_DIR));
 
@@ -512,14 +511,15 @@ app.get('/admin/preview/:page', (req, res) => {
 app.use('/admin/image', express.static(IMAGE_DIR));
 app.use('/docs/image', express.static(IMAGE_DIR));
 app.use('/docs/common', express.static(path.join(DOCS_DIR, 'common')));
-app.use('/docs/edit', express.static(path.join(DOCS_DIR, 'edit')));
+app.use('/docs/edit', express.static(LIVE_EDIT_DIR));
 
 // ============================================================
 // Init & start
 // ============================================================
 
+initPersistentData();
 ensureDraft();
-console.log('[init] Draft initialized.');
+console.log('[init] Data initialized.');
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://0.0.0.0:${PORT}`);

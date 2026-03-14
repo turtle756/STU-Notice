@@ -3,8 +3,28 @@ const path = require('path');
 const vm = require('vm');
 
 const DOCS_DIR = path.join(__dirname, '..', '..', 'docs');
-const DRAFT_EDIT_DIR = path.join(__dirname, '..', '..', 'draft', 'edit');
-const LIVE_EDIT_DIR = path.join(DOCS_DIR, 'edit');
+
+// DATA_ROOT: persistent storage (Railway Volume or local fallback)
+// On Railway: set DATA_ROOT env to volume mount path (e.g., /app/data)
+// Locally: defaults to repo root (edit/ and image/ live inside docs/)
+const DATA_ROOT = process.env.DATA_ROOT || '';
+
+const LIVE_EDIT_DIR = DATA_ROOT ? path.join(DATA_ROOT, 'edit') : path.join(DOCS_DIR, 'edit');
+const IMAGE_DIR = DATA_ROOT ? path.join(DATA_ROOT, 'image') : path.join(DOCS_DIR, 'image');
+const DRAFT_EDIT_DIR = DATA_ROOT ? path.join(DATA_ROOT, 'draft', 'edit') : path.join(__dirname, '..', '..', 'draft', 'edit');
+
+function copyDirRecursive(src, dest) {
+  fs.mkdirSync(dest, { recursive: true });
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
 
 function ensureDraft() {
   fs.mkdirSync(DRAFT_EDIT_DIR, { recursive: true });
@@ -14,6 +34,27 @@ function ensureDraft() {
     for (const file of files) {
       fs.copyFileSync(path.join(LIVE_EDIT_DIR, file), path.join(DRAFT_EDIT_DIR, file));
     }
+  }
+}
+
+function initPersistentData() {
+  if (!DATA_ROOT) return;
+  // Seed live edit files from git if volume is empty
+  fs.mkdirSync(LIVE_EDIT_DIR, { recursive: true });
+  const gitEditDir = path.join(DOCS_DIR, 'edit');
+  if (fs.readdirSync(LIVE_EDIT_DIR).length === 0 && fs.existsSync(gitEditDir)) {
+    const files = fs.readdirSync(gitEditDir);
+    for (const file of files) {
+      fs.copyFileSync(path.join(gitEditDir, file), path.join(LIVE_EDIT_DIR, file));
+    }
+    console.log(`[init] Seeded ${files.length} edit files to volume.`);
+  }
+  // Seed images from git if volume is empty
+  fs.mkdirSync(IMAGE_DIR, { recursive: true });
+  const gitImageDir = path.join(DOCS_DIR, 'image');
+  if (fs.readdirSync(IMAGE_DIR).length === 0 && fs.existsSync(gitImageDir)) {
+    copyDirRecursive(gitImageDir, IMAGE_DIR);
+    console.log('[init] Seeded images to volume.');
   }
 }
 
@@ -333,4 +374,4 @@ function revertDraft() {
   return count;
 }
 
-module.exports = { readDataFile, writeDataFile, publishDraft, revertDraft, ensureDraft, DOCS_DIR, DRAFT_EDIT_DIR, LIVE_EDIT_DIR };
+module.exports = { readDataFile, writeDataFile, publishDraft, revertDraft, ensureDraft, initPersistentData, DOCS_DIR, DRAFT_EDIT_DIR, LIVE_EDIT_DIR, IMAGE_DIR };
