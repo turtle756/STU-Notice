@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const { readDataFile, writeDataFile, publishDraft, revertDraft, ensureDraft, initPersistentData, DOCS_DIR, DRAFT_EDIT_DIR, LIVE_EDIT_DIR, IMAGE_DIR } = require('./lib/data-engine');
+const { syncToGithub, isEnabled: isGithubEnabled } = require('./lib/github-sync');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -136,9 +137,15 @@ app.put('/admin/api/data/:file', (req, res) => {
 // Admin API — publish & revert
 // ============================================================
 
-app.post('/admin/api/publish', (req, res) => {
+app.post('/admin/api/publish', async (req, res) => {
   try {
     const count = publishDraft();
+    // GitHub sync in background (don't block response)
+    if (isGithubEnabled()) {
+      syncToGithub(LIVE_EDIT_DIR)
+        .then(r => console.log(`[github-sync] ${r.filessynced} files synced`))
+        .catch(e => console.error('[github-sync] Error:', e.message));
+    }
     res.json({ success: true, filesPublished: count });
   } catch (e) {
     res.status(500).json({ error: e.message });
