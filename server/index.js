@@ -478,8 +478,9 @@ app.delete('/admin/api/folder/:path(*)', (req, res) => {
 
 const exitBtnHtml = `<a id="previewExitBtn" href="/admin" style="position:fixed;top:12px;right:16px;z-index:99999;background:#e74c3c;color:#fff;padding:7px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer;transition:background .2s" onmouseover="this.style.background='#c0392b'" onmouseout="this.style.background='#e74c3c'">✕ 미리보기 나가기</a>`;
 
-// Serve draft edit files for preview
+// Serve draft edit files and images for preview
 app.use('/admin/preview-data/edit', express.static(DRAFT_EDIT_DIR));
+app.use('/admin/preview/image', express.static(IMAGE_DIR));
 
 app.get('/admin/preview', (req, res) => {
   const htmlPath = path.join(DOCS_DIR, 'index.html');
