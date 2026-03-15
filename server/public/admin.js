@@ -3,6 +3,39 @@ let hasChanges = false;
 let currentTab = 'home';
 let autoSaveTimer = null;
 
+/* ── 로딩 오버레이 ── */
+function showLoading(title) {
+  const el = document.getElementById('loadingOverlay');
+  document.getElementById('loadingTitle').textContent = title || '처리 중...';
+  document.getElementById('loadingBar').style.width = '0%';
+  document.getElementById('loadingPct').textContent = '0%';
+  document.getElementById('loadingCount').textContent = '';
+  document.getElementById('loadingDesc').textContent = '';
+  el.classList.add('show');
+  // 자연스러운 프로그레스 애니메이션 시작
+  showLoading._interval = setInterval(() => {
+    const bar = document.getElementById('loadingBar');
+    const pct = document.getElementById('loadingPct');
+    const cur = parseFloat(bar.style.width) || 0;
+    if (cur < 90) {
+      const next = cur + (90 - cur) * 0.08;
+      bar.style.width = next + '%';
+      pct.textContent = Math.round(next) + '%';
+    }
+  }, 150);
+}
+function hideLoading(success) {
+  clearInterval(showLoading._interval);
+  const bar = document.getElementById('loadingBar');
+  const pct = document.getElementById('loadingPct');
+  bar.style.width = '100%';
+  pct.textContent = '100%';
+  document.getElementById('loadingDesc').textContent = success ? '완료!' : '실패';
+  setTimeout(() => {
+    document.getElementById('loadingOverlay').classList.remove('show');
+  }, 400);
+}
+
 const TAB_FILE_MAP = {
   home: 'home.js',
   schedule: 'schedule.js',
@@ -326,23 +359,23 @@ function closeRevertModal() { document.getElementById('revertModal').classList.r
 
 async function revertToLive() {
   closeRevertModal();
-  const btn = document.querySelector('.btn-pull');
-  if (btn) { btn.disabled = true; btn.textContent = '⏳ 되돌리는 중...'; }
+  showLoading('📥 라이브 데이터로 되돌리는 중...');
   try {
     const res = await fetch('/admin/api/revert', { method: 'POST' });
     const data = await res.json();
     if (data.success) {
-      showToast('라이브 데이터로 되돌리기 완료!', 'success');
+      hideLoading(true);
       hasChanges = false;
       document.getElementById('statusBar').classList.remove('show');
       await loadData();
+      showToast('라이브 데이터로 되돌리기 완료!', 'success');
     } else {
+      hideLoading(false);
       showToast('되돌리기 실패: ' + (data.error || '알 수 없는 오류'), 'error');
     }
   } catch (e) {
+    hideLoading(false);
     showToast('되돌리기 실패: ' + e.message, 'error');
-  } finally {
-    if (btn) { btn.disabled = false; btn.textContent = '📥 되돌리기'; }
   }
 }
 
@@ -351,22 +384,22 @@ function closeDeployModal() { document.getElementById('deployModal').classList.r
 
 async function deploy() {
   closeDeployModal();
-  const btn = document.querySelector('.btn-deploy');
-  if (btn) { btn.disabled = true; btn.textContent = '⏳ 적용 중...'; }
+  showLoading('✅ 사이트에 적용하는 중...');
   try {
     const res = await fetch('/admin/api/publish', { method: 'POST' });
     const data = await res.json();
     if (data.success) {
-      showToast('적용 완료! 사이트에 반영되었습니다.', 'success');
+      hideLoading(true);
       hasChanges = false;
       document.getElementById('statusBar').classList.remove('show');
+      showToast('적용 완료! 사이트에 반영되었습니다.', 'success');
     } else {
+      hideLoading(false);
       showToast('적용 실패: ' + (data.error || '알 수 없는 오류'), 'error');
     }
   } catch (e) {
+    hideLoading(false);
     showToast('적용 실패: ' + e.message, 'error');
-  } finally {
-    if (btn) { btn.disabled = false; btn.textContent = '✅ 적용하기'; }
   }
 }
 
