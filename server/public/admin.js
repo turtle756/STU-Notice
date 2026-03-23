@@ -569,13 +569,19 @@ function makeFormGroup(label, type, value, onChange, options = {}) {
 
   if (type === 'select') {
     const sel = document.createElement('select');
-    (options.choices || []).forEach(c => {
+    const choices = options.choices || [];
+    choices.forEach(c => {
       const opt = document.createElement('option');
       opt.value = c;
       opt.textContent = c;
       if (c === value) opt.selected = true;
       sel.appendChild(opt);
     });
+    // value가 choices에 없으면 첫 번째 값으로 즉시 반영
+    if (choices.length && !choices.includes(value)) {
+      sel.value = choices[0];
+      onChange(choices[0]);
+    }
     sel.addEventListener('change', () => onChange(sel.value));
     group.appendChild(sel);
   } else if (type === 'textarea') {
@@ -815,7 +821,7 @@ function renderItemList(sectionId, filename, dataKey, configKey, fields, title) 
       // #2 Category dropdown from config categories
       if (f.key === 'category' && config && Array.isArray(config.categories)) {
         const g = makeFormGroup(f.label, 'select', item[f.key], v => {
-          item[f.key] = v || null;
+          item[f.key] = v;
           markChanged();
         }, { choices: config.categories });
         form.appendChild(g);
