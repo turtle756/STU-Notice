@@ -29,5 +29,5 @@ const clubsConfig = {
   pageSubtitle: "관심사가 같은 학우들과 자유롭게 소통하세요!",
   applyFormLink: "https://forms.gle/3t7igzSKnyMeLT1n8",
   itemsPerPage: 15,
-  categories: ["스포츠","학술","문화예술","취미","수다방"],
+  categories: ["스포츠"],
 };
