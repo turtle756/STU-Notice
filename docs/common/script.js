@@ -250,7 +250,7 @@ if (typeof eventsData !== 'undefined') {
     pageEvents.forEach((event, pIdx) => {
       const card = document.createElement('div');
       card.className = 'event-card';
-      card.dataset.category = event.category;
+      card.dataset.category = event.category || '';
       card.dataset.eventIndex = eventsData.indexOf(event);
       
       if (event.details) {
@@ -271,7 +271,7 @@ if (typeof eventsData !== 'undefined') {
       card.innerHTML = `
         <img src="${imageSrc}" alt="${event.title}" loading="lazy" />
         <div class="event-content">
-          <span class="event-category">${event.category}</span>
+          ${event.category ? `<span class="event-category">${event.category}</span>` : ''}
           <h3>${event.title}</h3>
           <p class="event-date">📅 ${event.date}</p>
           <p class="event-organizer">${event.organizer}</p>
@@ -341,7 +341,7 @@ if (typeof clubsData !== 'undefined') {
     pageClubs.forEach(club => {
       const card = document.createElement('div');
       card.className = 'community-card';
-      card.dataset.category = club.category;
+      card.dataset.category = club.category || '';
       card.dataset.clubIndex = clubsData.indexOf(club);
       if (club.detail) card.dataset.detail = club.detail;
       card.dataset.fullDesc = club.description || '';
@@ -357,7 +357,7 @@ if (typeof clubsData !== 'undefined') {
         <div class="community-content">
           <div class="community-header-card">
             <h3>${club.title}</h3>
-            <span class="community-category">${club.category}</span>
+            ${club.category ? `<span class="community-category">${club.category}</span>` : ''}
           </div>
           <p class="community-description">${clubTruncatedDesc}</p>
           ${clubDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
@@ -413,7 +413,7 @@ if (typeof officialClubsData !== 'undefined') {
     pageClubs.forEach((club, idx) => {
       const card = document.createElement('div');
       card.className = 'community-card official-club-card';
-      card.dataset.category = club.category;
+      card.dataset.category = club.category || '';
       card.dataset.officialIndex = club._origIdx;
       if (club.detail) card.dataset.detail = club.detail;
       
@@ -435,7 +435,7 @@ if (typeof officialClubsData !== 'undefined') {
         <div class="community-content">
           <div class="community-header-card">
             <h3>${club.title}</h3>
-            <span class="community-category">${club.category}</span>
+            ${club.category ? `<span class="community-category">${club.category}</span>` : ''}
           </div>
           <p class="community-description">${truncatedDesc}</p>
           ${descText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
@@ -486,7 +486,7 @@ if (typeof partnersData !== 'undefined') {
     pagePartners.forEach((partner) => {
       const card = document.createElement('div');
       card.className = 'partner-card';
-      card.dataset.category = partner.category;
+      card.dataset.category = partner.category || '';
       card.dataset.index = partnersData.indexOf(partner);
       
       const imageSrc = partner.image.startsWith('http') ? partner.image : imgPrefix + partner.image;
@@ -501,7 +501,7 @@ if (typeof partnersData !== 'undefined') {
         <div class="partner-content">
           <div class="partner-header-card">
             <h3>${partner.title}</h3>
-            <span class="partner-category">${partner.category}</span>
+            ${partner.category ? `<span class="partner-category">${partner.category}</span>` : ''}
           </div>
           <p class="partner-discount">${partner.discount}</p>
           <p class="partner-location">📍 ${partner.location}</p>
