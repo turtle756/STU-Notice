@@ -269,12 +269,12 @@ if (typeof eventsData !== 'undefined') {
       card.dataset.fullDesc = eventDescText;
       
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${event.title}" loading="lazy" />
+        <img src="${imageSrc}" alt="${event.title || ''}" loading="lazy" />
         <div class="event-content">
           ${event.category ? `<span class="event-category">${event.category}</span>` : ''}
-          <h3>${event.title}</h3>
-          <p class="event-date">📅 ${event.date}</p>
-          <p class="event-organizer">${event.organizer}</p>
+          <h3>${event.title || ''}</h3>
+          ${event.date ? `<p class="event-date">📅 ${event.date}</p>` : ''}
+          ${event.organizer ? `<p class="event-organizer">${event.organizer}</p>` : ''}
           ${event.location ? `<p class="event-location">📍 장소: ${event.location}</p>` : ''}
           <p class="event-description">${eventTruncatedDesc}</p>
           ${eventDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
@@ -353,10 +353,10 @@ if (typeof clubsData !== 'undefined') {
       const clubTruncatedDesc = clubDescFlat.length > 80 ? clubDescFlat.substring(0, 80) + '...' : clubDescFlat;
       
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${club.title}" loading="lazy" />
+        <img src="${imageSrc}" alt="${club.title || ''}" loading="lazy" />
         <div class="community-content">
           <div class="community-header-card">
-            <h3>${club.title}</h3>
+            <h3>${club.title || ''}</h3>
             ${club.category ? `<span class="community-category">${club.category}</span>` : ''}
           </div>
           <p class="community-description">${clubTruncatedDesc}</p>
@@ -431,10 +431,10 @@ if (typeof officialClubsData !== 'undefined') {
       const truncatedDesc = descFlat.length > 80 ? descFlat.substring(0, 80) + '...' : descFlat;
 
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${club.title}" loading="lazy" />
+        <img src="${imageSrc}" alt="${club.title || ''}" loading="lazy" />
         <div class="community-content">
           <div class="community-header-card">
-            <h3>${club.title}</h3>
+            <h3>${club.title || ''}</h3>
             ${club.category ? `<span class="community-category">${club.category}</span>` : ''}
           </div>
           <p class="community-description">${truncatedDesc}</p>
@@ -497,14 +497,14 @@ if (typeof partnersData !== 'undefined') {
       card.dataset.fullDesc = partnerDescText;
       
       card.innerHTML = `
-        <img src="${imageSrc}" alt="${partner.title}" loading="lazy" />
+        <img src="${imageSrc}" alt="${partner.title || ''}" loading="lazy" />
         <div class="partner-content">
           <div class="partner-header-card">
-            <h3>${partner.title}</h3>
+            <h3>${partner.title || ''}</h3>
             ${partner.category ? `<span class="partner-category">${partner.category}</span>` : ''}
           </div>
-          <p class="partner-discount">${partner.discount}</p>
-          <p class="partner-location">📍 ${partner.location}</p>
+          ${partner.discount ? `<p class="partner-discount">${partner.discount}</p>` : ''}
+          ${partner.location ? `<p class="partner-location">📍 ${partner.location}</p>` : ''}
           <p class="partner-description">${partnerTruncatedDesc}</p>
           ${partnerDescText.length > 80 ? '<span class="desc-more-hint">더보기</span>' : ''}
         </div>
@@ -592,8 +592,9 @@ const modalQrCode = document.getElementById('modalQrCode');
 function openModal(cardData) {
   modalImage.src = cardData.image;
   modalImage.onclick = function() { openLightbox(this.src); };
-  modalTitle.textContent = cardData.title;
-  modalCategory.textContent = cardData.category;
+  modalTitle.textContent = cardData.title || '';
+  modalCategory.textContent = cardData.category || '';
+  modalCategory.style.display = cardData.category ? '' : 'none';
   modalCategory.style.backgroundColor = cardData.categoryColor;
 
   const modalTitleSocial = document.getElementById('modalTitleSocial');
@@ -730,7 +731,7 @@ function setupCardListeners() {
       
       const img = card.querySelector('img');
       const title = card.querySelector('h3').textContent;
-      const category = card.querySelector('.event-category').textContent;
+      const category = card.querySelector('.event-category')?.textContent || '';
       const date = card.querySelector('.event-date')?.textContent || '';
       const organizer = card.querySelector('.event-organizer')?.textContent || '';
       const location = card.querySelector('.event-location')?.textContent || '';
@@ -787,7 +788,7 @@ function setupCardListeners() {
       
       const img = card.querySelector('img');
       const title = card.querySelector('h3').textContent;
-      const category = card.querySelector('.community-category').textContent;
+      const category = card.querySelector('.community-category')?.textContent || '';
       const description = card.querySelector('.community-description').textContent;
       const kakaoBtn = card.querySelector('.kakao-button');
       const detailText = card.dataset.detail || '';
@@ -851,7 +852,7 @@ function setupCardListeners() {
       
       const img = card.querySelector('img');
       const title = card.querySelector('h3').textContent;
-      const category = card.querySelector('.partner-category').textContent;
+      const category = card.querySelector('.partner-category')?.textContent || '';
       const discount = card.querySelector('.partner-discount')?.textContent || '';
       const location = card.querySelector('.partner-location')?.textContent || '';
       const description = card.querySelector('.partner-description').textContent;
@@ -964,11 +965,11 @@ if (typeof homeData !== 'undefined') {
       item.href = `common/notice.html?notice=${idx}`;
       item.innerHTML = `
         <div class="notice-item-header">
-          <span class="notice-category">${notice.category}</span>
+          ${notice.category ? `<span class="notice-category">${notice.category}</span>` : ''}
           ${notice.poll ? '<span class="notice-poll-badge">링크</span>' : ''}
-          <span class="notice-date">${notice.date}</span>
+          ${notice.date ? `<span class="notice-date">${notice.date}</span>` : ''}
         </div>
-        <h3>${notice.title}</h3>
+        <h3>${notice.title || ''}</h3>
       `;
       noticeList.appendChild(item);
     });
@@ -982,7 +983,7 @@ if (typeof homeData !== 'undefined') {
       item.href = `common/notice.html?faq=${idx}#faq`;
       item.innerHTML = `
         <span class="faq-preview-icon">Q</span>
-        <span class="faq-preview-text">${faq.question}</span>
+        <span class="faq-preview-text">${faq.question || ''}</span>
       `;
       faqPreviewList.appendChild(item);
     });
@@ -1010,10 +1011,10 @@ if (typeof homeData !== 'undefined') {
       card.href = `common/events.html?event=${idx}`;
       const eventImgSrc = event.image.startsWith('http') ? event.image : event.image;
       card.innerHTML = `
-        <img class="home-event-card-image" src="${eventImgSrc}" alt="${event.title}" loading="lazy" />
+        <img class="home-event-card-image" src="${eventImgSrc}" alt="${event.title || ''}" loading="lazy" />
         <div class="home-event-card-info">
-          <span class="home-event-card-category">${event.category}</span>
-          <span class="home-event-card-title">${event.title}</span>
+          ${event.category ? `<span class="home-event-card-category">${event.category}</span>` : ''}
+          <span class="home-event-card-title">${event.title || ''}</span>
           ${event.date ? `<span class="home-event-card-date">📅 ${event.date}</span>` : ''}
         </div>
       `;
@@ -1045,7 +1046,7 @@ if (typeof homeData !== 'undefined') {
           ${imgSrc ? `<div class="sns-highlight-img-wrap"><img src="${imgSrc}" alt="${post.title}" loading="lazy" /></div>` : ''}
           <div class="sns-highlight-info">
             <span class="sns-highlight-badge">PICK</span>
-            <h3 class="sns-highlight-title">${post.title}</h3>
+            <h3 class="sns-highlight-title">${post.title || ''}</h3>
             ${post.description ? `<p class="sns-highlight-desc">${post.description}</p>` : ''}
             ${post.date ? `<span class="sns-highlight-date">${post.date}</span>` : ''}
           </div>
@@ -1123,21 +1124,21 @@ if (noticeFullList && typeof notices !== 'undefined') {
       if (notice.poll) {
         pollHtml = `
           <div class="notice-poll">
-            <div class="notice-poll-title">${notice.poll.title}</div>
-            <div class="notice-poll-description">${notice.poll.description}</div>
-            <a href="${notice.poll.link}" target="_blank" rel="noopener noreferrer" class="notice-poll-link">바로가기</a>
+            ${notice.poll.title ? `<div class="notice-poll-title">${notice.poll.title}</div>` : ''}
+            ${notice.poll.description ? `<div class="notice-poll-description">${notice.poll.description}</div>` : ''}
+            ${notice.poll.link ? `<a href="${notice.poll.link}" target="_blank" rel="noopener noreferrer" class="notice-poll-link">바로가기</a>` : ''}
           </div>
         `;
       }
       
       item.innerHTML = `
         <div class="notice-item-header">
-          <span class="notice-category">${notice.category}</span>
+          ${notice.category ? `<span class="notice-category">${notice.category}</span>` : ''}
           ${notice.poll ? '<span class="notice-poll-badge">링크</span>' : ''}
-          <span class="notice-date">${notice.date}</span>
+          ${notice.date ? `<span class="notice-date">${notice.date}</span>` : ''}
         </div>
-        <h3>${notice.title}</h3>
-        <p>${notice.content}</p>
+        <h3>${notice.title || ''}</h3>
+        ${notice.content ? `<p>${notice.content}</p>` : ''}
         ${pollHtml}
       `;
       noticeFullList.appendChild(item);
@@ -1156,7 +1157,7 @@ if (faqList && typeof faqs !== 'undefined') {
     const faqLinkHtml = faq.link ? `<a href="${faq.link}" target="_blank" rel="noopener noreferrer" class="faq-link-button">🔗 바로가기</a>` : '';
     item.innerHTML = `
       <div class="faq-question">
-        <span>${faq.question}</span>
+        <span>${faq.question || ''}</span>
         <span class="faq-toggle">▼</span>
       </div>
       <div class="faq-answer">${faqLinkHtml}${faq.link ? '<br>' : ''}${faq.answer}</div>
