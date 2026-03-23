@@ -7,7 +7,7 @@
 const clubsData = [
   // @@@@@@@@@@@@@@@@@
   {
-    category: null,
+    category: "스포츠",
     image: "image/자율동아리&소모임/풋살동아리.png",
     subImage1: null,
     subImage2: null,
