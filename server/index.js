@@ -67,7 +67,7 @@ PUBLIC_PAGES.forEach(page => {
     // Inject OG tags
     const og = PAGE_OG[page];
     if (og) {
-      const ogTags = `<meta property="og:title" content="서울신학대학교 총학생회 - ${og.title}"><meta property="og:description" content="${og.desc}"><meta property="og:type" content="website"><meta property="og:url" content="https://stuseed.site/${page}">`;
+      const ogTags = `<meta property="og:title" content="서울신학대학교 총학생회 - ${og.title}"><meta property="og:description" content="${og.desc}"><meta property="og:type" content="website"><meta property="og:url" content="https://stuseed.site/${page}"><meta property="og:image" content="https://stuseed.site/image/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">`;
       html = html.replace('</head>', ogTags + '</head>');
     }
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
