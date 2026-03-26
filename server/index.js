@@ -33,6 +33,8 @@ const DATA_FILES = ['home.js', 'schedule.js', 'events.js', 'official-clubs.js', 
 app.use('/edit', express.static(LIVE_EDIT_DIR));
 app.use('/common', express.static(path.join(DOCS_DIR, 'common')));
 app.use('/image', express.static(IMAGE_DIR));
+// Fallback to git images for static assets (og-image, favicon, etc.)
+app.use('/image', express.static(path.join(DOCS_DIR, 'image')));
 
 app.get('/', (req, res) => {
   let html = fs.readFileSync(path.join(DOCS_DIR, 'index.html'), 'utf-8');
