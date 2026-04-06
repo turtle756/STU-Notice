@@ -78,39 +78,6 @@ const eventsData = [
   },
   // #####################
 
-  // @@@@@@@@@@@@@@@@@
-  {
-    category: "행사",
-    image: "image/행사&공모전/힐송 컨퍼런스.jpg",
-    subImage1: null,
-    subImage2: null,
-    title: "힐송 컨퍼런스",
-    date: "2026.03.26(목)",
-    organizer: "서울신학대학교",
-    location: "성결인의 집 ",
-    description: `서울신학대학교와 HILLSONG COLLEGE가
-2024년부터 협약을 맺어 "LEAD WORSHIPER" 교육 과정을
-운영하고 있습니다.
-
-오는 3월 26일, 한국의 모든 예배자들과 함께
-힐송의 탁월한 예배 사역을 나누고 배우는 자리에 초청합니다.
-
-"2026 STU-HILLSONG COLLEGE 예배찬양컨퍼런스"를 통해
-하나님이 원하시고 기뻐하시는 예배를 함께 세워가기를 바랍니다.
-(누구나 신청할 수 있는 오픈된 컨퍼런스입니다.)
-
-교회와 공동체 그리고 주변에 널리 소식을 알려주시면
-감사드리겠습니다.`,
-    link: "https://2026stuhillsong.my.canva.site/c267ygc42f0ppzwh",
-    applyLink: "https://docs.google.com/forms/d/e/1FAIpQLScTKEuuL52ILXHMgxyN8nYRsLUIT3upjuroGzgMjCGbE1x3Hw/viewform",
-    details: {
-      target: " 한국의 모든 예배자",
-      contact: "서울신학대학교 교학과 (032-340-9265)",
-      benefits: "재학생 저녁7시 집회 참여시 채플 마스터카드(채플1회 결석권) 배부"
-    },
-  },
-  // #####################
-
 ];
 
 const eventsConfig = {
